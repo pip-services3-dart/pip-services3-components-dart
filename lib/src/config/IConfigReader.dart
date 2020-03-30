@@ -14,9 +14,9 @@
 //     /**
 //      * Reads configuration and parameterize it with given values.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param parameters        values to parameters the configuration or null to skip parameterization.
-//      * @param callback          callback function that receives configuration or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - parameters        values to parameters the configuration or null to skip parameterization.
+//      * - callback          callback function that receives configuration or error.
 //      */
 //     readConfig(correlationId: string, parameters: ConfigParams, 
 //         callback: (err: any, config: ConfigParams) => void): void;

@@ -7,12 +7,12 @@
 // import { YamlConfigReader } from './YamlConfigReader';
 
 // /**
-//  * Creates [[IConfigReader]] components by their descriptors.
+//  * Creates [IConfigReader] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[MemoryConfigReader]]
-//  * @see [[JsonConfigReader]]
-//  * @see [[YamlConfigReader]]
+//  * See [Factory]
+//  * See [MemoryConfigReader]
+//  * See [JsonConfigReader]
+//  * See [YamlConfigReader]
 //  */
 // export class DefaultConfigReaderFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "config-reader", "default", "1.0");

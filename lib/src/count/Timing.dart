@@ -23,8 +23,8 @@
 // 	/**
 // 	 * Creates a new instance of the timing callback object.
 // 	 * 
-// 	 * @param counter 		an associated counter name
-// 	 * @param callback 		a callback that shall be called when endTiming is called.
+// 	 * - counter 		an associated counter name
+// 	 * - callback 		a callback that shall be called when endTiming is called.
 // 	 */
 // 	public constructor(counter: string = null, callback: ITimingCallback = null) {
 // 		this._counter = counter;

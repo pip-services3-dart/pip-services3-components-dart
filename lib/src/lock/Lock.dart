@@ -13,7 +13,7 @@
 //  * - __options:__
 //  *     - retry_timeout:   timeout in milliseconds to retry lock acquisition. (Default: 100)
 //  * 
-//  * @see [[ILock]]
+//  * See [ILock]
 //  */
 // export abstract class Lock implements ILock, IReconfigurable {
 //     private _retryTimeout: number = 100;
@@ -21,7 +21,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this._retryTimeout = config.getAsIntegerWithDefault("options.retry_timeout", this._retryTimeout);
@@ -31,10 +31,10 @@
 //      * Makes a single attempt to acquire a lock by its key.
 //      * It returns immediately a positive or negative result.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique lock key to acquire.
-//      * @param ttl               a lock timeout (time to live) in milliseconds.
-//      * @param callback          callback function that receives a lock result or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique lock key to acquire.
+//      * - ttl               a lock timeout (time to live) in milliseconds.
+//      * - callback          callback function that receives a lock result or error.
 //      */
 //     public abstract tryAcquireLock(correlationId: string, key: string, ttl: number,
 //         callback: (err: any, result: boolean) => void): void;
@@ -43,9 +43,9 @@
 //     /**
 //      * Releases prevously acquired lock by its key.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique lock key to release.
-//      * @param callback          callback function that receives error or null for success.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique lock key to release.
+//      * - callback          callback function that receives error or null for success.
 //      */
 //     public abstract releaseLock(correlationId: string, key: string,
 //         callback?: (err: any) => void): void;
@@ -53,11 +53,11 @@
 //     /**
 //      * Makes multiple attempts to acquire a lock by its key within give time interval.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain. 
-//      * @param key               a unique lock key to acquire.
-//      * @param ttl               a lock timeout (time to live) in milliseconds.
-//      * @param timeout           a lock acquisition timeout.
-//      * @param callback          callback function that receives error or null for success.
+//      * - correlationId     (optional) transaction id to trace execution through call chain. 
+//      * - key               a unique lock key to acquire.
+//      * - ttl               a lock timeout (time to live) in milliseconds.
+//      * - timeout           a lock acquisition timeout.
+//      * - callback          callback function that receives error or null for success.
 //      */
 //     public acquireLock(correlationId: string, key: string, ttl: number, timeout: number,
 //         callback: (err: any) => void): void {

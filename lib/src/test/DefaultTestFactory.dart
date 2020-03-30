@@ -7,8 +7,8 @@
 // /**
 //  * Creates test components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[Shutdown]]
+//  * See [Factory]
+//  * See [Shutdown]
 //  */
 // export class DefaultTestFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "test", "default", "1.0");

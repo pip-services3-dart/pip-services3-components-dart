@@ -22,11 +22,11 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [[ContextInfo]] to detect the context id and specify counters source
+//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [ContextInfo] to detect the context id and specify counters source
 //  * 
-//  * @see [[ILogger]]
-//  * @see [[Logger]]
-//  * @see [[LogMessage]]
+//  * See [ILogger]
+//  * See [Logger]
+//  * See [LogMessage]
 //  */
 // export abstract class CachedLogger extends Logger {
 //     protected _cache: LogMessage[] = [];
@@ -45,10 +45,10 @@
 //     /**
 //      * Writes a log message to the logger destination.
 //      * 
-//      * @param level             a log level.
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param error             an error object associated with this message.
-//      * @param message           a human-readable message to log.
+//      * - level             a log level.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - error             an error object associated with this message.
+//      * - message           a human-readable message to log.
 //      */
 // 	protected write(level: LogLevel, correlationId: string, error: Error, message: string): void {
 // 		let errorDesc: ErrorDescription = error != null ? ErrorDescriptionFactory.create(error) : null;
@@ -69,15 +69,15 @@
 //     /**
 //      * Saves log messages from the cache.
 //      * 
-//      * @param messages  a list with log messages
-//      * @param callback  callback function that receives error or null for success.
+//      * - messages  a list with log messages
+//      * - callback  callback function that receives error or null for success.
 //      */
 //     protected abstract save(messages: LogMessage[], callback: (err: any) => void): void;
 
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         super.configure(config);
@@ -97,7 +97,7 @@
 //     /**
 //      * Dumps (writes) the currently cached log messages.
 //      * 
-//      * @see [[write]]
+//      * See [write]
 //      */
 //     public dump(): void {
 //         if (this._updated) {
@@ -128,7 +128,7 @@
 //      * Makes message cache as updated
 //      * and dumps it when timeout expires.
 //      * 
-//      * @see [[dump]]
+//      * See [dump]
 //      */
 //     protected update(): void {
 //     	this._updated = true;

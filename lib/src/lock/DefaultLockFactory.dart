@@ -6,12 +6,12 @@
 // import { Factory } from '../build/Factory';
 
 // /**
-//  * Creates [[ILock]] components by their descriptors.
+//  * Creates [ILock] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[ILock]]
-//  * @see [[MemoryLock]]
-//  * @see [[NullLock]]
+//  * See [Factory]
+//  * See [ILock]
+//  * See [MemoryLock]
+//  * See [NullLock]
 //  */
 // export class DefaultLockFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "lock", "default", "1.0");

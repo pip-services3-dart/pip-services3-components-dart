@@ -18,12 +18,12 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:logger:\*:\*:1.0</code>           [[ILogger]] components to dump the captured counters
-//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [[ContextInfo]] to detect the context id and specify counters source
+//  * - <code>\*:logger:\*:\*:1.0</code>           [ILogger] components to dump the captured counters
+//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [ContextInfo] to detect the context id and specify counters source
 //  * 
-//  * @see [[Counter]]
-//  * @see [[CachedCounters]]
-//  * @see [[CompositeLogger]]
+//  * See [Counter]
+//  * See [CachedCounters]
+//  * See [CompositeLogger]
 //  * 
 //  * ### Example ###
 //  * 
@@ -53,7 +53,7 @@
 //     /**
 // 	 * Sets references to dependent components.
 // 	 * 
-// 	 * @param references 	references to locate the component dependencies. 
+// 	 * - references 	references to locate the component dependencies. 
 // 	 * 
 //      */
 //     public setReferences(references: IReferences): void {
@@ -82,7 +82,7 @@
 //     /**
 //      * Saves the current counters measurements.
 //      * 
-//      * @param counters      current counters measurements to be saves.
+//      * - counters      current counters measurements to be saves.
 //      */
 //     protected save(counters: Counter[]): void {
 //         if (this._logger == null || counters == null)

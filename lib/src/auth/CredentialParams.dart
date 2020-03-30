@@ -22,10 +22,10 @@
 //  * 
 //  * In addition to standard parameters CredentialParams may contain any number of custom parameters
 //  * 
-//  * @see [[https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/config.configparams.html ConfigParams]]
-//  * @see [[ConnectionParams]]
-//  * @see [[CredentialResolver]]
-//  * @see [[ICredentialStore]]
+//  * See [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/config.configparams.html ConfigParams]
+//  * See [ConnectionParams]
+//  * See [CredentialResolver]
+//  * See [ICredentialStore]
 //  * 
 //  * ### Example ###
 //  * 
@@ -44,40 +44,40 @@
 //     /**
 // 	 * Creates a new credential parameters and fills it with values.
 //      * 
-// 	 * @param values 	(optional) an object to be converted into key-value pairs to initialize these credentials.
+// 	 * - values 	(optional) an object to be converted into key-value pairs to initialize these credentials.
 //      */
 //     public constructor(values: any = null) {
 //         super(values);
 //     }
 
 //     /**
-//      * Checks if these credential parameters shall be retrieved from [[CredentialStore]].
-//      * The credential parameters are redirected to [[CredentialStore]] when store_key parameter is set.
+//      * Checks if these credential parameters shall be retrieved from [CredentialStore].
+//      * The credential parameters are redirected to [CredentialStore] when store_key parameter is set.
 //      * 
-//      * @returns     true if credentials shall be retrieved from [[CredentialStore]]
+//      * Return     true if credentials shall be retrieved from [CredentialStore]
 //      * 
-//      * @see [[getStoreKey]]
+//      * See [getStoreKey]
 //      */
 //     public useCredentialStore(): boolean {
 //         return super.getAsNullableString("store_key") != null;
 //     }
 
 //     /**
-//      * Gets the key to retrieve these credentials from [[CredentialStore]].
+//      * Gets the key to retrieve these credentials from [CredentialStore].
 //      * If this key is null, than all parameters are already present.
 //      * 
-//      * @returns     the store key to retrieve credentials.
+//      * Return     the store key to retrieve credentials.
 //      * 
-//      * @see [[useCredentialStore]]
+//      * See [useCredentialStore]
 //      */
 //     public getStoreKey(): string {
 //         return super.getAsNullableString("store_key");
 //     }
 
 //     /**
-//      * Sets the key to retrieve these parameters from [[CredentialStore]].
+//      * Sets the key to retrieve these parameters from [CredentialStore].
 //      * 
-//      * @param value     a new key to retrieve credentials.
+//      * - value     a new key to retrieve credentials.
 //      */
 //     public setStoreKey(value: string) {
 //         super.put("store_key", value);
@@ -87,7 +87,7 @@
 //      * Gets the user name.
 //      * The value can be stored in parameters "username" or "user".
 //      * 
-//      * @returns     the user name.
+//      * Return     the user name.
 //      */
 //     public getUsername(): string {
 //         return super.getAsNullableString("username") || super.getAsNullableString("user");
@@ -96,7 +96,7 @@
 //     /**
 //      * Sets the user name.
 //      * 
-//      * @param value     a new user name.
+//      * - value     a new user name.
 //      */
 //     public setUsername(value: string) {
 //         super.put("username", value);
@@ -106,7 +106,7 @@
 //      * Get the user password.
 //      * The value can be stored in parameters "password" or "pass".
 //      * 
-//      * @returns     the user password.
+//      * Return     the user password.
 //      */
 //     public getPassword(): string {
 //         return super.getAsNullableString("password") || super.getAsNullableString("pass");
@@ -115,7 +115,7 @@
 //     /**
 //      * Sets the user password.
 //      * 
-//      * @param value     a new user password.
+//      * - value     a new user password.
 //      */
 //     public setPassword(value: string) {
 //         super.put("password", value);
@@ -125,7 +125,7 @@
 //      * Gets the application access id.
 //      * The value can be stored in parameters "access_id" pr "client_id"
 //      * 
-//      * @returns     the application access id.
+//      * Return     the application access id.
 //      */
 //     public getAccessId(): string {
 //         return super.getAsNullableString("access_id")
@@ -135,7 +135,7 @@
 //     /**
 //      * Sets the application access id.
 //      * 
-//      * @param value     a new application access id.
+//      * - value     a new application access id.
 //      */
 //     public setAccessId(value: string) {
 //         super.put("access_id", value);
@@ -145,7 +145,7 @@
 //      * Gets the application secret key.
 //      * The value can be stored in parameters "access_key", "client_key" or "secret_key".
 //      * 
-//      * @returns     the application secret key.
+//      * Return     the application secret key.
 //      */
 //     public getAccessKey(): string {
 //         return super.getAsNullableString("access_key")
@@ -156,7 +156,7 @@
 //     /**
 //      * Sets the application secret key.
 //      * 
-//      * @param value     a new application secret key.
+//      * - value     a new application secret key.
 //      */
 //     public setAccessKey(value: string) {
 //         super.put("access_key", value);
@@ -165,9 +165,9 @@
 // 	/**
 // 	 * Creates a new CredentialParams object filled with key-value pairs serialized as a string.
 // 	 * 
-// 	 * @param line 		a string with serialized key-value pairs as "key1=value1;key2=value2;..."
+// 	 * - line 		a string with serialized key-value pairs as "key1=value1;key2=value2;..."
 // 	 * 					Example: "Key1=123;Key2=ABC;Key3=2016-09-16T00:00:00.00Z"
-// 	 * @returns			a new CredentialParams object.
+// 	 * Return			a new CredentialParams object.
 // 	 */
 //     public static fromString(line: string): CredentialParams {
 //         let map = StringValueMap.fromString(line);
@@ -178,8 +178,8 @@
 // 	 * Creates a new CredentialParams object filled with provided key-value pairs called tuples.
 // 	 * Tuples parameters contain a sequence of key1, value1, key2, value2, ... pairs.
 // 	 * 
-// 	 * @param tuples	the tuples to fill a new CredentialParams object.
-// 	 * @returns			a new CredentialParams object.
+// 	 * - tuples	the tuples to fill a new CredentialParams object.
+// 	 * Return			a new CredentialParams object.
 // 	 */
 // 	public static fromTuples(...tuples: any[]): CredentialParams {
 // 		let map = StringValueMap.fromTuplesArray(tuples);
@@ -191,8 +191,8 @@
 //      * from "credentials" section. If "credential" section is present instead,
 //      * than it returns a list with only one CredentialParams.
 // 	 * 
-// 	 * @param config 	a configuration parameters to retrieve credentials
-// 	 * @returns			a list of retrieved CredentialParams
+// 	 * - config 	a configuration parameters to retrieve credentials
+// 	 * Return			a list of retrieved CredentialParams
 // 	 */
 //     public static manyFromConfig(config: ConfigParams): CredentialParams[] {
 //         let result: CredentialParams[] = [];
@@ -218,10 +218,10 @@
 //      * from "credential" section. If "credentials" section is present instead,
 //      * then is returns only the first credential element.
 // 	 * 
-// 	 * @param config 	ConfigParams, containing a section named "credential(s)".
-// 	 * @returns			the generated CredentialParams object.
+// 	 * - config 	ConfigParams, containing a section named "credential(s)".
+// 	 * Return			the generated CredentialParams object.
 // 	 * 
-// 	 * @see [[manyFromConfig]]
+// 	 * See [manyFromConfig]
 // 	 */
 //     public static fromConfig(config: ConfigParams): CredentialParams {
 //         let credentials: CredentialParams[] = this.manyFromConfig(config);

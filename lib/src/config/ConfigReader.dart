@@ -15,7 +15,7 @@
 //  * - __parameters:__            this entire section is used as template parameters
 //  *     - ...
 //  * 
-//  *  @see [[IConfigReader]]
+//  *  See [IConfigReader]
 //  */
 // export abstract class ConfigReader implements IConfigurable {
 //     private _parameters: ConfigParams = new ConfigParams();
@@ -28,7 +28,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         let parameters = config.getSection("parameters")
@@ -39,9 +39,9 @@
 //     /**
 //      * Reads configuration and parameterize it with given values.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param parameters        values to parameters the configuration or null to skip parameterization.
-//      * @param callback          callback function that receives configuration or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - parameters        values to parameters the configuration or null to skip parameterization.
+//      * - callback          callback function that receives configuration or error.
 //      */
 //     public abstract readConfig(correlationId: string, parameters: ConfigParams,
 //         callback: (err: any, config: ConfigParams) => void): void;
@@ -49,11 +49,11 @@
 //     /**
 //      * Parameterized configuration template given as string with dynamic parameters.
 //      * 
-//      * The method uses Handlebars template engine: [[https://handlebarsjs.com]]
+//      * The method uses Handlebars template engine: [https://handlebarsjs.com]
 //      * 
-//      * @param config        a string with configuration template to be parameterized
-//      * @param parameters    dynamic parameters to inject into the template
-//      * @returns a parameterized configuration string.
+//      * - config        a string with configuration template to be parameterized
+//      * - parameters    dynamic parameters to inject into the template
+//      * Return a parameterized configuration string.
 //      */
 //     protected parameterize(config: string, parameters: ConfigParams): string {
 //         parameters = this._parameters.override(parameters);

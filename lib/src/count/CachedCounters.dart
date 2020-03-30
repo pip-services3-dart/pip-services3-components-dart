@@ -36,7 +36,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this._interval = config.getAsLongWithDefault("interval", this._interval);
@@ -48,7 +48,7 @@
 //     /**
 //      * Gets the counters dump/save interval.
 //      * 
-//      * @returns the interval in milliseconds.
+//      * Return the interval in milliseconds.
 //      */
 //     public getInterval() {
 //         return this._interval;
@@ -57,7 +57,7 @@
 //     /**
 //      * Sets the counters dump/save interval.
 //      * 
-//      * @param value    a new interval in milliseconds.
+//      * - value    a new interval in milliseconds.
 //      */
 //     public setInterval(value: number) {
 //         this._interval = value;
@@ -66,14 +66,14 @@
 //     /**
 //      * Saves the current counters measurements.
 //      * 
-//      * @param counters      current counters measurements to be saves.
+//      * - counters      current counters measurements to be saves.
 //      */
 //     protected abstract save(counters: Counter[]): void;
 
 //     /**
 //      * Clears (resets) a counter specified by its name.
 //      * 
-//      * @param name  a counter name to clear.
+//      * - name  a counter name to clear.
 //      */
 //     public clear(name: string): void {
 //         delete this._cache[name];
@@ -89,11 +89,11 @@
 
 //     /**
 // 	 * Begins measurement of execution time interval.
-// 	 * It returns [[Timing]] object which has to be called at
-// 	 * [[Timing.endTiming]] to end the measurement and update the counter.
+// 	 * It returns [Timing] object which has to be called at
+// 	 * [Timing.endTiming] to end the measurement and update the counter.
 // 	 * 
-// 	 * @param name 	a counter name of Interval type.
-// 	 * @returns a [[Timing]] callback object to end timing.
+// 	 * - name 	a counter name of Interval type.
+// 	 * Return a [Timing] callback object to end timing.
 //      */
 //     public beginTiming(name: string): Timing {
 //         return new Timing(name, this);
@@ -102,7 +102,7 @@
 //     /**
 //      * Dumps (saves) the current values of counters.
 //      * 
-//      * @see [[save]]
+//      * See [save]
 //      */
 //     public dump(): void {
 //         if (!this._updated) return;
@@ -119,7 +119,7 @@
 //      * Makes counter measurements as updated
 //      * and dumps them when timeout expires.
 //      * 
-//      * @see [[dump]]
+//      * See [dump]
 //      */
 //     protected update(): void {
 //         this._updated = true;
@@ -146,7 +146,7 @@
 //     /**
 //      * Gets all captured counters.
 //      * 
-//      * @returns a list with counters.
+//      * Return a list with counters.
 //      */
 //     public getAll(): Counter[] {
 //         let result: Counter[] = [];
@@ -164,9 +164,9 @@
 //      * It counter does not exist or its type doesn't match the specified type
 //      * it creates a new one.
 //      * 
-//      * @param name  a counter name to retrieve.
-//      * @param type  a counter type.
-//      * @returns an existing or newly created counter of the specified type.
+//      * - name  a counter name to retrieve.
+//      * - type  a counter type.
+//      * Return an existing or newly created counter of the specified type.
 //      */
 //     public get(name: string, type: CounterType): Counter {
 //         if (!name)
@@ -199,10 +199,10 @@
 //     /**
 //      * Ends measurement of execution elapsed time and updates specified counter.
 //      * 
-//      * @param name      a counter name
-//      * @param elapsed   execution elapsed time in milliseconds to update the counter.
+//      * - name      a counter name
+//      * - elapsed   execution elapsed time in milliseconds to update the counter.
 //      * 
-//      * @see [[Timing.endTiming]]
+//      * See [Timing.endTiming]
 //      */
 //     public endTiming(name: string, elapsed: number): void {
 //         let counter: Counter = this.get(name, CounterType.Interval);
@@ -213,8 +213,8 @@
 //     /**
 // 	 * Calculates min/average/max statistics based on the current and previous values.
 // 	 * 
-// 	 * @param name 		a counter name of Statistics type
-// 	 * @param value		a value to update statistics
+// 	 * - name 		a counter name of Statistics type
+// 	 * - value		a value to update statistics
 // 	 */
 //     public stats(name: string, value: number): void {
 //         let counter: Counter = this.get(name, CounterType.Statistics);
@@ -228,8 +228,8 @@
 // 	 * Usually this method is used by metrics calculated
 // 	 * externally.
 // 	 * 
-// 	 * @param name 		a counter name of Last type.
-// 	 * @param value		a last value to record.
+// 	 * - name 		a counter name of Last type.
+// 	 * - value		a last value to record.
 // 	 */
 //     public last(name: string, value: number): void {
 //         let counter: Counter = this.get(name, CounterType.LastValue);
@@ -240,7 +240,7 @@
 //     /**
 // 	 * Records the current time as a timestamp.
 // 	 * 
-// 	 * @param name 		a counter name of Timestamp type.
+// 	 * - name 		a counter name of Timestamp type.
 // 	 */
 //     public timestampNow(name: string): void {
 //         this.timestamp(name, new Date());
@@ -249,8 +249,8 @@
 //     /**
 // 	 * Records the given timestamp.
 // 	 * 
-// 	 * @param name 		a counter name of Timestamp type.
-// 	 * @param value		a timestamp to record.
+// 	 * - name 		a counter name of Timestamp type.
+// 	 * - value		a timestamp to record.
 // 	 */
 //     public timestamp(name: string, value: Date): void {
 //         let counter: Counter = this.get(name, CounterType.Timestamp);
@@ -261,7 +261,7 @@
 //     /**
 // 	 * Increments counter by 1.
 // 	 * 
-// 	 * @param name 		a counter name of Increment type.
+// 	 * - name 		a counter name of Increment type.
 // 	 */
 //     public incrementOne(name: string): void {
 //         this.increment(name, 1);
@@ -270,8 +270,8 @@
 //     /**
 // 	 * Increments counter by given value.
 // 	 * 
-// 	 * @param name 		a counter name of Increment type.
-// 	 * @param value		a value to add to the counter.
+// 	 * - name 		a counter name of Increment type.
+// 	 * - value		a value to add to the counter.
 // 	 */
 //     public increment(name: string, value: number): void {
 //         let counter: Counter = this.get(name, CounterType.Increment);

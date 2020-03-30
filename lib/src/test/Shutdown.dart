@@ -44,7 +44,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this._mode = config.getAsStringWithDefault('mode', this._mode);
@@ -55,7 +55,7 @@
 // 	/**
 // 	 * Checks if the component is opened.
 // 	 * 
-// 	 * @returns true if the component has been opened and false otherwise.
+// 	 * Return true if the component has been opened and false otherwise.
 // 	 */
 //     public isOpen(): boolean {
 //         return this._interval != null;
@@ -64,8 +64,8 @@
 // 	/**
 // 	 * Opens the component.
 // 	 * 
-// 	 * @param correlationId 	(optional) transaction id to trace execution through call chain.
-//      * @param callback 			callback function that receives error or null no errors occured.
+// 	 * - correlationId 	(optional) transaction id to trace execution through call chain.
+//      * - callback 			callback function that receives error or null no errors occured.
 // 	 */
 //     public open(correlationId: string, callback: (err: any) => void): void {
 //         if (this._interval != null)
@@ -82,8 +82,8 @@
 // 	/**
 // 	 * Closes component and frees used resources.
 // 	 * 
-// 	 * @param correlationId 	(optional) transaction id to trace execution through call chain.
-//      * @param callback 			callback function that receives error or null no errors occured.
+// 	 * - correlationId 	(optional) transaction id to trace execution through call chain.
+//      * - callback 			callback function that receives error or null no errors occured.
 // 	 */
 //     public close(correlationId: string, callback: (err: any) => void): void {
 //         if (this._interval != null) {

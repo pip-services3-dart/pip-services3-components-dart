@@ -11,8 +11,8 @@
 //  * - __options:__
 //  *     - retry_timeout:   timeout in milliseconds to retry lock acquisition. (Default: 100)
 //  * 
-//  * @see [[ILock]]
-//  * @see [[Lock]]
+//  * See [ILock]
+//  * See [Lock]
 //  * 
 //  * ### Example ###
 //  * 
@@ -37,10 +37,10 @@
 //      * Makes a single attempt to acquire a lock by its key.
 //      * It returns immediately a positive or negative result.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique lock key to acquire.
-//      * @param ttl               a lock timeout (time to live) in milliseconds.
-//      * @param callback          callback function that receives a lock result or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique lock key to acquire.
+//      * - ttl               a lock timeout (time to live) in milliseconds.
+//      * - callback          callback function that receives a lock result or error.
 //      */
 //     public tryAcquireLock(correlationId: string, key: string, ttl: number,
 //         callback: (err: any, result: boolean) => void): void {
@@ -58,9 +58,9 @@
 //     /**
 //      * Releases the lock with the given key.
 //      * 
-//      * @param correlationId     not used.
-//      * @param key               the key of the lock that is to be released.
-//      * @param callback          (optional) the function to call once the lock has been released. Will be called 
+//      * - correlationId     not used.
+//      * - key               the key of the lock that is to be released.
+//      * - callback          (optional) the function to call once the lock has been released. Will be called 
 //      *                          with <code>null</code>.
 //      */
 //     public releaseLock(correlationId: string, key: string,

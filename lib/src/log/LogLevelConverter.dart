@@ -6,16 +6,16 @@
 // /**
 //  * Helper class to convert log level values.
 //  * 
-//  * @see [[LogLevel]]
+//  * See [LogLevel]
 //  */
 // export class LogLevelConverter {
 
 //     /**
 //      * Converts numbers and strings to standard log level values.
 //      * 
-//      * @param value         a value to be converted
-//      * @param defaultValue  a default value if conversion is not possible
-//      * @returns converted log level
+//      * - value         a value to be converted
+//      * - defaultValue  a default value if conversion is not possible
+//      * Return converted log level
 //      */
 //     public static toLogLevel(value: any, defaultValue: LogLevel = LogLevel.Info): LogLevel {
 //         if (value == null) return LogLevel.Info;
@@ -42,10 +42,10 @@
 //     /**
 //      * Converts log level to a string.
 //      * 
-//      * @param level     a log level to convert
-//      * @returns log level name string.
+//      * - level     a log level to convert
+//      * Return log level name string.
 //      * 
-//      * @see [[LogLevel]]
+//      * See [LogLevel]
 //      */
 //     public static toString(level: LogLevel): string {
 //         if (level == LogLevel.Fatal) return "FATAL";
@@ -60,8 +60,8 @@
 //     /**
 //      * Converts log level to a number.
 //      * 
-//      * @param level     a log level to convert.
-//      * @returns log level number value.
+//      * - level     a log level to convert.
+//      * Return log level number value.
 //      */
 //     public static toInteger(level: LogLevel): number {
 //         if (level == LogLevel.Fatal) return 1;

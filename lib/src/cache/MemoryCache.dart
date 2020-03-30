@@ -16,7 +16,7 @@
 //  * - timeout:               default caching timeout in milliseconds (default: 1 minute)
 //  * - max_size:              maximum number of values stored in this cache (default: 1000)        
 //  *  
-//  * @see [[ICache]]
+//  * See [ICache]
 //  * 
 //  * ### Example ###
 //  * 
@@ -44,7 +44,7 @@
 // 	/**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 // 	 */
 //     public configure(config: ConfigParams): void {
 //         this._timeout = config.getAsLongWithDefault("options.timeout", this._timeout);
@@ -54,8 +54,8 @@
 // 	/**
 // 	 * Clears component state.
 // 	 * 
-// 	 * @param correlationId 	(optional) transaction id to trace execution through call chain.
-//      * @param callback 			callback function that receives error or null no errors occured.
+// 	 * - correlationId 	(optional) transaction id to trace execution through call chain.
+//      * - callback 			callback function that receives error or null no errors occured.
 // 	 */
 //     private cleanup(): void {
 //         let oldest: CacheEntry = null;
@@ -88,9 +88,9 @@
 //      * Retrieves cached value from the cache using its key.
 //      * If value is missing in the cache or expired it returns null.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique value key.
-//      * @param callback          callback function that receives cached value or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique value key.
+//      * - callback          callback function that receives cached value or error.
 //      */
 //     public retrieve(correlationId: string, key: string, callback: (err: any, value: any) => void): void {
 //         if (key == null) {
@@ -122,11 +122,11 @@
 // 	/**
 //      * Stores value in the cache with expiration time.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique value key.
-//      * @param value             a value to store.
-//      * @param timeout           expiration timeout in milliseconds.
-//      * @param callback          (optional) callback function that receives an error or null for success
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique value key.
+//      * - value             a value to store.
+//      * - timeout           expiration timeout in milliseconds.
+//      * - callback          (optional) callback function that receives an error or null for success
 // 	 */
 //     public store(correlationId: string, key: string, value: any, timeout: number, callback: (err: any, value: any) => void): void {
 //         if (key == null) {
@@ -171,9 +171,9 @@
 // 	/**
 //      * Removes a value from the cache by its key.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a unique value key.
-//      * @param callback          (optional) callback function that receives an error or null for success
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a unique value key.
+//      * - callback          (optional) callback function that receives an error or null for success
 // 	 */
 //     public remove(correlationId: string, key: string, callback: (err: any) => void): void {
 //         if (key == null) {

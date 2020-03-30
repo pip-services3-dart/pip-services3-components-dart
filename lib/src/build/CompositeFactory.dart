@@ -28,7 +28,7 @@
 // 	/**
 // 	 * Creates a new instance of the factory.
 // 	 * 
-// 	 * @param factories 	a list of factories to embed into this factory.
+// 	 * - factories 	a list of factories to embed into this factory.
 // 	 */
 // 	public constructor(...factories: IFactory[]) {
 // 		if (factories != null)
@@ -38,7 +38,7 @@
 // 	/**
 // 	 * Adds a factory into the list of embedded factories.
 // 	 * 
-// 	 * @param factory 	a factory to be added.
+// 	 * - factory 	a factory to be added.
 // 	 */
 // 	public add(factory: IFactory): void {
 // 		if (factory == null)
@@ -50,7 +50,7 @@
 // 	/**
 // 	 * Removes a factory from the list of embedded factories.
 // 	 * 
-// 	 * @param factory 	the factory to remove.
+// 	 * - factory 	the factory to remove.
 // 	 */
 // 	public remove(factory: IFactory): void {
 // 		this._factories = _.remove(this._factories, f => f == factory);
@@ -63,8 +63,8 @@
 // 	 * a locator for component it is able to create that matches the given locator.
 // 	 * If the factory is not able to create a requested component is returns null.
 // 	 * 
-// 	 * @param locator 	a locator to identify component to be created.
-// 	 * @returns			a locator for a component that the factory is able to create.
+// 	 * - locator 	a locator to identify component to be created.
+// 	 * Return			a locator for a component that the factory is able to create.
 // 	 */
 // 	public canCreate(locator: any): any {
 // 		if (locator == null)
@@ -83,10 +83,10 @@
 // 	/**
 // 	 * Creates a component identified by given locator.
 // 	 * 
-// 	 * @param locator 	a locator to identify component to be created.
-// 	 * @returns the created component.
+// 	 * - locator 	a locator to identify component to be created.
+// 	 * Return the created component.
 // 	 * 
-// 	 * @throws a CreateException if the factory is not able to create the component.
+// 	 * Trows a CreateException if the factory is not able to create the component.
 // 	 */
 // 	public create(locator: any): any {
 // 		if (locator == null)

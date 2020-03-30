@@ -7,12 +7,12 @@
 // import { Factory } from '../build/Factory';
 
 // /**
-//  * Creates [[ILogger]] components by their descriptors.
+//  * Creates [ILogger] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[NullLogger]]
-//  * @see [[ConsoleLogger]]
-//  * @see [[CompositeLogger]]
+//  * See [Factory]
+//  * See [NullLogger]
+//  * See [ConsoleLogger]
+//  * See [CompositeLogger]
 //  */
 // export class DefaultLoggerFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "logger", "default", "1.0");

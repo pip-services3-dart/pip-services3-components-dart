@@ -3,7 +3,7 @@
 
 // /**
 //  * Data object to store captured log messages.
-//  * This object is used by [[CachedLogger]].
+//  * This object is used by [CachedLogger].
 //  */
 // export class LogMessage {	
 // 	/** The time then message was generated */
@@ -17,8 +17,8 @@
 // 	/** 
 // 	 * The description of the captured error
 // 	 * 
-// 	 * [[https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.errordescription.html ErrorDescription]] 
-// 	 * [[https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.applicationexception.html ApplicationException]] 
+// 	 * [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.errordescription.html ErrorDescription] 
+// 	 * [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.applicationexception.html ApplicationException] 
 // 	 */
 // 	public error: ErrorDescription;
 // 	/** The human-readable message */

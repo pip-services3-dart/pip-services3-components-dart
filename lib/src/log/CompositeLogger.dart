@@ -14,9 +14,9 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:logger:\*:\*:1.0</code> 	(optional) [[ILogger]] components to pass log messages
+//  * - <code>\*:logger:\*:\*:1.0</code> 	(optional) [ILogger] components to pass log messages
 //  * 
-//  * @see [[ILogger]]
+//  * See [ILogger]
 //  * 
 //  * ### Example ###
 //  * 
@@ -46,7 +46,7 @@
 // 	/**
 //      * Creates a new instance of the logger.
 //      * 
-// 	 * @param references 	references to locate the component dependencies. 
+// 	 * - references 	references to locate the component dependencies. 
 //      */
 // 	public constructor(references: IReferences = null) {
 // 		super();
@@ -58,7 +58,7 @@
 // 	/**
 // 	 * Sets references to dependent components.
 // 	 * 
-// 	 * @param references 	references to locate the component dependencies. 
+// 	 * - references 	references to locate the component dependencies. 
 //      */
 // 	public setReferences(references: IReferences): void {
 // 		super.setReferences(references);
@@ -76,10 +76,10 @@
 // 	/**
 //      * Writes a log message to the logger destination(s).
 //      * 
-//      * @param level             a log level.
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param error             an error object associated with this message.
-//      * @param message           a human-readable message to log.
+//      * - level             a log level.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - error             an error object associated with this message.
+//      * - message           a human-readable message to log.
 // 	 */
 // 	protected write(level: LogLevel, correlationId: string, error: Error, message: string): void {
 // 		for (let index = 0; index < this._loggers.length; index++) 

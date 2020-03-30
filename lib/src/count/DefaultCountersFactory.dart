@@ -7,12 +7,12 @@
 // import { Factory } from '../build/Factory';
 
 // /**
-//  * Creates [[ICounters]] components by their descriptors.
+//  * Creates [ICounters] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[NullCounters]]
-//  * @see [[LogCounters]]
-//  * @see [[CompositeCounters]]
+//  * See [Factory]
+//  * See [NullCounters]
+//  * See [LogCounters]
+//  * See [CompositeCounters]
 //  */
 // export class DefaultCountersFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "counters", "default", "1.0");

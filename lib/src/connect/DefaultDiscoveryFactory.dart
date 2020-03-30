@@ -5,11 +5,11 @@
 // import { MemoryDiscovery } from './MemoryDiscovery';
 
 // /**
-//  * Creates [[https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]] components by their descriptors.
+//  * Creates [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[IDiscovery]]
-//  * @see [[MemoryDiscovery]]
+//  * See [Factory]
+//  * See [IDiscovery]
+//  * See [MemoryDiscovery]
 //  */
 // export class DefaultDiscoveryFactory extends Factory {
 // 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "discovery", "default", "1.0");

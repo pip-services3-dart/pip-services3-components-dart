@@ -6,12 +6,12 @@
 // import { MemoryCache } from './MemoryCache';
 
 // /**
-//  * Creates [[ICache]] components by their descriptors.
+//  * Creates [ICache] components by their descriptors.
 //  * 
-//  * @see [[Factory]]
-//  * @see [[ICache]]
-//  * @see [[MemoryCache]]
-//  * @see [[NullCache]]
+//  * See [Factory]
+//  * See [ICache]
+//  * See [MemoryCache]
+//  * See [NullCache]
 //  */
 // export class DefaultCacheFactory extends Factory {
 //     public static readonly Descriptor: Descriptor = new Descriptor("pip-services", "factory", "cache", "default", "1.0");

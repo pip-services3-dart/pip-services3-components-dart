@@ -24,8 +24,8 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:counters:\*:\*:1.0</code>     (optional) [[ICounters]] components to pass collected measurements
-//  * - <code>\*:logger:\*:\*:1.0</code>       (optional) [[ILogger]] components to pass log messages
+//  * - <code>\*:counters:\*:\*:1.0</code>     (optional) [ICounters] components to pass collected measurements
+//  * - <code>\*:logger:\*:\*:1.0</code>       (optional) [ILogger] components to pass log messages
 //  * - ...                                    References must match configured dependencies.
 //  */
 // export class Component implements IConfigurable, IReferenceable {
@@ -36,7 +36,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this._dependencyResolver.configure(config);
@@ -46,7 +46,7 @@
 //     /**
 // 	 * Sets references to dependent components.
 // 	 * 
-// 	 * @param references 	references to locate the component dependencies. 
+// 	 * - references 	references to locate the component dependencies. 
 //      */
 //     public setReferences(references: IReferences): void {
 //         this._dependencyResolver.setReferences(references);

@@ -3,7 +3,7 @@
 
 // /**
 //  * Data object to store measurement for a performance counter.
-//  * This object is used by [[CachedCounters]] to store counters.
+//  * This object is used by [CachedCounters] to store counters.
 //  */
 // export class Counter {
 //     /** The counter unique name */
@@ -26,8 +26,8 @@
 //     /**
 //      * Creates a instance of the data obejct
 //      * 
-//      * @param name      a counter name.
-//      * @param type      a counter type.
+//      * - name      a counter name.
+//      * - type      a counter type.
 //      */
 //     public constructor(name: string, type: CounterType) {
 //         this.name = name;

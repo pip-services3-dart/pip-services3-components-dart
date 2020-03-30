@@ -8,7 +8,7 @@ environment:
   sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  
+  pip_services3_commons: '^1.0.0'
 
 dev_dependencies:
   test: '>=1.14.2 <2.0.0'

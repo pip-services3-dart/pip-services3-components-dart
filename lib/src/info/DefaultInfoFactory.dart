@@ -7,8 +7,8 @@
 // /**
 //  * Creates information components by their descriptors.
 //  * 
-//  * @see [[IFactory]]
-//  * @see [[ContextInfo]]
+//  * See [IFactory]
+//  * See [ContextInfo]
 //  */
 // export class DefaultInfoFactory extends Factory {
 // 	public static readonly Descriptor: Descriptor = new Descriptor("pip-services", "factory", "info", "default", "1.0");

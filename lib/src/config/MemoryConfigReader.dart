@@ -12,13 +12,13 @@
 //  * Config reader that stores configuration in memory.
 //  * 
 //  * The reader supports parameterization using Handlebars
-//  * template engine: [[https://handlebarsjs.com]]
+//  * template engine: [https://handlebarsjs.com]
 //  * 
 //  * ### Configuration parameters ###
 //  * 
 //  * The configuration parameters are the configuration template
 //  * 
-//  * @see [[IConfigReader]]
+//  * See [IConfigReader]
 //  * 
 //  * ### Example ####
 //  * 
@@ -43,7 +43,7 @@
 //     /**
 //      * Creates a new instance of config reader.
 //      * 
-//      * @param config        (optional) component configuration parameters
+//      * - config        (optional) component configuration parameters
 //      */
 //     public constructor(config: ConfigParams = null) {
 //         this._config = config;
@@ -52,7 +52,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this._config = config;
@@ -61,9 +61,9 @@
 //     /**
 //      * Reads configuration and parameterize it with given values.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param parameters        values to parameters the configuration or null to skip parameterization.
-//      * @param callback          callback function that receives configuration or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - parameters        values to parameters the configuration or null to skip parameterization.
+//      * - callback          callback function that receives configuration or error.
 //      */
 //     public readConfig(correlationId: string, parameters: ConfigParams,
 //         callback: (err: any, config: ConfigParams) => void): void {

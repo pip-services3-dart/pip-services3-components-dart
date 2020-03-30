@@ -13,14 +13,14 @@
 // /**
 //  * Helper class to retrieve component connections.
 //  * 
-//  * If connections are configured to be retrieved from [[IDiscovery]],
-//  * it automatically locates [[IDiscovery]] in component references
+//  * If connections are configured to be retrieved from [IDiscovery],
+//  * it automatically locates [IDiscovery] in component references
 //  * and retrieve connections from there using discovery_key parameter.
 //  * 
 //  * ### Configuration parameters ###
 //  * 
 //  * - __connection:__  
-//  *     - discovery_key:               (optional) a key to retrieve the connection from [[https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]]
+//  *     - discovery_key:               (optional) a key to retrieve the connection from [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]
 //  *     - ...                          other connection parameters
 //  * 
 //  * - __connections:__                  alternative to connection
@@ -31,10 +31,10 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:discovery:\*:\*:1.0</code>    (optional) [[https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]] services to resolve connections
+//  * - <code>\*:discovery:\*:\*:1.0</code>    (optional) [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] services to resolve connections
 //  * 
-//  * @see [[ConnectionParams]]
-//  * @see [[IDiscovery]]
+//  * See [ConnectionParams]
+//  * See [IDiscovery]
 //  * 
 //  * ### Example ###
 //  * 
@@ -58,8 +58,8 @@
 //     /**
 //      * Creates a new instance of connection resolver.
 //      * 
-//      * @param config        (optional) component configuration parameters
-//      * @param references    (optional) component references
+//      * - config        (optional) component configuration parameters
+//      * - references    (optional) component references
 //      */
 //     public constructor(config: ConfigParams = null, references: IReferences = null) {
 //         if (config != null) this.configure(config);
@@ -69,7 +69,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         let connections: ConnectionParams[] = ConnectionParams.manyFromConfig(config);
@@ -79,7 +79,7 @@
 //     /**
 // 	 * Sets references to dependent components.
 // 	 * 
-// 	 * @param references 	references to locate the component dependencies. 
+// 	 * - references 	references to locate the component dependencies. 
 //      */
 //     public setReferences(references: IReferences): void {
 //         this._references = references;
@@ -89,9 +89,9 @@
 //      * Gets all connections configured in component configuration.
 //      * 
 //      * Redirect to Discovery services is not done at this point.
-//      * If you need fully fleshed connection use [[resolve]] method instead.
+//      * If you need fully fleshed connection use [resolve] method instead.
 //      * 
-//      * @returns a list with connection parameters
+//      * Return a list with connection parameters
 //      */
 //     public getAll(): ConnectionParams[] {
 //         return this._connections;
@@ -100,7 +100,7 @@
 //     /**
 //      * Adds a new connection to component connections
 //      * 
-//      * @param connection    new connection parameters to be added
+//      * - connection    new connection parameters to be added
 //      */
 //     public add(connection: ConnectionParams): void {
 //         this._connections.push(connection);
@@ -151,12 +151,12 @@
 
 //     /**
 //      * Resolves a single component connection. If connections are configured to be retrieved
-//      * from Discovery service it finds a [[IDiscovery]] and resolves the connection there.
+//      * from Discovery service it finds a [IDiscovery] and resolves the connection there.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param callback 			callback function that receives resolved connection or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - callback 			callback function that receives resolved connection or error.
 //      * 
-//      * @see [[IDiscovery]]
+//      * See [IDiscovery]
 //      */
 //     public resolve(correlationId: string, 
 //         callback: (err: any, result: ConnectionParams) => void): void {
@@ -247,12 +247,12 @@
 
 //     /**
 //      * Resolves all component connection. If connections are configured to be retrieved
-//      * from Discovery service it finds a [[IDiscovery]] and resolves the connection there.
+//      * from Discovery service it finds a [IDiscovery] and resolves the connection there.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param callback 			callback function that receives resolved connections or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - callback 			callback function that receives resolved connections or error.
 //      * 
-//      * @see [[IDiscovery]]
+//      * See [IDiscovery]
 //      */
 //     public resolveAll(correlationId: string, callback: (err: any, result: ConnectionParams[]) => void): void {
 //         let resolved: ConnectionParams[] = [];
@@ -328,11 +328,11 @@
 //      * Registers the given connection in all referenced discovery services.
 //      * This method can be used for dynamic service discovery.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param connection        a connection to register.
-//      * @param callback          callback function that receives registered connection or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - connection        a connection to register.
+//      * - callback          callback function that receives registered connection or error.
 //      * 
-//      * @see [[IDiscovery]]
+//      * See [IDiscovery]
 //      */
 //     public register(correlationId: string, connection: ConnectionParams, callback: (err: any) => void): void {
 //         this.registerInDiscovery(correlationId, connection, (err, result) => {

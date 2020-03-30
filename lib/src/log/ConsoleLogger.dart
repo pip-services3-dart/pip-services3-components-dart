@@ -18,9 +18,9 @@
 //  * 
 //  * ### References ###
 //  * 
-//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [[ContextInfo]] to detect the context id and specify counters source
+//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [ContextInfo] to detect the context id and specify counters source
 //  * 
-//  * @see [[Logger]]
+//  * See [Logger]
 //  * 
 //  * ### Example ###
 //  * 
@@ -42,10 +42,10 @@
 //     /**
 //      * Writes a log message to the logger destination.
 //      * 
-//      * @param level             a log level.
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param error             an error object associated with this message.
-//      * @param message           a human-readable message to log.
+//      * - level             a log level.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - error             an error object associated with this message.
+//      * - message           a human-readable message to log.
 //      */
 // 	protected write(level: LogLevel, correlationId: string, error: Error, message: string): void {
 //         if (this.getLevel() < level) return;

@@ -20,8 +20,8 @@
 //  *     - ...                          credential parameters for key N
 //  * - ...
 //  *  
-//  * @see [[ICredentialStore]]
-//  * @see [[CredentialParams]]
+//  * See [ICredentialStore]
+//  * See [CredentialParams]
 //  * 
 //  * ### Example ###
 //  * 
@@ -45,7 +45,7 @@
 //     /**
 //      * Creates a new instance of the credential store.
 //      * 
-//      * @param config    (optional) configuration with credential parameters.
+//      * - config    (optional) configuration with credential parameters.
 //      */
 //     public constructor(config: ConfigParams = null) {
 //         if (config != null)
@@ -55,7 +55,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this.readCredentials(config);
@@ -65,7 +65,7 @@
 //      * Reads credentials from configuration parameters.
 //      * Each section represents an individual CredentialParams
 //      * 
-//      * @param config   configuration parameters to be read
+//      * - config   configuration parameters to be read
 //      */
 //     public readCredentials(config: ConfigParams) {
 //         this._items = {};
@@ -80,10 +80,10 @@
 //     /**
 //      * Stores credential parameters into the store.
 //      *
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a key to uniquely identify the credential parameters.
-//      * @param credential        a credential parameters to be stored.
-//      * @param callback 			callback function that receives an error or null for success.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a key to uniquely identify the credential parameters.
+//      * - credential        a credential parameters to be stored.
+//      * - callback 			callback function that receives an error or null for success.
 //      */
 //     public store(correlationId: string, key: string, credential: CredentialParams,
 //         callback: (err: any) => void): void {
@@ -98,9 +98,9 @@
 //     /**
 //      * Lookups credential parameters by its key.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a key to uniquely identify the credential parameters.
-//      * @param callback          callback function that receives found credential parameters or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a key to uniquely identify the credential parameters.
+//      * - callback          callback function that receives found credential parameters or error.
 //      */
 //     public lookup(correlationId: string, key: string,
 //         callback: (err: any, result: CredentialParams) => void): void {

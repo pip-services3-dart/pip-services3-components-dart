@@ -26,8 +26,8 @@
 //  * - [connection key 2]:            
 //  *     - ...                          connection parameters for key N
 //  * 
-//  * @see [[IDiscovery]]
-//  * @see [[ConnectionParams]]
+//  * See [IDiscovery]
+//  * See [ConnectionParams]
 //  * 
 //  * ### Example ###
 //  * 
@@ -51,7 +51,7 @@
 //     /**
 //      * Creates a new instance of discovery service.
 //      * 
-//      * @param config    (optional) configuration with connection parameters.
+//      * - config    (optional) configuration with connection parameters.
 //      */
 //     public constructor(config: ConfigParams = null) {
 //         if (config != null)
@@ -61,7 +61,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         this.readConnections(config);
@@ -71,7 +71,7 @@
 //      * Reads connections from configuration parameters.
 //      * Each section represents an individual Connectionparams
 //      * 
-//      * @param config   configuration parameters to be read
+//      * - config   configuration parameters to be read
 //      */
 //     public readConnections(config: ConfigParams) {
 //         this._items = [];
@@ -89,10 +89,10 @@
 //     /**
 //      * Registers connection parameters into the discovery service.
 //      *
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a key to uniquely identify the connection parameters.
-//      * @param credential        a connection to be registered.
-//      * @param callback 			callback function that receives a registered connection or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a key to uniquely identify the connection parameters.
+//      * - credential        a connection to be registered.
+//      * - callback 			callback function that receives a registered connection or error.
 //      */
 //     public register(correlationId: string, key: string, connection: ConnectionParams,
 //         callback: (err: any, result: ConnectionParams) => void): void {
@@ -106,9 +106,9 @@
 //     /**
 //      * Resolves a single connection parameters by its key.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a key to uniquely identify the connection.
-//      * @param callback          callback function that receives found connection or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a key to uniquely identify the connection.
+//      * - callback          callback function that receives found connection or error.
 //      */
 //     public resolveOne(correlationId: string, key: string, callback: (err: any, result: ConnectionParams) => void): void {
 //         let connection: ConnectionParams = null;
@@ -125,9 +125,9 @@
 //     /**
 //      * Resolves all connection parameters by their key.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param key               a key to uniquely identify the connections.
-//      * @param callback          callback function that receives found connections or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - key               a key to uniquely identify the connections.
+//      * - callback          callback function that receives found connections or error.
 //      */
 //     public resolveAll(correlationId: string, key: string, callback: (err: any, result: ConnectionParams[]) => void): void {
 //         let connections: ConnectionParams[] = [];

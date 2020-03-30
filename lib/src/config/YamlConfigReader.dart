@@ -21,8 +21,8 @@
 //  * - parameters:    this entire section is used as template parameters
 //  * - ...
 //  * 
-//  * @see [[IConfigReader]]
-//  * @see [[FileConfigReader]]
+//  * See [IConfigReader]
+//  * See [FileConfigReader]
 //  * 
 //  * ### Example ###
 //  * 
@@ -43,7 +43,7 @@
 //     /** 
 //      * Creates a new instance of the config reader.
 //      * 
-//      * @param path  (optional) a path to configuration file.
+//      * - path  (optional) a path to configuration file.
 //      */
 //     public constructor(path: string = null) {
 //         super(path);
@@ -52,9 +52,9 @@
 //     /**
 //      * Reads configuration file, parameterizes its content and converts it into JSON object.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param parameters        values to parameters the configuration.
-//      * @returns                 a JSON object with configuration.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - parameters        values to parameters the configuration.
+//      * Return                 a JSON object with configuration.
 //      */
 //     public readObject(correlationId: string, parameters: ConfigParams): any {
 //         if (super.getPath() == null)
@@ -80,9 +80,9 @@
 //     /**
 //      * Reads configuration and parameterize it with given values.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param parameters        values to parameters the configuration or null to skip parameterization.
-//      * @param callback          callback function that receives configuration or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - parameters        values to parameters the configuration or null to skip parameterization.
+//      * - callback          callback function that receives configuration or error.
 //      */
 //     public readConfig(correlationId: string, parameters: ConfigParams,
 //         callback: (err: any, config: ConfigParams) => void): void {
@@ -98,10 +98,10 @@
 //     /**
 //      * Reads configuration file, parameterizes its content and converts it into JSON object.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param file              a path to configuration file.
-//      * @param parameters        values to parameters the configuration.
-//      * @returns                 a JSON object with configuration.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - file              a path to configuration file.
+//      * - parameters        values to parameters the configuration.
+//      * Return                 a JSON object with configuration.
 //      */
 //     public static readObject(correlationId: string, path: string, parameters: ConfigParams): any {
 //         return new YamlConfigReader(path).readObject(correlationId, parameters);
@@ -110,10 +110,10 @@
 //     /**
 //      * Reads configuration from a file, parameterize it with given values and returns a new ConfigParams object.
 //      * 
-//      * @param correlationId     (optional) transaction id to trace execution through call chain.
-//      * @param file              a path to configuration file.
-//      * @param parameters        values to parameters the configuration or null to skip parameterization.
-//      * @param callback          callback function that receives configuration or error.
+//      * - correlationId     (optional) transaction id to trace execution through call chain.
+//      * - file              a path to configuration file.
+//      * - parameters        values to parameters the configuration or null to skip parameterization.
+//      * - callback          callback function that receives configuration or error.
 //      */
 //     public static readConfig(correlationId: string, path: string, parameters: ConfigParams): ConfigParams {
 //         let value: any = new YamlConfigReader(path).readObject(correlationId, parameters);

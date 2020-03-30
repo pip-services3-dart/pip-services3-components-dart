@@ -14,8 +14,8 @@
 //  * - parameters:    this entire section is used as template parameters
 //  * - ...
 //  * 
-//  * @see [[IConfigReader]]
-//  * @see [[ConfigReader]]
+//  * See [IConfigReader]
+//  * See [ConfigReader]
 //  */
 // export abstract class FileConfigReader extends ConfigReader {
 //     private _path: string;
@@ -23,7 +23,7 @@
 //     /**
 //      * Creates a new instance of the config reader.
 //      * 
-//      * @param path  (optional) a path to configuration file.
+//      * - path  (optional) a path to configuration file.
 //      */
 //     public constructor(path: string = null) {
 //         super();
@@ -33,7 +33,7 @@
 //     /**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 //      */
 //     public configure(config: ConfigParams): void {
 //         super.configure(config);
@@ -43,7 +43,7 @@
 //     /**
 //      * Get the path to configuration file..
 //      * 
-//      * @returns the path to configuration file.
+//      * Return the path to configuration file.
 //      */
 //     public getPath(): string {
 //         return this._path;
@@ -52,7 +52,7 @@
 //     /**
 //      * Set the path to configuration file.
 //      * 
-//      * @param path  a new path to configuration file.
+//      * - path  a new path to configuration file.
 //      */
 //     public setPath(path: string) {
 //         this._path = path;

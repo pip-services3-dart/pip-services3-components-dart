@@ -43,8 +43,8 @@
 // 	/**
 // 	 * Creates a new instance of this context info.
 // 	 * 
-// 	 * @param name  		(optional) a context name.
-// 	 * @param description 	(optional) a human-readable description of the context.
+// 	 * - name  		(optional) a context name.
+// 	 * - description 	(optional) a human-readable description of the context.
 // 	 */
 // 	public constructor(name?: string, description?: string) {
 // 		this._name = name || "unknown";
@@ -54,7 +54,7 @@
 // 	/**
 //      * Configures component by passing configuration parameters.
 //      * 
-//      * @param config    configuration parameters to be set.
+//      * - config    configuration parameters to be set.
 // 	 */
 // 	public configure(config: ConfigParams): void {
 // 		this.name = config.getAsStringWithDefault("name", this.name);
@@ -65,28 +65,28 @@
 // 	/**
 // 	 * Gets the context name.
 // 	 * 
-// 	 * @returns the context name 
+// 	 * Return the context name 
 // 	 */
 // 	public get name(): string { return this._name; }
 
 // 	/** 
 // 	 * Sets the context name.
 // 	 *  
-// 	 * @param value		a new name for the context.
+// 	 * - value		a new name for the context.
 // 	 */
 // 	public set name(value: string) { this._name = value || "unknown"; }
 	
 // 	/**
 // 	 * Gets the human-readable description of the context.
 // 	 * 
-// 	 * @returns the human-readable description of the context.
+// 	 * Return the human-readable description of the context.
 // 	 */
 // 	public get description(): string { return this._description; }
 
 // 	/**
 // 	 * Sets the human-readable description of the context.
 // 	 * 
-// 	 * @param value a new human readable description of the context.
+// 	 * - value a new human readable description of the context.
 // 	 */
 // 	public set description(value: string) { this._description = value; }
 	
@@ -94,35 +94,35 @@
 // 	 * Gets the unique context id.
 // 	 * Usually it is the current host name.
 // 	 * 
-// 	 * @returns the unique context id.
+// 	 * Return the unique context id.
 // 	 */
 // 	public get contextId(): string { return this._contextId; }
 
 // 	/**
 // 	 * Sets the unique context id.
 // 	 * 
-// 	 * @param value a new unique context id.
+// 	 * - value a new unique context id.
 // 	 */
 // 	public set contextId(value: string) { this._contextId = value; }
 	
 // 	/**
 // 	 * Gets the context start time.
 // 	 * 
-// 	 * @returns the context start time.
+// 	 * Return the context start time.
 // 	 */
 // 	public get startTime(): Date { return this._startTime; }
 
 // 	/**
 // 	 * Sets the context start time.
 // 	 * 
-// 	 * @param value a new context start time.
+// 	 * - value a new context start time.
 // 	 */
 // 	public set startTime(value: Date) { this._startTime = value || new Date(); }
 
 // 	/**
 // 	 * Calculates the context uptime as from the start time.
 // 	 * 
-// 	 * @returns number of milliseconds from the context start time.
+// 	 * Return number of milliseconds from the context start time.
 // 	 */
 // 	public get uptime(): number {
 // 		return new Date().getTime() - this._startTime.getTime();
@@ -131,14 +131,14 @@
 // 	/**
 // 	 * Gets context additional parameters.
 // 	 * 
-// 	 * @returns a JSON object with additional context parameters.
+// 	 * Return a JSON object with additional context parameters.
 // 	 */
 // 	public get properties(): any { return this._properties; }
 
 // 	/** 
 // 	 * Sets context additional parameters.
 // 	 * 
-// 	 * @param properties 	a JSON object with context additional parameters
+// 	 * - properties 	a JSON object with context additional parameters
 // 	*/
 // 	public set properties(properties: any) {
 // 		this._properties = StringValueMap.fromValue(properties);
@@ -147,8 +147,8 @@
 // 	/**
 // 	 * Creates a new ContextInfo and sets its configuration parameters.
 // 	 * 
-// 	 * @param config 	configuration parameters for the new ContextInfo.
-// 	 * @returns a newly created ContextInfo
+// 	 * - config 	configuration parameters for the new ContextInfo.
+// 	 * Return a newly created ContextInfo
 // 	 */
 // 	public static fromConfig(config: ConfigParams): ContextInfo {
 // 		let result = new ContextInfo();
