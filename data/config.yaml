@@ -1,0 +1,12 @@
+---
+field1:
+   field11: 123
+   field12: "ABC"
+field2:
+   - 123
+   - "ABC"
+   - field21: 543
+     field22: "XYZ"
+field3: true
+field4: {{param1}}
+field5: {{param2}}
