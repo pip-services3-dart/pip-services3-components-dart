@@ -1,73 +1,49 @@
-// /** @module config */
-// /** @hidden */ 
-// let _ = require('lodash');
-// /** @hidden */ 
-// let handlebars = require('handlebars');
+import 'package:pip_services3_commons/src/config/ConfigParams.dart';
+import 'package:pip_services3_commons/src/config/IConfigurable.dart';
+import 'dart:html';
+import 'package:handlebars2/handlebars2.dart' as handlebars;
 
-// import { ConfigParams } from 'pip-services3-commons-node';
-// import { IConfigurable } from 'pip-services3-commons-node'
+/// Abstract config reader that supports configuration parameterization.
+///
+/// ### Configuration parameters ###
+///
+/// - __parameters:__            this entire section is used as template parameters
+///     - ...
+///
+///  See [IConfigReader]
+abstract class ConfigReader implements IConfigurable {
+  ConfigParams _parameters = new ConfigParams();
 
-// /**
-//  * Abstract config reader that supports configuration parameterization.
-//  * 
-//  * ### Configuration parameters ###
-//  * 
-//  * - __parameters:__            this entire section is used as template parameters
-//  *     - ...
-//  * 
-//  *  See [IConfigReader]
-//  */
-// export abstract class ConfigReader implements IConfigurable {
-//     private _parameters: ConfigParams = new ConfigParams();
+  /// Creates a new instance of the config reader.
+  ConfigReader() {}
 
-//     /**
-//      * Creates a new instance of the config reader.
-//      */
-//     public constructor() {}
+  /// Configures component by passing configuration parameters.
+  ///
+  /// - config    configuration parameters to be set.
+  void configure(ConfigParams config) {
+    var parameters = config.getSection("parameters");
+    if (parameters.length > 0) this._parameters = parameters;
+  }
 
-//     /**
-//      * Configures component by passing configuration parameters.
-//      * 
-//      * - config    configuration parameters to be set.
-//      */
-//     public configure(config: ConfigParams): void {
-//         let parameters = config.getSection("parameters")
-//         if (parameters.length() > 0)
-//             this._parameters = parameters;
-//     }    
+  /// Reads configuration and parameterize it with given values.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - parameters        values to parameters the configuration or null to skip parameterization.
+  /// - callback          callback function that receives configuration or error.
+  Future<ConfigParams> readConfig(
+      String correlationId, ConfigParams parameters);
 
-//     /**
-//      * Reads configuration and parameterize it with given values.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - parameters        values to parameters the configuration or null to skip parameterization.
-//      * - callback          callback function that receives configuration or error.
-//      */
-//     public abstract readConfig(correlationId: string, parameters: ConfigParams,
-//         callback: (err: any, config: ConfigParams) => void): void;
+  /// Parameterized configuration template given as string with dynamic parameters.
+  ///
+  /// The method uses Handlebars template engine: [https://handlebarsjs.com]
+  ///
+  /// - config        a string with configuration template to be parameterized
+  /// - parameters    dynamic parameters to inject into the template
+  /// Return a parameterized configuration string.
+  String parameterize(String config, ConfigParams parameters) {
+    parameters = this._parameters.override(parameters);
 
-//     /**
-//      * Parameterized configuration template given as string with dynamic parameters.
-//      * 
-//      * The method uses Handlebars template engine: [https://handlebarsjs.com]
-//      * 
-//      * - config        a string with configuration template to be parameterized
-//      * - parameters    dynamic parameters to inject into the template
-//      * Return a parameterized configuration string.
-//      */
-//     protected parameterize(config: string, parameters: ConfigParams): string {
-//         parameters = this._parameters.override(parameters);
-
-//         // Convert template to lodash
-//         //config = config.replace(/{{/g, "<%=").replace(/}}/g, "%>");
-
-//         //let template = _.template(config);
-//         //return template(parameters);
-
-//         // return mustache.render(config, parameters);
-        
-//         let template = handlebars.compile(config);
-//         return template(parameters);
-//     }
-
-// }
+    var template = handlebars.compile(config);
+    return template(parameters);
+  }
+}

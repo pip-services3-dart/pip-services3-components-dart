@@ -1,120 +1,105 @@
-// /** @module config */
-// /** @hidden */ 
-// let fs = require('fs');
+// var fs = require('fs');
 
-// import { ConfigParams } from 'pip-services3-commons-node';
-// import { ConfigException } from 'pip-services3-commons-node'
-// import { FileException } from 'pip-services3-commons-node'
-// import { JsonConverter } from 'pip-services3-commons-node'
+import 'dart:convert';
 
-// import { FileConfigReader } from './FileConfigReader';
+import 'package:pip_services3_commons/src/config/ConfigParams.dart';
+import 'package:pip_services3_commons/src/errors/ConfigException.dart';
+import 'package:pip_services3_commons/src/errors/FileException.dart';
+import 'package:pip_services3_commons/src/convert/JsonConverter.dart';
 
-// /**
-//  * Config reader that reads configuration from JSON file.
-//  * 
-//  * The reader supports parameterization using Handlebar template engine.
-//  * 
-//  * ### Configuration parameters ###
-//  * 
-//  * - path:          path to configuration file
-//  * - parameters:    this entire section is used as template parameters
-//  * - ...
-//  * 
-//  * See [IConfigReader]
-//  * See [FileConfigReader]
-//  * 
-//  * ### Example ###
-//  * 
-//  *     ======== config.json ======
-//  *     { "key1": "{{KEY1_VALUE}}", "key2": "{{KEY2_VALUE}}" }
-//  *     ===========================
-//  *     
-//  *     let configReader = new JsonConfigReader("config.json");
-//  *     
-//  *     let parameters = ConfigParams.fromTuples("KEY1_VALUE", 123, "KEY2_VALUE", "ABC");
-//  *     configReader.readConfig("123", parameters, (err, config) => {
-//  *         // Result: key1=123;key2=ABC
-//  *     });
-//  */
-// export class JsonConfigReader extends FileConfigReader {
+import './FileConfigReader.dart';
 
-//     /** 
-//      * Creates a new instance of the config reader.
-//      * 
-//      * - path  (optional) a path to configuration file.
-//      */
-//     public constructor(path: string = null) {
-//         super(path);
-//     }
+import 'dart:async';
+import 'dart:io';
 
-//     /**
-//      * Reads configuration file, parameterizes its content and converts it into JSON object.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - parameters        values to parameters the configuration.
-//      * Return                 a JSON object with configuration.
-//      */
-//     public readObject(correlationId: string, parameters: ConfigParams): any {
-//         if (super.getPath() == null)
-//             throw new ConfigException(correlationId, "NO_PATH", "Missing config file path");
+/// Config reader that reads configuration from JSON file.
+///
+/// The reader supports parameterization using Handlebar template engine.
+///
+/// ### Configuration parameters ###
+///
+/// - path:          path to configuration file
+/// - parameters:    this entire section is used as template parameters
+/// - ...
+///
+/// See [IConfigReader]
+/// See [FileConfigReader]
+///
+/// ### Example ###
+///
+///     ======== config.json ======
+///     { "key1": "{{KEY1_VALUE}}", "key2": "{{KEY2_VALUE}}" }
+///     ===========================
+///
+///     var configReader = new JsonConfigReader("config.json");
+///
+///     var parameters = ConfigParams.fromTuples(["KEY1_VALUE", 123, "KEY2_VALUE", "ABC"]);
+///     configReader.readConfig("123", parameters, (err, config) => {
+///         // Result: key1=123;key2=ABC
+///     });
+class JsonConfigReader extends FileConfigReader {
+  /// Creates a new instance of the config reader.
+  ///
+  /// - path  (optional) a path to configuration file.
+  JsonConfigReader([String path = null]) : super(path) {}
 
-//         try {
-//             // Todo: make this async?
-//             let data: string = fs.readFileSync(super.getPath(), "utf8");
-//             data = this.parameterize(data, parameters);
-//             return JsonConverter.toNullableMap(data);
-//         } catch (e) {
-//             throw new FileException(
-//                 correlationId,
-//                 "READ_FAILED",
-//                 "Failed reading configuration " + super.getPath() + ": " + e
-//             )
-//             .withDetails("path", super.getPath())
-//             .withCause(e);
-//         }
-//     }
+  /// Reads configuration file, parameterizes its content and converts it into JSON object.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - parameters        values to parameters the configuration.
+  /// Return                 a JSON object with configuration.
+  dynamic readObject(String correlationId, ConfigParams parameters) async{
+    if (super.getPath() == null)
+      throw new ConfigException(
+          correlationId, "NO_PATH", "Missing config file path");
 
-//     /**
-//      * Reads configuration and parameterize it with given values.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - parameters        values to parameters the configuration
-//      * - callback          callback function that receives configuration or error.
-//      */
-//     public readConfig(correlationId: string, parameters: ConfigParams,
-//         callback: (err: any, config: ConfigParams) => void): void {
-//         try {
-//             let value: any = this.readObject(correlationId, parameters);
-//             let config = ConfigParams.fromValue(value);
-//             callback(null, config);
-//         } catch (ex) {
-//             callback(ex, null);
-//         }
-//     }
+    try {
+      // Todo: make this async?
+      String data = await File(super.getPath()).readAsString();
+      data = this.parameterize(data, parameters);
+      return JsonConverter.toNullableMap(data);
+    } catch (e) {
+      throw new FileException(correlationId, "READ_FAILED",
+              "Failed reading configuration " + super.getPath() + ": " + e)
+          .withDetails("path", super.getPath())
+          .withCause(e);
+    }
+  }
 
-//     /**
-//      * Reads configuration file, parameterizes its content and converts it into JSON object.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - file              a path to configuration file.
-//      * - parameters        values to parameters the configuration.
-//      * Return                 a JSON object with configuration.
-//      */
-//     public static readObject(correlationId: string, path: string, parameters: ConfigParams): any {
-//         return new JsonConfigReader(path).readObject(correlationId, parameters);
-//     }
+  /// Reads configuration and parameterize it with given values.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - parameters        values to parameters the configuration
+  /// - callback          callback function that receives configuration or error.
+  Future<ConfigParams> readConfig(
+      String correlationId, ConfigParams parameters) {
+    return Future<ConfigParams>(() {
+      var value = this.readObject(correlationId, parameters);
+      var config = ConfigParams.fromValue(value);
+      return config;
+    });
+  }
 
-//     /**
-//      * Reads configuration from a file, parameterize it with given values and returns a new ConfigParams object.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - file              a path to configuration file.
-//      * - parameters        values to parameters the configuration.
-//      * - callback          callback function that receives configuration or error.
-//      */
-//     public static readConfig(correlationId: string, path: string, parameters: ConfigParams): ConfigParams {
-//         let value: any = new JsonConfigReader(path).readObject(correlationId, parameters);
-//         let config = ConfigParams.fromValue(value);
-//         return config;
-//     }
-// }
+  /// Reads configuration file, parameterizes its content and converts it into JSON object.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - file              a path to configuration file.
+  /// - parameters        values to parameters the configuration.
+  /// Return                 a JSON object with configuration.
+  static dynamic readObject_(String correlationId, String path, ConfigParams parameters) async {
+    return await new JsonConfigReader(path).readObject(correlationId, parameters);
+  }
+
+  /// Reads configuration from a file, parameterize it with given values and returns a new ConfigParams object.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - file              a path to configuration file.
+  /// - parameters        values to parameters the configuration.
+  /// - callback          callback function that receives configuration or error.
+  static ConfigParams readConfig_(
+      String correlationId, String path, ConfigParams parameters)  {
+    var value = new JsonConfigReader(path).readObject(correlationId, parameters);
+    var config = ConfigParams.fromValue(value);
+    return config;
+  }
+}

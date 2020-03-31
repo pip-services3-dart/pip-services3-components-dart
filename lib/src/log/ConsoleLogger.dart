@@ -1,78 +1,73 @@
-// /** @module log */
-// import { StringConverter } from 'pip-services3-commons-node';
 
-// import { LogLevel } from './LogLevel';
-// import { Logger } from './Logger';
-// import { LogLevelConverter } from './LogLevelConverter';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 
-// /**
-//  * Logger that writes log messages to console.
-//  * 
-//  * Errors are written to standard err stream
-//  * and all other messages to standard out stream.
-//  * 
-//  * ### Configuration parameters ###
-//  * 
-//  * - level:             maximum log level to capture
-//  * - source:            source (context) name
-//  * 
-//  * ### References ###
-//  * 
-//  * - <code>\*:context-info:\*:\*:1.0</code>     (optional) [ContextInfo] to detect the context id and specify counters source
-//  * 
-//  * See [Logger]
-//  * 
-//  * ### Example ###
-//  * 
-//  *     let logger = new ConsoleLogger();
-//  *     logger.setLevel(LogLevel.debug);
-//  *     
-//  *     logger.error("123", ex, "Error occured: %s", ex.message);
-//  *     logger.debug("123", "Everything is OK.");
-//  */
-// export class ConsoleLogger extends Logger {
+import './LogLevel.dart';
+import './Logger.dart';
+import './LogLevelConverter.dart';
+
+/// Logger that writes log messages to console.
+/// 
+/// Errors are written to standard err stream
+/// and all other messages to standard out stream.
+/// 
+/// ### Configuration parameters ###
+/// 
+/// - level:             maximum log level to capture
+/// - source:            source (context) name
+/// 
+/// ### References ###
+/// 
+/// - \*:context-info:\*:\*:1.0     (optional) [ContextInfo] to detect the context id and specify counters source
+/// 
+/// See [Logger]
+/// 
+/// ### Example ###
+/// 
+///     var logger = new ConsoleLogger();
+///     logger.setLevel(LogLevel.debug);
+///     
+///     logger.error("123", ex, "Error occured: %s", ex.message);
+///     logger.debug("123", "Everything is OK.");
+class ConsoleLogger extends Logger {
     
-//     /**
-//      * Creates a new instance of the logger.
-//      */
-//     public constructor() {
-//         super();
-//     }
+    /// Creates a new instance of the logger.
+    ConsoleLogger():super() {
+    }
 
-//     /**
-//      * Writes a log message to the logger destination.
-//      * 
-//      * - level             a log level.
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - error             an error object associated with this message.
-//      * - message           a human-readable message to log.
-//      */
-// 	protected write(level: LogLevel, correlationId: string, error: Error, message: string): void {
-//         if (this.getLevel() < level) return;
+    
+    /// Writes a log message to the logger destination.
+    /// 
+    /// - level             a log level.
+    /// - correlationId     (optional) transaction id to trace execution through call chain.
+    /// - error             an error object associated with this message.
+    /// - message           a human-readable message to log.
+	void _write(LogLevel level, String correlationId, ApplicationException error, String message) {
+        if (this.getLevel().index < level.index) return;
 
-//         let result: string = '[';
-//         result += correlationId != null ? correlationId : "---";
-//         result += ':';
-//         result += LogLevelConverter.toString(level);
-//         result += ':';
-//         result += StringConverter.toString(new Date());
-//         result += "] ";
+        var result = '[';
+        result += correlationId != null ? correlationId : "---";
+        result += ':';
+        result += LogLevelConverter.toString(level);
+        result += ':';
+        result += StringConverter.toString2(new DateTime.now());
+        result += "] ";
 
-//         result += message;
+        result += message;
 
-//         if (error != null) {
-//             if (message.length == 0)
-//                 result += "Error: ";
-//             else
-//                 result += ": ";
+        if (error != null) {
+            if (message.length == 0)
+                result += "Error: ";
+            else
+                result += ": ";
 
-//             result += this.composeError(error);
-//         }
+            result += this.composeError(error);
+        }
 
-//         if (level == LogLevel.Fatal || level == LogLevel.Error || level == LogLevel.Warn)
-//             console.error(result);
-//         else
-//             console.log(result);
-// 	}
+        print(result);
+        // if (level == LogLevel.Fatal || level == LogLevel.Error || level == LogLevel.Warn)
+        //    console.error(result);
+        // else
+        //     console.log(result);
+	}
 
-// }
+}

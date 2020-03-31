@@ -2,7 +2,7 @@
 /npm-debug.log
 /.idea
 *.map
-/obj/test/**/*
+/obj/test/*
 /config/config.json
 /config/config.yaml
 /data/dummies.json

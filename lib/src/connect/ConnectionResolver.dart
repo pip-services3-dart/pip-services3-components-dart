@@ -1,345 +1,319 @@
-// /** @module connect */
-// /** @hidden */ 
-// let async = require('async');
+import 'package:pip_services3_commons/src/config/ConfigParams.dart';
+import 'package:pip_services3_commons/src/refer/IReferences.dart';
+import 'package:pip_services3_commons/src/refer/ReferenceException.dart';
+import 'package:pip_services3_commons/src/refer/Descriptor.dart';
 
-// import { ConfigParams } from 'pip-services3-commons-node';
-// import { IReferences } from 'pip-services3-commons-node';
-// import { ReferenceException } from 'pip-services3-commons-node';
-// import { Descriptor } from 'pip-services3-commons-node';
+import './ConnectionParams.dart';
+import './IDiscovery.dart';
+import 'dart:async';
 
-// import { ConnectionParams } from './ConnectionParams';
-// import { IDiscovery } from './IDiscovery';
+/// Helper class to retrieve component connections.
+///
+/// If connections are configured to be retrieved from [IDiscovery],
+/// it automatically locates [IDiscovery] in component references
+/// and retrieve connections from there using discovery_key parameter.
+///
+/// ### Configuration parameters ###
+///
+/// - __connection:__
+///     - discovery_key:               (optional) a key to retrieve the connection from [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]
+///     - ...                          other connection parameters
+///
+/// - __connections:__                  alternative to connection
+///     - [connection params 1]:       first connection parameters
+///         - ...                      connection parameters for key 1
+///     - [connection params N]:       Nth connection parameters
+///         - ...                      connection parameters for key N
+///
+/// ### References ###
+///
+/// - \*:discovery:\*:\*:1.0    (optional) [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] services to resolve connections
+///
+/// See [ConnectionParams]
+/// See [IDiscovery]
+///
+/// ### Example ###
+///
+///     var config = ConfigParams.fromTuples(
+///         "connection.host", "10.1.1.100",
+///         "connection.port", 8080
+///     );
+///
+///     var connectionResolver = new ConnectionResolver();
+///     connectionResolver.configure(config);
+///     connectionResolver.setReferences(references);
+///
+///     connectionResolver.resolve("123", (err, connection) => {
+///         // Now use connection...
+///     });
 
-// /**
-//  * Helper class to retrieve component connections.
-//  * 
-//  * If connections are configured to be retrieved from [IDiscovery],
-//  * it automatically locates [IDiscovery] in component references
-//  * and retrieve connections from there using discovery_key parameter.
-//  * 
-//  * ### Configuration parameters ###
-//  * 
-//  * - __connection:__  
-//  *     - discovery_key:               (optional) a key to retrieve the connection from [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]
-//  *     - ...                          other connection parameters
-//  * 
-//  * - __connections:__                  alternative to connection
-//  *     - [connection params 1]:       first connection parameters
-//  *         - ...                      connection parameters for key 1
-//  *     - [connection params N]:       Nth connection parameters
-//  *         - ...                      connection parameters for key N
-//  * 
-//  * ### References ###
-//  * 
-//  * - <code>\*:discovery:\*:\*:1.0</code>    (optional) [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] services to resolve connections
-//  * 
-//  * See [ConnectionParams]
-//  * See [IDiscovery]
-//  * 
-//  * ### Example ###
-//  * 
-//  *     let config = ConfigParams.fromTuples(
-//  *         "connection.host", "10.1.1.100",
-//  *         "connection.port", 8080
-//  *     );
-//  *     
-//  *     let connectionResolver = new ConnectionResolver();
-//  *     connectionResolver.configure(config);
-//  *     connectionResolver.setReferences(references);
-//  *     
-//  *     connectionResolver.resolve("123", (err, connection) => {
-//  *         // Now use connection...
-//  *     });
-//  */
-// export class ConnectionResolver {
-//     private readonly _connections: ConnectionParams[] = [];
-//     private _references: IReferences = null;
+class ConnectionResolver {
+  final List<ConnectionParams> _connections = List<ConnectionParams>();
+  IReferences _references = null;
 
-//     /**
-//      * Creates a new instance of connection resolver.
-//      * 
-//      * - config        (optional) component configuration parameters
-//      * - references    (optional) component references
-//      */
-//     public constructor(config: ConfigParams = null, references: IReferences = null) {
-//         if (config != null) this.configure(config);
-//         if (references != null) this.setReferences(references);
-//     }
+  /// Creates a new instance of connection resolver.
+  ///
+  /// - config        (optional) component configuration parameters
+  /// - references    (optional) component references
 
-//     /**
-//      * Configures component by passing configuration parameters.
-//      * 
-//      * - config    configuration parameters to be set.
-//      */
-//     public configure(config: ConfigParams): void {
-//         let connections: ConnectionParams[] = ConnectionParams.manyFromConfig(config);
-//         this._connections.push(...connections);
-//     }
+  ConnectionResolver(
+      [ConfigParams config = null, IReferences references = null]) {
+    if (config != null) this.configure(config);
+    if (references != null) this.setReferences(references);
+  }
 
-//     /**
-// 	 * Sets references to dependent components.
-// 	 * 
-// 	 * - references 	references to locate the component dependencies. 
-//      */
-//     public setReferences(references: IReferences): void {
-//         this._references = references;
-//     }
+  /// Configures component by passing configuration parameters.
+  ///
+  /// - config    configuration parameters to be set.
 
-//     /**
-//      * Gets all connections configured in component configuration.
-//      * 
-//      * Redirect to Discovery services is not done at this point.
-//      * If you need fully fleshed connection use [resolve] method instead.
-//      * 
-//      * Return a list with connection parameters
-//      */
-//     public getAll(): ConnectionParams[] {
-//         return this._connections;
-//     }
+  void configure(ConfigParams config) {
+    List<ConnectionParams> connections =
+        ConnectionParams.manyFromConfig(config);
+    this._connections.addAll(connections);
+  }
 
-//     /**
-//      * Adds a new connection to component connections
-//      * 
-//      * - connection    new connection parameters to be added
-//      */
-//     public add(connection: ConnectionParams): void {
-//         this._connections.push(connection);
-//     }
+  /// Sets references to dependent components.
+  ///
+  /// - references 	references to locate the component dependencies.
 
-//     private resolveInDiscovery(correlationId: string, connection: ConnectionParams, 
-//         callback: (err: any, result: ConnectionParams) => void): void {
-        
-//         if (!connection.useDiscovery()) {
-//             callback(null, null);
-//             return;
-//         }
+  void setReferences(IReferences references) {
+    this._references = references;
+  }
 
-//         let key: string = connection.getDiscoveryKey();
-//         if (this._references == null) {
-//             callback(null, null);
-//             return;
-//         }
+  /// Gets all connections configured in component configuration.
+  ///
+  /// Redirect to Discovery services is not done at this point.
+  /// If you need fully fleshed connection use [resolve] method instead.
+  ///
+  /// Return a list with connection parameters
 
-//         let discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*")
-//         let discoveries: any[] = this._references.getOptional<any>(discoveryDescriptor)
-//         if (discoveries.length == 0) {
-//             let err = new ReferenceException(correlationId, discoveryDescriptor);
-//             callback(err, null);
-//             return;
-//         }
+  List<ConnectionParams> getAll() {
+    return this._connections;
+  }
 
-//         let firstResult: ConnectionParams = null;
+  /// Adds a new connection to component connections
+  ///
+  /// - connection    new connection parameters to be added
 
-//         async.any(
-//             discoveries,
-//             (discovery, callback) => {
-//                 let discoveryTyped: IDiscovery = discovery;
-//                 discoveryTyped.resolveOne(correlationId, key, (err, result) => {
-//                     if (err || result == null) {
-//                         callback(err, false);
-//                     } else {
-//                         firstResult = result;
-//                         callback(err, true);
-//                     }
-//                 });
-//             },
-//             (err) => {
-//                 callback(err, firstResult);
-//             }
-//         );
-//     }
+  void add(ConnectionParams connection) {
+    this._connections.add(connection);
+  }
 
-//     /**
-//      * Resolves a single component connection. If connections are configured to be retrieved
-//      * from Discovery service it finds a [IDiscovery] and resolves the connection there.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - callback 			callback function that receives resolved connection or error.
-//      * 
-//      * See [IDiscovery]
-//      */
-//     public resolve(correlationId: string, 
-//         callback: (err: any, result: ConnectionParams) => void): void {
+  Future<ConnectionParams> _resolveInDiscovery(
+      String correlationId, ConnectionParams connection) {
+    if (!connection.useDiscovery()) {
+      return Future<ConnectionParams>(() {
+        return null;
+      });
+    }
 
-//         if (this._connections.length == 0) {
-//             callback(null, null);
-//             return;
-//         }
+    String key = connection.getDiscoveryKey();
+    if (this._references == null) {
+      return Future<ConnectionParams>(() {
+        return null;
+      });
+    }
 
-//         let connections: ConnectionParams[] = [];
+    var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
+    List<dynamic> discoveries =
+        this._references.getOptional<dynamic>(discoveryDescriptor);
+    if (discoveries.length == 0) {
+      var err = new ReferenceException(correlationId, discoveryDescriptor);
+      throw err;
+    }
 
-//         for (let index = 0; index < this._connections.length; index++) {
-//             if (!this._connections[index].useDiscovery()) {
-//                 callback(null, this._connections[index]);  //If a connection is not configured for discovery use - return it.
-//                 return;
-//             } else {
-//                 connections.push(this._connections[index]);  //Otherwise, add it to the list of connections to resolve.
-//             }
-//         }
+    ConnectionParams firstResult = null;
 
-//         if (connections.length == 0) {
-//             callback(null, null);
-//             return;
-//         }
+    return Future<ConnectionParams>(() async {
+      for (var discovery in discoveries) {
+        IDiscovery discoveryTyped = discovery;
+        var result = await discoveryTyped.resolveOne(correlationId, key);
+        if (result != null) {
+          firstResult = result;
+          break;
+        }
+      }
+      return firstResult;
+    });
+  }
 
-//         let firstResult: ConnectionParams = null;
-//         async.any(
-//             connections,
-//             (connection, callback) => {
-//                 this.resolveInDiscovery(correlationId, connection, (err, result) => {
-//                     if (err || result == null) {
-//                         callback(err, false);
-//                     } else {
-//                         firstResult = new ConnectionParams(ConfigParams.mergeConfigs(connection, result));
-//                         callback(err, true);
-//                     }
-//                 });
-//             },
-//             (err) => {
-//                 callback(err, firstResult);
-//             }
-//         );
-//     }
+  /// Resolves a single component connection. If connections are configured to be retrieved
+  /// from Discovery service it finds a [IDiscovery] and resolves the connection there.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - callback 			callback function that receives resolved connection or error.
+  ///
+  /// See [IDiscovery]
 
-//     private resolveAllInDiscovery(correlationId: string, connection: ConnectionParams, 
-//         callback: (err: any, result: ConnectionParams[]) => void): void {
-        
-//         let resolved: ConnectionParams[] = [];
-//         let key: string = connection.getDiscoveryKey();
+  Future<ConnectionParams> resolve(String correlationId) {
+    if (this._connections.length == 0) {
+      return Future<ConnectionParams>(() {
+        return null;
+      });
+    }
 
-//         if (!connection.useDiscovery()) {
-//             callback(null, []);
-//             return;
-//         }
+    List<ConnectionParams> connections = List<ConnectionParams>();
 
-//         if (this._references == null) {
-//             callback(null, []);
-//             return;
-//         }
+    for (var index = 0; index < this._connections.length; index++) {
+      if (!this._connections[index].useDiscovery()) {
+        return Future<ConnectionParams>(() {
+          this._connections[index];
+        }); //If a connection is not configured for discovery use - return it.
 
-//         let discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*")
-//         let discoveries: any[] = this._references.getOptional<any>(discoveryDescriptor)
-//         if (discoveries.length == 0) {
-//             let err = new ReferenceException(correlationId, discoveryDescriptor);
-//             callback(err, null);
-//             return;
-//         }
+      } else {
+        connections.add(this._connections[
+            index]); //Otherwise, add it to the list of connections to resolve.
+      }
+    }
 
-//         async.each(
-//             discoveries,
-//             (discovery, callback) => {
-//                 let discoveryTyped: IDiscovery = discovery;
-//                 discoveryTyped.resolveAll(correlationId, key, (err, result) => {
-//                     if (err || result == null) {
-//                         callback(err);
-//                     } else {
-//                         resolved = resolved.concat(result);
-//                         callback(null);
-//                     }
+    if (connections.length == 0) {
+      return Future<ConnectionParams>(() {
+        return null;
+      });
+    }
 
-//                 });
-//             },
-//             (err) => {
-//                 callback(err, resolved);
-//             }
-//         );
-//     }
+    return Future<ConnectionParams>(() async {
+      ConnectionParams firstResult = null;
+      for (var connection in connections) {
+        var result = await this._resolveInDiscovery(correlationId, connection);
+        if (result != null) {
+          firstResult = result;
+          break;
+        }
+      }
+      return firstResult;
+    });
+  }
 
-//     /**
-//      * Resolves all component connection. If connections are configured to be retrieved
-//      * from Discovery service it finds a [IDiscovery] and resolves the connection there.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - callback 			callback function that receives resolved connections or error.
-//      * 
-//      * See [IDiscovery]
-//      */
-//     public resolveAll(correlationId: string, callback: (err: any, result: ConnectionParams[]) => void): void {
-//         let resolved: ConnectionParams[] = [];
-//         let toResolve: ConnectionParams[] = [];
+  Future<List<ConnectionParams>> _resolveAllInDiscovery(
+      String correlationId, ConnectionParams connection) {
+    List<ConnectionParams> resolved = List<ConnectionParams>();
+    String key = connection.getDiscoveryKey();
 
-//         for (let index = 0; index < this._connections.length; index++) {
-//             if (this._connections[index].useDiscovery())
-//                 toResolve.push(this._connections[index]);
-//             else
-//                 resolved.push(this._connections[index]);
-//         }
+    if (!connection.useDiscovery()) {
+      return Future<List<ConnectionParams>>(() {
+        return List<ConnectionParams>();
+      });
+    }
 
-//         if (toResolve.length <= 0) {
-//             callback(null, resolved);
-//             return;
-//         }
+    if (this._references == null) {
+      return Future<List<ConnectionParams>>(() {
+        return List<ConnectionParams>();
+      });
+    }
 
-//         async.each(
-//             toResolve,
-//             (connection, callback) => {
-//                 this.resolveAllInDiscovery(correlationId, connection, (err, result) => {
-//                     if (err) {
-//                         callback(err);
-//                     } else {
-//                         for (let index = 0; index < result.length; index++) {
-//                             let localResolvedConnection: ConnectionParams = new ConnectionParams(ConfigParams.mergeConfigs(connection, result[index]));
-//                             resolved.push(localResolvedConnection);
-//                         }
-//                         callback(null);
-//                     }
-//                 });
-//             },
-//             (err) => {
-//                 callback(err, resolved);
-//             }
-//         );
-//     }
+    var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
+    List<dynamic> discoveries =
+        this._references.getOptional<dynamic>(discoveryDescriptor);
+    if (discoveries.length == 0) {
+      var err = new ReferenceException(correlationId, discoveryDescriptor);
+      throw err;
+    }
 
-//     private registerInDiscovery(correlationId: string, connection: ConnectionParams,
-//         callback: (err: any, result: boolean) => void) {
-        
-//         if (!connection.useDiscovery()) {
-//             if (callback) callback(null, false);
-//             return;
-//         }
+    return Future<List<ConnectionParams>>(() async {
+      for (var discovery in discoveries) {
+        IDiscovery discoveryTyped = discovery;
+        var result = await discoveryTyped.resolveAll(correlationId, key);
+        if (result != null) {
+          resolved.addAll(result);
+        }
+      }
+      return resolved;
+    });
+  }
 
-//         var key = connection.getDiscoveryKey();
-//         if (this._references == null) {
-//             if (callback) callback(null, false);
-//             return;
-//         }
+  /// Resolves all component connection. If connections are configured to be retrieved
+  /// from Discovery service it finds a [IDiscovery] and resolves the connection there.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - callback 			callback function that receives resolved connections or error.
+  ///
+  /// See [IDiscovery]
 
-//         var discoveries = this._references.getOptional<IDiscovery>(new Descriptor("*", "discovery", "*", "*", "*"));
-//         if (discoveries == null) {
-//             if (callback) callback(null, false);
-//             return;
-//         }
+  Future<List<ConnectionParams>> resolveAll(String correlationId) {
+    List<ConnectionParams> resolved = List<ConnectionParams>();
+    List<ConnectionParams> toResolve = List<ConnectionParams>();
 
-//         async.each(
-//             discoveries,
-//             (discovery, callback) => {
-//                 discovery.register(correlationId, key, connection, (err, result) => {
-//                     callback(err);
-//                 });
-//             },
-//             (err) => {
-//                 if (callback) callback(err, err == null);
-//             }
-//         );
-//     }
+    for (var index = 0; index < this._connections.length; index++) {
+      if (this._connections[index].useDiscovery())
+        toResolve.add(this._connections[index]);
+      else
+        resolved.add(this._connections[index]);
+    }
 
-//     /**
-//      * Registers the given connection in all referenced discovery services.
-//      * This method can be used for dynamic service discovery.
-//      * 
-//      * - correlationId     (optional) transaction id to trace execution through call chain.
-//      * - connection        a connection to register.
-//      * - callback          callback function that receives registered connection or error.
-//      * 
-//      * See [IDiscovery]
-//      */
-//     public register(correlationId: string, connection: ConnectionParams, callback: (err: any) => void): void {
-//         this.registerInDiscovery(correlationId, connection, (err, result) => {
-//             if (result)
-//                 this._connections.push(connection);
-//             if (callback) callback(err);
-//         });
-//     }
+    if (toResolve.length <= 0) {
+      return Future<List<ConnectionParams>>(() {
+        return resolved;
+      });
+    }
 
-// }
+    return Future<List<ConnectionParams>>(() async {
+      for (var connection in toResolve) {
+        var result =
+            await this._resolveAllInDiscovery(correlationId, connection);
+        for (var index = 0; index < result.length; index++) {
+          ConnectionParams localResolvedConnection = new ConnectionParams(
+              ConfigParams.mergeConfigs([connection, result[index]]));
+          resolved.add(localResolvedConnection);
+        }
+      }
+
+      return resolved;
+    });
+  }
+
+  Future<bool> _registerInDiscovery(
+      String correlationId, ConnectionParams connection) {
+    if (!connection.useDiscovery()) {
+      return Future<bool>(() {
+        return false;
+      });
+    }
+
+    var key = connection.getDiscoveryKey();
+    if (this._references == null) {
+      return Future<bool>(() {
+        return false;
+      });
+    }
+
+    var discoveries = this._references.getOptional<IDiscovery>(
+        new Descriptor("*", "discovery", "*", "*", "*"));
+    if (discoveries == null) {
+      return Future<bool>(() {
+        return false;
+      });
+    }
+
+    return Future<bool>(() async {
+      bool error = false;
+      for (var discovery in discoveries) {
+        try {
+          await discovery.register(correlationId, key, connection);
+        } catch (err) {
+          error = true;
+        }
+      }
+      return !error;
+    });
+  }
+
+  /// Registers the given connection in all referenced discovery services.
+  /// This method can be used for dynamic service discovery.
+  ///
+  /// - correlationId     (optional) transaction id to trace execution through call chain.
+  /// - connection        a connection to register.
+  /// - callback          callback function that receives registered connection or error.
+  ///
+  /// See [IDiscovery]
+
+  Future<ConnectionParams> register(
+      String correlationId, ConnectionParams connection) async {
+    var result = await this._registerInDiscovery(correlationId, connection);
+
+    if (result != null) this._connections.add(connection);
+    return Future<ConnectionParams>(() {
+      return connection;
+    });
+  }
+}

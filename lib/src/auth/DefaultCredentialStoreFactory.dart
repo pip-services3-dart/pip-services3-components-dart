@@ -1,25 +1,20 @@
-// /** @module auth */
-// import { Descriptor } from 'pip-services3-commons-node';
+import 'package:pip_services3_commons/src/refer/Descriptor.dart';
 
-// import { Factory } from '../build/Factory';
-// import { MemoryCredentialStore } from './MemoryCredentialStore';
+import '../build/Factory.dart';
+import './MemoryCredentialStore.dart';
 
-// /**
-//  * Creates [ICredentialStore] components by their descriptors.
-//  * 
-//  * See [IFactory]
-//  * See [ICredentialStore]
-//  * See [MemoryCredentialStore]
-//  */
-// export class DefaultCredentialStoreFactory extends Factory {
-// 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "credential-store", "default", "1.0");
-// 	public static readonly MemoryCredentialStoreDescriptor = new Descriptor("pip-services", "credential-store", "memory", "*", "1.0");
+/// Creates [ICredentialStore] components by their descriptors.
+/// 
+/// See [IFactory]
+/// See [ICredentialStore]
+/// See [MemoryCredentialStore]
+class DefaultCredentialStoreFactory extends Factory {
+	static final descriptor = new Descriptor("pip-services", "factory", "credential-store", "default", "1.0");
+	static final MemoryCredentialStoreDescriptor = new Descriptor("pip-services", "credential-store", "memory", "*", "1.0");
 	
-// 	/**
-// 	 * Create a new instance of the factory.
-// 	 */
-// 	public constructor() {
-//         super();
-// 		this.registerAsType(DefaultCredentialStoreFactory.MemoryCredentialStoreDescriptor, MemoryCredentialStore);
-// 	}	
-// }
+
+	/// Create a new instance of the factory.
+	DefaultCredentialStoreFactory() :super(){
+		this.registerAsType(DefaultCredentialStoreFactory.MemoryCredentialStoreDescriptor, MemoryCredentialStore);
+	}	
+}
