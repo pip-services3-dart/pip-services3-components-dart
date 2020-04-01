@@ -1,12 +1,6 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/refer/IReferences.dart';
-import 'package:pip_services3_commons/src/refer/ReferenceException.dart';
-import 'package:pip_services3_commons/src/refer/Descriptor.dart';
-
-import './CredentialParams.dart';
-import './ICredentialStore.dart';
-
-import "dart:async";
+import 'dart:async';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
 
 /// Helper class to retrieve component credentials.
 ///
@@ -36,16 +30,16 @@ import "dart:async";
 ///
 /// ### Example ###
 ///
-///     var config = ConfigParams.fromTuples(
-///         "credential.user", "jdoe",
-///         "credential.pass",  "pass123"
-///     );
+///     var config = ConfigParams.fromTuples([
+///         'credential.user', 'jdoe',
+///         'credential.pass',  'pass123'
+///     ]);
 ///
 ///     var credentialResolver = new CredentialResolver();
 ///     credentialResolver.configure(config);
 ///     credentialResolver.setReferences(references);
 ///
-///     credentialResolver.lookup("123", (err, credential) => {
+///     credentialResolver.lookup('123', (err, credential) => {
 ///         // Now use credential...
 ///     });
 ///
@@ -98,22 +92,20 @@ class CredentialResolver {
 
   Future<CredentialParams> _lookupInStores(
       String correlationId, CredentialParams credential) async {
-    if (!credential.useCredentialStore())
-      return null;
+    if (!credential.useCredentialStore()) return null;
 
     String key = credential.getStoreKey();
-    if (this._references == null)
-      return null;
+    if (this._references == null) return null;
 
     var storeDescriptor =
-        new Descriptor("*", "credential-store", "*", "*", "*");
+         Descriptor('*', 'credential-store', '*', '*', '*');
     List<dynamic> components =
         this._references.getOptional<dynamic>(storeDescriptor);
-    if (components.length == 0) {
-      throw new ReferenceException(correlationId, storeDescriptor);
+    if (components.isEmpty) {
+      throw  ReferenceException(correlationId, storeDescriptor);
     }
 
-    CredentialParams firstResult = null;
+    CredentialParams firstResult;
     for (var component in components) {
       ICredentialStore store = component;
       var result = await store.lookup(correlationId, key);
@@ -131,7 +123,7 @@ class CredentialResolver {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives resolved credential or error.
   Future<CredentialParams> lookup(String correlationId) async {
-    if (this._credentials.length == 0) {
+    if (this._credentials.isEmpty) {
       return null;
     }
 
@@ -145,7 +137,7 @@ class CredentialResolver {
       }
     }
 
-    CredentialParams firstResult = null;
+    CredentialParams firstResult;
     for (var credential in lookupCredentials) {
       var result = await this._lookupInStores(correlationId, credential);
       if (result != null) {

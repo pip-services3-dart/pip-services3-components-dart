@@ -1,108 +1,85 @@
-// let assert = require('chai').assert;
-// let async = require('async');
+import 'dart:async';
+import 'package:test/test.dart';
+import '../../lib/pip_services3_components.dart';
 
-// import { ICache } from '../../src/cache/ICache';
+String KEY1 = "key1";
+String KEY2 = "key2";
 
-// let KEY1: string = "key1";
-// let KEY2: string = "key2";
+String VALUE1 = "value1";
+String VALUE2 = "value2";
 
-// let VALUE1: string = "value1";
-// let VALUE2: string = "value2";
+class CacheFixture {
+  ICache _cache;
 
-// export class CacheFixture {
-//     private _cache: ICache = null;
+  CacheFixture(ICache cache) {
+    this._cache = cache;
+  }
 
-//     public constructor(cache: ICache) {
-//         this._cache = cache;
-//     }
+  void testStoreAndRetrieve() async {
+    try {
+      await this._cache.store(null, KEY1, VALUE1, 5000);
+    } catch (err) {
+      expect(err, isNull);
+    }
 
-//     public testStoreAndRetrieve(done: any): void {
-//         async.series([
-//             (callback) => {
-//                 this._cache.store(null, KEY1, VALUE1, 5000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 this._cache.store(null, KEY2, VALUE2, 5000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 setTimeout(() => {
-//                     callback();
-//                 }, 500);
-//             },
-//             (callback) => {
-//                 this._cache.retrieve(null, KEY1, (err, val) => {
-//                     assert.isNull(err || null);
-//                     assert.isNotNull(val);
-//                     assert.equal(VALUE1, val);
+    try {
+      await this._cache.store(null, KEY2, VALUE2, 5000);
+    } catch (err) {
+      expect(err, isNull);
+    }
 
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 this._cache.retrieve(null, KEY2, (err, val) => {
-//                     assert.isNull(err || null);
-//                     assert.isNotNull(val);
-//                     assert.equal(VALUE2, val);
+    await Future.delayed(Duration(milliseconds: 500));
 
-//                     callback();
-//                 });
-//             }
-//         ], done);
-//     }
+    try {
+      var val = await this._cache.retrieve(null, KEY1);
+      expect(val, isNotNull);
+      expect(VALUE1, val);
+    } catch (err) {
+      expect(err, isNull);
+    }
+    try {
+      var val = await this._cache.retrieve(null, KEY2);
+      expect(val, isNotNull);
+      expect(VALUE2, val);
+    } catch (err) {
+      expect(err, isNull);
+    }
+  }
 
-//     public testRetrieveExpired(done: any): void {
-//         async.series([
-//             (callback) => {
-//                 this._cache.store(null, KEY1, VALUE1, 1000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 setTimeout(() => {
-//                     callback();
-//                 }, 1500);
-//             },
-//             (callback) => {
-//                 this._cache.retrieve(null, KEY1, (err, val) => {
-//                     assert.isNull(err || null);
-//                     assert.isNull(val || null);
+  void testRetrieveExpired() async {
+    try {
+      await this._cache.store(null, KEY1, VALUE1, 1000);
+    } catch (err) {
+      expect(err, isNull);
+    }
 
-//                     callback();
-//                 });
-//             }
-//         ], done);
-//     }
-    
-//     public testRemove(done: any): void {
-//         async.series([
-//             (callback) => {
-//                 this._cache.store(null, KEY1, VALUE1, 1000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 this._cache.remove(null, KEY1, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             (callback) => {
-//                 this._cache.retrieve(null, KEY1, (err, val) => {
-//                     assert.isNull(err || null);
-//                     assert.isNull(val || null);
+    await Future.delayed(Duration(milliseconds: 1500));
 
-//                     callback();
-//                 });
-//             }
-//         ], done);
-//     }
+    try {
+      var val = await this._cache.retrieve(null, KEY1);
+      expect(val, isNull);
+    } catch (err) {
+      expect(err, isNull);
+    }
+  }
 
-// }
+  void testRemove() async {
+    try {
+      await this._cache.store(null, KEY1, VALUE1, 1000);
+    } catch (err) {
+      expect(err, isNull);
+    }
+    try {
+      await this._cache.remove(null, KEY1);
+    } catch (err) {
+      expect(err, isNull);
+    }
+
+    try {
+      var val = await this._cache.retrieve(null, KEY1);
+      expect(val, isNull);
+    } catch (err) {
+      expect(err, isNull);
+    }
+  }
+}

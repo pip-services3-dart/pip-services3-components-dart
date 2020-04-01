@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/config/IReconfigurable.dart';
-import 'package:handlebars2/handlebars2.dart' as handlebars;
-import './IConfigReader.dart';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+//import 'package:handlebars2/handlebars2.dart' as handlebars;
+import 'package:stubble/stubble.dart';
+import '../../pip_services3_components.dart';
 
 /// Config reader that stores configuration in memory.
 ///
@@ -18,8 +18,8 @@ import './IConfigReader.dart';
 /// ### Example ####
 ///
 ///     var config = ConfigParams.fromTuples(
-///         "connection.host", "{{SERVICE_HOST}}",
-///         "connection.port", "{{SERVICE_PORT}}{{^SERVICE_PORT}}8080{{/SERVICE_PORT}}"
+///         'connection.host', '{{SERVICE_HOST}}',
+///         'connection.port', '{{SERVICE_PORT}}{{^SERVICE_PORT}}8080{{/SERVICE_PORT}}'
 ///     );
 ///
 ///     var configReader = new MemoryConfigReader();
@@ -27,7 +27,7 @@ import './IConfigReader.dart';
 ///
 ///     var parameters = ConfigParams.fromValue(process.env);
 ///
-///     configReader.readConfig("123", parameters, (err, config) => {
+///     configReader.readConfig('123', parameters, (err, config) => {
 ///         // Possible result: connection.host=10.1.1.100;connection.port=8080
 ///     });
 ///
@@ -61,6 +61,7 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
       String correlationId, ConfigParams parameters) async {
     if (parameters != null) {
       var config = new ConfigParams(this._config).toString();
+      var handlebars = Stubble();
       var template = handlebars.compile(config);
       config = template(parameters);
       return ConfigParams.fromString(config);

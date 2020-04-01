@@ -14,7 +14,7 @@
 //     beforeEach(function() {
 //         _logger = new CompositeLogger();
 //         let refs = References.fromTuples(
-//             DefaultLoggerFactory.NullLoggerDescriptor, new NullLogger(), 
+//             DefaultLoggerFactory.NullLoggerDescriptor, new NullLogger(),
 //             DefaultLoggerFactory.ConsoleLoggerDescriptor, new ConsoleLogger()
 //         );
 //         _logger.setReferences(refs);

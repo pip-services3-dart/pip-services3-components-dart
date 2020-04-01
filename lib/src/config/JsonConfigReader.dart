@@ -1,16 +1,7 @@
-// var fs = require('fs');
-
-import 'dart:convert';
-
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/errors/ConfigException.dart';
-import 'package:pip_services3_commons/src/errors/FileException.dart';
-import 'package:pip_services3_commons/src/convert/JsonConverter.dart';
-
-import './FileConfigReader.dart';
-
 import 'dart:async';
 import 'dart:io';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
 
 /// Config reader that reads configuration from JSON file.
 ///
@@ -28,30 +19,30 @@ import 'dart:io';
 /// ### Example ###
 ///
 ///     ======== config.json ======
-///     { "key1": "{{KEY1_VALUE}}", "key2": "{{KEY2_VALUE}}" }
+///     { 'key1': '{{KEY1_VALUE}}', 'key2': '{{KEY2_VALUE}}' }
 ///     ===========================
 ///
-///     var configReader = new JsonConfigReader("config.json");
+///     var configReader = new JsonConfigReader('config.json');
 ///
-///     var parameters = ConfigParams.fromTuples(["KEY1_VALUE", 123, "KEY2_VALUE", "ABC"]);
-///     configReader.readConfig("123", parameters, (err, config) => {
+///     var parameters = ConfigParams.fromTuples(['KEY1_VALUE', 123, 'KEY2_VALUE', 'ABC']);
+///     configReader.readConfig('123', parameters, (err, config) => {
 ///         // Result: key1=123;key2=ABC
 ///     });
 class JsonConfigReader extends FileConfigReader {
   /// Creates a new instance of the config reader.
   ///
   /// - path  (optional) a path to configuration file.
-  JsonConfigReader([String path = null]) : super(path) {}
+  JsonConfigReader([String path]) : super(path) {}
 
   /// Reads configuration file, parameterizes its content and converts it into JSON object.
   ///
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - parameters        values to parameters the configuration.
   /// Return                 a JSON object with configuration.
-  dynamic readObject(String correlationId, ConfigParams parameters) async{
+  dynamic readObject(String correlationId, ConfigParams parameters) async {
     if (super.getPath() == null)
       throw new ConfigException(
-          correlationId, "NO_PATH", "Missing config file path");
+          correlationId, 'NO_PATH', 'Missing config file path');
 
     try {
       // Todo: make this async?
@@ -59,9 +50,9 @@ class JsonConfigReader extends FileConfigReader {
       data = this.parameterize(data, parameters);
       return JsonConverter.toNullableMap(data);
     } catch (e) {
-      throw new FileException(correlationId, "READ_FAILED",
-              "Failed reading configuration " + super.getPath() + ": " + e)
-          .withDetails("path", super.getPath())
+      throw FileException(correlationId, 'READ_FAILED',
+              'Failed reading configuration ' + super.getPath() + ': ' + e)
+          .withDetails('path', super.getPath())
           .withCause(e);
     }
   }
@@ -72,12 +63,11 @@ class JsonConfigReader extends FileConfigReader {
   /// - parameters        values to parameters the configuration
   /// - callback          callback function that receives configuration or error.
   Future<ConfigParams> readConfig(
-      String correlationId, ConfigParams parameters) {
-    return Future<ConfigParams>(() {
+      String correlationId, ConfigParams parameters) async {
+    
       var value = this.readObject(correlationId, parameters);
       var config = ConfigParams.fromValue(value);
       return config;
-    });
   }
 
   /// Reads configuration file, parameterizes its content and converts it into JSON object.
@@ -86,8 +76,10 @@ class JsonConfigReader extends FileConfigReader {
   /// - file              a path to configuration file.
   /// - parameters        values to parameters the configuration.
   /// Return                 a JSON object with configuration.
-  static dynamic readObject_(String correlationId, String path, ConfigParams parameters) async {
-    return await new JsonConfigReader(path).readObject(correlationId, parameters);
+  static dynamic readObject_(
+      String correlationId, String path, ConfigParams parameters) async {
+    return await new JsonConfigReader(path)
+        .readObject(correlationId, parameters);
   }
 
   /// Reads configuration from a file, parameterize it with given values and returns a new ConfigParams object.
@@ -97,8 +89,9 @@ class JsonConfigReader extends FileConfigReader {
   /// - parameters        values to parameters the configuration.
   /// - callback          callback function that receives configuration or error.
   static ConfigParams readConfig_(
-      String correlationId, String path, ConfigParams parameters)  {
-    var value = new JsonConfigReader(path).readObject(correlationId, parameters);
+      String correlationId, String path, ConfigParams parameters) {
+    var value =
+        new JsonConfigReader(path).readObject(correlationId, parameters);
     var config = ConfigParams.fromValue(value);
     return config;
   }

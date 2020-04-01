@@ -1,24 +1,21 @@
-//  @module test 
-// import { Descriptor } from 'pip-services3-commons-node';
 
-// import { Factory } from '../build/Factory';
-// import { Shutdown } from './Shutdown';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
 
-// 
-// /// Creates test components by their descriptors.
-// /// 
-// /// See [Factory]
-// /// See [Shutdown]
-//  
-// export class DefaultTestFactory extends Factory {
-// 	public static readonly Descriptor = new Descriptor("pip-services", "factory", "test", "default", "1.0");
-// 	public static readonly ShutdownDescriptor = new Descriptor("pip-services", "shutdown", "*", "*", "1.0");
 
-// 	
-// 	/// Create a new instance of the factory.
-// 	 
-// 	public constructor() {
-//         super();
-// 		this.registerAsType(DefaultTestFactory.ShutdownDescriptor, Shutdown);
-// 	}
-// }
+/// Creates test components by their descriptors.
+///
+/// See [Factory]
+/// See [Shutdown]
+
+class DefaultTestFactory extends Factory {
+	static final descriptor = new Descriptor('pip-services', 'factory', 'test', 'default', '1.0');
+	static final ShutdownDescriptor = new Descriptor('pip-services', 'shutdown', '*', '*', '1.0');
+
+
+	/// Create a new instance of the factory.
+
+	DefaultTestFactory(): super() {
+		this.registerAsType(DefaultTestFactory.ShutdownDescriptor, Shutdown);
+	}
+}

@@ -1,10 +1,6 @@
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import 'package:sprintf/sprintf.dart';
-
-import './ILogger.dart';
-import './LogLevel.dart';
-import './LogLevelConverter.dart';
-import '../info/ContextInfo.dart';
+import '../../pip_services3_components.dart';
 
 /// Abstract logger that captures and formats log messages.
 /// Child classes take the captured messages and write them to their specific destinations.
@@ -22,7 +18,7 @@ import '../info/ContextInfo.dart';
 /// See [ILogger]
 abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   LogLevel _level = LogLevel.Info;
-  String _source = null;
+  String source = null;
 
   /// Creates a new instance of the logger.
   Logger() {}
@@ -33,7 +29,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   void configure(ConfigParams config) {
     this._level =
         LogLevelConverter.toLogLevel(config.getAsObject("level"), this._level);
-    this._source = config.getAsStringWithDefault("source", this._source);
+    this.source = config.getAsStringWithDefault("source", this.source);
   }
 
   /// Sets references to dependent components.
@@ -42,8 +38,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   void setReferences(IReferences references) {
     var contextInfo = references.getOneOptional<ContextInfo>(
         new Descriptor("pip-services", "context-info", "*", "*", "1.0"));
-    if (contextInfo != null && this._source == null) {
-      this._source = contextInfo.name;
+    if (contextInfo != null && this.source == null) {
+      this.source = contextInfo.name;
     }
   }
 
@@ -66,14 +62,14 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   ///
   /// Return the source (context) name.
   String getSource() {
-    return this._source;
+    return this.source;
   }
 
   /// Sets the source (context) name.
   ///
   /// - value     a new source (context) name.
   void setSource(String value) {
-    this._source = value;
+    this.source = value;
   }
 
   /// Writes a log message to the logger destination.
@@ -82,7 +78,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
-  void _write(LogLevel level, String correlationId, ApplicationException error,
+  void write(LogLevel level, String correlationId, ApplicationException error,
       String message);
 
   /// Formats the log message and writes it to the logger destination.
@@ -102,7 +98,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
       message = sprintf(message, args);
     }
 
-    this._write(level, correlationId, error, message);
+    this.write(level, correlationId, error, message);
   }
 
   /// Logs a message at specified log level.

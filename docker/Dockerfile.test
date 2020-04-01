@@ -1,14 +1,14 @@
-FROM node:8
+FROM google/dart
 
 # set working directory
 WORKDIR /app
-# copy project file
-COPY package.json .
- 
-# install ALL node_modules, including 'devDependencies'
-RUN npm install
 
 # copy all project
 COPY . .
- 
-CMD [ "npm", "test" ]
+
+# Install all dependencies
+RUN pub get
+RUN pub get --offline
+
+# Specify the command from running tests
+CMD pub run test

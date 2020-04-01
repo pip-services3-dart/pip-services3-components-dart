@@ -1,5 +1,5 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import './ConfigReader.dart';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
 
 /// Abstract config reader that reads configuration from a file.
 /// Child classes add support for config files in their specific format

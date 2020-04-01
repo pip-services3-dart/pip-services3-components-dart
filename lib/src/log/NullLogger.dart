@@ -1,7 +1,7 @@
-import './ILogger.dart';
-import './LogLevel.dart';
 
 import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
+
 /// Dummy implementation of logger that doesn't do anything.
 ///
 /// It can be used in testing or in situations when logger is required
@@ -32,8 +32,8 @@ class NullLogger implements ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  void log(LogLevel level, String correlationId, ApplicationException error, String message,
-      List args) {}
+  void log(LogLevel level, String correlationId, ApplicationException error,
+      String message, List args) {}
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///
@@ -41,7 +41,8 @@ class NullLogger implements ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  void fatal(String correlationId, ApplicationException error, String message, List args) {}
+  void fatal(String correlationId, ApplicationException error, String message,
+      List args) {}
 
   /// Logs recoverable application error.
   ///
@@ -49,7 +50,8 @@ class NullLogger implements ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  void error(String correlationId, ApplicationException error, String message, List args) {}
+  void error(String correlationId, ApplicationException error, String message,
+      List args) {}
 
   /// Logs a warning that may or may not have a negative impact.
   ///

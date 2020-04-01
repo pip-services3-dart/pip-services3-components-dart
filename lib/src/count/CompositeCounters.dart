@@ -1,10 +1,6 @@
-import 'package:pip_services3_commons/src/refer/IReferenceable.dart';
-import 'package:pip_services3_commons/src/refer/IReferences.dart';
-import 'package:pip_services3_commons/src/refer/Descriptor.dart';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 
-import './ICounters.dart';
-import './Timing.dart';
-import './ITimingCallback.dart';
+import '../../pip_services3_components.dart';
 
 /// Aggregates all counters from component references under a single component.
 ///
@@ -134,7 +130,7 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// - name 		a counter name of Increment type.
   /// - value		a value to add to the counter.
   void increment(String name, int value) {
-    if (name == null || name == "") throw "Name cannot be null";
+    if (name == null || name == "") throw Exception("Name cannot be null");
     for (var i = 0; i < this._counters.length; i++)
       this._counters[i].increment(name, value);
   }

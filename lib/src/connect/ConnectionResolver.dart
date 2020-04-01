@@ -1,11 +1,6 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/refer/IReferences.dart';
-import 'package:pip_services3_commons/src/refer/ReferenceException.dart';
-import 'package:pip_services3_commons/src/refer/Descriptor.dart';
-
-import './ConnectionParams.dart';
-import './IDiscovery.dart';
 import 'dart:async';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../pip_services3_components.dart';
 
 /// Helper class to retrieve component connections.
 ///
@@ -100,7 +95,7 @@ class ConnectionResolver {
   }
 
   Future<ConnectionParams> _resolveInDiscovery(
-      String correlationId, ConnectionParams connection) {
+      String correlationId, ConnectionParams connection) async {
     if (!connection.useDiscovery()) {
       return Future<ConnectionParams>(() {
         return null;
@@ -109,9 +104,7 @@ class ConnectionResolver {
 
     String key = connection.getDiscoveryKey();
     if (this._references == null) {
-      return Future<ConnectionParams>(() {
-        return null;
-      });
+      return null;
     }
 
     var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
@@ -124,17 +117,15 @@ class ConnectionResolver {
 
     ConnectionParams firstResult = null;
 
-    return Future<ConnectionParams>(() async {
-      for (var discovery in discoveries) {
-        IDiscovery discoveryTyped = discovery;
-        var result = await discoveryTyped.resolveOne(correlationId, key);
-        if (result != null) {
-          firstResult = result;
-          break;
-        }
+    for (var discovery in discoveries) {
+      IDiscovery discoveryTyped = discovery;
+      var result = await discoveryTyped.resolveOne(correlationId, key);
+      if (result != null) {
+        firstResult = result;
+        break;
       }
-      return firstResult;
-    });
+    }
+    return firstResult;
   }
 
   /// Resolves a single component connection. If connections are configured to be retrieved
@@ -145,20 +136,16 @@ class ConnectionResolver {
   ///
   /// See [IDiscovery]
 
-  Future<ConnectionParams> resolve(String correlationId) {
+  Future<ConnectionParams> resolve(String correlationId) async {
     if (this._connections.length == 0) {
-      return Future<ConnectionParams>(() {
-        return null;
-      });
+      return null;
     }
 
     List<ConnectionParams> connections = List<ConnectionParams>();
 
     for (var index = 0; index < this._connections.length; index++) {
       if (!this._connections[index].useDiscovery()) {
-        return Future<ConnectionParams>(() {
-          this._connections[index];
-        }); //If a connection is not configured for discovery use - return it.
+        return this._connections[index]; //If a connection is not configured for discovery use - return it.
 
       } else {
         connections.add(this._connections[
@@ -167,39 +154,31 @@ class ConnectionResolver {
     }
 
     if (connections.length == 0) {
-      return Future<ConnectionParams>(() {
-        return null;
-      });
+      return null;
     }
 
-    return Future<ConnectionParams>(() async {
-      ConnectionParams firstResult = null;
-      for (var connection in connections) {
-        var result = await this._resolveInDiscovery(correlationId, connection);
-        if (result != null) {
-          firstResult = result;
-          break;
-        }
+    ConnectionParams firstResult = null;
+    for (var connection in connections) {
+      var result = await this._resolveInDiscovery(correlationId, connection);
+      if (result != null) {
+        firstResult = result;
+        break;
       }
-      return firstResult;
-    });
+    }
+    return firstResult;
   }
 
   Future<List<ConnectionParams>> _resolveAllInDiscovery(
-      String correlationId, ConnectionParams connection) {
+      String correlationId, ConnectionParams connection) async {
     List<ConnectionParams> resolved = List<ConnectionParams>();
     String key = connection.getDiscoveryKey();
 
     if (!connection.useDiscovery()) {
-      return Future<List<ConnectionParams>>(() {
-        return List<ConnectionParams>();
-      });
+      return List<ConnectionParams>();
     }
 
     if (this._references == null) {
-      return Future<List<ConnectionParams>>(() {
-        return List<ConnectionParams>();
-      });
+      return List<ConnectionParams>();
     }
 
     var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
@@ -210,16 +189,14 @@ class ConnectionResolver {
       throw err;
     }
 
-    return Future<List<ConnectionParams>>(() async {
-      for (var discovery in discoveries) {
-        IDiscovery discoveryTyped = discovery;
-        var result = await discoveryTyped.resolveAll(correlationId, key);
-        if (result != null) {
-          resolved.addAll(result);
-        }
+    for (var discovery in discoveries) {
+      IDiscovery discoveryTyped = discovery;
+      var result = await discoveryTyped.resolveAll(correlationId, key);
+      if (result != null) {
+        resolved.addAll(result);
       }
-      return resolved;
-    });
+    }
+    return resolved;
   }
 
   /// Resolves all component connection. If connections are configured to be retrieved
@@ -230,7 +207,7 @@ class ConnectionResolver {
   ///
   /// See [IDiscovery]
 
-  Future<List<ConnectionParams>> resolveAll(String correlationId) {
+  Future<List<ConnectionParams>> resolveAll(String correlationId) async {
     List<ConnectionParams> resolved = List<ConnectionParams>();
     List<ConnectionParams> toResolve = List<ConnectionParams>();
 
@@ -242,39 +219,30 @@ class ConnectionResolver {
     }
 
     if (toResolve.length <= 0) {
-      return Future<List<ConnectionParams>>(() {
-        return resolved;
-      });
+      return resolved;
     }
 
-    return Future<List<ConnectionParams>>(() async {
-      for (var connection in toResolve) {
-        var result =
-            await this._resolveAllInDiscovery(correlationId, connection);
-        for (var index = 0; index < result.length; index++) {
-          ConnectionParams localResolvedConnection = new ConnectionParams(
-              ConfigParams.mergeConfigs([connection, result[index]]));
-          resolved.add(localResolvedConnection);
-        }
+    for (var connection in toResolve) {
+      var result = await this._resolveAllInDiscovery(correlationId, connection);
+      for (var index = 0; index < result.length; index++) {
+        ConnectionParams localResolvedConnection = new ConnectionParams(
+            ConfigParams.mergeConfigs([connection, result[index]]));
+        resolved.add(localResolvedConnection);
       }
+    }
 
-      return resolved;
-    });
+    return resolved;
   }
 
   Future<bool> _registerInDiscovery(
-      String correlationId, ConnectionParams connection) {
+      String correlationId, ConnectionParams connection) async {
     if (!connection.useDiscovery()) {
-      return Future<bool>(() {
-        return false;
-      });
+      return false;
     }
 
     var key = connection.getDiscoveryKey();
     if (this._references == null) {
-      return Future<bool>(() {
-        return false;
-      });
+      return false;
     }
 
     var discoveries = this._references.getOptional<IDiscovery>(
@@ -285,17 +253,15 @@ class ConnectionResolver {
       });
     }
 
-    return Future<bool>(() async {
-      bool error = false;
-      for (var discovery in discoveries) {
-        try {
-          await discovery.register(correlationId, key, connection);
-        } catch (err) {
-          error = true;
-        }
+    bool error = false;
+    for (var discovery in discoveries) {
+      try {
+        await discovery.register(correlationId, key, connection);
+      } catch (err) {
+        error = true;
       }
-      return !error;
-    });
+    }
+    return !error;
   }
 
   /// Registers the given connection in all referenced discovery services.
@@ -310,10 +276,7 @@ class ConnectionResolver {
   Future<ConnectionParams> register(
       String correlationId, ConnectionParams connection) async {
     var result = await this._registerInDiscovery(correlationId, connection);
-
-    if (result != null) this._connections.add(connection);
-    return Future<ConnectionParams>(() {
-      return connection;
-    });
+    if (result) this._connections.add(connection);
+    return connection;
   }
 }

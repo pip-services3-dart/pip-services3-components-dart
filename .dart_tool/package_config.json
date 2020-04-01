@@ -74,12 +74,6 @@
       "languageVersion": "2.1"
     },
     {
-      "name": "handlebars2",
-      "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/handlebars2-0.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "html",
       "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/html-0.14.0+3",
       "packageUri": "lib/",
@@ -200,12 +194,6 @@
       "languageVersion": "2.0"
     },
     {
-      "name": "rst_bootstrap",
-      "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/rst_bootstrap-4.3.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "shelf",
       "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/shelf-0.7.5",
       "packageUri": "lib/",
@@ -270,6 +258,12 @@
       "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/string_scanner-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.0"
+    },
+    {
+      "name": "stubble",
+      "rootUri": "file:///C:/Users/Nikopol/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/stubble-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
     },
     {
       "name": "term_glyph",
@@ -344,7 +338,7 @@
       "languageVersion": "2.0"
     }
   ],
-  "generated": "2020-03-31T18:15:05.108031Z",
+  "generated": "2020-04-01T16:14:43.445988Z",
   "generator": "pub",
   "generatorVersion": "2.7.2"
 }

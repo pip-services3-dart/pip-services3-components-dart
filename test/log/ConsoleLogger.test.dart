@@ -4,7 +4,7 @@
 // import { LogLevel } from '../../src/log/LogLevel';
 
 // suite('ConsoleLogger', ()=> {
-    
+
 //     var _logger: ConsoleLogger;
 
 //     beforeEach(function() {

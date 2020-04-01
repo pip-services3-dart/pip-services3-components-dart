@@ -1,4 +1,4 @@
-import "package:pip_services3_commons/src/errors/InternalException.dart";
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 
 /// Error raised when factory is not able to create requested component.
 ///

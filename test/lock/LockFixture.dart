@@ -1,107 +1,92 @@
-// let async = require('async');
-// let assert = require('chai').assert;
+import 'package:test/test.dart';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+import '../../lib/pip_services3_components.dart';
 
-// import { ILock } from '../../src/lock/ILock';
+final String LOCK1 = 'lock_1';
+final String LOCK2 = 'lock_2';
+final String LOCK3 = 'lock_3';
 
-// let LOCK1: string = "lock_1";
-// let LOCK2: string = "lock_2";
-// let LOCK3: string = "lock_3";
+class LockFixture {
+  ILock _lock;
 
-// export class LockFixture {
-//     private _lock: ILock;
+  LockFixture(ILock lock) {
+    this._lock = lock;
+  }
 
-//     public constructor(lock: ILock) {
-//         this._lock = lock;
-//     }
+  testTryAcquireLock() async {
+    // Try to acquire lock for the first time
+    try {
+      var result = await this._lock.tryAcquireLock(null, LOCK1, 3000);
+      expect(result, isTrue);
+    } catch (err) {
+      expect(err, isNull);
+    }
 
-//     public testTryAcquireLock(done: (err: any) => void): void {
-//         async.series([
-//             // Try to acquire lock for the first time
-//             (callback) => {
-//                 this._lock.tryAcquireLock(null, LOCK1, 3000, (err, result) => {
-//                     assert.isNull(err || null);
-//                     assert.isTrue(result);
-//                     callback();
-//                 });
-//             },
-//             // Try to acquire lock for the second time
-//             (callback) => {
-//                 this._lock.tryAcquireLock(null, LOCK1, 3000, (err, result) => {
-//                     assert.isNull(err || null);
-//                     assert.isFalse(result);
-//                     callback();
-//                 });
-//             },
-//             // Release the lock
-//             (callback) => {
-//                 this._lock.releaseLock(null, LOCK1, callback);
-//             },
-//             // Try to acquire lock for the third time
-//             (callback) => {
-//                 this._lock.tryAcquireLock(null, LOCK1, 3000, (err, result) => {
-//                     assert.isNull(err || null);
-//                     assert.isTrue(result);
-//                     callback();
-//                 });
-//             }
-//         ], (err) => {
-//             this._lock.releaseLock(null, LOCK1);
-//             done(err);
-//         });
-//     }
+    // Try to acquire lock for the second time
+    try {
+      var result = await this._lock.tryAcquireLock(null, LOCK1, 3000);
+      expect(result, isFalse);
+    } catch (err) {
+      expect(err, isNull);
+    }
 
-//     public testAcquireLock(done: (err: any) => void): void {
-//         async.series([
-//             // Acquire lock for the first time
-//             (callback) => {
-//                 this._lock.acquireLock(null, LOCK2, 3000, 1000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             // Acquire lock for the second time
-//             (callback) => {
-//                 this._lock.acquireLock(null, LOCK2, 3000, 1000, (err) => {
-//                     assert.isNotNull(err || null);
-//                     callback();
-//                 });
-//             },
-//             // Release the lock
-//             (callback) => {
-//                 this._lock.releaseLock(null, LOCK2, callback)
-//             },
-//             // Acquire lock for the third time
-//             (callback) => {
-//                 this._lock.acquireLock(null, LOCK2, 3000, 1000, (err) => {
-//                     assert.isNull(err || null);
-//                     callback();
-//                 });
-//             },
-//         ], (err) => {
-//             this._lock.releaseLock(null, LOCK2);
-//             done(err);
-//         });
-//     }
+    // Release the lock
+    await this._lock.releaseLock(null, LOCK1);
 
-//     public testReleaseLock(done: (err: any) => void): void {
-//         async.series([
-//             // Acquire lock for the first time
-//             (callback) => {
-//                 this._lock.tryAcquireLock(null, LOCK3, 3000, (err, result) => {
-//                     assert.isNull(err || null);
-//                     assert.isTrue(result);
-//                     callback();
-//                 });
-//             },
-//             // Release the lock for the first time
-//             (callback) => {
-//                 this._lock.releaseLock(null, LOCK3, callback)
-//             },
-//             // Release the lock for the second time
-//             (callback) => {
-//                 this._lock.releaseLock(null, LOCK3, callback)
-//             }
-//         ], done);
-//     }
-    
-// }
+    // Try to acquire lock for the third time
+    try {
+      var result = await this._lock.tryAcquireLock(null, LOCK1, 3000);
+      expect(result, isTrue);
+    } catch (err) {
+      expect(err, isNull);
+    }
+
+    await this._lock.releaseLock(null, LOCK1);
+  }
+
+  void testAcquireLock() async {
+    // Acquire lock for the first time
+
+    try {
+      await this._lock.acquireLock(null, LOCK2, 3000, 1000);
+    } catch (err) {
+      expect(err, isNull);
+    }
+
+    // Acquire lock for the second time
+    try {
+      await this._lock.acquireLock(null, LOCK2, 3000, 1000);
+    } catch (err) {
+      expect(err, isNotNull);
+    }
+
+    // Release the lock
+
+    await this._lock.releaseLock(null, LOCK2);
+
+    // Acquire lock for the third time
+    try {
+      this._lock.acquireLock(null, LOCK2, 3000, 1000);
+    } catch (err) {
+      expect(err, isNull);
+    }
+
+    await this._lock.releaseLock(null, LOCK2);
+  }
+
+  void testReleaseLock() async {
+    // Acquire lock for the first time
+    try {
+      var result = await this._lock.tryAcquireLock(null, LOCK3, 3000);
+      expect(result, isTrue);
+    } catch (err) {
+      expect(err, isNull);
+    }
+
+    // Release the lock for the first time
+    await this._lock.releaseLock(null, LOCK3);
+
+    // Release the lock for the second time
+    await this._lock.releaseLock(null, LOCK3);
+  }
+}

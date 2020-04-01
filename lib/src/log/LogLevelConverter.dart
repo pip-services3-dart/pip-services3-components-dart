@@ -1,5 +1,5 @@
 import 'package:pip_services3_commons/src/convert/StringConverter.dart';
-import './LogLevel.dart';
+import '../../pip_services3_components.dart';
 
 /// Helper class to convert log level values.
 ///
@@ -39,7 +39,7 @@ class LogLevelConverter {
   /// Return log level name string.
   ///
   /// See [LogLevel]
-  static String toString(LogLevel level) {
+  static String toString2(LogLevel level) {
     if (level == LogLevel.Fatal) return "FATAL";
     if (level == LogLevel.Error) return "ERROR";
     if (level == LogLevel.Warn) return "WARN";

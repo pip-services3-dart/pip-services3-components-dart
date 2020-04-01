@@ -1,5 +1,5 @@
 import 'package:pip_services3_commons/pip_services3_commons.dart';
-import './LogLevel.dart';
+import '../../pip_services3_components.dart';
 
 /// Todo: solve issue with overloaded methods. Look at Python implementation
 /// Interface for logger components that capture execution log messages.
@@ -23,8 +23,8 @@ abstract class ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  log(LogLevel level, String correlationId, ApplicationException error, String message,
-      List args);
+  log(LogLevel level, String correlationId, ApplicationException error,
+      String message, List args);
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///
@@ -32,7 +32,8 @@ abstract class ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  fatal(String correlationId, ApplicationException error, String message, List args);
+  fatal(String correlationId, ApplicationException error, String message,
+      List args);
 
   // Todo: these overloads are not supported in TS
   //fatal(String correlationId, error: ApplicationException) ;
@@ -44,7 +45,8 @@ abstract class ILogger {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   /// - args              arguments to parameterize the message.
-  error(String correlationId, ApplicationException error, String message, List args);
+  error(String correlationId, ApplicationException error, String message,
+      List args);
 
   // Todo: these overloads are not supported in TS
   //error(String correlationId, error: ApplicationException) ;

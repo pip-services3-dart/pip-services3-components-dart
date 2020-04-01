@@ -1,11 +1,8 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/errors/ConfigException.dart';
-import 'package:pip_services3_commons/src/errors/FileException.dart';
-
-import './FileConfigReader.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 import 'package:yaml/yaml.dart';
+import '../../pip_services3_components.dart';
 
 /// Config reader that reads configuration from YAML file.
 ///
@@ -23,14 +20,14 @@ import 'package:yaml/yaml.dart';
 /// ### Example ###
 ///
 ///     ======== config.yml ======
-///     key1: "{{KEY1_VALUE}}"
-///     key2: "{{KEY2_VALUE}}"
+///     key1: '{{KEY1_VALUE}}'
+///     key2: '{{KEY2_VALUE}}'
 ///     ===========================
 ///
-///     var configReader = new YamlConfigReader("config.yml");
+///     var configReader = new YamlConfigReader('config.yml');
 ///
-///     var parameters = ConfigParams.fromTuples("KEY1_VALUE", 123, "KEY2_VALUE", "ABC");
-///     configReader.readConfig("123", parameters, (err, config) => {
+///     var parameters = ConfigParams.fromTuples('KEY1_VALUE', 123, 'KEY2_VALUE', 'ABC');
+///     configReader.readConfig('123', parameters, (err, config) => {
 ///         // Result: key1=123;key2=ABC
 ///     });
 ///
@@ -49,7 +46,7 @@ class YamlConfigReader extends FileConfigReader {
   dynamic readObject(String correlationId, ConfigParams parameters) async {
     if (super.getPath() == null)
       throw new ConfigException(
-          correlationId, "NO_PATH", "Missing config file path");
+          correlationId, 'NO_PATH', 'Missing config file path');
 
     try {
       // Todo: make this async?
@@ -58,9 +55,9 @@ class YamlConfigReader extends FileConfigReader {
       var data = loadYaml(content);
       return data;
     } catch (e) {
-      throw new FileException(correlationId, "READ_FAILED",
-              "Failed reading configuration " + super.getPath() + ": " + e)
-          .withDetails("path", super.getPath())
+      throw new FileException(correlationId, 'READ_FAILED',
+              'Failed reading configuration ' + super.getPath() + ': ' + e)
+          .withDetails('path', super.getPath())
           .withCause(e);
     }
   }
@@ -70,8 +67,8 @@ class YamlConfigReader extends FileConfigReader {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - parameters        values to parameters the configuration or null to skip parameterization.
   /// - callback          callback function that receives configuration or error.
-  Future<ConfigParams> readConfig async (
-      String correlationId, ConfigParams parameters) {
+  Future<ConfigParams> readConfig(
+      String correlationId, ConfigParams parameters) async {
     var value = this.readObject(correlationId, parameters);
     var config = ConfigParams.fromValue(value);
     return config;

@@ -4,7 +4,7 @@
 // import { LogLevel } from '../../src/log/LogLevel';
 
 // suite('NullLogger', ()=> {
-    
+
 //     var _logger: NullLogger;
 
 //     beforeEach(function() {

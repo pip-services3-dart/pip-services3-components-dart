@@ -85,13 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  handlebars2:
-    dependency: "direct main"
-    description:
-      name: handlebars2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   html:
     dependency: transitive
     description:
@@ -232,13 +225,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
-  rst_bootstrap:
-    dependency: transitive
-    description:
-      name: rst_bootstrap
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.1"
   shelf:
     dependency: transitive
     description:
@@ -316,6 +302,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  stubble:
+    dependency: "direct main"
+    description:
+      name: stubble
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   term_glyph:
     dependency: transitive
     description:

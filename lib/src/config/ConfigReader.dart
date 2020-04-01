@@ -1,7 +1,6 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/config/IConfigurable.dart';
-import 'dart:html';
-import 'package:handlebars2/handlebars2.dart' as handlebars;
+import 'package:pip_services3_commons/pip_services3_commons.dart';
+//import 'package:handlebars2/handlebars2.dart' as handlebars;
+import 'package:stubble/stubble.dart';
 
 /// Abstract config reader that supports configuration parameterization.
 ///
@@ -42,7 +41,7 @@ abstract class ConfigReader implements IConfigurable {
   /// Return a parameterized configuration string.
   String parameterize(String config, ConfigParams parameters) {
     parameters = this._parameters.override(parameters);
-
+    var handlebars = Stubble();
     var template = handlebars.compile(config);
     return template(parameters);
   }

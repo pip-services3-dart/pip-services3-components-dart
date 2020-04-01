@@ -1,5 +1,5 @@
-import './CredentialParams.dart';
 import "dart:async";
+import '../../pip_services3_components.dart';
 
 /// Interface for credential stores which are used to store and lookup credentials
 /// to authenticate against external services.
