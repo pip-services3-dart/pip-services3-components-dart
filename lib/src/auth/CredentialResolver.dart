@@ -97,40 +97,32 @@ class CredentialResolver {
   }
 
   Future<CredentialParams> _lookupInStores(
-      String correlationId, CredentialParams credential) {
-    if (!credential.useCredentialStore()) {
-      return Future<CredentialParams>(() {
-        return null;
-      });
-    }
+      String correlationId, CredentialParams credential) async {
+    if (!credential.useCredentialStore())
+      return null;
 
     String key = credential.getStoreKey();
-    if (this._references == null) {
-      return Future<CredentialParams>(() {
-        return null;
-      });
+    if (this._references == null)
+      return null;
+
+    var storeDescriptor =
+        new Descriptor("*", "credential-store", "*", "*", "*");
+    List<dynamic> components =
+        this._references.getOptional<dynamic>(storeDescriptor);
+    if (components.length == 0) {
+      throw new ReferenceException(correlationId, storeDescriptor);
     }
 
-    return Future<CredentialParams>(() async {
-      var storeDescriptor =
-          new Descriptor("*", "credential-store", "*", "*", "*");
-      List<dynamic> components =
-          this._references.getOptional<dynamic>(storeDescriptor);
-      if (components.length == 0) {
-        throw new ReferenceException(correlationId, storeDescriptor);
+    CredentialParams firstResult = null;
+    for (var component in components) {
+      ICredentialStore store = component;
+      var result = await store.lookup(correlationId, key);
+      if (result != null) {
+        firstResult = result;
+        break;
       }
-
-      CredentialParams firstResult = null;
-      for (var component in components) {
-        ICredentialStore store = component;
-        var result = await store.lookup(correlationId, key);
-        if (result != null) {
-          firstResult = result;
-          break;
-        }
-      }
-      return firstResult;
-    });
+    }
+    return firstResult;
   }
 
   /// Looks up component credential parameters. If credentials are configured to be retrieved
@@ -138,36 +130,30 @@ class CredentialResolver {
   ///
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives resolved credential or error.
-  Future<CredentialParams> lookup(String correlationId) {
+  Future<CredentialParams> lookup(String correlationId) async {
     if (this._credentials.length == 0) {
-      return Future<CredentialParams>(() {
-        return null;
-      });
+      return null;
     }
 
     List<CredentialParams> lookupCredentials = List<CredentialParams>();
 
     for (var index = 0; index < this._credentials.length; index++) {
       if (!this._credentials[index].useCredentialStore()) {
-        return Future<CredentialParams>(() {
-          return this._credentials[index];
-        });
+        return this._credentials[index];
       } else {
         lookupCredentials.add(this._credentials[index]);
       }
     }
 
-    return Future<CredentialParams>(() async {
-      CredentialParams firstResult = null;
-      for (var credential in lookupCredentials) {
-        var result = await this._lookupInStores(correlationId, credential);
-        if (result != null) {
-          firstResult = result;
-          break;
-        }
+    CredentialParams firstResult = null;
+    for (var credential in lookupCredentials) {
+      var result = await this._lookupInStores(correlationId, credential);
+      if (result != null) {
+        firstResult = result;
+        break;
       }
+    }
 
-      return firstResult;
-    });
+    return firstResult;
   }
 }

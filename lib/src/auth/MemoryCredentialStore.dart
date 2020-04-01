@@ -1,11 +1,11 @@
+import "dart:async";
+
 import 'package:pip_services3_commons/src/config/ConfigParams.dart';
 import 'package:pip_services3_commons/src/config/IReconfigurable.dart';
 import 'package:pip_services3_commons/src/data/StringValueMap.dart';
 
 import './CredentialParams.dart';
 import './ICredentialStore.dart';
-
-import "dart:async";
 
 /// Credential store that keeps credentials in memory.
 ///
@@ -73,7 +73,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// - key               a key to uniquely identify the credential parameters.
   /// - credential        a credential parameters to be stored.
   /// - callback 			callback function that receives an error or null for success.
-  Future store(String correlationId, String key, CredentialParams credential) {
+  Future store(String correlationId, String key, CredentialParams credential) async {
     if (credential != null)
       this._items[key] = credential;
     else
@@ -85,10 +85,8 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - key               a key to uniquely identify the credential parameters.
   /// - callback          callback function that receives found credential parameters or error.
-  Future<CredentialParams> lookup(String correlationId, String key) {
+  Future<CredentialParams> lookup(String correlationId, String key) async {
     var credential = this._items[key];
-    return Future<CredentialParams>(() {
-      return credential;
-    });
+    return credential;
   }
 }

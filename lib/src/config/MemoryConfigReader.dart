@@ -1,9 +1,8 @@
+import 'dart:async';
 import 'package:pip_services3_commons/src/config/ConfigParams.dart';
 import 'package:pip_services3_commons/src/config/IReconfigurable.dart';
-import './IConfigReader.dart';
-import 'dart:html';
 import 'package:handlebars2/handlebars2.dart' as handlebars;
-import 'dart:async';
+import './IConfigReader.dart';
 
 /// Config reader that stores configuration in memory.
 ///
@@ -59,18 +58,15 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
   /// - callback          callback function that receives configuration or error.
 
   Future<ConfigParams> readConfig(
-      String correlationId, ConfigParams parameters) {
-    return Future<ConfigParams>(() {
-      if (parameters != null) {
-        var config = new ConfigParams(this._config).toString();
-        var template = handlebars.compile(config);
-        config = template(parameters);
-        return ConfigParams.fromString(config);
-      } else {
-        var config = new ConfigParams(this._config);
-        ;
-        return config;
-      }
-    });
+      String correlationId, ConfigParams parameters) async {
+    if (parameters != null) {
+      var config = new ConfigParams(this._config).toString();
+      var template = handlebars.compile(config);
+      config = template(parameters);
+      return ConfigParams.fromString(config);
+    } else {
+      var config = new ConfigParams(this._config);
+      return config;
+    }
   }
 }

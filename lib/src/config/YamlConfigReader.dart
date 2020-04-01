@@ -70,13 +70,11 @@ class YamlConfigReader extends FileConfigReader {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - parameters        values to parameters the configuration or null to skip parameterization.
   /// - callback          callback function that receives configuration or error.
-  Future<ConfigParams> readConfig(
+  Future<ConfigParams> readConfig async (
       String correlationId, ConfigParams parameters) {
-    return Future<ConfigParams>(() {
-      var value = this.readObject(correlationId, parameters);
-      var config = ConfigParams.fromValue(value);
-      return config;
-    });
+    var value = this.readObject(correlationId, parameters);
+    var config = ConfigParams.fromValue(value);
+    return config;
   }
 
   /// Reads configuration file, parameterizes its content and converts it into JSON object.
