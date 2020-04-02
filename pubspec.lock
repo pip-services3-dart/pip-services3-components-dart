@@ -162,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  mustache4dart2:
+    dependency: "direct main"
+    description:
+      name: mustache4dart2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   node_interop:
     dependency: transitive
     description:
@@ -302,13 +309,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  stubble:
-    dependency: "direct main"
-    description:
-      name: stubble
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   term_glyph:
     dependency: transitive
     description:

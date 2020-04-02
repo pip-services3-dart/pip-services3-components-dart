@@ -1,4 +1,5 @@
 import 'dart:async';
+
 /// Interface for caches that are used to cache values to improve performance.
 
 abstract class ICache {
@@ -7,7 +8,7 @@ abstract class ICache {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a unique value key.
-  /// Return                Future that receives cached value 
+  /// Return                Future that receives cached value
   /// Throws  error.
   Future<dynamic> retrieve(String correlationId, String key);
 

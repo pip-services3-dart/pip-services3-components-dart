@@ -18,8 +18,8 @@ abstract class CachedCounters
   int _resetTimeout = 0;
   final _cache = Map<String, Counter>();
   bool _updated;
-  int _lastDumpTime =  DateTime.now().millisecondsSinceEpoch;
-  int _lastResetTime =  DateTime.now().millisecondsSinceEpoch;
+  int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+  int _lastResetTime = DateTime.now().millisecondsSinceEpoch;
 
   /// Creates a new CachedCounters object.
   CachedCounters();
@@ -30,12 +30,10 @@ abstract class CachedCounters
   @override
   void configure(ConfigParams config) {
     _interval = config.getAsLongWithDefault('interval', _interval);
-    _interval =
-        config.getAsLongWithDefault('options.interval', _interval);
+    _interval = config.getAsLongWithDefault('options.interval', _interval);
+    _resetTimeout = config.getAsLongWithDefault('reset_timeout', _resetTimeout);
     _resetTimeout =
-        config.getAsLongWithDefault('reset_timeout', _resetTimeout);
-    _resetTimeout = config.getAsLongWithDefault(
-        'options.reset_timeout', _resetTimeout);
+        config.getAsLongWithDefault('options.reset_timeout', _resetTimeout);
   }
 
   /// Gets the counters dump/save interval.
@@ -101,8 +99,7 @@ abstract class CachedCounters
   /// See [dump]
   void _update() {
     _updated = true;
-    if (DateTime.now().millisecondsSinceEpoch >
-        _lastDumpTime + getInterval()) {
+    if (DateTime.now().millisecondsSinceEpoch > _lastDumpTime + getInterval()) {
       try {
         dump();
       } catch (ex) {
@@ -172,7 +169,7 @@ abstract class CachedCounters
     counter.min = counter.min != null ? min(counter.min, value) : value;
     counter.average = (counter.average != null && counter.count > 1
         ? (counter.average * (counter.count - 1) + value) / counter.count
-        : (value+0.0));
+        : (value + 0.0));
   }
 
   /// Ends measurement of execution elapsed time and updates specified counter.

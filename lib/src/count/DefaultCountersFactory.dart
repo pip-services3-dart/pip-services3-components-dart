@@ -9,21 +9,19 @@ import '../../pip_services3_components.dart';
 /// See [CompositeCounters]
 class DefaultCountersFactory extends Factory {
   static final descriptor =
-       Descriptor('pip-services', 'factory', 'counters', 'default', '1.0');
+      Descriptor('pip-services', 'factory', 'counters', 'default', '1.0');
   static final NullCountersDescriptor =
-       Descriptor('pip-services', 'counters', 'null', '*', '1.0');
+      Descriptor('pip-services', 'counters', 'null', '*', '1.0');
   static final LogCountersDescriptor =
-       Descriptor('pip-services', 'counters', 'log', '*', '1.0');
+      Descriptor('pip-services', 'counters', 'log', '*', '1.0');
   static final CompositeCountersDescriptor =
-       Descriptor('pip-services', 'counters', 'composite', '*', '1.0');
+      Descriptor('pip-services', 'counters', 'composite', '*', '1.0');
 
   /// Create a new instance of the factory.
   DefaultCountersFactory() : super() {
-   registerAsType(
-        DefaultCountersFactory.NullCountersDescriptor, NullCounters);
-   registerAsType(
-        DefaultCountersFactory.LogCountersDescriptor, LogCounters);
-   registerAsType(
+    registerAsType(DefaultCountersFactory.NullCountersDescriptor, NullCounters);
+    registerAsType(DefaultCountersFactory.LogCountersDescriptor, LogCounters);
+    registerAsType(
         DefaultCountersFactory.CompositeCountersDescriptor, CompositeCounters);
   }
 }

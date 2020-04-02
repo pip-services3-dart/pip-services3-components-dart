@@ -19,7 +19,7 @@ abstract class ICredentialStore {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a key to uniquely identify the credential.
-  /// Return              Future that receives found credential 
+  /// Return              Future that receives found credential
   /// Throw  error.
   Future<CredentialParams> lookup(String correlationId, String key);
 }

@@ -55,8 +55,8 @@ class Factory implements IFactory {
     if (locator == null) throw Exception('Locator cannot be null');
     if (type == null) throw Exception('Factory cannot be null');
     _registrations.add(Registration(locator, (locator) {
-          return type();
-        }));
+      return type();
+    }));
   }
 
   /// Checks if this factory is able to create component by given locator.
@@ -99,8 +99,7 @@ class Factory implements IFactory {
         } catch (ex) {
           if (ex is CreateException) rethrow;
 
-          throw CreateException(
-                  null, 'Failed to create object for ' + locator)
+          throw CreateException(null, 'Failed to create object for ' + locator)
               .withCause(ex);
         }
       }

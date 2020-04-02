@@ -164,8 +164,7 @@ class ConnectionParams extends ConfigParams {
     if (connections.isNotEmpty) {
       var connectionSections = connections.getSectionNames();
       for (var index = 0; index < connectionSections.length; index++) {
-        var connection =
-            connections.getSection(connectionSections[index]);
+        var connection = connections.getSection(connectionSections[index]);
         result.add(ConnectionParams(connection));
       }
     } else {
@@ -185,8 +184,7 @@ class ConnectionParams extends ConfigParams {
   ///
   /// See [manyFromConfig]
   static ConnectionParams fromConfig(ConfigParams config) {
-    var connections =
-        ConnectionParams.manyFromConfig(config);
+    var connections = ConnectionParams.manyFromConfig(config);
     return connections.isNotEmpty ? connections[0] : null;
   }
 }

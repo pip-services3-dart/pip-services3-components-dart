@@ -10,11 +10,11 @@ import '../../pip_services3_components.dart';
 
 class DefaultLockFactory extends Factory {
   static final descriptor =
-       Descriptor('pip-services', 'factory', 'lock', 'default', '1.0');
+      Descriptor('pip-services', 'factory', 'lock', 'default', '1.0');
   static final NullLockDescriptor =
-       Descriptor('pip-services', 'lock', 'null', '*', '1.0');
+      Descriptor('pip-services', 'lock', 'null', '*', '1.0');
   static final MemoryLockDescriptor =
-       Descriptor('pip-services', 'lock', 'memory', '*', '1.0');
+      Descriptor('pip-services', 'lock', 'memory', '*', '1.0');
 
   /// Create a new instance of the factory.
   DefaultLockFactory() : super() {

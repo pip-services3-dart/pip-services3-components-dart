@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
-//import 'package:handlebars2/handlebars2.dart' as handlebars;
-import 'package:stubble/stubble.dart';
+import 'package:mustache4dart2/mustache4dart2.dart';
 import '../../pip_services3_components.dart';
 
 /// Config reader that stores configuration in memory.
@@ -29,7 +28,7 @@ import '../../pip_services3_components.dart';
 ///
 ///     var config = await configReader.readConfig('123', parameters)
 ///         // Possible result: connection.host=10.1.1.100;connection.port=8080
-///    
+///
 ///
 
 class MemoryConfigReader implements IConfigReader, IReconfigurable {
@@ -37,16 +36,14 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
 
   /// Creates a new instance of config reader.
   ///
-  /// - config        (optional) component configuration parameters
-
+  /// - [config]        (optional) component configuration parameters
   MemoryConfigReader([ConfigParams config]) {
     _config = config;
   }
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
-
+  /// - [config]    configuration parameters to be set.
   @override
   void configure(ConfigParams config) {
     _config = config;
@@ -54,18 +51,16 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
 
   /// Reads configuration and parameterize it with given values.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - parameters        values to parameters the configuration or null to skip parameterization.
-  /// - callback          callback function that receives configuration or error.
-
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [parameters]        values to parameters the configuration or null to skip parameterization.
+  /// Return              Future that receives configuration
+  /// Throw  error.
   @override
   Future<ConfigParams> readConfig(
       String correlationId, ConfigParams parameters) async {
     if (parameters != null) {
       var config = ConfigParams(_config).toString();
-      var handlebars = Stubble();
-      var template = handlebars.compile(config);
-      config = template(parameters);
+      config = render(config, parameters);
       return ConfigParams.fromString(config);
     } else {
       var config = ConfigParams(_config);

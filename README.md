@@ -24,7 +24,7 @@ Quick Links:
 * [API Reference](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/pip_services3_components-library.html)
 * [Building and Testing](https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/doc/Development.md)
 * [Contributing](https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/doc/Development.md#contrib)
-* [Examples](https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/example/readme.md)
+* [Examples](https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/example/README.md)
 
 
 ## Acknowledgements

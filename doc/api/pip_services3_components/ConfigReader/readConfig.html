@@ -92,9 +92,10 @@
     <section class="desc markdown">
       <p>Reads configuration and parameterize it with given values.</p>
 <ul>
-<li>correlationId     (optional) transaction id to trace execution through call chain.</li>
-<li>parameters        values to parameters the configuration or null to skip parameterization.</li>
-<li>callback          callback function that receives configuration or error.</li>
+<li><code>correlationId</code>     (optional) transaction id to trace execution through call chain.</li>
+<li><code>parameters</code>        values to parameters the configuration or null to skip parameterization.
+Return                Future that receives configuration
+Throws error.</li>
 </ul>
     </section>
     

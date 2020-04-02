@@ -91,13 +91,13 @@ abstract class CachedLogger extends Logger {
       try {
         await save(messages);
       } catch (err) {
-          // Adds messages back to the cache
-          messages.addAll(_cache);
-          _cache = messages;
+        // Adds messages back to the cache
+        messages.addAll(_cache);
+        _cache = messages;
 
-          // Truncate cache
-          var deleteCount = _cache.length - _maxCacheSize;
-          if (deleteCount > 0) _cache.removeRange(0, deleteCount);
+        // Truncate cache
+        var deleteCount = _cache.length - _maxCacheSize;
+        if (deleteCount > 0) _cache.removeRange(0, deleteCount);
       }
 
       _updated = false;

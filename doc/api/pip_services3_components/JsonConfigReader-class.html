@@ -145,9 +145,8 @@ See <a href="pip_services3_components/FileConfigReader-class.html">FileConfigRea
 var configReader = new JsonConfigReader('config.json');
 
 var parameters = ConfigParams.fromTuples(['KEY1_VALUE', 123, 'KEY2_VALUE', 'ABC']);
-configReader.readConfig('123', parameters, (err, config) =&gt; {
+var config = await configReader.readConfig('123', parameters)
     // Result: key1=123;key2=ABC
-});
 </code></pre>
     </section>
     
@@ -218,7 +217,7 @@ configReader.readConfig('123', parameters, (err, config) =&gt; {
 </dd>
         <dt id="readObject" class="callable">
           <span class="name"><a href="pip_services3_components/JsonConfigReader/readObject.html">readObject</a></span><span class="signature">(<wbr><span class="parameter" id="readObject-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, </span> <span class="parameter" id="readObject-param-parameters"><span class="type-annotation">ConfigParams</span> <span class="parameter-name">parameters</span></span>)
-            <span class="returntype parameter">&#8594; Future</span>
+            <span class="returntype parameter">&#8594; dynamic</span>
           </span>
                   </dt>
         <dd>

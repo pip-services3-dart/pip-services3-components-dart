@@ -38,10 +38,8 @@ class Shutdown implements IConfigurable, IOpenable {
   @override
   void configure(ConfigParams config) {
     _mode = config.getAsStringWithDefault('mode', _mode);
-    _minTimeout =
-        config.getAsIntegerWithDefault('min_timeout', _minTimeout);
-    _maxTimeout =
-        config.getAsIntegerWithDefault('max_timeout', _maxTimeout);
+    _minTimeout = config.getAsIntegerWithDefault('min_timeout', _minTimeout);
+    _maxTimeout = config.getAsIntegerWithDefault('max_timeout', _maxTimeout);
   }
 
   /// Checks if the component is opened.
@@ -61,8 +59,7 @@ class Shutdown implements IConfigurable, IOpenable {
     if (_interval != null) _interval.cancel();
 
     var timeout = RandomInteger.nextInteger(_minTimeout, _maxTimeout);
-    _interval =
-        Timer.periodic(Duration(milliseconds: timeout), (Timer tm) {
+    _interval = Timer.periodic(Duration(milliseconds: timeout), (Timer tm) {
       shutdown();
     });
   }
@@ -89,8 +86,8 @@ class Shutdown implements IConfigurable, IOpenable {
     } else if (_mode == 'exit' || _mode == 'processexit') {
       exit(1);
     } else {
-      var err = ApplicationException(
-          'test', null, 'CRASH', 'Crash test exception');
+      var err =
+          ApplicationException('test', null, 'CRASH', 'Crash test exception');
       throw err;
     }
   }

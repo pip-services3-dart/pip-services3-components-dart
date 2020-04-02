@@ -24,7 +24,8 @@ abstract class ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   void log(LogLevel level, String correlationId, ApplicationException error,
-      String message, [List args]);
+      String message,
+      [List args]);
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///

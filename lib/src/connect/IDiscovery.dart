@@ -6,13 +6,13 @@ import '../../pip_services3_components.dart';
 ///
 /// See [ConnectionParams]
 /// See [CredentialParams]
-/// 
+///
 abstract class IDiscovery {
   /// Registers connection parameters into the discovery service.
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a key to uniquely identify the connection parameters.
   /// - [credential]        a connection to be registered.
-  /// Return 			          Future that receives a registered connection 
+  /// Return 			          Future that receives a registered connection
   /// Throw error.
   Future<ConnectionParams> register(
       String correlationId, String key, ConnectionParams connection);
@@ -21,7 +21,7 @@ abstract class IDiscovery {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a key to uniquely identify the connection.
-  /// Return          Future that receives found connection 
+  /// Return          Future that receives found connection
   /// Throw error.
   Future<ConnectionParams> resolveOne(String correlationId, String key);
 
@@ -29,7 +29,7 @@ abstract class IDiscovery {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a key to uniquely identify the connections.
-  /// Return          Future that receives found connections 
+  /// Return          Future that receives found connections
   /// Throw error.
   Future<List<ConnectionParams>> resolveAll(String correlationId, String key);
 }

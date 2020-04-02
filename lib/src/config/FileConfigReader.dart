@@ -7,8 +7,8 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Configuration parameters ###
 ///
-/// - path:          path to configuration file
-/// - parameters:    this entire section is used as template parameters
+/// - [path]:          path to configuration file
+/// - [parameters]:    this entire section is used as template parameters
 /// - ...
 ///
 /// See [IConfigReader]
@@ -18,30 +18,31 @@ abstract class FileConfigReader extends ConfigReader {
 
   /// Creates a new instance of the config reader.
   ///
-  /// - path  (optional) a path to configuration file.
-  FileConfigReader([String path = null]) : super() {
-    this._path = path;
+  /// - [path]  (optional) a path to configuration file.
+  FileConfigReader([String path]) : super() {
+    _path = path;
   }
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
     super.configure(config);
-    this._path = config.getAsStringWithDefault("path", this._path);
+    _path = config.getAsStringWithDefault('path', _path);
   }
 
   /// Get the path to configuration file..
   ///
   /// Return the path to configuration file.
   String getPath() {
-    return this._path;
+    return _path;
   }
 
   /// Set the path to configuration file.
   ///
-  /// - path  a new path to configuration file.
+  /// - [path]  a new path to configuration file.
   void setPath(String path) {
-    this._path = path;
+    _path = path;
   }
 }

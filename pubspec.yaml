@@ -9,8 +9,8 @@ environment:
 
 dependencies:
   pip_services3_commons: ">=1.0.2 <2.0.0"
-  #handlebars2: ^0.0.3
-  stubble: ^1.0.2
+  #stubble: ^1.0.2
+  mustache4dart2: ^0.1.0
   yaml: ^2.2.0
   sprintf: "^4.0.0"
 

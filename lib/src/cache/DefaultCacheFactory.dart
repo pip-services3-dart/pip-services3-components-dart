@@ -9,11 +9,11 @@ import '../../pip_services3_components.dart';
 /// See [NullCache]
 class DefaultCacheFactory extends Factory {
   static final Descriptor descriptor =
-       Descriptor('pip-services', 'factory', 'cache', 'default', '1.0');
+      Descriptor('pip-services', 'factory', 'cache', 'default', '1.0');
   static final Descriptor NullCacheDescriptor =
-       Descriptor('pip-services', 'cache', 'null', '*', '1.0');
+      Descriptor('pip-services', 'cache', 'null', '*', '1.0');
   static final Descriptor MemoryCacheDescriptor =
-       Descriptor('pip-services', 'cache', 'memory', '*', '1.0');
+      Descriptor('pip-services', 'cache', 'memory', '*', '1.0');
 
   /// Create a new instance of the factory.
   DefaultCacheFactory() : super() {

@@ -19,8 +19,8 @@ abstract class Lock implements ILock, IReconfigurable {
   /// - [config]    configuration parameters to be set.
   @override
   void configure(ConfigParams config) {
-    _retryTimeout = config.getAsIntegerWithDefault(
-        'options.retry_timeout', _retryTimeout);
+    _retryTimeout =
+        config.getAsIntegerWithDefault('options.retry_timeout', _retryTimeout);
   }
 
   /// Makes a single attempt to acquire a lock by its key.
@@ -65,13 +65,12 @@ abstract class Lock implements ILock, IReconfigurable {
     }
 
     // Start retrying
-    Timer.periodic(Duration(milliseconds: _retryTimeout),
-        (Timer tm) async {
+    Timer.periodic(Duration(milliseconds: _retryTimeout), (Timer tm) async {
       // When timeout expires return false
-      var now =  DateTime.now().millisecondsSinceEpoch;
+      var now = DateTime.now().millisecondsSinceEpoch;
       if (now > retryTime) {
         tm.cancel();
-        var err =  ConflictException(correlationId, 'LOCK_TIMEOUT',
+        var err = ConflictException(correlationId, 'LOCK_TIMEOUT',
                 'Acquiring lock ' + key + ' failed on timeout')
             .withDetails('key', key);
         throw err;

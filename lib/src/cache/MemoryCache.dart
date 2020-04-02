@@ -19,7 +19,7 @@ import '../../pip_services3_components.dart';
 ///     var cache = new MemoryCache();
 ///
 ///     await cache.store('123', 'key1', 'ABC')
-///     var value await cache.retrive('123', 'key1') 
+///     var value await cache.retrive('123', 'key1')
 ///             // Result: 'ABC'
 ///
 class MemoryCache implements ICache, IReconfigurable {
@@ -38,10 +38,8 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - [config]    configuration parameters to be set.
   @override
   void configure(ConfigParams config) {
-    _timeout =
-        config.getAsLongWithDefault('options.timeout', _timeout);
-    _maxSize =
-        config.getAsLongWithDefault('options.max_size', _maxSize);
+    _timeout = config.getAsLongWithDefault('options.timeout', _timeout);
+    _maxSize = config.getAsLongWithDefault('options.max_size', _maxSize);
   }
 
   /// Clears component state.
@@ -81,7 +79,7 @@ class MemoryCache implements ICache, IReconfigurable {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a unique value key.
-  /// Return                Future that receives cached value 
+  /// Return                Future that receives cached value
   /// Throws error.
   @override
   Future<dynamic> retrieve(String correlationId, String key) async {

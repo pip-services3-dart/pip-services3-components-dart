@@ -10,9 +10,10 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 abstract class IConfigReader {
   /// Reads configuration and parameterize it with given values.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - parameters        values to parameters the configuration or null to skip parameterization.
-  /// - callback          callback function that receives configuration or error.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [parameters]        values to parameters the configuration or null to skip parameterization.
+  /// Return            Future that receives configuration
+  /// Throws error.
   Future<ConfigParams> readConfig(
       String correlationId, ConfigParams parameters);
 }

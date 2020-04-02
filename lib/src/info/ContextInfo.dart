@@ -28,10 +28,10 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 ///     context.uptime;			// Possible result: 3454345
 class ContextInfo implements IReconfigurable {
   String _name = 'unknown';
-  String _description ;
+  String _description;
   String _contextId = Platform.localHostname; // IdGenerator.nextLong();
-  DateTime _startTime =  DateTime.now();
-  StringValueMap _properties =  StringValueMap();
+  DateTime _startTime = DateTime.now();
+  StringValueMap _properties = StringValueMap();
 
   /// Creates a new instance of this context info.
   ///
@@ -48,8 +48,7 @@ class ContextInfo implements IReconfigurable {
   @override
   void configure(ConfigParams config) {
     name = config.getAsStringWithDefault('name', name);
-    description =
-        config.getAsStringWithDefault('description', description);
+    description = config.getAsStringWithDefault('description', description);
     properties = config.getSection('properties');
   }
 
@@ -106,7 +105,7 @@ class ContextInfo implements IReconfigurable {
   /// Sets the context start time.
   ///
   /// - value a new context start time.
-   set startTime(DateTime value) {
+  set startTime(DateTime value) {
     _startTime = value ?? DateTime.now();
   }
 

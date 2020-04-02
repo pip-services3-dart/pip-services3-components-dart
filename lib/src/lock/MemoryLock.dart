@@ -20,9 +20,9 @@ import '../../pip_services3_components.dart';
 ///             lock.acquire("123", "key1")
 ///                 // Processing...
 ///             } finally {
-///                 lock.releaseLock("123", "key1", 
+///                 lock.releaseLock("123", "key1",
 ///                     // Continue...
-///    
+///
 ///             }
 ///         }
 ///     });

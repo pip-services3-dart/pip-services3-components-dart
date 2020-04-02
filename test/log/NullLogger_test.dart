@@ -14,7 +14,7 @@ void main() {
       expect(_logger.getLevel().index <= LogLevel.Trace.index, isTrue);
     });
 
-_logger = NullLogger();
+    _logger = NullLogger();
     test('Simple Logging', () {
       _logger.setLevel(LogLevel.Trace);
 
@@ -26,13 +26,13 @@ _logger = NullLogger();
       _logger.trace(null, 'Trace message');
     });
 
-_logger = NullLogger();
+    _logger = NullLogger();
     test('Error Logging', () {
       try {
         // Raise an exception
         throw Exception();
       } catch (err) {
-       var ex = ApplicationException().wrap(err);
+        var ex = ApplicationException().wrap(err);
         _logger.fatal('123', ex, 'Fatal error');
         _logger.error('123', ex, 'Recoverable error');
         expect(ex, isNotNull);

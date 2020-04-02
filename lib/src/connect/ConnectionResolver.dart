@@ -38,9 +38,9 @@ import '../../pip_services3_components.dart';
 ///     connectionResolver.configure(config);
 ///     connectionResolver.setReferences(references);
 ///
-///     connection await = connectionResolver.resolve('123') 
+///     connection await = connectionResolver.resolve('123')
 ///         // Now use connection...
-///     
+///
 class ConnectionResolver {
   final _connections = List<ConnectionParams>();
   IReferences _references;
@@ -62,8 +62,7 @@ class ConnectionResolver {
   ///
   /// - [config]    configuration parameters to be set.
   void configure(ConfigParams config) {
-    var connections =
-        ConnectionParams.manyFromConfig(config);
+    var connections = ConnectionParams.manyFromConfig(config);
     _connections.addAll(connections);
   }
 
@@ -102,11 +101,10 @@ class ConnectionResolver {
       return null;
     }
 
-    var discoveryDescriptor =  Descriptor('*', 'discovery', '*', '*', '*');
-    var discoveries =
-        _references.getOptional<dynamic>(discoveryDescriptor);
+    var discoveryDescriptor = Descriptor('*', 'discovery', '*', '*', '*');
+    var discoveries = _references.getOptional<dynamic>(discoveryDescriptor);
     if (discoveries.isEmpty) {
-      var err =  ReferenceException(correlationId, discoveryDescriptor);
+      var err = ReferenceException(correlationId, discoveryDescriptor);
       throw err;
     }
 
@@ -128,7 +126,7 @@ class ConnectionResolver {
   /// from Discovery service it finds a [IDiscovery] and resolves the connection there.
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
-  /// Return 			Future that receives resolved connection 
+  /// Return 			Future that receives resolved connection
   /// Throws error.
   ///
   /// See [IDiscovery]
@@ -141,7 +139,8 @@ class ConnectionResolver {
 
     for (var index = 0; index < _connections.length; index++) {
       if (!_connections[index].useDiscovery()) {
-        return _connections[index]; //If a connection is not configured for discovery use - return it.
+        return _connections[
+            index]; //If a connection is not configured for discovery use - return it.
 
       } else {
         connections.add(_connections[
@@ -177,11 +176,10 @@ class ConnectionResolver {
       return List<ConnectionParams>();
     }
 
-    var discoveryDescriptor =  Descriptor('*', 'discovery', '*', '*', '*');
-    var discoveries =
-        _references.getOptional<dynamic>(discoveryDescriptor);
+    var discoveryDescriptor = Descriptor('*', 'discovery', '*', '*', '*');
+    var discoveries = _references.getOptional<dynamic>(discoveryDescriptor);
     if (discoveries.isEmpty) {
-      var err =  ReferenceException(correlationId, discoveryDescriptor);
+      var err = ReferenceException(correlationId, discoveryDescriptor);
       throw err;
     }
 
@@ -242,8 +240,8 @@ class ConnectionResolver {
       return false;
     }
 
-    var discoveries = _references.getOptional<IDiscovery>(
-        Descriptor('*', 'discovery', '*', '*', '*'));
+    var discoveries = _references
+        .getOptional<IDiscovery>(Descriptor('*', 'discovery', '*', '*', '*'));
     if (discoveries == null) {
       return false;
     }
@@ -264,7 +262,7 @@ class ConnectionResolver {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [connection]        a connection to register.
-  /// Return          Future that receives registered connection 
+  /// Return          Future that receives registered connection
   /// throws error.
   ///
   /// See [IDiscovery]

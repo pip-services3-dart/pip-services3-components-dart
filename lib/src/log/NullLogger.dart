@@ -1,4 +1,3 @@
-
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
@@ -10,7 +9,7 @@ import '../../pip_services3_components.dart';
 /// See [ILogger]
 class NullLogger implements ILogger {
   /// Creates a new instance of the logger.
-  /// 
+  ///
   NullLogger();
 
   /// Gets the maximum log level.
@@ -37,7 +36,8 @@ class NullLogger implements ILogger {
   /// - [args]              arguments to parameterize the message.
   @override
   void log(LogLevel level, String correlationId, ApplicationException error,
-      String message, [List args]) {}
+      String message,
+      [List args]) {}
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///

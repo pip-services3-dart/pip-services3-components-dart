@@ -58,7 +58,7 @@ class CompositeLogger extends Logger implements IReferenceable {
       ILogger logger = loggers[i];
 
       // Todo: This doesn't work in TS. Redo...
-      if (logger != this ) _loggers.add(logger); //as ILogger
+      if (logger != this) _loggers.add(logger); //as ILogger
     }
   }
 

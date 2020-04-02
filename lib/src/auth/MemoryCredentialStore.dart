@@ -27,7 +27,7 @@ import '../../pip_services3_components.dart';
 ///     var credentialStore = MemoryCredentialStore();
 ///     credentialStore.readCredentials(config);
 ///
-///     var credential = await credentialStore.lookup('123', 'key1') 
+///     var credential = await credentialStore.lookup('123', 'key1')
 ///     // Result: user=jdoe;pass=pass123
 
 class MemoryCredentialStore implements ICredentialStore, IReconfigurable {

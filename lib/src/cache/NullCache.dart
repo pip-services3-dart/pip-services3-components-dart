@@ -14,7 +14,7 @@ class NullCache implements ICache {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a unique value key.
-  /// Return          Future that receives cached value 
+  /// Return          Future that receives cached value
   /// Throws error.
   @override
   Future<dynamic> retrieve(String correlationId, String key) async {}
@@ -28,7 +28,8 @@ class NullCache implements ICache {
   /// Return              Future that receives an null for success
   /// Throws error
   @override
-  Future<dynamic> store(String correlationId, String key, value, int timeout) async {
+  Future<dynamic> store(
+      String correlationId, String key, value, int timeout) async {
     return value;
   }
 

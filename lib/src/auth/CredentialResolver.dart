@@ -51,8 +51,7 @@ class CredentialResolver {
   ///
   /// - [config]        (optional) component configuration parameters
   /// - [references]    (optional) component references
-  CredentialResolver(
-      [ConfigParams config, IReferences references]) {
+  CredentialResolver([ConfigParams config, IReferences references]) {
     if (config != null) configure(config);
     if (references != null) setReferences(references);
   }
@@ -61,8 +60,7 @@ class CredentialResolver {
   ///
   /// - [config]    configuration parameters to be set.
   void configure(ConfigParams config) {
-   var credentials =
-        CredentialParams.manyFromConfig(config);
+    var credentials = CredentialParams.manyFromConfig(config);
     _credentials.addAll(credentials);
   }
 
@@ -97,12 +95,10 @@ class CredentialResolver {
     var key = credential.getStoreKey();
     if (_references == null) return null;
 
-    var storeDescriptor =
-         Descriptor('*', 'credential-store', '*', '*', '*');
-    var components =
-        _references.getOptional<dynamic>(storeDescriptor);
+    var storeDescriptor = Descriptor('*', 'credential-store', '*', '*', '*');
+    var components = _references.getOptional<dynamic>(storeDescriptor);
     if (components.isEmpty) {
-      throw  ReferenceException(correlationId, storeDescriptor);
+      throw ReferenceException(correlationId, storeDescriptor);
     }
 
     CredentialParams firstResult;
