@@ -4,7 +4,7 @@ This library has an extensive set of components for working in various fields wh
 microservices, micro-applications and applications. It includes:
 
 - **Auth** - authentication credential store
-#Example:
+# Example:
 ```dart
 void main(){
      var restConfig = ConfigParams.fromTuples([
@@ -26,7 +26,7 @@ void main(){
 }
 ```
 - **We build** - plants
-#Example:
+# Example:
 ```dart
 void main(){
 
@@ -34,7 +34,7 @@ void main(){
 
 ```
 - **Cache** - distributed cache
-#Example:
+# Example:
 ```dart
 void main(){
     String KEY1 = 'key1';
@@ -56,14 +56,14 @@ void main(){
 }
 ```
 - **Component** - root package
-#Example:
+# Example:
 ```dart
 void main(){
     
 }
 ```
 - **Config** - configuration reader
-#Example:
+# Example:
 ```dart
 void main(){
      var parameters = ConfigParams.fromTuples(
@@ -79,7 +79,7 @@ void main(){
 }
 ```
 - **Connect** - connection discovery services
-#Example:
+# Example:
 ```dart
 void main(){
     var RestConfig = ConfigParams.fromTuples([
@@ -98,7 +98,7 @@ void main(){
 }
 ```
 - **Count** - performance counters
-#Example:
+# Example:
 ```dart
 void main(){
     LogCounters counters;
@@ -129,7 +129,7 @@ void main(){
 }
 ```
 - **Information** - contextual information
-#Example:
+# Example:
 ```dart
 void main(){
     var config = ConfigParams.fromTuples([
@@ -149,7 +149,7 @@ void main(){
 }
 ```
 - **Lock** - distributed locks
-#Example:
+# Example:
 ```dart
 void main() async {
     final String LOCK1 = 'lock_1';
@@ -181,7 +181,7 @@ void main() async {
 }
 ```
 - **Log** - logging components
-#Example:
+# Example:
 ```dart
 void main(){
     var _logger = ConsoleLogger();
