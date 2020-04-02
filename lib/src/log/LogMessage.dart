@@ -2,7 +2,7 @@ import 'package:pip_services3_commons/src/errors/ErrorDescription.dart';
 
 /// Data object to store captured log messages.
 /// This object is used by [CachedLogger].
-
+// Todo: Make it JSON Serializable
 class LogMessage {
   // The time then message was generated
   DateTime time;

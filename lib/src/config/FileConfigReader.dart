@@ -41,7 +41,7 @@ abstract class FileConfigReader extends ConfigReader {
   /// Set the path to configuration file.
   ///
   /// - path  a new path to configuration file.
-  setPath(String path) {
+  void setPath(String path) {
     this._path = path;
   }
 }

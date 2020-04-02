@@ -2,6 +2,7 @@ import '../../pip_services3_components.dart';
 
 /// Data object to store measurement for a performance counter.
 /// This object is used by [CachedCounters] to store counters.
+// Todo: Make it JSON serializable
 class Counter {
   /// The counter unique name
   String name;

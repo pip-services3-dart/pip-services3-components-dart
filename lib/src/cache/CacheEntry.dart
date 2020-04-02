@@ -2,7 +2,7 @@
 
 class CacheEntry {
   String _key;
-  dynamic _value;
+  var _value;
   int _expiration;
 
   /// Creates a new instance of the cache entry and assigns its values.
@@ -31,7 +31,7 @@ class CacheEntry {
   ///
   /// Return the value object.
 
-  dynamic getValue() {
+  getValue() {
     return this._value;
   }
 
@@ -47,8 +47,7 @@ class CacheEntry {
   ///
   /// - value     a new cached value.
   /// - timeout   a expiration timeout in milliseconds.
-
-  setValue(dynamic value, int timeout) {
+  void setValue(value, int timeout) {
     this._value = value;
     this._expiration = DateTime.now()
         .add(Duration(milliseconds: timeout))

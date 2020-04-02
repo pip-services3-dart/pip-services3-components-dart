@@ -30,7 +30,7 @@ class NullLock implements ILock {
   /// - callback          callback function that receives error or null for success.
 
   Future acquireLock(String correlationId, String key, int ttl, int timeout) async {
-    
+      // Do nothing...
   }
 
   /// Releases prevously acquired lock by its key.
@@ -40,6 +40,6 @@ class NullLock implements ILock {
   /// - callback          callback function that receives error or null for success.
 
   Future releaseLock(String correlationId, String key) async{
-
+      // Do nothing...
   }
 }

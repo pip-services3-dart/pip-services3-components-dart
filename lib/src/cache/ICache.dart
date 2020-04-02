@@ -9,7 +9,7 @@ abstract class ICache {
   /// - key               a unique value key.
   /// - callback          callback function that receives cached value or error.
 
-  Future retrieve( String correlationId, String key);
+  Future<dynamic> retrieve(String correlationId, String key);
 
   /// Stores value in the cache with expiration time.
   ///
@@ -19,7 +19,7 @@ abstract class ICache {
   /// - timeout           expiration timeout in milliseconds.
   /// - callback          (optional) callback function that receives an error or null for success
 
-  Future store(String correlationId, String key, dynamic value, int timeout);
+  Future<dynamic> store(String correlationId, String key, value, int timeout);
 
   /// Removes a value from the cache by its key.
   ///
@@ -27,5 +27,5 @@ abstract class ICache {
   /// - key               a unique value key.
   /// - callback          (optional) callback function that receives an error or null for success
 
-  Future remove(String correlationId, String key);
+  Future<dynamic> remove(String correlationId, String key);
 }

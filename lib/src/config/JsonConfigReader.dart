@@ -76,7 +76,7 @@ class JsonConfigReader extends FileConfigReader {
   /// - file              a path to configuration file.
   /// - parameters        values to parameters the configuration.
   /// Return                 a JSON object with configuration.
-  static dynamic readObject_(
+  static readObject_(
       String correlationId, String path, ConfigParams parameters) async {
     return await new JsonConfigReader(path)
         .readObject(correlationId, parameters);

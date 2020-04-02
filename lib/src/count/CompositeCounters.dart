@@ -41,7 +41,8 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   ///
   /// - references 	references to locate the component dependencies.
   CompositeCounters([IReferences references = null]) {
-    if (references != null) this.setReferences(references);
+    if (references != null)
+      this.setReferences(references);
   }
 
   /// Sets references to dependent components.
@@ -53,7 +54,8 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
     for (var i = 0; i < counters.length; i++) {
       ICounters counter = counters[i];
 
-      if (counter != this as ICounters) this._counters.add(counter);
+      if (counter != this as ICounters)
+        this._counters.add(counter);
     }
   }
 
@@ -77,7 +79,8 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
     for (var i = 0; i < this._counters.length; i++) {
       var counter = this._counters[i];
       var callback = counter as ITimingCallback;
-      if (callback != null) callback.endTiming(name, elapsed);
+      if (callback != null)
+        callback.endTiming(name, elapsed);
     }
   }
 
@@ -130,7 +133,8 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// - name 		a counter name of Increment type.
   /// - value		a value to add to the counter.
   void increment(String name, int value) {
-    if (name == null || name == "") throw Exception("Name cannot be null");
+    if (name == null || name == "")
+      throw Exception("Name cannot be null");
     for (var i = 0; i < this._counters.length; i++)
       this._counters[i].increment(name, value);
   }

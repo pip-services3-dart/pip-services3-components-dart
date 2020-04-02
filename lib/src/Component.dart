@@ -23,24 +23,24 @@ import './count/CompositeCounters.dart';
 /// - ...                                    References must match configured dependencies.
 
 class Component implements IConfigurable, IReferenceable {
-  DependencyResolver _dependencyResolver = new DependencyResolver();
-  CompositeLogger _logger = new CompositeLogger();
-  CompositeCounters _counters = new CompositeCounters();
+  DependencyResolver dependencyResolver = new DependencyResolver();
+  CompositeLogger logger = new CompositeLogger();
+  CompositeCounters counters = new CompositeCounters();
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
   void configure(ConfigParams config) {
-    this._dependencyResolver.configure(config);
-    this._logger.configure(config);
+    this.dependencyResolver.configure(config);
+    this.logger.configure(config);
   }
 
   /// Sets references to dependent components.
   ///
   /// - references 	references to locate the component dependencies.
   void setReferences(IReferences references) {
-    this._dependencyResolver.setReferences(references);
-    this._logger.setReferences(references);
-    this._counters.setReferences(references);
+    this.dependencyResolver.setReferences(references);
+    this.logger.setReferences(references);
+    this.counters.setReferences(references);
   }
 }

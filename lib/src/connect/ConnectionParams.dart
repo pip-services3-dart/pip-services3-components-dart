@@ -39,7 +39,7 @@ class ConnectionParams extends ConfigParams {
   ///
   /// - values 	(optional) an object to be converted into key-value pairs to initialize this connection.
 
-  ConnectionParams([dynamic values = null]) : super(values) {}
+  ConnectionParams([values = null]) : super(values) {}
 
   /// Checks if these connection parameters shall be retrieved from [DiscoveryService].
   /// The connection parameters are redirected to [DiscoveryService] when discovery_key parameter is set.
@@ -160,7 +160,7 @@ class ConnectionParams extends ConfigParams {
   /// - tuples	the tuples to fill a new ConnectionParams object.
   /// Return			a new ConnectionParams object.
 
-  static fromTuples(List<dynamic> tuples) {
+  static ConnectionParams fromTuples(List<dynamic> tuples) {
     var map = StringValueMap.fromTuplesArray(tuples);
     return new ConnectionParams(map);
   }

@@ -54,7 +54,7 @@ class Shutdown implements IConfigurable, IOpenable {
   ///
   /// - correlationId 	(optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives error or null no errors occured.
-  Future open(String correlationId) {
+  Future open(String correlationId) async {
     if (this._interval != null) this._interval.cancel();
 
     var timeout = RandomInteger.nextInteger(this._minTimeout, this._maxTimeout);
@@ -68,7 +68,7 @@ class Shutdown implements IConfigurable, IOpenable {
   ///
   /// - correlationId 	(optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives error or null no errors occured.
-  Future close(String correlationId) {
+  Future close(String correlationId) async {
     if (this._interval != null) {
       this._interval.cancel();
       this._interval = null;

@@ -70,7 +70,7 @@ abstract class CachedCounters
 
   /// Clears (resets) all counters.
   void clearAll() {
-    this._cache = {};
+    this._cache.clear();
     this._updated = false;
   }
 
@@ -120,7 +120,7 @@ abstract class CachedCounters
 
     var now = new DateTime.now().millisecondsSinceEpoch;
     if (now - this._lastResetTime > this._resetTimeout) {
-      this._cache = {};
+      this._cache.clear();
       this._updated = false;
       this._lastResetTime = now;
     }
@@ -134,7 +134,9 @@ abstract class CachedCounters
 
     this._resetIfNeeded();
 
-    for (var key in this._cache.keys) result.add(this._cache[key]);
+    for (var key in this._cache.keys) {
+      result.add(this._cache[key]);
+    }
 
     return result;
   }
@@ -148,7 +150,8 @@ abstract class CachedCounters
   /// Return an existing or newly created counter of the specified type.
 
   Counter get(String name, CounterType type) {
-    if (name == null || name == "") throw Exception("Name cannot be null");
+    if (name == null || name == "")
+      throw Exception("Name cannot be null");
 
     this._resetIfNeeded();
 
@@ -163,7 +166,8 @@ abstract class CachedCounters
   }
 
   void _calculateStats(Counter counter, int value) {
-    if (counter == null) throw Exception("Counter cannot be null");
+    if (counter == null)
+      throw Exception("Counter cannot be null");
 
     counter.last = value;
     counter.count = counter.count != null ? counter.count + 1 : 1;

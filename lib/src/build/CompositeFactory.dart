@@ -22,14 +22,16 @@ class CompositeFactory implements IFactory {
   ///
   /// - factories 	a list of factories to embed into this factory.
   CompositeFactory(List<IFactory> factories) {
-    if (factories != null) this._factories.addAll(factories);
+    if (factories != null)
+      this._factories.addAll(factories);
   }
 
   /// Adds a factory into the list of embedded factories.
   ///
   /// - factory 	a factory to be added.
   void add(IFactory factory) {
-    if (factory == null) throw Exception("Factory cannot be null");
+    if (factory == null)
+      throw Exception("Factory cannot be null");
 
     this._factories.add(factory);
   }
@@ -49,8 +51,9 @@ class CompositeFactory implements IFactory {
   ///
   /// - locator 	a locator to identify component to be created.
   /// Return			a locator for a component that the factory is able to create.
-  dynamic canCreate(dynamic locator) {
-    if (locator == null) throw Exception("Locator cannot be null");
+  canCreate(locator) {
+    if (locator == null)
+      throw Exception("Locator cannot be null");
 
     // Iterate from the latest factories
     for (var index = this._factories.length - 1; index >= 0; index--) {
@@ -67,13 +70,15 @@ class CompositeFactory implements IFactory {
   /// Return the created component.
   ///
   /// Trows a CreateException if the factory is not able to create the component.
-  dynamic create(dynamic locator) {
-    if (locator == null) throw Exception("Locator cannot be null");
+  create(locator) {
+    if (locator == null)
+      throw Exception("Locator cannot be null");
 
     // Iterate from the latest factories
     for (var index = this._factories.length - 1; index >= 0; index--) {
       var factory = this._factories[index];
-      if (factory.canCreate(locator) != null) return factory.create(locator);
+      if (factory.canCreate(locator) != null)
+        return factory.create(locator);
     }
 
     throw new CreateException(null, locator);

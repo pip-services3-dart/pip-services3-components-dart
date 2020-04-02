@@ -51,10 +51,11 @@ class ConnectionResolver {
   /// - config        (optional) component configuration parameters
   /// - references    (optional) component references
 
-  ConnectionResolver(
-      [ConfigParams config = null, IReferences references = null]) {
-    if (config != null) this.configure(config);
-    if (references != null) this.setReferences(references);
+  ConnectionResolver([ConfigParams config = null, IReferences references = null]) {
+    if (config != null)
+      this.configure(config);
+    if (references != null)
+      this.setReferences(references);
   }
 
   /// Configures component by passing configuration parameters.
@@ -96,19 +97,15 @@ class ConnectionResolver {
 
   Future<ConnectionParams> _resolveInDiscovery(
       String correlationId, ConnectionParams connection) async {
-    if (!connection.useDiscovery()) {
-      return Future<ConnectionParams>(() {
-        return null;
-      });
-    }
+    if (!connection.useDiscovery())
+      return null;
 
     String key = connection.getDiscoveryKey();
-    if (this._references == null) {
+    if (this._references == null)
       return null;
-    }
 
     var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
-    List<dynamic> discoveries =
+    List discoveries =
         this._references.getOptional<dynamic>(discoveryDescriptor);
     if (discoveries.length == 0) {
       var err = new ReferenceException(correlationId, discoveryDescriptor);
@@ -125,6 +122,7 @@ class ConnectionResolver {
         break;
       }
     }
+
     return firstResult;
   }
 
@@ -137,9 +135,8 @@ class ConnectionResolver {
   /// See [IDiscovery]
 
   Future<ConnectionParams> resolve(String correlationId) async {
-    if (this._connections.length == 0) {
+    if (this._connections.length == 0)
       return null;
-    }
 
     List<ConnectionParams> connections = List<ConnectionParams>();
 
@@ -153,9 +150,8 @@ class ConnectionResolver {
       }
     }
 
-    if (connections.length == 0) {
+    if (connections.length == 0)
       return null;
-    }
 
     ConnectionParams firstResult = null;
     for (var connection in connections) {
@@ -182,7 +178,7 @@ class ConnectionResolver {
     }
 
     var discoveryDescriptor = new Descriptor("*", "discovery", "*", "*", "*");
-    List<dynamic> discoveries =
+    List discoveries =
         this._references.getOptional<dynamic>(discoveryDescriptor);
     if (discoveries.length == 0) {
       var err = new ReferenceException(correlationId, discoveryDescriptor);
@@ -236,22 +232,17 @@ class ConnectionResolver {
 
   Future<bool> _registerInDiscovery(
       String correlationId, ConnectionParams connection) async {
-    if (!connection.useDiscovery()) {
+    if (!connection.useDiscovery())
       return false;
-    }
 
     var key = connection.getDiscoveryKey();
-    if (this._references == null) {
+    if (this._references == null)
       return false;
-    }
 
     var discoveries = this._references.getOptional<IDiscovery>(
         new Descriptor("*", "discovery", "*", "*", "*"));
-    if (discoveries == null) {
-      return Future<bool>(() {
-        return false;
-      });
-    }
+    if (discoveries == null)
+      return false;
 
     bool error = false;
     for (var discovery in discoveries) {
@@ -276,7 +267,8 @@ class ConnectionResolver {
   Future<ConnectionParams> register(
       String correlationId, ConnectionParams connection) async {
     var result = await this._registerInDiscovery(correlationId, connection);
-    if (result) this._connections.add(connection);
+    if (result)
+      this._connections.add(connection);
     return connection;
   }
 }

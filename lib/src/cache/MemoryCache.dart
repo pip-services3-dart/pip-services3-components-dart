@@ -86,7 +86,7 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - key               a unique value key.
   /// - callback          callback function that receives cached value or error.
 
-  Future retrieve(String correlationId, String key) async {
+  Future<dynamic> retrieve(String correlationId, String key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;
@@ -118,8 +118,8 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - timeout           expiration timeout in milliseconds.
   /// - callback          (optional) callback function that receives an error or null for success
 
-  Future store(
-      String correlationId, String key, dynamic value, int timeout) async {
+  Future<dynamic> store(
+      String correlationId, String key, value, int timeout) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;
@@ -162,7 +162,7 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - key               a unique value key.
   /// - callback          (optional) callback function that receives an error or null for success
 
-  Future remove(String correlationId, String key) async {
+  Future<dynamic> remove(String correlationId, String key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;

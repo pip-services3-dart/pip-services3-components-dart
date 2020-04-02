@@ -8,7 +8,7 @@ environment:
   sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  pip_services3_commons: "^1.0.0"
+  pip_services3_commons: ">=1.0.2 <2.0.0"
   #handlebars2: ^0.0.3
   stubble: ^1.0.2
   yaml: ^2.2.0

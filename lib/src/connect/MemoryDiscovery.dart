@@ -115,8 +115,9 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
     List<ConnectionParams> connections = List<ConnectionParams>();
     for (var index = 0; index < this._items.length; index++) {
       var item = this._items[index];
-      if (item.key == key && item.connection != null)
+      if (item.key == key && item.connection != null) {
         connections.add(item.connection);
+      }
     }
     return connections;
   }

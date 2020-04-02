@@ -1,10 +1,10 @@
 import '../../pip_services3_components.dart';
 
 class Registration {
-  dynamic locator;
+  var locator;
   Function(dynamic locator) factory_;
 
-  Registration(dynamic locator, factory_(dynamic locator))
+  Registration(locator, factory_(locator))
       : this.locator = locator,
         this.factory_ = factory_ {}
 }
@@ -40,7 +40,7 @@ class Factory implements IFactory {
   /// - locator 	a locator to identify component to be created.
   /// - factory   a factory function that receives a locator and returns a created component.
 
-  void register(dynamic locator, factory_(dynamic locator)) {
+  void register(locator, factory_(locator)) {
     if (locator == null) throw Exception("Locator cannot be null");
     if (factory_ == null) throw Exception("Factory cannot be null");
 
@@ -52,7 +52,7 @@ class Factory implements IFactory {
   /// - locator 		a locator to identify component to be created.
   /// - type 			a component type.
 
-  void registerAsType(dynamic locator, dynamic type) {
+  void registerAsType(locator, type) {
     if (locator == null) throw Exception("Locator cannot be null");
     if (type == null) throw Exception("Factory cannot be null");
     this._registrations.add(Registration(locator, (locator) {
@@ -68,8 +68,7 @@ class Factory implements IFactory {
   ///
   /// - locator 	a locator to identify component to be created.
   /// Return			a locator for a component that the factory is able to create.
-
-  dynamic canCreate(dynamic locator) {
+  canCreate(locator) {
     for (var index = 0; index < this._registrations.length; index++) {
       var registration = this._registrations[index];
       var thisLocator = registration.locator;
@@ -87,7 +86,7 @@ class Factory implements IFactory {
   ///
   /// Trows a CreateException if the factory is not able to create the component.
 
-  dynamic create(dynamic locator) {
+  create(locator) {
     for (var index = 0; index < this._registrations.length; index++) {
       var registration = this._registrations[index];
       var thisLocator = registration.locator;
