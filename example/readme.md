@@ -4,7 +4,7 @@ This library has an extensive set of components for working in various fields wh
 microservices, micro-applications and applications. It includes:
 
 - **Auth** - authentication credential store
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -30,7 +30,7 @@ void main(){
 - **Build** - factories
 
 - **Cache** - distributed cache
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -56,7 +56,7 @@ void main(){
 - **Component** - root package
 
 - **Config** - configuration reader
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -74,7 +74,7 @@ void main(){
 ```
 
 - **Connect** - connection discovery services
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -95,7 +95,7 @@ void main(){
 ```
 
 - **Count** - performance counters
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -128,7 +128,7 @@ void main(){
 ```
 
 - **Information** - contextual information
-* Example:
+Example:
 
 ```dart
 void main(){
@@ -150,7 +150,7 @@ void main(){
 ```
 
 - **Lock** - distributed locks
-* Example:
+Example:
 
 ```dart
 void main() async {
@@ -184,7 +184,7 @@ void main() async {
 ```
 
 - **Log** - logging components
-* Example:
+Example:
 
 ```dart
 void main(){
