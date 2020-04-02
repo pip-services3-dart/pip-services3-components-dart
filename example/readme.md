@@ -4,7 +4,8 @@ This library has an extensive set of components for working in various fields wh
 microservices, micro-applications and applications. It includes:
 
 - **Auth** - authentication credential store
-# Example:
+* Example:
+
 ```dart
 void main(){
      var restConfig = ConfigParams.fromTuples([
@@ -25,16 +26,12 @@ void main(){
     configList[0].get('store_key'); // Returns 'store key'
 }
 ```
-- **We build** - plants
-# Example:
-```dart
-void main(){
 
-}
+- **Build** - factories
 
-```
 - **Cache** - distributed cache
-# Example:
+* Example:
+
 ```dart
 void main(){
     String KEY1 = 'key1';
@@ -55,15 +52,12 @@ void main(){
     }
 }
 ```
+
 - **Component** - root package
-# Example:
-```dart
-void main(){
-    
-}
-```
+
 - **Config** - configuration reader
-# Example:
+* Example:
+
 ```dart
 void main(){
      var parameters = ConfigParams.fromTuples(
@@ -78,8 +72,10 @@ void main(){
       config.get('field5'); // Return 'Test Param 2'
 }
 ```
+
 - **Connect** - connection discovery services
-# Example:
+* Example:
+
 ```dart
 void main(){
     var RestConfig = ConfigParams.fromTuples([
@@ -97,8 +93,10 @@ void main(){
     configList[0].get('port'); // Return '3000'
 }
 ```
+
 - **Count** - performance counters
-# Example:
+* Example:
+
 ```dart
 void main(){
     LogCounters counters;
@@ -128,8 +126,10 @@ void main(){
     counter.average;// Return 2
 }
 ```
+
 - **Information** - contextual information
-# Example:
+* Example:
+
 ```dart
 void main(){
     var config = ConfigParams.fromTuples([
@@ -148,8 +148,10 @@ void main(){
       contextInfo.description; // Return 'description'
 }
 ```
+
 - **Lock** - distributed locks
-# Example:
+* Example:
+
 ```dart
 void main() async {
     final String LOCK1 = 'lock_1';
@@ -180,8 +182,10 @@ void main() async {
     await _lock.releaseLock('123', LOCK1);
 }
 ```
+
 - **Log** - logging components
-# Example:
+* Example:
+
 ```dart
 void main(){
     var _logger = ConsoleLogger();
@@ -203,6 +207,7 @@ void main(){
       }
 }
 ```
+
 - **Test** - component testing
 
 In the help for each class there is a general example of its use. Also one of the quality sources
