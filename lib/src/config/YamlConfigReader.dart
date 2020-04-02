@@ -36,7 +36,7 @@ class YamlConfigReader extends FileConfigReader {
   ///
   /// - path  (optional) a path to configuration file.
 
-  YamlConfigReader([String path = null]) : super(path) {}
+  YamlConfigReader([String path]) : super(path);
 
   /// Reads configuration file, parameterizes its content and converts it into JSON object.
   ///
@@ -45,17 +45,17 @@ class YamlConfigReader extends FileConfigReader {
   /// Return                 a JSON object with configuration.
   dynamic readObject(String correlationId, ConfigParams parameters) async {
     if (super.getPath() == null)
-      throw new ConfigException(
+      throw ConfigException(
           correlationId, 'NO_PATH', 'Missing config file path');
 
     try {
       // Todo: make this async?
       var content = await File(super.getPath()).readAsString();
-      content = this.parameterize(content, parameters);
+      content = parameterize(content, parameters);
       var data = loadYaml(content);
       return data;
     } catch (e) {
-      throw new FileException(correlationId, 'READ_FAILED',
+      throw FileException(correlationId, 'READ_FAILED',
               'Failed reading configuration ' + super.getPath() + ': ' + e)
           .withDetails('path', super.getPath())
           .withCause(e);
@@ -67,9 +67,10 @@ class YamlConfigReader extends FileConfigReader {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - parameters        values to parameters the configuration or null to skip parameterization.
   /// - callback          callback function that receives configuration or error.
+  @override
   Future<ConfigParams> readConfig(
       String correlationId, ConfigParams parameters) async {
-    var value = this.readObject(correlationId, parameters);
+    var value = readObject(correlationId, parameters);
     var config = ConfigParams.fromValue(value);
     return config;
   }
@@ -82,7 +83,7 @@ class YamlConfigReader extends FileConfigReader {
   /// Return                 a JSON object with configuration.
   static dynamic readObject_(
       String correlationId, String path, ConfigParams parameters) {
-    return new YamlConfigReader(path).readObject(correlationId, parameters);
+    return YamlConfigReader(path).readObject(correlationId, parameters);
   }
 
   /// Reads configuration from a file, parameterize it with given values and returns a new ConfigParams object.
@@ -93,8 +94,7 @@ class YamlConfigReader extends FileConfigReader {
   /// - callback          callback function that receives configuration or error.
   static ConfigParams readConfig_(
       String correlationId, String path, ConfigParams parameters) {
-    var value =
-        new YamlConfigReader(path).readObject(correlationId, parameters);
+    var value = YamlConfigReader(path).readObject(correlationId, parameters);
     var config = ConfigParams.fromValue(value);
     return config;
   }

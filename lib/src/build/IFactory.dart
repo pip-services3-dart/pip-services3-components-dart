@@ -13,17 +13,15 @@ abstract class IFactory {
   /// a locator for component it is able to create that matches the given locator.
   /// If the factory is not able to create a requested component is returns null.
   ///
-  /// - locator 	a locator to identify component to be created.
+  /// - [locator] 	a locator to identify component to be created.
   /// Returns			a locator for a component that the factory is able to create.
-
   dynamic canCreate(dynamic locator);
 
   /// Creates a component identified by given locator.
   ///
-  /// - locator 	a locator to identify component to be created.
+  /// - [locator] 	a locator to identify component to be created.
   /// Returns the created component.
   ///
   /// Throws a CreateException if the factory is not able to create the component.
-
   dynamic create(dynamic locator);
 }

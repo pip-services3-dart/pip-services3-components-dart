@@ -17,38 +17,39 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ####
 ///
-///     var config = ConfigParams.fromTuples(
+///     var config = ConfigParams.fromTuples([
 ///         'connection.host', '{{SERVICE_HOST}}',
 ///         'connection.port', '{{SERVICE_PORT}}{{^SERVICE_PORT}}8080{{/SERVICE_PORT}}'
-///     );
+///     ]);
 ///
 ///     var configReader = new MemoryConfigReader();
 ///     configReader.configure(config);
 ///
 ///     var parameters = ConfigParams.fromValue(process.env);
 ///
-///     configReader.readConfig('123', parameters, (err, config) => {
+///     var config = await configReader.readConfig('123', parameters)
 ///         // Possible result: connection.host=10.1.1.100;connection.port=8080
-///     });
+///    
 ///
 
 class MemoryConfigReader implements IConfigReader, IReconfigurable {
-  ConfigParams _config = new ConfigParams();
+  ConfigParams _config = ConfigParams();
 
   /// Creates a new instance of config reader.
   ///
   /// - config        (optional) component configuration parameters
 
-  MemoryConfigReader([ConfigParams config = null]) {
-    this._config = config;
+  MemoryConfigReader([ConfigParams config]) {
+    _config = config;
   }
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
 
+  @override
   void configure(ConfigParams config) {
-    this._config = config;
+    _config = config;
   }
 
   /// Reads configuration and parameterize it with given values.
@@ -57,16 +58,17 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
   /// - parameters        values to parameters the configuration or null to skip parameterization.
   /// - callback          callback function that receives configuration or error.
 
+  @override
   Future<ConfigParams> readConfig(
       String correlationId, ConfigParams parameters) async {
     if (parameters != null) {
-      var config = new ConfigParams(this._config).toString();
+      var config = ConfigParams(_config).toString();
       var handlebars = Stubble();
       var template = handlebars.compile(config);
       config = template(parameters);
       return ConfigParams.fromString(config);
     } else {
-      var config = new ConfigParams(this._config);
+      var config = ConfigParams(_config);
       return config;
     }
   }

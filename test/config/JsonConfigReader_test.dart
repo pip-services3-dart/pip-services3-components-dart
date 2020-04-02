@@ -8,7 +8,7 @@ void main() {
     test('Config Sections', () {
       var parameters = ConfigParams.fromTuples(
           ['param1', 'Test Param 1', 'param2', 'Test Param 2']);
-      ConfigParams config =
+      var config =
           JsonConfigReader.readConfig_(null, './data/config.json', parameters);
 
       expect(config.length, 9);

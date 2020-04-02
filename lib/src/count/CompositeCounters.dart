@@ -15,16 +15,16 @@ import '../../pip_services3_components.dart';
 /// ### Example ###
 ///
 ///     class MyComponent implements IReferenceable {
-///         private _counters: CompositeCounters = new CompositeCounters();
+///         var _counters = new CompositeCounters();
 ///
-///         public setReferences(references: IReferences): void {
-///             this._counters.setReferences(references);
+///          void setReferences(IReferences references) {
+///             _counters.setReferences(references);
 ///             ...
 ///         }
 ///
-///         public myMethod(): void {
-///             this._counters.increment("mycomponent.mymethod.calls");
-///             var timing = this._counters.beginTiming("mycomponent.mymethod.exec_time");
+///         void myMethod() {
+///            _counters.increment('mycomponent.mymethod.calls');
+///             var timing =_counters.beginTiming('mycomponent.mymethod.exec_time');
 ///             try {
 ///                 ...
 ///             } finally {
@@ -35,27 +35,30 @@ import '../../pip_services3_components.dart';
 ///
 
 class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
-  final List<ICounters> _counters = List<ICounters>();
+  final _counters = List<ICounters>();
 
   /// Creates a new instance of the counters.
   ///
-  /// - references 	references to locate the component dependencies.
-  CompositeCounters([IReferences references = null]) {
-    if (references != null)
-      this.setReferences(references);
+  /// - [references] 	references to locate the component dependencies.
+  CompositeCounters([IReferences references]) {
+    if (references != null) {
+      setReferences(references);
+    }
   }
 
   /// Sets references to dependent components.
   ///
-  /// - references 	references to locate the component dependencies.
+  /// - [references] 	references to locate the component dependencies.
+  @override
   void setReferences(IReferences references) {
     var counters = references.getOptional<ICounters>(
-        new Descriptor(null, "counters", null, null, null));
+        Descriptor(null, 'counters', null, null, null));
     for (var i = 0; i < counters.length; i++) {
-      ICounters counter = counters[i];
+      var counter = counters[i];
 
-      if (counter != this as ICounters)
-        this._counters.add(counter);
+      if (counter != this) { // as ICounters
+        _counters.add(counter);
+      }
     }
   }
 
@@ -63,34 +66,39 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// It returns [Timing] object which has to be called at
   /// [Timing.endTiming] to end the measurement and update the counter.
   ///
-  /// - name 	a counter name of Interval type.
+  /// - [name] 	a counter name of Interval type.
   /// Return a [Timing] callback object to end timing.
+  @override
   Timing beginTiming(String name) {
-    return new Timing(name, this);
+    return Timing(name, this);
   }
 
   /// Ends measurement of execution elapsed time and updates specified counter.
   ///
-  /// - name      a counter name
-  /// - elapsed   execution elapsed time in milliseconds to update the counter.
+  /// - [name]      a counter name
+  /// - [elapsed]   execution elapsed time in milliseconds to update the counter.
   ///
   /// See [Timing.endTiming]
+  @override
   void endTiming(String name, int elapsed) {
-    for (var i = 0; i < this._counters.length; i++) {
-      var counter = this._counters[i];
+    for (var i = 0; i <_counters.length; i++) {
+      var counter =_counters[i];
       var callback = counter as ITimingCallback;
-      if (callback != null)
+      if (callback != null) {
         callback.endTiming(name, elapsed);
+      }
     }
   }
 
   /// Calculates min/average/max statistics based on the current and previous values.
   ///
-  /// - name 		a counter name of Statistics type
-  /// - value		a value to update statistics
+  /// - [name] 		a counter name of Statistics type
+  /// - [value]		a value to update statistics
+  @override
   void stats(String name, int value) {
-    for (var i = 0; i < this._counters.length; i++)
-      this._counters[i].stats(name, value);
+    for (var i = 0; i <_counters.length; i++) {
+      _counters[i].stats(name, value);
+    }
   }
 
   /// Records the last calculated measurement value.
@@ -98,44 +106,53 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// Usually this method is used by metrics calculated
   /// externally.
   ///
-  /// - name 		a counter name of Last type.
-  /// - value		a last value to record.
+  /// - [name] 		a counter name of Last type.
+  /// - [value]		a last value to record.
+  @override
   void last(String name, int value) {
-    for (var i = 0; i < this._counters.length; i++)
-      this._counters[i].last(name, value);
+    for (var i = 0; i <_counters.length; i++) {
+      _counters[i].last(name, value);
+    }
   }
 
   /// Records the current time as a timestamp.
   ///
-  /// - name 		a counter name of Timestamp type.
+  /// - [name] 		a counter name of Timestamp type.
+  @override
   void timestampNow(String name) {
-    this.timestamp(name, new DateTime.now());
+   timestamp(name, DateTime.now());
   }
 
   /// Records the given timestamp.
   ///
-  /// - name 		a counter name of Timestamp type.
-  /// - value		a timestamp to record.
+  /// - [name] 		a counter name of Timestamp type.
+  /// - [value]		a timestamp to record.
+  @override
   void timestamp(String name, DateTime value) {
-    for (var i = 0; i < this._counters.length; i++)
-      this._counters[i].timestamp(name, value);
+    for (var i = 0; i <_counters.length; i++) {
+      _counters[i].timestamp(name, value);
+    }
   }
 
   /// Increments counter by 1.
   ///
-  /// - name 		a counter name of Increment type.
+  /// - [name] 		a counter name of Increment type.
+  @override
   void incrementOne(String name) {
-    this.increment(name, 1);
+   increment(name, 1);
   }
 
   /// Increments counter by given value.
   ///
-  /// - name 		a counter name of Increment type.
-  /// - value		a value to add to the counter.
+  /// - [name] 		a counter name of Increment type.
+  /// - [value]		a value to add to the counter.
+  @override
   void increment(String name, int value) {
-    if (name == null || name == "")
-      throw Exception("Name cannot be null");
-    for (var i = 0; i < this._counters.length; i++)
-      this._counters[i].increment(name, value);
+    if (name == null || name == '') {
+      throw Exception('Name cannot be null');
+    }
+    for (var i = 0; i <_counters.length; i++) {
+      _counters[i].increment(name, value);
+    }
   }
 }

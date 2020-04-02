@@ -11,7 +11,7 @@ void main() {
     test('Name', () {
       expect(contextInfo.name, 'unknown');
 
-      String update = 'name';
+      var update = 'name';
       contextInfo.name = update;
       expect(contextInfo.name, update);
     });
@@ -20,7 +20,7 @@ void main() {
     test('Description', () {
       expect(contextInfo.description, isNull);
 
-      String update = 'description';
+      var update = 'description';
       contextInfo.description = update;
       expect(contextInfo.description, update);
     });
@@ -28,7 +28,7 @@ void main() {
     test('ContextId', () {
       expect(contextInfo.contextId, isNotNull);
 
-      String update = 'context id';
+      var update = 'context id';
       contextInfo.contextId = update;
       expect(contextInfo.contextId, update);
     });
@@ -46,7 +46,7 @@ void main() {
     });
     contextInfo = ContextInfo();
     test('FromConfig', () {
-      ConfigParams config = ConfigParams.fromTuples([
+      var config = ConfigParams.fromTuples([
         'name',
         'name',
         'description',
@@ -57,7 +57,7 @@ void main() {
         'store key'
       ]);
 
-      ContextInfo contextInfo = ContextInfo.fromConfig(config);
+      var contextInfo = ContextInfo.fromConfig(config);
       expect(contextInfo.name, 'name');
       expect(contextInfo.description, 'description');
     });

@@ -1,4 +1,4 @@
-import "dart:async";
+import 'dart:async';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
@@ -17,25 +17,25 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     let config = ConfigParams.fromTuples(
-///         "key1.user", "jdoe",
-///         "key1.pass", "pass123",
-///         "key2.user", "bsmith",
-///         "key2.pass", "mypass"
+///     var config = ConfigParams.fromTuples(
+///         'key1.user', 'jdoe',
+///         'key1.pass', 'pass123',
+///         'key2.user', 'bsmith',
+///         'key2.pass', 'mypass'
 ///     );
 ///
-///     let credentialStore = new MemoryCredentialStore();
+///     var credentialStore = MemoryCredentialStore();
 ///     credentialStore.readCredentials(config);
 ///
-///     credentialStore.lookup("123", "key1", (err, credential) => {
-///         // Result: user=jdoe;pass=pass123
-///     });
+///     var credential = await credentialStore.lookup('123', 'key1') 
+///     // Result: user=jdoe;pass=pass123
+
 class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   Map<String, dynamic> _items = Map<String, dynamic>();
 
   /// Creates a new instance of the credential store.
   ///
-  /// - config    (optional) configuration with credential parameters.
+  /// - [config]    (optional) configuration with credential parameters.
 
   MemoryCredentialStore([ConfigParams config = null]) {
     if (config != null) this.configure(config);
@@ -43,7 +43,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
+  /// - [config]    configuration parameters to be set.
   void configure(ConfigParams config) {
     this.readCredentials(config);
   }
@@ -51,7 +51,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// Reads credentials from configuration parameters.
   /// Each section represents an individual CredentialParams
   ///
-  /// - config   configuration parameters to be read
+  /// - [config]   configuration parameters to be read
   void readCredentials(ConfigParams config) {
     this._items = Map<String, dynamic>();
     var keys = config.getKeys();
@@ -64,10 +64,11 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
 
   /// Stores credential parameters into the store.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a key to uniquely identify the credential parameters.
-  /// - credential        a credential parameters to be stored.
-  /// - callback 			callback function that receives an error or null for success.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a key to uniquely identify the credential parameters.
+  /// - [credential]        a credential parameters to be stored.
+  /// Return 			        Future that receives an null for success.
+  /// Throw error
   Future store(
       String correlationId, String key, CredentialParams credential) async {
     if (credential != null)
@@ -78,9 +79,10 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
 
   /// Lookups credential parameters by its key.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a key to uniquely identify the credential parameters.
-  /// - callback          callback function that receives found credential parameters or error.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a key to uniquely identify the credential parameters.
+  /// Return              Future that receives found credential parameters
+  /// Throw error.
   Future<CredentialParams> lookup(String correlationId, String key) async {
     var credential = this._items[key];
     return credential;

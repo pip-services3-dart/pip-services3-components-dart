@@ -30,10 +30,45 @@ class Counter {
 
   /// Creates a instance of the data obejct
   ///
-  /// - name      a counter name.
-  /// - type      a counter type.
+  /// - [name]      a counter name.
+  /// - [type]      a counter type.
   Counter(String name, CounterType type) {
     this.name = name;
     this.type = type;
+  }
+
+  factory Counter.fromJson(Map<String, dynamic> json) {
+    var c = Counter(json['name'], json['type']);
+    c.last = json['last'];
+    c.count = json['count'];
+    c.min = json['min'];
+    c.max = json['max'];
+    c.average = json['average'];
+    c.time = json['time'];
+    return c;
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'name': name,
+      'type': type,
+      'last': last,
+      'count': count,
+      'min': min,
+      'max': max,
+      'average': average,
+      'time': time
+    };
+  }
+
+  void fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    type = json['type'];
+    last = json['last'];
+    count = json['count'];
+    min = json['min'];
+    max = json['max'];
+    average = json['average'];
+    time = json['time'];
   }
 }

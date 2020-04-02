@@ -8,17 +8,16 @@ import '../../pip_services3_components.dart';
 
 class DefaultInfoFactory extends Factory {
   static final Descriptor descriptor =
-      new Descriptor("pip-services", "factory", "info", "default", "1.0");
+       Descriptor('pip-services', 'factory', 'info', 'default', '1.0');
   static final Descriptor ContextInfoDescriptor =
-      new Descriptor("pip-services", "context-info", "default", "*", "1.0");
+       Descriptor('pip-services', 'context-info', 'default', '*', '1.0');
   static final Descriptor ContainerInfoDescriptor =
-      new Descriptor("pip-services", "container-info", "default", "*", "1.0");
-
+       Descriptor('pip-services', 'container-info', 'default', '*', '1.0');
   /// Create a new instance of the factory.
 
   DefaultInfoFactory() : super() {
-    this.registerAsType(DefaultInfoFactory.ContextInfoDescriptor, ContextInfo);
-    this.registerAsType(
+    registerAsType(DefaultInfoFactory.ContextInfoDescriptor, ContextInfo);
+    registerAsType(
         DefaultInfoFactory.ContainerInfoDescriptor, ContextInfo);
   }
 }

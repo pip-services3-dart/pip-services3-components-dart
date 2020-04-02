@@ -9,8 +9,8 @@ import '../../pip_services3_components.dart';
 /// ### Configuration parameters ###
 ///
 /// __options:__
-/// - timeout:               default caching timeout in milliseconds (default: 1 minute)
-/// - max_size:              maximum number of values stored in this cache (default: 1000)
+/// - [timeout]:               default caching timeout in milliseconds (default: 1 minute)
+/// - [max_size]:              maximum number of values stored in this cache (default: 1000)
 ///
 /// See [ICache]
 ///
@@ -18,15 +18,12 @@ import '../../pip_services3_components.dart';
 ///
 ///     var cache = new MemoryCache();
 ///
-///     cache.store('123', 'key1', 'ABC', (err) => {
-///         cache.store('123', 'key1', (err, value) => {
+///     await cache.store('123', 'key1', 'ABC')
+///     var value await cache.retrive('123', 'key1') 
 ///             // Result: 'ABC'
-///         });
-///     });
 ///
-
 class MemoryCache implements ICache, IReconfigurable {
-  Map _cache = {};
+  final Map _cache = {};
   int _count = 0;
 
   int _timeout = 60000;
@@ -34,58 +31,59 @@ class MemoryCache implements ICache, IReconfigurable {
 
   /// Creates a new instance of the cache.
 
-  MemoryCache() {}
+  MemoryCache();
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
-
+  /// - [config]    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
-    this._timeout =
-        config.getAsLongWithDefault('options.timeout', this._timeout);
-    this._maxSize =
-        config.getAsLongWithDefault('options.max_size', this._maxSize);
+    _timeout =
+        config.getAsLongWithDefault('options.timeout', _timeout);
+    _maxSize =
+        config.getAsLongWithDefault('options.max_size', _maxSize);
   }
 
   /// Clears component state.
   ///
-  /// - correlationId 	(optional) transaction id to trace execution through call chain.
-  /// - callback 			callback function that receives error or null no errors occured.
-
+  /// - [correlationId] 	(optional) transaction id to trace execution through call chain.
+  /// - [callback] 			Future that receives error or null no errors occured.
   void _cleanup() {
-    CacheEntry oldest = null;
-    int now = DateTime.now().millisecondsSinceEpoch;
-    this._count = 0;
+    CacheEntry oldest;
+    //var now = DateTime.now().millisecondsSinceEpoch;
+    _count = 0;
 
     // Cleanup obsolete entries and find the oldest
-    for (var prop in this._cache.keys) {
-      CacheEntry entry = this._cache[prop]; //.cast<CacheEntry>();
+    for (var prop in _cache.keys) {
+      CacheEntry entry = _cache[prop]; //.cast<CacheEntry>();
       // Remove obsolete entry
       if (entry.isExpired()) {
-        this._cache.remove(prop);
+        _cache.remove(prop);
       }
       // Count the remaining entry
       else {
-        this._count++;
-        if (oldest == null || oldest.getExpiration() > entry.getExpiration())
+        _count++;
+        if (oldest == null || oldest.getExpiration() > entry.getExpiration()) {
           oldest = entry;
+        }
       }
     }
 
     // Remove the oldest if cache size exceeded maximum
-    if (this._count > this._maxSize && oldest != null) {
-      this._cache.remove(oldest.getKey());
-      this._count--;
+    if (_count > _maxSize && oldest != null) {
+      _cache.remove(oldest.getKey());
+      _count--;
     }
   }
 
   /// Retrieves cached value from the cache using its key.
   /// If value is missing in the cache or expired it returns null.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a unique value key.
-  /// - callback          callback function that receives cached value or error.
-
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a unique value key.
+  /// Return                Future that receives cached value 
+  /// Throws error.
+  @override
   Future<dynamic> retrieve(String correlationId, String key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
@@ -93,7 +91,7 @@ class MemoryCache implements ICache, IReconfigurable {
     }
 
     // Get entry from the cache
-    CacheEntry entry = this._cache[key]; //.cast<CacheEntry>();
+    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
 
     // Cache has nothing
     if (entry == null) {
@@ -101,9 +99,9 @@ class MemoryCache implements ICache, IReconfigurable {
     }
 
     // Remove entry if expiration set and entry is expired
-    if (this._timeout > 0 && entry.isExpired()) {
-      this._cache.remove(key);
-      this._count--;
+    if (_timeout > 0 && entry.isExpired()) {
+      _cache.remove(key);
+      _count--;
       return null;
     }
 
@@ -112,12 +110,13 @@ class MemoryCache implements ICache, IReconfigurable {
 
   /// Stores value in the cache with expiration time.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a unique value key.
-  /// - value             a value to store.
-  /// - timeout           expiration timeout in milliseconds.
-  /// - callback          (optional) callback function that receives an error or null for success
-
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a unique value key.
+  /// - [value]             a value to store.
+  /// - [timeout]           expiration timeout in milliseconds.
+  /// Return                Future that receives an null for success
+  /// Throws error
+  @override
   Future<dynamic> store(
       String correlationId, String key, value, int timeout) async {
     if (key == null) {
@@ -126,18 +125,17 @@ class MemoryCache implements ICache, IReconfigurable {
     }
 
     // Get the entry
-    CacheEntry entry = this._cache[key]; //.cast<CacheEntry>();
-
+    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
     // Shortcut to remove entry from the cache
     if (value == null) {
       if (entry != null) {
-        this._cache.remove(key);
-        this._count--;
+        _cache.remove(key);
+        _count--;
       }
       return value;
     }
 
-    timeout = timeout != null && timeout > 0 ? timeout : this._timeout;
+    timeout = timeout != null && timeout > 0 ? timeout : _timeout;
 
     // Update the entry
     if (entry != null) {
@@ -145,23 +143,24 @@ class MemoryCache implements ICache, IReconfigurable {
     }
     // Or create a new entry
     else {
-      entry = new CacheEntry(key, value, timeout);
-      this._cache[key] = entry;
-      this._count++;
+      entry = CacheEntry(key, value, timeout);
+      _cache[key] = entry;
+      _count++;
     }
 
     // Clean up the cache
-    if (this._maxSize > 0 && this._count > this._maxSize) this._cleanup();
+    if (_maxSize > 0 && _count > _maxSize) _cleanup();
 
     return value;
   }
 
   /// Removes a value from the cache by its key.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a unique value key.
-  /// - callback          (optional) callback function that receives an error or null for success
-
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a unique value key.
+  /// Return                Future that receives an null for success
+  /// Throws error
+  @override
   Future<dynamic> remove(String correlationId, String key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
@@ -169,12 +168,12 @@ class MemoryCache implements ICache, IReconfigurable {
     }
 
     // Get the entry
-    CacheEntry entry = this._cache[key]; //.cast<CacheEntry>();
+    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
 
     // Remove entry from the cache
     if (entry != null) {
-      this._cache.remove(key);
-      this._count--;
+      _cache.remove(key);
+      _count--;
     }
     return null;
   }

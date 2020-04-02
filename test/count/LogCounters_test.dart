@@ -7,14 +7,14 @@ void main() {
   group('LogCounters', () {
     LogCounters _counters;
 
-    NullLogger log = NullLogger();
-    References refs =
+    var log = NullLogger();
+    var refs =
         References.fromTuples([DefaultLoggerFactory.NullLoggerDescriptor, log]);
     _counters = LogCounters();
     _counters.setReferences(refs);
 
     test('Simple Counters', () {
-      LogCounters counters = _counters;
+      var counters = _counters;
 
       counters.last('Test.LastValue', 123);
       counters.last('Test.LastValue', 123456);
@@ -56,7 +56,7 @@ void main() {
     _counters.setReferences(refs);
 
     test('Measure Elapsed Time', () async {
-      Timing timer = _counters.beginTiming('Test.Elapsed');
+      var timer = _counters.beginTiming('Test.Elapsed');
 
       await Future.delayed(Duration(milliseconds: 100), () {
         timer.endTiming();

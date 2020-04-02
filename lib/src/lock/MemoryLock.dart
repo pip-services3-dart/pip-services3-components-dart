@@ -15,37 +15,36 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     var lock = new MemoryLock();
-///
-///     lock.acquire("123", "key1", (err) => {
-///         if (err == null) {
+///     var lock = MemoryLock();
 ///             try {
+///             lock.acquire("123", "key1")
 ///                 // Processing...
 ///             } finally {
-///                 lock.releaseLock("123", "key1", (err) => {
+///                 lock.releaseLock("123", "key1", 
 ///                     // Continue...
-///                 });
+///    
 ///             }
 ///         }
 ///     });
 
 class MemoryLock extends Lock {
-  Map<String, int> _locks = {};
+  final Map<String, int> _locks = {};
 
   /// Makes a single attempt to acquire a lock by its key.
   /// It returns immediately a positive or negative result.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - key               a unique lock key to acquire.
-  /// - ttl               a lock timeout (time to live) in milliseconds.
-  /// - callback          callback function that receives a lock result or error.
-
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [key]               a unique lock key to acquire.
+  /// - [ttl]               a lock timeout (time to live) in milliseconds.
+  /// Return                Future  that receives a lock result
+  /// Throws error.
+  @override
   Future<bool> tryAcquireLock(String correlationId, String key, int ttl) async {
-    var expireTime = this._locks[key];
-    var now = new DateTime.now().millisecondsSinceEpoch;
+    var expireTime = _locks[key];
+    var now = DateTime.now().millisecondsSinceEpoch;
 
     if (expireTime == null || expireTime < now) {
-      this._locks[key] = now + ttl;
+      _locks[key] = now + ttl;
       return true;
     } else {
       return false;
@@ -54,12 +53,13 @@ class MemoryLock extends Lock {
 
   /// Releases the lock with the given key.
   ///
-  /// - correlationId     not used.
-  /// - key               the key of the lock that is to be released.
-  /// - callback          (optional) the function to call once the lock has been released. Will be called
+  /// - [correlationId]     not used.
+  /// - [key]               the key of the lock that is to be released.
+  /// Return                Future the lock has been released. Will be called
   ///                          with null.
-
+  /// Throw error
+  @override
   Future releaseLock(String correlationId, String key) async {
-    this._locks.remove(key);
+    _locks.remove(key);
   }
 }

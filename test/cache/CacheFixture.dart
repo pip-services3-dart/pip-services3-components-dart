@@ -2,28 +2,28 @@ import 'dart:async';
 import 'package:test/test.dart';
 import '../../lib/pip_services3_components.dart';
 
-String KEY1 = "key1";
-String KEY2 = "key2";
+String KEY1 = 'key1';
+String KEY2 = 'key2';
 
-String VALUE1 = "value1";
-String VALUE2 = "value2";
+String VALUE1 = 'value1';
+String VALUE2 = 'value2';
 
 class CacheFixture {
   ICache _cache;
 
   CacheFixture(ICache cache) {
-    this._cache = cache;
+    _cache = cache;
   }
 
   void testStoreAndRetrieve() async {
     try {
-      await this._cache.store(null, KEY1, VALUE1, 5000);
+      await _cache.store(null, KEY1, VALUE1, 5000);
     } catch (err) {
       expect(err, isNull);
     }
 
     try {
-      await this._cache.store(null, KEY2, VALUE2, 5000);
+      await _cache.store(null, KEY2, VALUE2, 5000);
     } catch (err) {
       expect(err, isNull);
     }
@@ -31,14 +31,14 @@ class CacheFixture {
     await Future.delayed(Duration(milliseconds: 500));
 
     try {
-      var val = await this._cache.retrieve(null, KEY1);
+      var val = await _cache.retrieve(null, KEY1);
       expect(val, isNotNull);
       expect(VALUE1, val);
     } catch (err) {
       expect(err, isNull);
     }
     try {
-      var val = await this._cache.retrieve(null, KEY2);
+      var val = await _cache.retrieve(null, KEY2);
       expect(val, isNotNull);
       expect(VALUE2, val);
     } catch (err) {
@@ -48,7 +48,7 @@ class CacheFixture {
 
   void testRetrieveExpired() async {
     try {
-      await this._cache.store(null, KEY1, VALUE1, 1000);
+      await _cache.store(null, KEY1, VALUE1, 1000);
     } catch (err) {
       expect(err, isNull);
     }
@@ -56,7 +56,7 @@ class CacheFixture {
     await Future.delayed(Duration(milliseconds: 1500));
 
     try {
-      var val = await this._cache.retrieve(null, KEY1);
+      var val = await _cache.retrieve(null, KEY1);
       expect(val, isNull);
     } catch (err) {
       expect(err, isNull);
@@ -65,18 +65,18 @@ class CacheFixture {
 
   void testRemove() async {
     try {
-      await this._cache.store(null, KEY1, VALUE1, 1000);
+      await _cache.store(null, KEY1, VALUE1, 1000);
     } catch (err) {
       expect(err, isNull);
     }
     try {
-      await this._cache.remove(null, KEY1);
+      await _cache.remove(null, KEY1);
     } catch (err) {
       expect(err, isNull);
     }
 
     try {
-      var val = await this._cache.retrieve(null, KEY1);
+      var val = await _cache.retrieve(null, KEY1);
       expect(val, isNull);
     } catch (err) {
       expect(err, isNull);

@@ -6,17 +6,15 @@ import '../../pip_services3_components.dart';
 /// See [Factory]
 /// See [IDiscovery]
 /// See [MemoryDiscovery]
-
 class DefaultDiscoveryFactory extends Factory {
   static final descriptor =
-      new Descriptor("pip-services", "factory", "discovery", "default", "1.0");
+       Descriptor('pip-services', 'factory', 'discovery', 'default', '1.0');
   static final MemoryDiscoveryDescriptor =
-      new Descriptor("pip-services", "discovery", "memory", "*", "1.0");
+       Descriptor('pip-services', 'discovery', 'memory', '*', '1.0');
 
   /// Create a new instance of the factory.
-
   DefaultDiscoveryFactory() : super() {
-    this.registerAsType(
+    registerAsType(
         DefaultDiscoveryFactory.MemoryDiscoveryDescriptor, MemoryDiscovery);
   }
 }

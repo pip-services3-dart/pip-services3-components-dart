@@ -1,8 +1,4 @@
-import 'package:pip_services3_commons/src/config/ConfigParams.dart';
-import 'package:pip_services3_commons/src/config/IConfigurable.dart';
-import 'package:pip_services3_commons/src/refer/IReferences.dart';
-import 'package:pip_services3_commons/src/refer/IReferenceable.dart';
-import 'package:pip_services3_commons/src/refer/DependencyResolver.dart';
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 import './log/CompositeLogger.dart';
 import './count/CompositeCounters.dart';
 
@@ -23,24 +19,26 @@ import './count/CompositeCounters.dart';
 /// - ...                                    References must match configured dependencies.
 
 class Component implements IConfigurable, IReferenceable {
-  DependencyResolver dependencyResolver = new DependencyResolver();
-  CompositeLogger logger = new CompositeLogger();
-  CompositeCounters counters = new CompositeCounters();
+  DependencyResolver dependencyResolver = DependencyResolver();
+  CompositeLogger logger = CompositeLogger();
+  CompositeCounters counters = CompositeCounters();
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
+  /// - [config]    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
-    this.dependencyResolver.configure(config);
-    this.logger.configure(config);
+    dependencyResolver.configure(config);
+    logger.configure(config);
   }
 
   /// Sets references to dependent components.
   ///
-  /// - references 	references to locate the component dependencies.
+  /// - [references] 	references to locate the component dependencies.
+  @override
   void setReferences(IReferences references) {
-    this.dependencyResolver.setReferences(references);
-    this.logger.setReferences(references);
-    this.counters.setReferences(references);
+    dependencyResolver.setReferences(references);
+    logger.setReferences(references);
+    counters.setReferences(references);
   }
 }

@@ -1,5 +1,4 @@
-import "dart:math";
-
+import 'dart:math';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
@@ -8,107 +7,104 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Configuration parameters ###
 ///
-/// - options:
-///     - interval:        interval in milliseconds to save current counters measurements
+/// - [options]:
+///     - [interval]:        interval in milliseconds to save current counters measurements
 ///     (default: 5 mins)
-///     - reset_timeout:   timeout in milliseconds to reset the counters. 0 disables the reset
+///     - [reset_timeout]:   timeout in milliseconds to reset the counters. 0 disables the reset
 ///     (default: 0)
-
 abstract class CachedCounters
     implements ICounters, IReconfigurable, ITimingCallback {
   int _interval = 300000;
   int _resetTimeout = 0;
-  Map<String, Counter> _cache = Map<String, Counter>();
+  final _cache = Map<String, Counter>();
   bool _updated;
-  int _lastDumpTime = new DateTime.now().millisecondsSinceEpoch;
-  int _lastResetTime = new DateTime.now().millisecondsSinceEpoch;
+  int _lastDumpTime =  DateTime.now().millisecondsSinceEpoch;
+  int _lastResetTime =  DateTime.now().millisecondsSinceEpoch;
 
   /// Creates a new CachedCounters object.
-  CachedCounters() {}
+  CachedCounters();
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
-
+  @override
   void configure(ConfigParams config) {
-    this._interval = config.getAsLongWithDefault("interval", this._interval);
-    this._interval =
-        config.getAsLongWithDefault("options.interval", this._interval);
-    this._resetTimeout =
-        config.getAsLongWithDefault("reset_timeout", this._resetTimeout);
-    this._resetTimeout = config.getAsLongWithDefault(
-        "options.reset_timeout", this._resetTimeout);
+    _interval = config.getAsLongWithDefault('interval', _interval);
+    _interval =
+        config.getAsLongWithDefault('options.interval', _interval);
+    _resetTimeout =
+        config.getAsLongWithDefault('reset_timeout', _resetTimeout);
+    _resetTimeout = config.getAsLongWithDefault(
+        'options.reset_timeout', _resetTimeout);
   }
 
   /// Gets the counters dump/save interval.
   ///
   /// Return the interval in milliseconds.
-
   int getInterval() {
-    return this._interval;
+    return _interval;
   }
 
   /// Sets the counters dump/save interval.
   ///
-  /// - value    a new interval in milliseconds.
-
+  /// - [value]    a new interval in milliseconds.
   void setInterval(int value) {
-    this._interval = value;
+    _interval = value;
   }
 
   /// Saves the current counters measurements.
   ///
-  /// - counters      current counters measurements to be saves.
+  /// - [counters]      current counters measurements to be saves.
   void save(List<Counter> counters);
 
   /// Clears (resets) a counter specified by its name.
   ///
-  /// - name  a counter name to clear.
+  /// - [name]  a counter name to clear.
   void clear(String name) {
-    this._cache.remove(name);
+    _cache.remove(name);
   }
 
   /// Clears (resets) all counters.
   void clearAll() {
-    this._cache.clear();
-    this._updated = false;
+    _cache.clear();
+    _updated = false;
   }
 
   /// Begins measurement of execution time interval.
   /// It returns [Timing] object which has to be called at
   /// [Timing.endTiming] to end the measurement and update the counter.
   ///
-  /// - name 	a counter name of Interval type.
+  /// - [name] 	a counter name of Interval type.
   /// Return a [Timing] callback object to end timing.
+  @override
   Timing beginTiming(String name) {
-    return new Timing(name, this);
+    return Timing(name, this);
   }
 
   /// Dumps (saves) the current values of counters.
   ///
   /// See [save]
   void dump() {
-    if (!this._updated) return;
+    if (!_updated) return;
 
-    var counters = this.getAll();
+    var counters = getAll();
 
-    this.save(counters);
+    save(counters);
 
-    this._updated = false;
-    this._lastDumpTime = new DateTime.now().millisecondsSinceEpoch;
+    _updated = false;
+    _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
   }
 
   /// Makes counter measurements as updated
   /// and dumps them when timeout expires.
   ///
   /// See [dump]
-
   void _update() {
-    this._updated = true;
-    if (new DateTime.now().millisecondsSinceEpoch >
-        this._lastDumpTime + this.getInterval()) {
+    _updated = true;
+    if (DateTime.now().millisecondsSinceEpoch >
+        _lastDumpTime + getInterval()) {
       try {
-        this.dump();
+        dump();
       } catch (ex) {
         // Todo: decide what to do
       }
@@ -116,13 +112,13 @@ abstract class CachedCounters
   }
 
   void _resetIfNeeded() {
-    if (this._resetTimeout == 0) return;
+    if (_resetTimeout == 0) return;
 
-    var now = new DateTime.now().millisecondsSinceEpoch;
-    if (now - this._lastResetTime > this._resetTimeout) {
-      this._cache.clear();
-      this._updated = false;
-      this._lastResetTime = now;
+    var now = DateTime.now().millisecondsSinceEpoch;
+    if (now - _lastResetTime > _resetTimeout) {
+      _cache.clear();
+      _updated = false;
+      _lastResetTime = now;
     }
   }
 
@@ -132,10 +128,10 @@ abstract class CachedCounters
   List<Counter> getAll() {
     var result = List<Counter>();
 
-    this._resetIfNeeded();
+    _resetIfNeeded();
 
-    for (var key in this._cache.keys) {
-      result.add(this._cache[key]);
+    for (var key in _cache.keys) {
+      result.add(_cache[key]);
     }
 
     return result;
@@ -145,29 +141,30 @@ abstract class CachedCounters
   /// It counter does not exist or its type doesn't match the specified type
   /// it creates a new one.
   ///
-  /// - name  a counter name to retrieve.
-  /// - type  a counter type.
+  /// - [name]  a counter name to retrieve.
+  /// - [type]  a counter type.
   /// Return an existing or newly created counter of the specified type.
-
   Counter get(String name, CounterType type) {
-    if (name == null || name == "")
-      throw Exception("Name cannot be null");
+    if (name == null || name == '') {
+      throw Exception('Name cannot be null');
+    }
 
-    this._resetIfNeeded();
+    _resetIfNeeded();
 
-    Counter counter = this._cache[name];
+    var counter = _cache[name];
 
     if (counter == null || counter.type != type) {
-      counter = new Counter(name, type);
-      this._cache[name] = counter;
+      counter = Counter(name, type);
+      _cache[name] = counter;
     }
 
     return counter;
   }
 
   void _calculateStats(Counter counter, int value) {
-    if (counter == null)
-      throw Exception("Counter cannot be null");
+    if (counter == null) {
+      throw Exception('Counter cannot be null');
+    }
 
     counter.last = value;
     counter.count = counter.count != null ? counter.count + 1 : 1;
@@ -180,24 +177,25 @@ abstract class CachedCounters
 
   /// Ends measurement of execution elapsed time and updates specified counter.
   ///
-  /// - name      a counter name
-  /// - elapsed   execution elapsed time in milliseconds to update the counter.
+  /// - [name]      a counter name
+  /// - [elapsed]   execution elapsed time in milliseconds to update the counter.
   ///
   /// See [Timing.endTiming]
   void endTiming(String name, int elapsed) {
-    Counter counter = this.get(name, CounterType.Interval);
-    this._calculateStats(counter, elapsed);
-    this._update();
+    var counter = get(name, CounterType.Interval);
+    _calculateStats(counter, elapsed);
+    _update();
   }
 
   /// Calculates min/average/max statistics based on the current and previous values.
   ///
-  /// - name 		a counter name of Statistics type
-  /// - value		a value to update statistics
+  /// - [name] 		a counter name of Statistics type
+  /// - [value]		a value to update statistics
+  @override
   void stats(String name, int value) {
-    Counter counter = this.get(name, CounterType.Statistics);
-    this._calculateStats(counter, value);
-    this._update();
+    var counter = get(name, CounterType.Statistics);
+    _calculateStats(counter, value);
+    _update();
   }
 
   /// Records the last calculated measurement value.
@@ -205,46 +203,50 @@ abstract class CachedCounters
   /// Usually this method is used by metrics calculated
   /// externally.
   ///
-  /// - name 		a counter name of Last type.
-  /// - value		a last value to record.
-
+  /// - [name] 		a counter name of Last type.
+  /// - [value]		a last value to record.
+  @override
   void last(String name, int value) {
-    Counter counter = this.get(name, CounterType.LastValue);
+    var counter = get(name, CounterType.LastValue);
     counter.last = value;
-    this._update();
+    _update();
   }
 
   /// Records the current time as a timestamp.
   ///
-  /// - name 		a counter name of Timestamp type.
+  /// - [name] 		a counter name of Timestamp type.
+  @override
   void timestampNow(String name) {
-    this.timestamp(name, new DateTime.now());
+    timestamp(name, DateTime.now());
   }
 
   /// Records the given timestamp.
   ///
-  /// - name 		a counter name of Timestamp type.
-  /// - value		a timestamp to record.
+  /// - [name] 		a counter name of Timestamp type.
+  /// - [value]		a timestamp to record.
+  @override
   void timestamp(String name, DateTime value) {
-    Counter counter = this.get(name, CounterType.Timestamp);
+    var counter = get(name, CounterType.Timestamp);
     counter.time = value;
-    this._update();
+    _update();
   }
 
   /// Increments counter by 1.
   ///
-  /// - name 		a counter name of Increment type.
+  /// - [name] 		a counter name of Increment type.
+  @override
   void incrementOne(String name) {
-    this.increment(name, 1);
+    increment(name, 1);
   }
 
   /// Increments counter by given value.
   ///
   /// - name 		a counter name of Increment type.
   /// - value		a value to add to the counter.
+  @override
   void increment(String name, int value) {
-    Counter counter = this.get(name, CounterType.Increment);
+    var counter = get(name, CounterType.Increment);
     counter.count = counter.count != null ? counter.count + value : value;
-    this._update();
+    _update();
   }
 }

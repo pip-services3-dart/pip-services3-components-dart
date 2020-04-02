@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 //import 'package:handlebars2/handlebars2.dart' as handlebars;
 import 'package:stubble/stubble.dart';
@@ -11,17 +12,18 @@ import 'package:stubble/stubble.dart';
 ///
 ///  See [IConfigReader]
 abstract class ConfigReader implements IConfigurable {
-  ConfigParams _parameters = new ConfigParams();
+  ConfigParams _parameters = ConfigParams();
 
   /// Creates a new instance of the config reader.
-  ConfigReader() {}
+  ConfigReader();
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
-    var parameters = config.getSection("parameters");
-    if (parameters.length > 0) this._parameters = parameters;
+    var parameters = config.getSection('parameters');
+    if (parameters.isNotEmpty) _parameters = parameters;
   }
 
   /// Reads configuration and parameterize it with given values.
@@ -40,7 +42,7 @@ abstract class ConfigReader implements IConfigurable {
   /// - parameters    dynamic parameters to inject into the template
   /// Return a parameterized configuration string.
   String parameterize(String config, ConfigParams parameters) {
-    parameters = this._parameters.override(parameters);
+    parameters = _parameters.override(parameters);
     var handlebars = Stubble();
     var template = handlebars.compile(config);
     return template(parameters);

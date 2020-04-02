@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
@@ -6,11 +7,11 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Configuration parameters ###
 ///
-/// - level:             maximum log level to capture
-/// - source:            source (context) name
-/// - options:
-///     - interval:        interval in milliseconds to save log messages (default: 10 seconds)
-///     - max_cache_size:  maximum number of messages stored in this cache (default: 100)
+/// - [level]:             maximum log level to capture
+/// - [source]:            source (context) name
+/// - [options]:
+///     - [interval]:        interval in milliseconds to save log messages (default: 10 seconds)
+///     - [max_cache_size]:  maximum number of messages stored in this cache (default: 100)
 ///
 /// ### References ###
 ///
@@ -23,84 +24,84 @@ import '../../pip_services3_components.dart';
 abstract class CachedLogger extends Logger {
   List<LogMessage> _cache = List<LogMessage>();
   bool _updated = false;
-  int _lastDumpTime = new DateTime.now().millisecondsSinceEpoch;
+  int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
   int _maxCacheSize = 100;
   int _interval = 10000;
 
   /// Creates a new instance of the logger.
-  CachedLogger() : super() {}
+  CachedLogger() : super();
 
   /// Writes a log message to the logger destination.
   ///
-  /// - level             a log level.
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
-  void _write(LogLevel level, String correlationId, ApplicationException error,
+  /// - [level]             a log level.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
+  @override
+  void write(LogLevel level, String correlationId, ApplicationException error,
       String message) {
-    ErrorDescription errorDesc =
+    var errorDesc =
         error != null ? ErrorDescriptionFactory.create(error) : null;
-    LogMessage logMessage = LogMessage();
-    logMessage.time = new DateTime.now();
+    var logMessage = LogMessage();
+    logMessage.time = DateTime.now();
     logMessage.level = LogLevelConverter.toString2(level);
-    logMessage.source = this.source;
+    logMessage.source = source;
     logMessage.correlation_id = correlationId;
     logMessage.error = errorDesc;
     logMessage.message = message;
 
-    this._cache.add(logMessage);
-
-    this._update();
+    _cache.add(logMessage);
+    update();
   }
 
   /// Saves log messages from the cache.
   ///
-  /// - messages  a list with log messages
-  /// - callback  callback function that receives error or null for success.
-  void _save(List<LogMessage> messages, callback(err));
+  /// - [messages]  a list with log messages
+  /// Retruns     Future that receives null for success.
+  /// Throws error
+  Future save(List<LogMessage> messages);
 
   /// Configures component by passing configuration parameters.
   ///
   /// - config    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
     super.configure(config);
 
-    this._interval =
-        config.getAsLongWithDefault("options.interval", this._interval);
-    this._maxCacheSize = config.getAsIntegerWithDefault(
-        "options.max_cache_size", this._maxCacheSize);
+    _interval = config.getAsLongWithDefault('options.interval', _interval);
+    _maxCacheSize =
+        config.getAsIntegerWithDefault('options.max_cache_size', _maxCacheSize);
   }
 
   /// Clears (removes) all cached log messages.
   void clear() {
-    this._cache = [];
-    this._updated = false;
+    _cache = [];
+    _updated = false;
   }
 
   /// Dumps (writes) the currently cached log messages.
   ///
   /// See [write]
-  void dump() {
-    if (this._updated) {
-      if (!this._updated) return;
+  void dump() async {
+    if (_updated) {
+      if (!_updated) return;
 
-      var messages = this._cache;
-      this._cache = [];
-
-      this._save(messages, (err) {
-        if (err) {
+      var messages = _cache;
+      _cache = [];
+      try {
+        await save(messages);
+      } catch (err) {
           // Adds messages back to the cache
-          messages.addAll(this._cache);
-          this._cache = messages;
+          messages.addAll(_cache);
+          _cache = messages;
 
           // Truncate cache
-          var deleteCount = this._cache.length - this._maxCacheSize;
-          if (deleteCount > 0) this._cache.removeRange(0, deleteCount);
-        }
-      });
+          var deleteCount = _cache.length - _maxCacheSize;
+          if (deleteCount > 0) _cache.removeRange(0, deleteCount);
+      }
 
-      this._updated = false;
-      this._lastDumpTime = new DateTime.now().millisecondsSinceEpoch;
+      _updated = false;
+      _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
     }
   }
 
@@ -108,14 +109,13 @@ abstract class CachedLogger extends Logger {
   /// and dumps it when timeout expires.
   ///
   /// See [dump]
+  void update() {
+    _updated = true;
+    var now = DateTime.now().millisecondsSinceEpoch;
 
-  void _update() {
-    this._updated = true;
-    var now = new DateTime.now().millisecondsSinceEpoch;
-
-    if (now > this._lastDumpTime + this._interval) {
+    if (now > _lastDumpTime + _interval) {
       try {
-        this.dump();
+        dump();
       } catch (ex) {
         // Todo: decide what to do
       }

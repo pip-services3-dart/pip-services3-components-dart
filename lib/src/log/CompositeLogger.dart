@@ -13,51 +13,52 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     class MyComponent implements IConfigurable, IReferenceable {
-///         private _logger: CompositeLogger = new CompositeLogger();
+///      MyComponent implements IConfigurable, IReferenceable {
+///          var _logger = new CompositeLogger();
 ///
-///         public configure(config: ConfigParams): void {
-///             this._logger.configure(config);
+///         void configure(ConfigParams config) {
+///             _logger.configure(config);
 ///             ...
 ///         }
 ///
-///         public setReferences(references: IReferences): void {
-///             this._logger.setReferences(references);
+///         void setReferences(IReferences references) {
+///             _logger.setReferences(references);
 ///             ...
 ///         }
 ///
-///         public myMethod(string correlationId): void {
-///             this._logger.debug(correlationId, "Called method mycomponent.mymethod");
+///         myMethod(String correlationId) {
+///             _logger.debug(correlationId, 'Called method mycomponent.mymethod');
 ///             ...
 ///         }
 ///     }
 ///
 
 class CompositeLogger extends Logger implements IReferenceable {
-  final List<ILogger> _loggers = List<ILogger>();
+  final _loggers = List<ILogger>();
 
   /// Creates a new instance of the logger.
   ///
   /// - references 	references to locate the component dependencies.
 
-  CompositeLogger([IReferences references = null]) : super() {
-    if (references != null) this.setReferences(references);
+  CompositeLogger([IReferences references]) : super() {
+    if (references != null) setReferences(references);
   }
 
   /// Sets references to dependent components.
   ///
   /// - references 	references to locate the component dependencies.
 
+  @override
   void setReferences(IReferences references) {
     super.setReferences(references);
 
-    List loggers = references
-        .getOptional<dynamic>(new Descriptor(null, "logger", null, null, null));
+    var loggers = references
+        .getOptional<dynamic>(Descriptor(null, 'logger', null, null, null));
     for (var i = 0; i < loggers.length; i++) {
       ILogger logger = loggers[i];
 
       // Todo: This doesn't work in TS. Redo...
-      if (logger != this as ILogger) this._loggers.add(logger);
+      if (logger != this ) _loggers.add(logger); //as ILogger
     }
   }
 
@@ -70,7 +71,8 @@ class CompositeLogger extends Logger implements IReferenceable {
   @override
   void write(LogLevel level, String correlationId, ApplicationException error,
       String message) {
-    for (var index = 0; index < this._loggers.length; index++)
-      this._loggers[index].log(level, correlationId, error, message, []);
+    for (var index = 0; index < _loggers.length; index++) {
+      _loggers[index].log(level, correlationId, error, message);
+    }
   }
 }

@@ -8,8 +8,8 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Configuration parameters ###
 ///
-/// - level:             maximum log level to capture
-/// - source:            source (context) name
+/// - [level]:             maximum log level to capture
+/// - [source]:            source (context) name
 ///
 /// ### References ###
 ///
@@ -22,40 +22,41 @@ import '../../pip_services3_components.dart';
 ///     var logger = new ConsoleLogger();
 ///     logger.setLevel(LogLevel.debug);
 ///
-///     logger.error("123", ex, "Error occured: %s", ex.message);
-///     logger.debug("123", "Everything is OK.");
+///     logger.error('123', ex, 'Error occured: %s', ex.message);
+///     logger.debug('123', 'Everything is OK.');
 class ConsoleLogger extends Logger {
   /// Creates a new instance of the logger.
-  ConsoleLogger() : super() {}
+  ConsoleLogger() : super();
 
   /// Writes a log message to the logger destination.
   ///
-  /// - level             a log level.
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
+  /// - [level]             a log level.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
   @override
   void write(LogLevel level, String correlationId, ApplicationException error,
       String message) {
-    if (this.getLevel().index < level.index) return;
+    if (getLevel().index < level.index) return;
 
     var result = '[';
-    result += correlationId != null ? correlationId : "---";
+    result += correlationId ?? '---';
     result += ':';
     result += LogLevelConverter.toString2(level);
     result += ':';
-    result += StringConverter.toString2(new DateTime.now());
-    result += "] ";
+    result += StringConverter.toString2(DateTime.now());
+    result += '] ';
 
     result += message;
 
     if (error != null) {
-      if (message.length == 0)
-        result += "Error: ";
-      else
-        result += ": ";
+      if (message.isEmpty) {
+        result += 'Error: ';
+      } else {
+        result += ': ';
+      }
 
-      result += this.composeError(error);
+      result += composeError(error);
     }
 
     print(result);

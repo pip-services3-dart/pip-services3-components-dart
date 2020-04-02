@@ -1,5 +1,4 @@
-import "package:pip_services3_commons/pip_services3_commons.dart";
-
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
 /// Performance counters that periodically dumps counters measurements to logger.
@@ -21,13 +20,13 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     let counters = new LogCounters();
-///     counters.setReferences(References.fromTuples(
-///         new Descriptor("pip-services", "logger", "console", "default", "1.0"), new ConsoleLogger()
-///     ));
+///     var counters = LogCounters();
+///     counters.setReferences(References.fromTuples([
+///         Descriptor("pip-services", "logger", "console", "default", "1.0"), ConsoleLogger()
+///     ]));
 ///
 ///     counters.increment("mycomponent.mymethod.calls");
-///     let timing = counters.beginTiming("mycomponent.mymethod.exec_time");
+///     var timing = counters.beginTiming("mycomponent.mymethod.exec_time");
 ///     try {
 ///         ...
 ///     } finally {
@@ -40,43 +39,50 @@ class LogCounters extends CachedCounters implements IReferenceable {
   final CompositeLogger _logger = CompositeLogger();
 
   /// Creates a new instance of the counters.
-  LogCounters() {}
+  LogCounters();
 
   /// Sets references to dependent components.
   ///
-  /// - references 	references to locate the component dependencies.
+  /// - [references] 	references to locate the component dependencies.
   ///
+  @override
   void setReferences(IReferences references) {
-    this._logger.setReferences(references);
+    _logger.setReferences(references);
   }
 
   String _counterToString(Counter counter) {
-    var result = "Counter " + counter.name + " { ";
-    result += "\"type\": " + counter.type.toString();
-    if (counter.last != null)
-      result += ", \"last\": " + StringConverter.toString2(counter.last);
-    if (counter.count != null)
-      result += ", \"count\": " + StringConverter.toString2(counter.count);
-    if (counter.min != null)
-      result += ", \"min\": " + StringConverter.toString2(counter.min);
-    if (counter.max != null)
-      result += ", \"max\": " + StringConverter.toString2(counter.max);
-    if (counter.average != null)
-      result += ", \"avg\": " + StringConverter.toString2(counter.average);
-    if (counter.time != null)
-      result += ", \"time\": " + StringConverter.toString2(counter.time);
-    result += " }";
+    var result = 'Counter ' + counter.name + ' { ';
+    result += '\"type\": ' + counter.type.toString();
+    if (counter.last != null) {
+      result += ', \"last\": ' + StringConverter.toString2(counter.last);
+    }
+    if (counter.count != null) {
+      result += ', \"count\": ' + StringConverter.toString2(counter.count);
+    }
+    if (counter.min != null) {
+      result += ', \"min\": ' + StringConverter.toString2(counter.min);
+    }
+    if (counter.max != null) {
+      result += ', \"max\": ' + StringConverter.toString2(counter.max);
+    }
+    if (counter.average != null) {
+      result += ', \"avg\": ' + StringConverter.toString2(counter.average);
+    }
+    if (counter.time != null) {
+      result += ', \"time\": ' + StringConverter.toString2(counter.time);
+    }
+    result += ' }';
     return result;
   }
 
   /// Saves the current counters measurements.
   ///
-  /// - counters      current counters measurements to be saves.
+  /// - [counters]      current counters measurements to be saves.
   @override
   void save(List<Counter> counters) {
-    if (this._logger == null || counters == null) return;
+    if (_logger == null || counters == null) return;
 
-    if (counters.length == 0) return;
+    if (counters.isEmpty) return;
 
     counters.sort((c1, c2) {
       if (c1.name.compareTo(c2.name) < 0) return -1;
@@ -85,7 +91,7 @@ class LogCounters extends CachedCounters implements IReferenceable {
     });
 
     for (var i = 0; i < counters.length; i++) {
-      this._logger.info(null, this._counterToString(counters[i]), []);
+      _logger.info(null, _counterToString(counters[i]), []);
     }
   }
 }

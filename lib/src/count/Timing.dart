@@ -5,7 +5,7 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     let timing = counters.beginTiming("mymethod.exec_time");
+///     var timing = counters.beginTiming("mymethod.exec_time");
 ///     try {
 ///         ...
 ///     } finally {
@@ -20,18 +20,18 @@ class Timing {
   ///
   /// - counter 		an associated counter name
   /// - callback 		a callback that shall be called when endTiming is called.
-  Timing([String counter = null, ITimingCallback callback = null]) {
-    this._counter = counter;
-    this._callback = callback;
-    this._start = new DateTime.now().millisecondsSinceEpoch;
+  Timing([String counter, ITimingCallback callback]) {
+    _counter = counter;
+    _callback = callback;
+    _start = DateTime.now().millisecondsSinceEpoch;
   }
 
   /// Ends timing of an execution block, calculates elapsed time
   /// and updates the associated counter.
   void endTiming() {
-    if (this._callback != null) {
-      int elapsed = new DateTime.now().millisecondsSinceEpoch - this._start;
-      this._callback.endTiming(this._counter, elapsed);
+    if (_callback != null) {
+      var elapsed = DateTime.now().millisecondsSinceEpoch - _start;
+      _callback.endTiming(_counter, elapsed);
     }
   }
 }

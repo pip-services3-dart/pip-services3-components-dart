@@ -21,4 +21,37 @@ class LogMessage {
   ErrorDescription error;
   // The human-readable message
   String message;
+
+  LogMessage();
+
+  factory LogMessage.fromJson(Map<String, dynamic> json) {
+    var c = LogMessage();
+    c.time = json['time'];
+    c.source = json['source'];
+    c.level = json['level'];
+    c.correlation_id = json['correlation_id'];
+    c.error = json['error'];
+    c.message = json['message'];
+    return c;
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'time': time,
+      'source': source,
+      'level': level,
+      'correlation_id': correlation_id,
+      'error': error,
+      'message': message
+    };
+  }
+
+  void fromJson(Map<String, dynamic> json) {
+    time = json['time'];
+    source = json['source'];
+    level = json['level'];
+    correlation_id = json['correlation_id'];
+    error = json['error'];
+    message = json['message'];
+  }
 }

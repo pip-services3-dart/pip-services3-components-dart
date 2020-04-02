@@ -44,33 +44,33 @@ import '../../pip_services3_components.dart';
 ///     });
 ///
 class CredentialResolver {
-  List<CredentialParams> _credentials = List<CredentialParams>();
-  IReferences _references = null;
+  var _credentials = List<CredentialParams>();
+  IReferences _references;
 
   /// Creates a new instance of credentials resolver.
   ///
-  /// - config        (optional) component configuration parameters
-  /// - references    (optional) component references
+  /// - [config]        (optional) component configuration parameters
+  /// - [references]    (optional) component references
   CredentialResolver(
-      [ConfigParams config = null, IReferences references = null]) {
-    if (config != null) this.configure(config);
-    if (references != null) this.setReferences(references);
+      [ConfigParams config, IReferences references]) {
+    if (config != null) configure(config);
+    if (references != null) setReferences(references);
   }
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
+  /// - [config]    configuration parameters to be set.
   void configure(ConfigParams config) {
-    List<CredentialParams> credentials =
+   var credentials =
         CredentialParams.manyFromConfig(config);
-    this._credentials.addAll(credentials);
+    _credentials.addAll(credentials);
   }
 
   /// Sets references to dependent components.
   ///
-  /// - references 	references to locate the component dependencies.
+  /// - [references] 	references to locate the component dependencies.
   void setReferences(IReferences references) {
-    this._references = references;
+    _references = references;
   }
 
   /// Gets all credentials configured in component configuration.
@@ -80,27 +80,27 @@ class CredentialResolver {
   ///
   /// Return a list with credential parameters
   List<CredentialParams> getAll() {
-    return this._credentials;
+    return _credentials;
   }
 
   /// Adds a new credential to component credentials
   ///
-  /// - credential    new credential parameters to be added
+  /// - [credential]    new credential parameters to be added
   void add(CredentialParams credential) {
-    this._credentials.add(credential);
+    _credentials.add(credential);
   }
 
   Future<CredentialParams> _lookupInStores(
       String correlationId, CredentialParams credential) async {
     if (!credential.useCredentialStore()) return null;
 
-    String key = credential.getStoreKey();
-    if (this._references == null) return null;
+    var key = credential.getStoreKey();
+    if (_references == null) return null;
 
     var storeDescriptor =
          Descriptor('*', 'credential-store', '*', '*', '*');
-    List<dynamic> components =
-        this._references.getOptional<dynamic>(storeDescriptor);
+    var components =
+        _references.getOptional<dynamic>(storeDescriptor);
     if (components.isEmpty) {
       throw  ReferenceException(correlationId, storeDescriptor);
     }
@@ -120,26 +120,27 @@ class CredentialResolver {
   /// Looks up component credential parameters. If credentials are configured to be retrieved
   /// from Credential store it finds a [ICredentialStore] and lookups credentials there.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - callback 			callback function that receives resolved credential or error.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// Returrn 			Future that receives resolved credential.
+  /// Throw error
   Future<CredentialParams> lookup(String correlationId) async {
-    if (this._credentials.isEmpty) {
+    if (_credentials.isEmpty) {
       return null;
     }
 
-    List<CredentialParams> lookupCredentials = List<CredentialParams>();
+    var lookupCredentials = List<CredentialParams>();
 
-    for (var index = 0; index < this._credentials.length; index++) {
-      if (!this._credentials[index].useCredentialStore()) {
-        return this._credentials[index];
+    for (var index = 0; index < _credentials.length; index++) {
+      if (!_credentials[index].useCredentialStore()) {
+        return _credentials[index];
       } else {
-        lookupCredentials.add(this._credentials[index]);
+        lookupCredentials.add(_credentials[index]);
       }
     }
 
     CredentialParams firstResult;
     for (var credential in lookupCredentials) {
-      var result = await this._lookupInStores(correlationId, credential);
+      var result = await _lookupInStores(correlationId, credential);
       if (result != null) {
         firstResult = result;
         break;

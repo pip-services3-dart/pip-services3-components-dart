@@ -8,8 +8,8 @@ import '../../pip_services3_components.dart';
 ///
 /// Parameters to pass to the [configure] method for component configuration:
 ///
-/// - level:             maximum log level to capture
-/// - source:            source (context) name
+/// - [level]:             maximum log level to capture
+/// - [source]:            source (context) name
 ///
 /// ### References ###
 ///
@@ -18,28 +18,29 @@ import '../../pip_services3_components.dart';
 /// See [ILogger]
 abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   LogLevel _level = LogLevel.Info;
-  String source = null;
+  String source;
 
   /// Creates a new instance of the logger.
-  Logger() {}
+  Logger();
 
   /// Configures component by passing configuration parameters.
   ///
-  /// - config    configuration parameters to be set.
+  /// - [config]    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
-    this._level =
-        LogLevelConverter.toLogLevel(config.getAsObject("level"), this._level);
-    this.source = config.getAsStringWithDefault("source", this.source);
+    _level = LogLevelConverter.toLogLevel(config.getAsObject('level'), _level);
+    source = config.getAsStringWithDefault('source', source);
   }
 
   /// Sets references to dependent components.
   ///
-  /// - references 	references to locate the component dependencies.
+  /// - [references] 	references to locate the component dependencies.
+  @override
   void setReferences(IReferences references) {
     var contextInfo = references.getOneOptional<ContextInfo>(
-        new Descriptor("pip-services", "context-info", "*", "*", "1.0"));
-    if (contextInfo != null && this.source == null) {
-      this.source = contextInfo.name;
+        Descriptor('pip-services', 'context-info', '*', '*', '1.0'));
+    if (contextInfo != null && source == null) {
+      source = contextInfo.name;
     }
   }
 
@@ -47,147 +48,158 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// Messages with higher log level are filtered out.
   ///
   /// Return the maximum log level.
+  @override
   LogLevel getLevel() {
-    return this._level;
+    return _level;
   }
 
   /// Set the maximum log level.
   ///
-  /// - value     a new maximum log level.
+  /// - [value]     a new maximum log level.
+  @override
   void setLevel(LogLevel value) {
-    this._level = value;
+    _level = value;
   }
 
   /// Gets the source (context) name.
   ///
   /// Return the source (context) name.
   String getSource() {
-    return this.source;
+    return source;
   }
 
   /// Sets the source (context) name.
   ///
-  /// - value     a new source (context) name.
+  /// - [value]     a new source (context) name.
   void setSource(String value) {
-    this.source = value;
+    source = value;
   }
 
   /// Writes a log message to the logger destination.
   ///
-  /// - level             a log level.
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
+  /// - [level]             a log level.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
   void write(LogLevel level, String correlationId, ApplicationException error,
       String message);
 
   /// Formats the log message and writes it to the logger destination.
   ///
-  /// - level             a log level.
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
-  _formatAndWrite(LogLevel level, String correlationId,
+  /// - [level]             a log level.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+
+  void _formatAndWrite(LogLevel level, String correlationId,
       ApplicationException error, String message, List args) {
-    message = message != null ? message : "";
-    if (args != null && args.length > 0) {
+    message = message ?? '';
+    if (args != null && args.isNotEmpty) {
       // message = message.replace(/{(\d+)}/g, function (match, number) {
       //     return typeof args[number] != 'undefined' ? args[number] : match;
       // });
       message = sprintf(message, args);
     }
 
-    this.write(level, correlationId, error, message);
+    write(level, correlationId, error, message);
   }
 
   /// Logs a message at specified log level.
   ///
-  /// - level             a log level.
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
+  /// - [level]             a log level.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
   void log(LogLevel level, String correlationId, ApplicationException error,
-      String message, List args) {
-    this._formatAndWrite(level, correlationId, error, message, args);
+      String message,
+      [List args]) {
+    _formatAndWrite(level, correlationId, error, message, args);
   }
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
   void fatal(String correlationId, ApplicationException error, String message,
-      List args) {
-    this._formatAndWrite(LogLevel.Fatal, correlationId, error, message, args);
+      [List args]) {
+    _formatAndWrite(LogLevel.Fatal, correlationId, error, message, args);
   }
 
   /// Logs recoverable application error.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - error             an error object associated with this message.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [error]             an error object associated with this message.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
   void error(String correlationId, ApplicationException error, String message,
-      List args) {
-    this._formatAndWrite(LogLevel.Error, correlationId, error, message, args);
+      [List args]) {
+    _formatAndWrite(LogLevel.Error, correlationId, error, message, args);
   }
 
   /// Logs a warning that may or may not have a negative impact.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
-  void warn(String correlationId, String message, List args) {
-    this._formatAndWrite(LogLevel.Warn, correlationId, null, message, args);
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
+  void warn(String correlationId, String message, [List args]) {
+    _formatAndWrite(LogLevel.Warn, correlationId, null, message, args);
   }
 
   /// Logs an important information message
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
-  void info(String correlationId, String message, List args) {
-    this._formatAndWrite(LogLevel.Info, correlationId, null, message, args);
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
+  void info(String correlationId, String message, [List args]) {
+    _formatAndWrite(LogLevel.Info, correlationId, null, message, args);
   }
 
   /// Logs a high-level debug information for troubleshooting.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
-  void debug(String correlationId, String message, List args) {
-    this._formatAndWrite(LogLevel.Debug, correlationId, null, message, args);
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
+  void debug(String correlationId, String message, [List args]) {
+    _formatAndWrite(LogLevel.Debug, correlationId, null, message, args);
   }
 
   /// Logs a low-level debug information for troubleshooting.
   ///
-  /// - correlationId     (optional) transaction id to trace execution through call chain.
-  /// - message           a human-readable message to log.
-  /// - args              arguments to parameterize the message.
-  void trace(String correlationId, String message, List args) {
-    this._formatAndWrite(LogLevel.Trace, correlationId, null, message, args);
+  /// - [correlationId]     (optional) transaction id to trace execution through call chain.
+  /// - [message]           a human-readable message to log.
+  /// - [args]              arguments to parameterize the message.
+  @override
+  void trace(String correlationId, String message, [List args]) {
+    _formatAndWrite(LogLevel.Trace, correlationId, null, message, args);
   }
 
   /// Composes an human-readable error description
   ///
-  /// - error     an error to format.
+  /// - [error]     an error to format.
   /// Return a human-reable error description.
   String composeError(ApplicationException error) {
-    String builder = "";
+    var builder = '';
 
     builder += error.message;
 
     var appError = error;
     if (appError.cause != null) {
-      builder += " Caused by: ";
+      builder += ' Caused by: ';
       builder += appError.cause;
     }
 
     if (error.stack_trace != null) {
-      builder += " Stack trace: ";
+      builder += ' Stack trace: ';
       builder += error.stack_trace;
     }
 

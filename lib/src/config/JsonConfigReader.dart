@@ -32,7 +32,7 @@ class JsonConfigReader extends FileConfigReader {
   /// Creates a new instance of the config reader.
   ///
   /// - path  (optional) a path to configuration file.
-  JsonConfigReader([String path]) : super(path) {}
+  JsonConfigReader([String path]) : super(path);
 
   /// Reads configuration file, parameterizes its content and converts it into JSON object.
   ///
@@ -40,14 +40,15 @@ class JsonConfigReader extends FileConfigReader {
   /// - parameters        values to parameters the configuration.
   /// Return                 a JSON object with configuration.
   dynamic readObject(String correlationId, ConfigParams parameters) async {
-    if (super.getPath() == null)
-      throw new ConfigException(
+    if (super.getPath() == null) {
+      throw ConfigException(
           correlationId, 'NO_PATH', 'Missing config file path');
+    }
 
     try {
       // Todo: make this async?
-      String data = await File(super.getPath()).readAsString();
-      data = this.parameterize(data, parameters);
+      var data = await File(super.getPath()).readAsString();
+      data = parameterize(data, parameters);
       return JsonConverter.toNullableMap(data);
     } catch (e) {
       throw FileException(correlationId, 'READ_FAILED',
@@ -62,10 +63,11 @@ class JsonConfigReader extends FileConfigReader {
   /// - correlationId     (optional) transaction id to trace execution through call chain.
   /// - parameters        values to parameters the configuration
   /// - callback          callback function that receives configuration or error.
+  @override
   Future<ConfigParams> readConfig(
       String correlationId, ConfigParams parameters) async {
     
-      var value = this.readObject(correlationId, parameters);
+      var value = readObject(correlationId, parameters);
       var config = ConfigParams.fromValue(value);
       return config;
   }
@@ -78,7 +80,7 @@ class JsonConfigReader extends FileConfigReader {
   /// Return                 a JSON object with configuration.
   static readObject_(
       String correlationId, String path, ConfigParams parameters) async {
-    return await new JsonConfigReader(path)
+    return await JsonConfigReader(path)
         .readObject(correlationId, parameters);
   }
 
@@ -91,7 +93,7 @@ class JsonConfigReader extends FileConfigReader {
   static ConfigParams readConfig_(
       String correlationId, String path, ConfigParams parameters) {
     var value =
-        new JsonConfigReader(path).readObject(correlationId, parameters);
+        JsonConfigReader(path).readObject(correlationId, parameters);
     var config = ConfigParams.fromValue(value);
     return config;
   }
