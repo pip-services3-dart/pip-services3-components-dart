@@ -3,6 +3,7 @@
 This library has an extensive set of components for working in various fields when creating
 microservices, micro-applications and applications. It includes:
 
+
 - **Auth** - authentication credential store
 * Example:
 
