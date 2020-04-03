@@ -27,6 +27,10 @@ Quick Links:
 * [Examples](https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/example/README.md)
 
 
+* Warning!
+Config package now not work with condition **{{#if var}} something {{/}}** in config files.
+Use **Mustache** syntax, for example **{{#var}} something {{/var}}**
+
 ## Acknowledgements
 
 The library is created and maintained by **Sergey Seroukhov** and **Levichev Dmitry**.
