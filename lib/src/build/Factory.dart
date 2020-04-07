@@ -1,12 +1,13 @@
+import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
 class Registration {
   var locator;
-  Function(dynamic locator) factory_;
+  Function(dynamic locator) factory;
 
-  Registration(locator, factory_(locator))
+  Registration(locator, factory(locator))
       : locator = locator,
-        factory_ = factory_ {}
+        factory = factory;
 }
 
 /// Basic component factory that creates components using registered types and factory functions.
@@ -31,7 +32,6 @@ class Registration {
 ///
 /// See [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/refer.descriptor.html Descriptor]
 /// See [IFactory]
-
 class Factory implements IFactory {
   final _registrations = List<Registration>();
 
@@ -39,23 +39,26 @@ class Factory implements IFactory {
   ///
   /// - [locator] 	a locator to identify component to be created.
   /// - [factory]   a factory function that receives a locator and returns a created component.
-  void register(locator, factory_(locator)) {
+  void register(locator, factory(locator)) {
     if (locator == null) throw Exception('Locator cannot be null');
-    if (factory_ == null) throw Exception('Factory cannot be null');
+    if (factory == null) throw Exception('Factory cannot be null');
 
-    _registrations.add(Registration(locator, factory_));
+    _registrations.add(Registration(locator, factory));
   }
 
   /// Registers a component using its type (a constructor function).
   ///
   /// - [locator] 		a locator to identify component to be created.
   /// - [type] 			a component type.
-
   void registerAsType(locator, type) {
     if (locator == null) throw Exception('Locator cannot be null');
     if (type == null) throw Exception('Factory cannot be null');
     _registrations.add(Registration(locator, (locator) {
-      return type();
+      try {
+        return TypeReflector.createInstanceByType(type, []);
+      } catch (ex) {
+        return null;
+      }
     }));
   }
 
@@ -95,7 +98,7 @@ class Factory implements IFactory {
       if (thisLocator == locator ||
           (thisLocator.equals && thisLocator.equals(locator))) {
         try {
-          return registration.factory_(locator);
+          return registration.factory(locator);
         } catch (ex) {
           if (ex is CreateException) rethrow;
 

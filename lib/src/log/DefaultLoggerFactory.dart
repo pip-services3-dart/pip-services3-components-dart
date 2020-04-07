@@ -18,7 +18,6 @@ class DefaultLoggerFactory extends Factory {
       Descriptor('pip-services', 'logger', 'composite', '*', '1.0');
 
   /// Create a instance of the factory.
-
   DefaultLoggerFactory() : super() {
     registerAsType(DefaultLoggerFactory.NullLoggerDescriptor, NullLogger);
     registerAsType(DefaultLoggerFactory.ConsoleLoggerDescriptor, ConsoleLogger);
