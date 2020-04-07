@@ -16,7 +16,7 @@ import '../../pip_services3_components.dart';
 ///     factory.canCreate(loggerLocator); 		// Result: Descriptor('pip-service', 'logger', 'null', 'default', '1.0')
 ///     factory.create(loggerLocator); 			  // Result: created NullLogger
 class CompositeFactory implements IFactory {
-  final _factories = List<IFactory>();
+  final _factories = <IFactory>[];
 
   /// Creates a new instance of the factory.
   ///

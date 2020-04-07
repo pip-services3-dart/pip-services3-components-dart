@@ -44,7 +44,7 @@ import '../../pip_services3_components.dart';
 ///     });
 ///
 class CredentialResolver {
-  var _credentials = List<CredentialParams>();
+  final _credentials = <CredentialParams>[];
   IReferences _references;
 
   /// Creates a new instance of credentials resolver.
@@ -124,7 +124,7 @@ class CredentialResolver {
       return null;
     }
 
-    var lookupCredentials = List<CredentialParams>();
+    var lookupCredentials = <CredentialParams>[];
 
     for (var index = 0; index < _credentials.length; index++) {
       if (!_credentials[index].useCredentialStore()) {

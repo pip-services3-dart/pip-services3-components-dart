@@ -16,7 +16,7 @@ abstract class CachedCounters
     implements ICounters, IReconfigurable, ITimingCallback {
   int _interval = 300000;
   int _resetTimeout = 0;
-  final _cache = Map<String, Counter>();
+  final _cache = <String, Counter>{};
   bool _updated;
   int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
   int _lastResetTime = DateTime.now().millisecondsSinceEpoch;
@@ -123,7 +123,7 @@ abstract class CachedCounters
   ///
   /// Return a list with counters.
   List<Counter> getAll() {
-    var result = List<Counter>();
+    var result = <Counter>[];
 
     _resetIfNeeded();
 
@@ -178,6 +178,7 @@ abstract class CachedCounters
   /// - [elapsed]   execution elapsed time in milliseconds to update the counter.
   ///
   /// See [Timing.endTiming]
+  @override
   void endTiming(String name, int elapsed) {
     var counter = get(name, CounterType.Interval);
     _calculateStats(counter, elapsed);

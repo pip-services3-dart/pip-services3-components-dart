@@ -31,21 +31,22 @@ import '../../pip_services3_components.dart';
 ///     // Result: user=jdoe;pass=pass123
 
 class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
-  Map<String, dynamic> _items = Map<String, dynamic>();
+  Map<String, dynamic> _items = <String, dynamic>{};
 
   /// Creates a new instance of the credential store.
   ///
   /// - [config]    (optional) configuration with credential parameters.
 
-  MemoryCredentialStore([ConfigParams config = null]) {
-    if (config != null) this.configure(config);
+  MemoryCredentialStore([ConfigParams config]) {
+    if (config != null) configure(config);
   }
 
   /// Configures component by passing configuration parameters.
   ///
   /// - [config]    configuration parameters to be set.
+  @override
   void configure(ConfigParams config) {
-    this.readCredentials(config);
+    readCredentials(config);
   }
 
   /// Reads credentials from configuration parameters.
@@ -53,12 +54,12 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   ///
   /// - [config]   configuration parameters to be read
   void readCredentials(ConfigParams config) {
-    this._items = Map<String, dynamic>();
+    _items = <String, dynamic>{};
     var keys = config.getKeys();
     for (var index = 0; index < keys.length; index++) {
       var key = keys[index];
       var value = config.getAsString(key);
-      this._items[key] = CredentialParams.fromString(value);
+      _items[key] = CredentialParams.fromString(value);
     }
   }
 
@@ -69,12 +70,14 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// - [credential]        a credential parameters to be stored.
   /// Return 			        Future that receives an null for success.
   /// Throw error
+  @override
   Future store(
       String correlationId, String key, CredentialParams credential) async {
-    if (credential != null)
-      this._items[key] = credential;
-    else
-      this._items.remove(key);
+    if (credential != null) {
+      _items[key] = credential;
+    } else {
+      _items.remove(key);
+    }
   }
 
   /// Lookups credential parameters by its key.
@@ -83,8 +86,9 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// - [key]               a key to uniquely identify the credential parameters.
   /// Return              Future that receives found credential parameters
   /// Throw error.
+  @override
   Future<CredentialParams> lookup(String correlationId, String key) async {
-    var credential = this._items[key];
+    var credential = _items[key];
     return credential;
   }
 }

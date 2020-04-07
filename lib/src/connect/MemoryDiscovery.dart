@@ -35,7 +35,7 @@ class DiscoveryItem {
 ///     var connection await discovery.resolve('123', 'key1');
 ///         // Result: host=10.1.1.100;port=8080
 class MemoryDiscovery implements IDiscovery, IReconfigurable {
-  List<DiscoveryItem> _items = List<DiscoveryItem>();
+  List<DiscoveryItem> _items = <DiscoveryItem>[];
 
   /// Creates a new instance of discovery service.
   ///
@@ -111,7 +111,7 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   @override
   Future<List<ConnectionParams>> resolveAll(
       String correlationId, String key) async {
-    var connections = List<ConnectionParams>();
+    var connections = <ConnectionParams>[];
     for (var index = 0; index < _items.length; index++) {
       var item = _items[index];
       if (item.key == key && item.connection != null) {

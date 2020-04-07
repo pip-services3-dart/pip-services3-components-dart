@@ -158,7 +158,7 @@ class ConnectionParams extends ConfigParams {
   /// - [config] 	a configuration parameters to retrieve connections
   /// Return			a list of retrieved ConnectionParams
   static List<ConnectionParams> manyFromConfig(ConfigParams config) {
-    var result = List<ConnectionParams>();
+    var result = <ConnectionParams>[];
     var connections = config.getSection('connections');
 
     if (connections.isNotEmpty) {

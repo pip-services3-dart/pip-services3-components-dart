@@ -161,7 +161,7 @@ class CredentialParams extends ConfigParams {
   /// - [config] 	a configuration parameters to retrieve credentials
   /// Return			a list of retrieved CredentialParams
   static List<CredentialParams> manyFromConfig(ConfigParams config) {
-    var result = List<CredentialParams>();
+    var result = <CredentialParams>[];
 
     var credentials = config.getSection('credentials');
 

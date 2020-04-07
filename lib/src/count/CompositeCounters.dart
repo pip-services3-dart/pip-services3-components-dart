@@ -35,7 +35,7 @@ import '../../pip_services3_components.dart';
 ///
 
 class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
-  final _counters = List<ICounters>();
+  final _counters = <ICounters>[];
 
   /// Creates a new instance of the counters.
   ///

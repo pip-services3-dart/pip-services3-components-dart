@@ -22,7 +22,7 @@ class Registration {
 ///     );
 ///     factory.register(
 ///         Descriptor('mygroup', 'mycomponent2', 'default', '*', '1.0'),
-///         (locator) => {
+///         (locator) {
 ///             return MyComponent2();
 ///         }
 ///     );
@@ -33,7 +33,7 @@ class Registration {
 /// See [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/refer.descriptor.html Descriptor]
 /// See [IFactory]
 class Factory implements IFactory {
-  final _registrations = List<Registration>();
+  final _registrations = <Registration>[];
 
   /// Registers a component using a factory method.
   ///
@@ -75,8 +75,7 @@ class Factory implements IFactory {
     for (var index = 0; index < _registrations.length; index++) {
       var registration = _registrations[index];
       var thisLocator = registration.locator;
-      if (thisLocator == locator ||
-          (thisLocator.equals && thisLocator.equals(locator))) {
+      if (thisLocator == locator || (thisLocator.equals(locator))) {
         return thisLocator;
       }
     }
@@ -95,8 +94,7 @@ class Factory implements IFactory {
       var registration = _registrations[index];
       var thisLocator = registration.locator;
 
-      if (thisLocator == locator ||
-          (thisLocator.equals && thisLocator.equals(locator))) {
+      if (thisLocator == locator || (thisLocator.equals(locator))) {
         try {
           return registration.factory(locator);
         } catch (ex) {

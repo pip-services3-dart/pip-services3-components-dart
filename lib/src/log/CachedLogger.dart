@@ -22,7 +22,7 @@ import '../../pip_services3_components.dart';
 /// See [LogMessage]
 
 abstract class CachedLogger extends Logger {
-  List<LogMessage> _cache = List<LogMessage>();
+  List<LogMessage> _cache = <LogMessage>[];
   bool _updated = false;
   int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
   int _maxCacheSize = 100;

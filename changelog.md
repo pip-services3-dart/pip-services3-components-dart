@@ -2,6 +2,6 @@
 
 - Initial version, created by Sergey Seroukhov and Dmitry Levichev
 
-## 1.0.1
+## 1.0.2
 
-- Fix registerAsType method in Factory class.
+- Fix registerAsType, create and canCreate method in Factory class.

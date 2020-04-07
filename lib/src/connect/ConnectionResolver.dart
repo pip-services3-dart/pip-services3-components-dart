@@ -42,7 +42,7 @@ import '../../pip_services3_components.dart';
 ///         // Now use connection...
 ///
 class ConnectionResolver {
-  final _connections = List<ConnectionParams>();
+  final _connections = <ConnectionParams>[];
   IReferences _references;
 
   /// Creates a new instance of connection resolver.
@@ -135,7 +135,7 @@ class ConnectionResolver {
       return null;
     }
 
-    var connections = List<ConnectionParams>();
+    var connections = <ConnectionParams>[];
 
     for (var index = 0; index < _connections.length; index++) {
       if (!_connections[index].useDiscovery()) {
@@ -165,15 +165,15 @@ class ConnectionResolver {
 
   Future<List<ConnectionParams>> _resolveAllInDiscovery(
       String correlationId, ConnectionParams connection) async {
-    var resolved = List<ConnectionParams>();
+    var resolved = <ConnectionParams>[];
     var key = connection.getDiscoveryKey();
 
     if (!connection.useDiscovery()) {
-      return List<ConnectionParams>();
+      return <ConnectionParams>[];
     }
 
     if (_references == null) {
-      return List<ConnectionParams>();
+      return <ConnectionParams>[];
     }
 
     var discoveryDescriptor = Descriptor('*', 'discovery', '*', '*', '*');
@@ -202,8 +202,8 @@ class ConnectionResolver {
   ///
   /// See [IDiscovery]
   Future<List<ConnectionParams>> resolveAll(String correlationId) async {
-    var resolved = List<ConnectionParams>();
-    var toResolve = List<ConnectionParams>();
+    var resolved = <ConnectionParams>[];
+    var toResolve = <ConnectionParams>[];
 
     for (var index = 0; index < _connections.length; index++) {
       if (_connections[index].useDiscovery()) {
@@ -213,7 +213,7 @@ class ConnectionResolver {
       }
     }
 
-    if (toResolve.length <= 0) {
+    if (toResolve.isEmpty) {
       return resolved;
     }
 

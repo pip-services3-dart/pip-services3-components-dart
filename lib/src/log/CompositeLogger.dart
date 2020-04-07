@@ -34,7 +34,7 @@ import '../../pip_services3_components.dart';
 ///
 
 class CompositeLogger extends Logger implements IReferenceable {
-  final _loggers = List<ILogger>();
+  final _loggers = <ILogger>[];
 
   /// Creates a new instance of the logger.
   ///
