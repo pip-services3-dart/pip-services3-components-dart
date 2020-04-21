@@ -21,7 +21,7 @@ void main() {
 
       _logger.fatal(null, null, 'Fatal error message');
       _logger.error(null, null, 'Error message');
-      _logger.warn(null, 'Warning message');
+      _logger.warn(null, 'Warning message %s',['Test message']);
       _logger.info(null, 'Information message');
       _logger.debug(null, 'Debug message');
       _logger.trace(null, 'Trace message');
