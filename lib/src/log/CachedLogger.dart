@@ -22,11 +22,11 @@ import '../../pip_services3_components.dart';
 /// See [LogMessage]
 
 abstract class CachedLogger extends Logger {
-  List<LogMessage> _cache = <LogMessage>[];
-  bool _updated = false;
-  int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
-  int _maxCacheSize = 100;
-  int _interval = 10000;
+  List<LogMessage> cache = <LogMessage>[];
+  bool updated = false;
+  int lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+  int maxCacheSize = 100;
+  int interval = 10000;
 
   /// Creates a new instance of the logger.
   CachedLogger() : super();
@@ -50,7 +50,7 @@ abstract class CachedLogger extends Logger {
     logMessage.error = errorDesc;
     logMessage.message = message;
 
-    _cache.add(logMessage);
+    cache.add(logMessage);
     update();
   }
 
@@ -68,40 +68,40 @@ abstract class CachedLogger extends Logger {
   void configure(ConfigParams config) {
     super.configure(config);
 
-    _interval = config.getAsLongWithDefault('options.interval', _interval);
-    _maxCacheSize =
-        config.getAsIntegerWithDefault('options.max_cache_size', _maxCacheSize);
+    interval = config.getAsLongWithDefault('options.interval', interval);
+    maxCacheSize =
+        config.getAsIntegerWithDefault('options.max_cache_size', maxCacheSize);
   }
 
   /// Clears (removes) all cached log messages.
   void clear() {
-    _cache = [];
-    _updated = false;
+    cache = [];
+    updated = false;
   }
 
   /// Dumps (writes) the currently cached log messages.
   ///
   /// See [write]
   void dump() async {
-    if (_updated) {
-      if (!_updated) return;
+    if (updated) {
+      if (!updated) return;
 
-      var messages = _cache;
-      _cache = [];
+      var messages = cache;
+      cache = [];
       try {
         await save(messages);
       } catch (err) {
         // Adds messages back to the cache
-        messages.addAll(_cache);
-        _cache = messages;
+        messages.addAll(cache);
+        cache = messages;
 
         // Truncate cache
-        var deleteCount = _cache.length - _maxCacheSize;
-        if (deleteCount > 0) _cache.removeRange(0, deleteCount);
+        var deleteCount = cache.length - maxCacheSize;
+        if (deleteCount > 0) cache.removeRange(0, deleteCount);
       }
 
-      _updated = false;
-      _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+      updated = false;
+      lastDumpTime = DateTime.now().millisecondsSinceEpoch;
     }
   }
 
@@ -110,14 +110,14 @@ abstract class CachedLogger extends Logger {
   ///
   /// See [dump]
   void update() {
-    _updated = true;
+    updated = true;
     var now = DateTime.now().millisecondsSinceEpoch;
 
-    if (now > _lastDumpTime + _interval) {
+    if (now > lastDumpTime + interval) {
       try {
         dump();
       } catch (ex) {
-        // Todo: decide what to do
+        // TODO: decide what to do
       }
     }
   }
