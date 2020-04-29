@@ -135,7 +135,7 @@ Child classes implement saving cached messages to their specified destinations.<
 <li><a href="pip_services3_components/Logger/source.html">source</a>:            source (context) name</li>
 <li><code>options</code>:
 <ul>
-<li><code>interval</code>:        interval in milliseconds to save log messages (default: 10 seconds)</li>
+<li><a href="pip_services3_components/CachedLogger/interval.html">interval</a>:        interval in milliseconds to save log messages (default: 10 seconds)</li>
 <li><code>max_cache_size</code>:  maximum number of messages stored in this cache (default: 100)</li>
 </ul>
 </li>
@@ -178,10 +178,50 @@ See <a href="pip_services3_components/LogMessage-class.html">LogMessage</a></p>
       </dl>
     </section>
 
-    <section class="summary offset-anchor inherited" id="instance-properties">
+    <section class="summary offset-anchor" id="instance-properties">
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="cache" class="property">
+          <span class="name"><a href="pip_services3_components/CachedLogger/cache.html">cache</a></span>
+          <span class="signature">&#8596; List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="pip_services3_components/LogMessage-class.html">LogMessage</a></span>&gt;</span></span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="interval" class="property">
+          <span class="name"><a href="pip_services3_components/CachedLogger/interval.html">interval</a></span>
+          <span class="signature">&#8596; int</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="lastDumpTime" class="property">
+          <span class="name"><a href="pip_services3_components/CachedLogger/lastDumpTime.html">lastDumpTime</a></span>
+          <span class="signature">&#8596; int</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="maxCacheSize" class="property">
+          <span class="name"><a href="pip_services3_components/CachedLogger/maxCacheSize.html">maxCacheSize</a></span>
+          <span class="signature">&#8596; int</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="updated" class="property">
+          <span class="name"><a href="pip_services3_components/CachedLogger/updated.html">updated</a></span>
+          <span class="signature">&#8596; bool</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
+</dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="pip_services3_components/ILogger/hashCode.html">hashCode</a></span>
           <span class="signature">&#8594; int</span>         
@@ -259,7 +299,7 @@ and dumps it when timeout expires. <a href="pip_services3_components/CachedLogge
                   
 </dd>
         <dt id="write" class="callable">
-          <span class="name"><a href="pip_services3_components/CachedLogger/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="write-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span></span> <span class="parameter" id="write-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="write-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span></span>)
+          <span class="name"><a href="pip_services3_components/CachedLogger/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="write-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span></span> <span class="parameter" id="write-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="write-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -268,7 +308,7 @@ and dumps it when timeout expires. <a href="pip_services3_components/CachedLogge
                   <div class="features">override</div>
 </dd>
         <dt id="composeError" class="callable inherited">
-          <span class="name"><a href="pip_services3_components/Logger/composeError.html">composeError</a></span><span class="signature">(<wbr><span class="parameter" id="composeError-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span></span>)
+          <span class="name"><a href="pip_services3_components/Logger/composeError.html">composeError</a></span><span class="signature">(<wbr><span class="parameter" id="composeError-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span></span>)
             <span class="returntype parameter">&#8594; String</span>
           </span>
                   </dt>
@@ -286,7 +326,7 @@ and dumps it when timeout expires. <a href="pip_services3_components/CachedLogge
                   <div class="features">inherited</div>
 </dd>
         <dt id="error" class="callable inherited">
-          <span class="name"><a href="pip_services3_components/Logger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="error-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="error-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="error-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="error-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="error-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="error-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -295,7 +335,7 @@ and dumps it when timeout expires. <a href="pip_services3_components/CachedLogge
                   <div class="features">inherited</div>
 </dd>
         <dt id="fatal" class="callable inherited">
-          <span class="name"><a href="pip_services3_components/Logger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="fatal-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="fatal-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="fatal-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="fatal-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="fatal-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="fatal-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -332,7 +372,7 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
                   <div class="features">inherited</div>
 </dd>
         <dt id="log" class="callable inherited">
-          <span class="name"><a href="pip_services3_components/Logger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="log-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="log-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="log-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="log-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="log-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="log-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="log-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="log-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -432,9 +472,14 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
       <li class="section-title"><a href="pip_services3_components/CachedLogger-class.html#constructors">Constructors</a></li>
       <li><a href="pip_services3_components/CachedLogger/CachedLogger.html">CachedLogger</a></li>
     
-      <li class="section-title inherited">
+      <li class="section-title">
         <a href="pip_services3_components/CachedLogger-class.html#instance-properties">Properties</a>
       </li>
+      <li><a href="pip_services3_components/CachedLogger/cache.html">cache</a></li>
+      <li><a href="pip_services3_components/CachedLogger/interval.html">interval</a></li>
+      <li><a href="pip_services3_components/CachedLogger/lastDumpTime.html">lastDumpTime</a></li>
+      <li><a href="pip_services3_components/CachedLogger/maxCacheSize.html">maxCacheSize</a></li>
+      <li><a href="pip_services3_components/CachedLogger/updated.html">updated</a></li>
       <li class="inherited"><a href="pip_services3_components/ILogger/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="pip_services3_components/ILogger/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="pip_services3_components/Logger/source.html">source</a></li>
@@ -476,7 +521,7 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.0
+      1.0.4
   </span>
 
   <!-- footer-text placeholder -->

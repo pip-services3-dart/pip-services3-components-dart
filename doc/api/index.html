@@ -103,6 +103,11 @@ It defines standard component definitions that can be used to build applications
 <li><a href="https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/doc/Development.md#contrib">Contributing</a></li>
 <li><a href="https://github.com/pip-services3-dart/pip-services3-components-dart/blob/master/example/README.md">Examples</a></li>
 </ul>
+<ul>
+<li>Warning!
+Config package now not work with condition <strong>{{#if var}} something {{/}}</strong> in config files.
+Use <strong>Mustache</strong> syntax, for example <strong>{{#var}} something {{/var}}</strong></li>
+</ul>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>The library is created and maintained by <strong>Sergey Seroukhov</strong> and <strong>Levichev Dmitry</strong>.</p>
 <p>The documentation is written by <strong>Egor Nuzhnykh</strong>, <strong>Alexey Dvoykin</strong>, <strong>Mark Makarychev</strong>, <strong>Levichev Dmitry</strong>.</p>
@@ -129,7 +134,7 @@ It defines standard component definitions that can be used to build applications
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.0
+      1.0.4
   </span>
 
   <!-- footer-text placeholder -->

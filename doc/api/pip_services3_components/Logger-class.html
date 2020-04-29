@@ -212,7 +212,7 @@ Child classes take the captured messages and write them to their specific destin
       <h2>Methods</h2>
       <dl class="callables">
         <dt id="composeError" class="callable">
-          <span class="name"><a href="pip_services3_components/Logger/composeError.html">composeError</a></span><span class="signature">(<wbr><span class="parameter" id="composeError-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span></span>)
+          <span class="name"><a href="pip_services3_components/Logger/composeError.html">composeError</a></span><span class="signature">(<wbr><span class="parameter" id="composeError-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span></span>)
             <span class="returntype parameter">&#8594; String</span>
           </span>
                   </dt>
@@ -239,7 +239,7 @@ Child classes take the captured messages and write them to their specific destin
                   <div class="features">override</div>
 </dd>
         <dt id="error" class="callable">
-          <span class="name"><a href="pip_services3_components/Logger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="error-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="error-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="error-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="error-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="error-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="error-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -248,7 +248,7 @@ Child classes take the captured messages and write them to their specific destin
                   <div class="features">override</div>
 </dd>
         <dt id="fatal" class="callable">
-          <span class="name"><a href="pip_services3_components/Logger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="fatal-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="fatal-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="fatal-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="fatal-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="fatal-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="fatal-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -285,7 +285,7 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
                   <div class="features">override</div>
 </dd>
         <dt id="log" class="callable">
-          <span class="name"><a href="pip_services3_components/Logger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="log-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="log-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="log-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="log-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
+          <span class="name"><a href="pip_services3_components/Logger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="log-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, [</span> <span class="parameter" id="log-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="log-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span>, [</span> <span class="parameter" id="log-param-args"><span class="type-annotation">List</span> <span class="parameter-name">args</span></span> ])
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -339,7 +339,7 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
                   <div class="features">override</div>
 </dd>
         <dt id="write" class="callable">
-          <span class="name"><a href="pip_services3_components/Logger/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="write-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span></span> <span class="parameter" id="write-param-error"><span class="type-annotation">ApplicationException</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="write-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span></span>)
+          <span class="name"><a href="pip_services3_components/Logger/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-level"><span class="type-annotation"><a href="pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="write-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span></span> <span class="parameter" id="write-param-error"><span class="type-annotation">Exception</span> <span class="parameter-name">error</span>, </span> <span class="parameter" id="write-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span></span>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
                   </dt>
@@ -434,7 +434,7 @@ Messages with higher log level are filtered out. <a href="pip_services3_componen
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.0
+      1.0.4
   </span>
 
   <!-- footer-text placeholder -->

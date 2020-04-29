@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:pip_services3_commons/pip_services3_commons.dart';
 import 'package:pip_services3_components/pip_services3_components.dart';
 import 'package:test/test.dart';
 
@@ -48,8 +47,8 @@ void main() {
       try {
         // Raise an exception
         throw Exception();
-      } catch (err) {
-        var ex = ApplicationException().wrap(err);
+      } catch (ex) {
+        //var ex = ApplicationException().wrap(err);
         _logger.fatal('123', ex, 'Fatal error');
         _logger.error('123', ex, 'Recoverable error');
 

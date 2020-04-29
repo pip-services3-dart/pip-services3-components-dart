@@ -69,8 +69,8 @@ class CompositeLogger extends Logger implements IReferenceable {
   /// - error             an error object associated with this message.
   /// - message           a human-readable message to log.
   @override
-  void write(LogLevel level, String correlationId, ApplicationException error,
-      String message) {
+  void write(
+      LogLevel level, String correlationId, Exception error, String message) {
     for (var index = 0; index < _loggers.length; index++) {
       _loggers[index].log(level, correlationId, error, message);
     }

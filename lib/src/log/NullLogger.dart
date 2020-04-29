@@ -1,4 +1,3 @@
-import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
 /// Dummy implementation of logger that doesn't do anything.
@@ -35,8 +34,8 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void log(LogLevel level, String correlationId, ApplicationException error,
-      String message,
+  void log(
+      LogLevel level, String correlationId, Exception error, String message,
       [List args]) {}
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
@@ -46,7 +45,7 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void fatal(String correlationId, ApplicationException error, String message,
+  void fatal(String correlationId, Exception error, String message,
       [List args]) {}
 
   /// Logs recoverable application error.
@@ -56,7 +55,7 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void error(String correlationId, ApplicationException error, String message,
+  void error(String correlationId, Exception error, String message,
       [List args]) {}
 
   /// Logs a warning that may or may not have a negative impact.

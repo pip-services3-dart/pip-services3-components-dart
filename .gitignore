@@ -1,9 +1,8 @@
-/node_modules
-/npm-debug.log
 /.idea
 *.map
 /.vscode
-/obj/test/**/*
 /data/dummies.json
 /pubspec.lock
 /.packages
+/.dart_tool
+/temp

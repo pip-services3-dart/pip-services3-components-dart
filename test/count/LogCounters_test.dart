@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:test/test.dart';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
-import '../../lib/pip_services3_components.dart';
+import 'package:pip_services3_components/pip_services3_components.dart';
 
 void main() {
   group('LogCounters', () {

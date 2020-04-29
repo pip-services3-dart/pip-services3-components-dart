@@ -1,5 +1,4 @@
-import 'package:pip_services3_commons/pip_services3_commons.dart';
-import '../../pip_services3_components.dart';
+import 'package:pip_services3_components/pip_services3_components.dart';
 
 /// Todo: solve issue with overloaded methods. Look at Python implementation
 /// Interface for logger components that capture execution log messages.
@@ -23,8 +22,8 @@ abstract class ILogger {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void log(LogLevel level, String correlationId, ApplicationException error,
-      String message,
+  void log(
+      LogLevel level, String correlationId, Exception error, String message,
       [List args]);
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
@@ -33,11 +32,11 @@ abstract class ILogger {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void fatal(String correlationId, ApplicationException error, String message,
+  void fatal(String correlationId, Exception error, String message,
       [List args]);
 
   // Todo: these overloads are not supported in TS
-  //fatal(String correlationId, error: ApplicationException) ;
+  //fatal(String correlationId, error: Exception) ;
   //fatal(String correlationId, String message, List args) ;
 
   /// Logs recoverable application error.
@@ -46,11 +45,11 @@ abstract class ILogger {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void error(String correlationId, ApplicationException error, String message,
+  void error(String correlationId, Exception error, String message,
       [List args]);
 
   // Todo: these overloads are not supported in TS
-  //error(String correlationId, error: ApplicationException) ;
+  //error(String correlationId, error: Exception) ;
   //error(String correlationId, String message, List args) ;
 
   /// Logs a warning that may or may not have a negative impact.

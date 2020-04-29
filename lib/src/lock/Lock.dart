@@ -63,24 +63,19 @@ abstract class Lock implements ILock, IReconfigurable {
     if (result) {
       return null;
     }
-
     // Start retrying
-    Timer.periodic(Duration(milliseconds: _retryTimeout), (Timer tm) async {
-      // When timeout expires return false
-      var now = DateTime.now().millisecondsSinceEpoch;
-      if (now > retryTime) {
-        tm.cancel();
-        var err = ConflictException(correlationId, 'LOCK_TIMEOUT',
-                'Acquiring lock ' + key + ' failed on timeout')
-            .withDetails('key', key);
-        throw err;
-      }
-
+    var now = DateTime.now().millisecondsSinceEpoch;
+    for (; now <= retryTime;) {
+      await Future.delayed(Duration(milliseconds: _retryTimeout));
       result = await tryAcquireLock(correlationId, key, ttl);
       if (result) {
-        tm.cancel();
-        return null;
+        return;
       }
-    });
+      now = DateTime.now().millisecondsSinceEpoch;
+    }
+    // When timeout expires throw exception
+    throw ConflictException(correlationId, 'LOCK_TIMEOUT',
+            'Acquiring lock ' + key + ' failed on timeout')
+        .withDetails('key', key);
   }
 }

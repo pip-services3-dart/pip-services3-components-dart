@@ -81,8 +81,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
-  void write(LogLevel level, String correlationId, ApplicationException error,
-      String message);
+  void write(
+      LogLevel level, String correlationId, Exception error, String message);
 
   /// Formats the log message and writes it to the logger destination.
   ///
@@ -92,8 +92,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
 
-  void _formatAndWrite(LogLevel level, String correlationId,
-      ApplicationException error, String message, List args) {
+  void _formatAndWrite(LogLevel level, String correlationId, Exception error,
+      String message, List args) {
     message = message ?? '';
     if (args != null && args.isNotEmpty) {
       // message = message.replace(/{(\d+)}/g, function (match, number) {
@@ -113,8 +113,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void log(LogLevel level, String correlationId, ApplicationException error,
-      String message,
+  void log(
+      LogLevel level, String correlationId, Exception error, String message,
       [List args]) {
     _formatAndWrite(level, correlationId, error, message, args);
   }
@@ -126,7 +126,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void fatal(String correlationId, ApplicationException error, String message,
+  void fatal(String correlationId, Exception error, String message,
       [List args]) {
     _formatAndWrite(LogLevel.Fatal, correlationId, error, message, args);
   }
@@ -138,7 +138,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void error(String correlationId, ApplicationException error, String message,
+  void error(String correlationId, Exception error, String message,
       [List args]) {
     _formatAndWrite(LogLevel.Error, correlationId, error, message, args);
   }
@@ -187,20 +187,24 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   ///
   /// - [error]     an error to format.
   /// Return a human-reable error description.
-  String composeError(ApplicationException error) {
+  String composeError(Exception error) {
+    dynamic ex = error;
+    if (!(error is ApplicationException)) {
+      ex = ApplicationException().wrap(error);
+    }
     var builder = '';
 
-    builder += error.message;
+    builder += ex.message;
 
-    var appError = error;
+    var appError = ex;
     if (appError.cause != null) {
       builder += ' Caused by: ';
       builder += appError.cause;
     }
 
-    if (error.stack_trace != null) {
+    if (ex.stack_trace != null) {
       builder += ' Stack trace: ';
-      builder += error.stack_trace;
+      builder += ex.stack_trace;
     }
 
     return builder;

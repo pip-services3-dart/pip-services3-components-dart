@@ -3,9 +3,11 @@
 /.gitignore
 /.dockerignore
 /doc
-/node_modules
 /docker
 /*.sh
 /*.ps1
 /*.md
 /example
+/.dart_tool
+/.packages
+/pubspec.lock
