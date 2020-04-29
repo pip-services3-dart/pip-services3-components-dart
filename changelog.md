@@ -14,7 +14,7 @@
 
 - Fix json converter in LogMessage class.
 
-# 1.0.5 
+## 1.0.5 
 
 - Fix acquireLock method in Lock class.
 - Change type of error in ILoger interface methods. Make auto wraping exceptions in ApplicationException type. 
