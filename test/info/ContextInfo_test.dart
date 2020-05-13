@@ -34,7 +34,7 @@ void main() {
     });
     contextInfo = ContextInfo();
     test('StartTime', () {
-      var now = DateTime.now();
+      var now = DateTime.now().toUtc();
 
       expect(contextInfo.startTime.year, now.year);
       expect(contextInfo.startTime.month, now.month);

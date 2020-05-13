@@ -24,7 +24,7 @@ import '../../pip_services3_components.dart';
 abstract class CachedLogger extends Logger {
   List<LogMessage> cache = <LogMessage>[];
   bool updated = false;
-  int lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+  int lastDumpTime = DateTime.now().toUtc().millisecondsSinceEpoch;
   int maxCacheSize = 100;
   int interval = 10000;
 
@@ -43,7 +43,7 @@ abstract class CachedLogger extends Logger {
     var errorDesc =
         error != null ? ErrorDescriptionFactory.create(error) : null;
     var logMessage = LogMessage();
-    logMessage.time = DateTime.now();
+    logMessage.time = DateTime.now().toUtc();
     logMessage.level = LogLevelConverter.toString2(level);
     logMessage.source = source;
     logMessage.correlation_id = correlationId;
@@ -101,7 +101,7 @@ abstract class CachedLogger extends Logger {
       }
 
       updated = false;
-      lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+      lastDumpTime = DateTime.now().toUtc().millisecondsSinceEpoch;
     }
   }
 
@@ -111,7 +111,7 @@ abstract class CachedLogger extends Logger {
   /// See [dump]
   void update() {
     updated = true;
-    var now = DateTime.now().millisecondsSinceEpoch;
+    var now = DateTime.now().toUtc().millisecondsSinceEpoch;
 
     if (now > lastDumpTime + interval) {
       try {

@@ -41,7 +41,7 @@ class MemoryLock extends Lock {
   @override
   Future<bool> tryAcquireLock(String correlationId, String key, int ttl) async {
     var expireTime = _locks[key];
-    var now = DateTime.now().millisecondsSinceEpoch;
+    var now = DateTime.now().toUtc().millisecondsSinceEpoch;
 
     if (expireTime == null || expireTime < now) {
       _locks[key] = now + ttl;

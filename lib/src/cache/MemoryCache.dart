@@ -48,7 +48,7 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - [callback] 			Future that receives error or null no errors occured.
   void _cleanup() {
     CacheEntry oldest;
-    //var now = DateTime.now().millisecondsSinceEpoch;
+    //var now = DateTime.now().toUtc().millisecondsSinceEpoch;
     _count = 0;
 
     // Cleanup obsolete entries and find the oldest

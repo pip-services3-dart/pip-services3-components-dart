@@ -18,3 +18,7 @@
 
 - Fix acquireLock method in Lock class.
 - Change type of error in ILoger interface methods. Make auto wraping exceptions in ApplicationException type. 
+
+## 1.0.6
+
+- Fix working wiith time, convert all to UTC.

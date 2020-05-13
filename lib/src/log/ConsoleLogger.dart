@@ -44,7 +44,7 @@ class ConsoleLogger extends Logger {
     result += ':';
     result += LogLevelConverter.toString2(level);
     result += ':';
-    result += StringConverter.toString2(DateTime.now());
+    result += StringConverter.toString2(DateTime.now().toUtc());
     result += '] ';
 
     result += message;

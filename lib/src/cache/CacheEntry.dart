@@ -14,6 +14,7 @@ class CacheEntry {
     _key = key;
     _value = value;
     _expiration = DateTime.now()
+        .toUtc()
         .add(Duration(milliseconds: timeout))
         .millisecondsSinceEpoch;
   }
@@ -46,6 +47,7 @@ class CacheEntry {
   void setValue(value, int timeout) {
     _value = value;
     _expiration = DateTime.now()
+        .toUtc()
         .add(Duration(milliseconds: timeout))
         .millisecondsSinceEpoch;
   }
@@ -54,6 +56,6 @@ class CacheEntry {
   ///
   /// Return true if the value already expires and false otherwise.
   bool isExpired() {
-    return _expiration < DateTime.now().millisecondsSinceEpoch;
+    return _expiration < DateTime.now().toUtc().millisecondsSinceEpoch;
   }
 }

@@ -55,6 +55,7 @@ abstract class Lock implements ILock, IReconfigurable {
   Future acquireLock(
       String correlationId, String key, int ttl, int timeout) async {
     var retryTime = DateTime.now()
+        .toUtc()
         .add(Duration(milliseconds: timeout))
         .millisecondsSinceEpoch;
 
@@ -64,14 +65,14 @@ abstract class Lock implements ILock, IReconfigurable {
       return null;
     }
     // Start retrying
-    var now = DateTime.now().millisecondsSinceEpoch;
+    var now = DateTime.now().toUtc().millisecondsSinceEpoch;
     for (; now <= retryTime;) {
       await Future.delayed(Duration(milliseconds: _retryTimeout));
       result = await tryAcquireLock(correlationId, key, ttl);
       if (result) {
         return;
       }
-      now = DateTime.now().millisecondsSinceEpoch;
+      now = DateTime.now().toUtc().millisecondsSinceEpoch;
     }
     // When timeout expires throw exception
     throw ConflictException(correlationId, 'LOCK_TIMEOUT',

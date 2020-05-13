@@ -30,7 +30,7 @@ class ContextInfo implements IReconfigurable {
   String _name = 'unknown';
   String _description;
   String _contextId = Platform.localHostname; // IdGenerator.nextLong();
-  DateTime _startTime = DateTime.now();
+  DateTime _startTime = DateTime.now().toUtc();
   StringValueMap _properties = StringValueMap();
 
   /// Creates a new instance of this context info.
@@ -106,14 +106,14 @@ class ContextInfo implements IReconfigurable {
   ///
   /// - value a new context start time.
   set startTime(DateTime value) {
-    _startTime = value ?? DateTime.now();
+    _startTime = value ?? DateTime.now().toUtc();
   }
 
   /// Calculates the context uptime as from the start time.
   ///
   /// Return number of milliseconds from the context start time.
   int get uptime {
-    return DateTime.now().millisecondsSinceEpoch -
+    return DateTime.now().toUtc().millisecondsSinceEpoch -
         _startTime.millisecondsSinceEpoch;
   }
 

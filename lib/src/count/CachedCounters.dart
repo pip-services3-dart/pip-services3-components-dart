@@ -18,8 +18,8 @@ abstract class CachedCounters
   int _resetTimeout = 0;
   final _cache = <String, Counter>{};
   bool _updated;
-  int _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
-  int _lastResetTime = DateTime.now().millisecondsSinceEpoch;
+  int _lastDumpTime = DateTime.now().toUtc().millisecondsSinceEpoch;
+  int _lastResetTime = DateTime.now().toUtc().millisecondsSinceEpoch;
 
   /// Creates a new CachedCounters object.
   CachedCounters();
@@ -90,7 +90,7 @@ abstract class CachedCounters
     save(counters);
 
     _updated = false;
-    _lastDumpTime = DateTime.now().millisecondsSinceEpoch;
+    _lastDumpTime = DateTime.now().toUtc().millisecondsSinceEpoch;
   }
 
   /// Makes counter measurements as updated
@@ -99,7 +99,8 @@ abstract class CachedCounters
   /// See [dump]
   void _update() {
     _updated = true;
-    if (DateTime.now().millisecondsSinceEpoch > _lastDumpTime + getInterval()) {
+    if (DateTime.now().toUtc().millisecondsSinceEpoch >
+        _lastDumpTime + getInterval()) {
       try {
         dump();
       } catch (ex) {
@@ -111,7 +112,7 @@ abstract class CachedCounters
   void _resetIfNeeded() {
     if (_resetTimeout == 0) return;
 
-    var now = DateTime.now().millisecondsSinceEpoch;
+    var now = DateTime.now().toUtc().millisecondsSinceEpoch;
     if (now - _lastResetTime > _resetTimeout) {
       _cache.clear();
       _updated = false;
@@ -215,7 +216,7 @@ abstract class CachedCounters
   /// - [name] 		a counter name of Timestamp type.
   @override
   void timestampNow(String name) {
-    timestamp(name, DateTime.now());
+    timestamp(name, DateTime.now().toUtc());
   }
 
   /// Records the given timestamp.

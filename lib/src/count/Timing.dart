@@ -23,14 +23,14 @@ class Timing {
   Timing([String counter, ITimingCallback callback]) {
     _counter = counter;
     _callback = callback;
-    _start = DateTime.now().millisecondsSinceEpoch;
+    _start = DateTime.now().toUtc().millisecondsSinceEpoch;
   }
 
   /// Ends timing of an execution block, calculates elapsed time
   /// and updates the associated counter.
   void endTiming() {
     if (_callback != null) {
-      var elapsed = DateTime.now().millisecondsSinceEpoch - _start;
+      var elapsed = DateTime.now().toUtc().millisecondsSinceEpoch - _start;
       _callback.endTiming(_counter, elapsed);
     }
   }

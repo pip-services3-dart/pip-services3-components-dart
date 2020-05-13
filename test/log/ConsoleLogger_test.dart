@@ -12,7 +12,7 @@ void main() {
       var msg = LogMessage();
       msg.correlation_id = '123';
       msg.level = 'Trace';
-      msg.time = DateTime.now();
+      msg.time = DateTime.now().toUtc();
       msg.message = 'Error message';
 
       var jsonStr = json.encode(msg.toJson());

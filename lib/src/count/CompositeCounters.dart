@@ -121,7 +121,7 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// - [name] 		a counter name of Timestamp type.
   @override
   void timestampNow(String name) {
-    timestamp(name, DateTime.now());
+    timestamp(name, DateTime.now().toUtc());
   }
 
   /// Records the given timestamp.
