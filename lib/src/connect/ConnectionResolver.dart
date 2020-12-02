@@ -11,7 +11,7 @@ import '../../pip_services3_components.dart';
 /// ### Configuration parameters ###
 ///
 /// - __connection:__
-///     - discovery_key:               (optional) a key to retrieve the connection from [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery]
+///     - discovery_key:               (optional) a key to retrieve the connection from [IDiscovery](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/IDiscovery-class.html)
 ///     - ...                          other connection parameters
 ///
 /// - __connections:__                  alternative to connection
@@ -22,7 +22,7 @@ import '../../pip_services3_components.dart';
 ///
 /// ### References ###
 ///
-/// - \*:discovery:\*:\*:1.0    (optional) [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] services to resolve connections
+/// - \*:discovery:\*:\*:1.0    (optional) [IDiscovery](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/IDiscovery-class.html) services to resolve connections
 ///
 /// See [ConnectionParams]
 /// See [IDiscovery]

@@ -30,7 +30,7 @@ class Registration {
 ///     factory.create(Descriptor('mygroup', 'mycomponent1', 'default', 'name1', '1.0'))
 ///     factory.create(Descriptor('mygroup', 'mycomponent2', 'default', 'name2', '1.0'))
 ///
-/// See [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/refer.descriptor.html Descriptor]
+/// See [Descriptor](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/Descriptor-class.html)
 /// See [IFactory]
 class Factory implements IFactory {
   final _registrations = <Registration>[];

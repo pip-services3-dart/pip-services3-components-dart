@@ -15,8 +15,8 @@ class LogMessage {
 
   /// The description of the captured error
   ///
-  /// [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.errordescription.html ErrorDescription]
-  /// [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/errors.applicationexception.html ApplicationException]
+  /// [ErrorDescription](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/ErrorDescription-class.html)
+  /// [ApplicationException](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/ApplicationException-class.html)
 
   ErrorDescription error;
   // The human-readable message

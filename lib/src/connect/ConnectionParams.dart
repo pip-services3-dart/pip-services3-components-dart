@@ -14,7 +14,7 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 ///
 /// In addition to standard parameters ConnectionParams may contain any number of custom parameters
 ///
-/// See [https://rawgit.com/pip-services-node/pip-services3-commons-node/master/doc/api/classes/config.configparams.html ConfigParams]
+/// See [ConfigParams](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/ConfigParams-class.html)
 /// See [CredentialParams]
 /// See [ConnectionResolver]
 /// See [IDiscovery]

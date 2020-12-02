@@ -6,7 +6,7 @@ import '../../pip_services3_components.dart';
 /// Config reader that stores configuration in memory.
 ///
 /// The reader supports parameterization using Handlebars
-/// template engine: [https://handlebarsjs.com]
+/// template engine: [Handlebars](https://handlebarsjs.com)
 ///
 /// ### Configuration parameters ###
 ///

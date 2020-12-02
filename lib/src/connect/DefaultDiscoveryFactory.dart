@@ -1,7 +1,7 @@
 import 'package:pip_services3_commons/pip_services3_commons.dart';
 import '../../pip_services3_components.dart';
 
-/// Creates [https://rawgit.com/pip-services-node/pip-services-components-node/master/doc/api/interfaces/connect.idiscovery.html IDiscovery] components by their descriptors.
+/// Creates [IDiscovery](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/IDiscovery-class.html) components by their descriptors.
 ///
 /// See [Factory]
 /// See [IDiscovery]

@@ -36,7 +36,7 @@ abstract class ConfigReader implements IConfigurable {
 
   /// Parameterized configuration template given as string with dynamic parameters.
   ///
-  /// The method uses Handlebars template engine: [https://handlebarsjs.com]
+  /// The method uses Handlebars template engine: [Handlebars](https://handlebarsjs.com)
   ///
   /// - [config]        a string with configuration template to be parameterized
   /// - [parameters]    dynamic parameters to inject into the template
