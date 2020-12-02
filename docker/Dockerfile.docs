@@ -1,0 +1,12 @@
+FROM google/dart
+
+# set working directory
+WORKDIR /app
+
+# copy the entire project
+COPY . .
+
+RUN pub global activate dartdoc
+
+# Generating docs
+RUN dartdoc --no-auto-include-dependencies --no-include-source --show-progress --output docs
