@@ -7,10 +7,10 @@ generate:
 	@pub run build_runner build
 
 gendoc:
-	@dartdoc --no-auto-include-dependencies --no-include-source --show-progress
+	@dartdoc --no-auto-include-dependencies --no-include-source --show-progress --output docs
 
 docview:
-	@dhttpd --path doc/api
+	@dhttpd --path docs
 
 analyze:
 	@dartanalyzer .
