@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the DefaultLoggerFactory class from the pip_services3_components library, for the Dart programming language.">
+  <title>DefaultLoggerFactory class - pip_services3_components library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../static-assets/github.css">
+  <link rel="stylesheet" href="../static-assets/styles.css">
+  <link rel="icon" href="../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">pip_services3_components</a></li>
+    <li><a href="../pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
+    <li class="self-crumb">DefaultLoggerFactory class</li>
+  </ol>
+  <div class="self-name">DefaultLoggerFactory</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../index.html">pip_services3_components</a></li>
+      <li><a href="../pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
+      <li class="self-crumb">DefaultLoggerFactory class</li>
+    </ol>
+    
+    <h5>pip_services3_components library</h5>
+    <ol>
+      <li class="section-title"><a href="../pip_services3_components/pip_services3_components-library.html#classes">Classes</a></li>
+      <li><a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a></li>
+      <li><a href="../pip_services3_components/CachedLogger-class.html">CachedLogger</a></li>
+      <li><a href="../pip_services3_components/CacheEntry-class.html">CacheEntry</a></li>
+      <li><a href="../pip_services3_components/Component-class.html">Component</a></li>
+      <li><a href="../pip_services3_components/CompositeCounters-class.html">CompositeCounters</a></li>
+      <li><a href="../pip_services3_components/CompositeFactory-class.html">CompositeFactory</a></li>
+      <li><a href="../pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></li>
+      <li><a href="../pip_services3_components/ConfigReader-class.html">ConfigReader</a></li>
+      <li><a href="../pip_services3_components/ConnectionParams-class.html">ConnectionParams</a></li>
+      <li><a href="../pip_services3_components/ConnectionResolver-class.html">ConnectionResolver</a></li>
+      <li><a href="../pip_services3_components/ConsoleLogger-class.html">ConsoleLogger</a></li>
+      <li><a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a></li>
+      <li><a href="../pip_services3_components/Counter-class.html">Counter</a></li>
+      <li><a href="../pip_services3_components/CreateException-class.html">CreateException</a></li>
+      <li><a href="../pip_services3_components/CredentialParams-class.html">CredentialParams</a></li>
+      <li><a href="../pip_services3_components/CredentialResolver-class.html">CredentialResolver</a></li>
+      <li><a href="../pip_services3_components/DefaultCacheFactory-class.html">DefaultCacheFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultConfigReaderFactory-class.html">DefaultConfigReaderFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultCountersFactory-class.html">DefaultCountersFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultCredentialStoreFactory-class.html">DefaultCredentialStoreFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultDiscoveryFactory-class.html">DefaultDiscoveryFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultInfoFactory-class.html">DefaultInfoFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultLockFactory-class.html">DefaultLockFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory-class.html">DefaultLoggerFactory</a></li>
+      <li><a href="../pip_services3_components/DefaultTestFactory-class.html">DefaultTestFactory</a></li>
+      <li><a href="../pip_services3_components/DiscoveryItem-class.html">DiscoveryItem</a></li>
+      <li><a href="../pip_services3_components/Factory-class.html">Factory</a></li>
+      <li><a href="../pip_services3_components/FileConfigReader-class.html">FileConfigReader</a></li>
+      <li><a href="../pip_services3_components/ICache-class.html">ICache</a></li>
+      <li><a href="../pip_services3_components/IConfigReader-class.html">IConfigReader</a></li>
+      <li><a href="../pip_services3_components/ICounters-class.html">ICounters</a></li>
+      <li><a href="../pip_services3_components/ICredentialStore-class.html">ICredentialStore</a></li>
+      <li><a href="../pip_services3_components/IDiscovery-class.html">IDiscovery</a></li>
+      <li><a href="../pip_services3_components/IFactory-class.html">IFactory</a></li>
+      <li><a href="../pip_services3_components/ILock-class.html">ILock</a></li>
+      <li><a href="../pip_services3_components/ILogger-class.html">ILogger</a></li>
+      <li><a href="../pip_services3_components/ITimingCallback-class.html">ITimingCallback</a></li>
+      <li><a href="../pip_services3_components/JsonConfigReader-class.html">JsonConfigReader</a></li>
+      <li><a href="../pip_services3_components/Lock-class.html">Lock</a></li>
+      <li><a href="../pip_services3_components/LogCounters-class.html">LogCounters</a></li>
+      <li><a href="../pip_services3_components/Logger-class.html">Logger</a></li>
+      <li><a href="../pip_services3_components/LogLevelConverter-class.html">LogLevelConverter</a></li>
+      <li><a href="../pip_services3_components/LogMessage-class.html">LogMessage</a></li>
+      <li><a href="../pip_services3_components/MemoryCache-class.html">MemoryCache</a></li>
+      <li><a href="../pip_services3_components/MemoryConfigReader-class.html">MemoryConfigReader</a></li>
+      <li><a href="../pip_services3_components/MemoryCredentialStore-class.html">MemoryCredentialStore</a></li>
+      <li><a href="../pip_services3_components/MemoryDiscovery-class.html">MemoryDiscovery</a></li>
+      <li><a href="../pip_services3_components/MemoryLock-class.html">MemoryLock</a></li>
+      <li><a href="../pip_services3_components/NullCache-class.html">NullCache</a></li>
+      <li><a href="../pip_services3_components/NullCounters-class.html">NullCounters</a></li>
+      <li><a href="../pip_services3_components/NullLock-class.html">NullLock</a></li>
+      <li><a href="../pip_services3_components/NullLogger-class.html">NullLogger</a></li>
+      <li><a href="../pip_services3_components/Registration-class.html">Registration</a></li>
+      <li><a href="../pip_services3_components/Shutdown-class.html">Shutdown</a></li>
+      <li><a href="../pip_services3_components/Timing-class.html">Timing</a></li>
+      <li><a href="../pip_services3_components/YamlConfigReader-class.html">YamlConfigReader</a></li>
+    
+    
+    
+    
+    
+    
+      <li class="section-title"><a href="../pip_services3_components/pip_services3_components-library.html#enums">Enums</a></li>
+      <li><a href="../pip_services3_components/CounterType-class.html">CounterType</a></li>
+      <li><a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></li>
+    
+    
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">DefaultLoggerFactory</span> class </h1></div>
+
+    <section class="desc markdown">
+      <p>Creates <a href="../pip_services3_components/ILogger-class.html">ILogger</a> components by their descriptors.</p>
+<p>See <a href="../pip_services3_components/Factory-class.html">Factory</a>
+See <a href="../pip_services3_components/NullLogger-class.html">NullLogger</a>
+See <a href="../pip_services3_components/ConsoleLogger-class.html">ConsoleLogger</a>
+See <a href="../pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></p>
+    </section>
+    
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li>Object</li>
+          <li><a href="../pip_services3_components/Factory-class.html">Factory</a></li>
+          <li>DefaultLoggerFactory</li>
+        </ul></dd>
+
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="DefaultLoggerFactory" class="callable">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/DefaultLoggerFactory.html">DefaultLoggerFactory</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Create a instance of the factory. 
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span>         
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="../pip_services3_components/DefaultLoggerFactory/hashCode.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span>         
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object. 
+                  <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="canCreate" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/canCreate.html">canCreate</a></span><span class="signature">(<wbr><span class="parameter" id="canCreate-param-locator"><span class="type-annotation">dynamic</span> <span class="parameter-name">locator</span></span><wbr>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Checks if this factory is able to create component by given locator. <a href="../pip_services3_components/DefaultLoggerFactory/canCreate.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="create" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/create.html">create</a></span><span class="signature">(<wbr><span class="parameter" id="create-param-locator"><span class="type-annotation">dynamic</span> <span class="parameter-name">locator</span></span><wbr>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Creates a component identified by given locator. <a href="../pip_services3_components/DefaultLoggerFactory/create.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span><wbr>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="../pip_services3_components/DefaultLoggerFactory/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="register" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/register.html">register</a></span><span class="signature">(<wbr><span class="parameter" id="register-param-locator"><span class="type-annotation">dynamic</span> <span class="parameter-name">locator</span>, </span><wbr><span class="parameter" id="register-param-factory"><span class="type-annotation">dynamic</span> <span class="parameter-name">factory</span>(<span class="parameter" id="param-locator"><span class="type-annotation">dynamic</span> <span class="parameter-name">locator</span></span><wbr>)</span><wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Registers a component using a factory method. <a href="../pip_services3_components/DefaultLoggerFactory/register.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="registerAsType" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/registerAsType.html">registerAsType</a></span><span class="signature">(<wbr><span class="parameter" id="registerAsType-param-locator"><span class="type-annotation">dynamic</span> <span class="parameter-name">locator</span>, </span><wbr><span class="parameter" id="registerAsType-param-type"><span class="type-annotation">dynamic</span> <span class="parameter-name">type</span></span><wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Registers a component using its type (a constructor function). <a href="../pip_services3_components/DefaultLoggerFactory/registerAsType.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of this object. 
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span><wbr>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          The equality operator. <a href="../pip_services3_components/DefaultLoggerFactory/operator_equals.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="static-properties">
+      <h2>Static Properties</h2>
+
+      <dl class="properties">
+        <dt id="CompositeLoggerDescriptor" class="property">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/CompositeLoggerDescriptor.html">CompositeLoggerDescriptor</a></span>
+          <span class="signature">&#8594; dynamic</span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">final</div>
+</dd>
+        <dt id="ConsoleLoggerDescriptor" class="property">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/ConsoleLoggerDescriptor.html">ConsoleLoggerDescriptor</a></span>
+          <span class="signature">&#8594; dynamic</span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">final</div>
+</dd>
+        <dt id="descriptor" class="property">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/descriptor.html">descriptor</a></span>
+          <span class="signature">&#8594; dynamic</span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">final</div>
+</dd>
+        <dt id="NullLoggerDescriptor" class="property">
+          <span class="name"><a href="../pip_services3_components/DefaultLoggerFactory/NullLoggerDescriptor.html">NullLoggerDescriptor</a></span>
+          <span class="signature">&#8594; dynamic</span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">final</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+    
+      <li class="section-title"><a href="../pip_services3_components/DefaultLoggerFactory-class.html#constructors">Constructors</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory/DefaultLoggerFactory.html">DefaultLoggerFactory</a></li>
+    
+      <li class="section-title inherited">
+        <a href="../pip_services3_components/DefaultLoggerFactory-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title inherited"><a href="../pip_services3_components/DefaultLoggerFactory-class.html#instance-methods">Methods</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/canCreate.html">canCreate</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/create.html">create</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/register.html">register</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/registerAsType.html">registerAsType</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="../pip_services3_components/DefaultLoggerFactory-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="../pip_services3_components/DefaultLoggerFactory/operator_equals.html">operator ==</a></li>
+    
+      <li class="section-title"><a href="../pip_services3_components/DefaultLoggerFactory-class.html#static-properties">Static properties</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory/CompositeLoggerDescriptor.html">CompositeLoggerDescriptor</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory/ConsoleLoggerDescriptor.html">ConsoleLoggerDescriptor</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory/descriptor.html">descriptor</a></li>
+      <li><a href="../pip_services3_components/DefaultLoggerFactory/NullLoggerDescriptor.html">NullLoggerDescriptor</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    pip_services3_components
+      1.0.6
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static-assets/typeahead.bundle.min.js"></script>
+<script src="../static-assets/highlight.pack.js"></script>
+<script src="../static-assets/URI.js"></script>
+<script src="../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

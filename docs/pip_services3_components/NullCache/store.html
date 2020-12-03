@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the store method from the NullCache class, for the Dart programming language.">
+  <title>store method - NullCache class - pip_services3_components library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">pip_services3_components</a></li>
+    <li><a href="../../pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
+    <li><a href="../../pip_services3_components/NullCache-class.html">NullCache</a></li>
+    <li class="self-crumb">store method</li>
+  </ol>
+  <div class="self-name">store</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../../index.html">pip_services3_components</a></li>
+      <li><a href="../../pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
+      <li><a href="../../pip_services3_components/NullCache-class.html">NullCache</a></li>
+      <li class="self-crumb">store method</li>
+    </ol>
+    
+    <h5>NullCache class</h5>
+    <ol>
+    
+        <li class="section-title"><a href="../../pip_services3_components/NullCache-class.html#constructors">Constructors</a></li>
+        <li><a href="../../pip_services3_components/NullCache/NullCache.html">NullCache</a></li>
+    
+        <li class="section-title inherited">
+            <a href="../../pip_services3_components/NullCache-class.html#instance-properties">Properties</a>
+        </li>
+        <li class="inherited"><a href="../../pip_services3_components/NullCache/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="../../pip_services3_components/NullCache/runtimeType.html">runtimeType</a></li>
+    
+        <li class="section-title"><a href="../../pip_services3_components/NullCache-class.html#instance-methods">Methods</a></li>
+        <li><a href="../../pip_services3_components/NullCache/remove.html">remove</a></li>
+        <li><a href="../../pip_services3_components/NullCache/retrieve.html">retrieve</a></li>
+        <li><a href="../../pip_services3_components/NullCache/store.html">store</a></li>
+        <li class="inherited"><a href="../../pip_services3_components/NullCache/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="../../pip_services3_components/NullCache/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="../../pip_services3_components/NullCache-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="../../pip_services3_components/NullCache/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">store</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <div>
+        <ol class="annotation-list">
+          <li>@override</li>
+        </ol>
+      </div>
+      <span class="returntype">Future</span>
+            <span class="name ">store</span>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="store-param-correlationId"><span class="type-annotation">String</span> <span class="parameter-name">correlationId</span>, </span></li>
+<li><span class="parameter" id="store-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span></li>
+<li><span class="parameter" id="store-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span></li>
+<li><span class="parameter" id="store-param-timeout"><span class="type-annotation">int</span> <span class="parameter-name">timeout</span></span></li>
+</ol>)
+      <div class="features">override</div>
+    </section>
+    <section class="desc markdown">
+      <p>Stores value in the cache with expiration time.</p>
+<ul>
+<li><code>correlationId</code>     (optional) transaction id to trace execution through call chain.</li>
+<li><code>key</code>               a unique value key.</li>
+<li><code>value</code>             a value to store.</li>
+<li><code>timeout</code>           expiration timeout in milliseconds.
+Return              Future that receives an null for success
+Throws error</li>
+</ul>
+    </section>
+    
+    
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    pip_services3_components
+      1.0.6
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
+
+</body>
+
+</html>
