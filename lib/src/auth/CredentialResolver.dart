@@ -11,7 +11,7 @@ import '../../pip_services3_components.dart';
 /// ### Configuration parameters ###
 ///
 /// __credential:__
-/// - store_key:                   (optional) a key to retrieve the credentials from [ICredentialStore]
+/// - [store_key]:                   (optional) a key to retrieve the credentials from [ICredentialStore]
 /// - ...                          other credential parameters
 ///
 /// __credentials:__                   alternative to credential

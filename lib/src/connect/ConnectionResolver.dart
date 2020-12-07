@@ -11,7 +11,7 @@ import '../../pip_services3_components.dart';
 /// ### Configuration parameters ###
 ///
 /// - __connection:__
-///     - discovery_key:               (optional) a key to retrieve the connection from [IDiscovery](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/IDiscovery-class.html)
+///     - [discovery_key]:               (optional) a key to retrieve the connection from [IDiscovery](https://pub.dev/documentation/pip_services3_components/latest/pip_services3_components/IDiscovery-class.html)
 ///     - ...                          other connection parameters
 ///
 /// - __connections:__                  alternative to connection

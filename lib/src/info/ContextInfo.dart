@@ -9,9 +9,9 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 ///
 /// ### Configuration parameters ###
 ///
-/// - name: 					the context (container or process) name
-/// - description: 		   	human-readable description of the context
-/// - properties: 			entire section of additional descriptive properties
+/// - [name]: 					the context (container or process) name
+/// - [description]: 		   	human-readable description of the context
+/// - [properties]: 			entire section of additional descriptive properties
 /// - ...
 ///
 /// ### Example ###

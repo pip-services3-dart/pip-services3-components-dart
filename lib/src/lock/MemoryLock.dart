@@ -8,7 +8,7 @@ import '../../pip_services3_components.dart';
 /// ### Configuration parameters ###
 ///
 /// - __options:__
-///     - retry_timeout:   timeout in milliseconds to retry lock acquisition. (Default: 100)
+///     - [retry_timeout]:   timeout in milliseconds to retry lock acquisition. (Default: 100)
 ///
 /// See [ILock]
 /// See [Lock]
