@@ -2,12 +2,11 @@
 /.git
 /.gitignore
 /.dockerignore
-/docs
+/doc
 /docker/Dockerfile*
 /docker/docker-compose*.yml
 /*.sh
 /*.ps1
-/*.md
 /example
 /.dart_tool
 /.packages

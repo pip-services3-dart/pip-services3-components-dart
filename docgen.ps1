@@ -10,8 +10,8 @@ $docsImage="$($component.registry)/$($component.name):$($component.version)-$($c
 $container=$component.name
 
 # Remove documentation files
-if (Test-Path "docs") {
-    Remove-Item -Recurse -Force -Path "docs"
+if (Test-Path "doc") {
+    Remove-Item -Recurse -Force -Path "doc"
 }
 
 # Build docker image
@@ -19,5 +19,5 @@ docker build -f docker/Dockerfile.docs -t $docsImage .
 
 # Create and copy compiled files, then destroy
 docker create --name $container $docsImage
-docker cp "$($container):/app/docs" ./docs
+docker cp "$($container):/app/doc" .
 docker rm $container
