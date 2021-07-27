@@ -75,6 +75,14 @@ class ConnectionParams extends ConfigParams {
     return super.getAsStringWithDefault('protocol', defaultValue);
   }
 
+  /// Gets the connection protocol with default value.
+  ///
+  /// - [defaultValue]  (optional) the default protocol
+  /// return the connection protocol or the default value if it's not set.
+  String getProtocolWithDefault(String defaultValue) {
+    return super.getAsStringWithDefault('protocol', defaultValue);
+  }
+
   /// Sets the connection protocol.
   ///
   /// - [value]     a new connection protocol.
@@ -103,6 +111,14 @@ class ConnectionParams extends ConfigParams {
   /// Return the port number.
   int getPort() {
     return super.getAsInteger('port');
+  }
+
+  /// Gets the port number with default value.
+  ///
+  /// - [defaultPort] a default port number.
+  /// return the port number.
+  int getPortWithDefault(int defaultPort) {
+    return super.getAsIntegerWithDefault('port', defaultPort);
   }
 
   /// Sets the port number.

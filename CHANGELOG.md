@@ -24,3 +24,8 @@
 ## 1.0.6
 
 - Fix working wiith time, convert all to UTC.
+
+## 1.0.7
+
+- **connect** added **CompositeConnectionResolver** and **ConnectionUtils**
+- **ConnectionParams** added getProtocolWithDefault and getPortWithDefault methods

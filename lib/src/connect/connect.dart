@@ -42,3 +42,5 @@ export './IDiscovery.dart';
 export './ConnectionResolver.dart';
 export './MemoryDiscovery.dart';
 export './DefaultDiscoveryFactory.dart';
+export './CompositeConnectionResolver.dart';
+export './ConnectionUtils.dart';
