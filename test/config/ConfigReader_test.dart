@@ -1,12 +1,13 @@
+import 'package:mustache_template/mustache.dart';
 import 'package:test/test.dart';
-import 'package:mustache4dart2/mustache4dart2.dart';
 
 void main() {
   group('ConfigReader', () {
     test('Process Templates', () {
       var config = '{{#A}}{{B}}{{/A}}';
       var params = {'A': 'true', 'B': 'XYZ'};
-      var result = render(config, params);
+      var template = Template(config);
+      var result = template.renderString(params);
 
       expect(result, 'XYZ');
     });

@@ -40,7 +40,7 @@ void main() {
       ]);
       credentialResolver = CredentialResolver(RestConfigWithoutStoreKey);
       credential = await credentialResolver.lookup('correlationId');
-      expect(credential.get('username'), 'Negrienko');
+      expect(credential!.get('username'), 'Negrienko');
       expect(credential.get('password'), 'qwerty');
       expect(credential.get('access_key'), 'key');
       expect(credential.get('store_key'), isNull);

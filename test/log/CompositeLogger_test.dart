@@ -53,7 +53,7 @@ void main() {
         throw Exception();
       } catch (ex) {
         //var ex = ApplicationException().wrap(err);
-        _logger.fatal('123', ex, 'Fatal error');
+        _logger.fatal('123', ex as Exception, 'Fatal error');
         _logger.error('123', ex, 'Recoverable error');
 
         expect(ex, isNotNull);

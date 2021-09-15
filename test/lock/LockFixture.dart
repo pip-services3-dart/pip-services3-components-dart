@@ -6,11 +6,9 @@ final String LOCK2 = 'lock_2';
 final String LOCK3 = 'lock_3';
 
 class LockFixture {
-  ILock _lock;
+  final ILock _lock;
 
-  LockFixture(ILock lock) {
-    _lock = lock;
-  }
+  LockFixture(ILock lock) : _lock = lock;
 
   void testTryAcquireLock() async {
     // Try to acquire lock for the first time

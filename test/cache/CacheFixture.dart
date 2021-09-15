@@ -9,11 +9,9 @@ String VALUE1 = 'value1';
 String VALUE2 = 'value2';
 
 class CacheFixture {
-  ICache _cache;
+  final ICache _cache;
 
-  CacheFixture(ICache cache) {
-    _cache = cache;
-  }
+  CacheFixture(ICache cache) : _cache = cache;
 
   void testStoreAndRetrieve() async {
     try {

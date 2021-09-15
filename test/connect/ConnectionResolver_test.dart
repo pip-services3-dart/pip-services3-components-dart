@@ -44,11 +44,12 @@ void main() {
       connectionParams.setDiscoveryKey('Discovery key value');
       var references = References();
       connectionResolver.setReferences(references);
-      try {
-        await connectionResolver.register('correlationId', connectionParams);
-      } catch (err) {
-        expect(err, isNull);
-      }
+      await connectionResolver.register('correlationId', connectionParams);
+      // try {
+      //   await connectionResolver.register('correlationId', connectionParams);
+      // } catch (err) {
+      //   expect(err, isNull);
+      // }
       configList = connectionResolver.getAll();
       expect(configList.length, 2);
       expect(configList[0].get('protocol'), 'http');
@@ -62,7 +63,7 @@ void main() {
       try {
         var connectionParams =
             await connectionResolver.resolve('correlationId');
-        expect(connectionParams.get('protocol'), 'http');
+        expect(connectionParams!.get('protocol'), 'http');
         expect(connectionParams.get('host'), 'localhost');
         expect(connectionParams.get('port'), '3000');
       } catch (err) {

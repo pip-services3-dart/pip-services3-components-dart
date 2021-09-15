@@ -63,8 +63,8 @@ void main() {
 
         var counter = _counters.get('Test.Elapsed', CounterType.Interval);
         print(counter.last);
-        expect(counter.last > 50, isTrue);
-        expect(counter.last < 5000, isTrue);
+        expect(counter.last! > 50, isTrue);
+        expect(counter.last! < 5000, isTrue);
 
         _counters.dump();
       });
