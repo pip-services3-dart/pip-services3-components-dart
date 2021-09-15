@@ -123,5 +123,34 @@ void main() {
       expect('user:pass123@broker1,broker2:8082?param1=ABC&param2=XYZ&param3',
           uri);
     });
+
+    test('Parse URI', () {
+      var options = ConnectionUtils.parseUri(
+          'http://localhost:8080/test?param1=abc', 'http', 80);
+
+      expect('http', options.getAsString('protocol'));
+      expect('localhost', options.getAsString('host'));
+      expect(8080, options.getAsInteger('port'));
+      expect('test', options.getAsString('path'));
+      expect('abc', options.getAsString('param1'));
+    });
+
+    test('Compose URI', () {
+      var options = ConfigParams.fromTuples([
+        'protocol',
+        'http',
+        'host',
+        'localhost',
+        'port',
+        8080,
+        'path',
+        'test',
+        'param1',
+        'abc'
+      ]);
+
+      var uri = ConnectionUtils.composeUri(options, 'http', 80);
+      expect('http://localhost:8080/test?param1=abc', uri);
+    });
   });
 }
