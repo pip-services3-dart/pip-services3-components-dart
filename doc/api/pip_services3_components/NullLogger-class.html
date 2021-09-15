@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="../static-assets/github.css">
-  <link rel="stylesheet" href="../static-assets/styles.css">
-  <link rel="icon" href="../static-assets/favicon.png">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
 
   
 </head>
@@ -40,6 +41,254 @@
 
 <main>
 
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">NullLogger</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Dummy implementation of logger that doesn't do anything.</p>
+<p>It can be used in testing or in situations when logger is required
+but shall be disabled.</p>
+<p>See <a href="../pip_services3_components/ILogger-class.html">ILogger</a></p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+
+        <dt>Implemented types</dt>
+        <dd>
+          <ul class="comma-separated clazz-relationships">
+            <li><a href="../pip_services3_components/ILogger-class.html">ILogger</a></li>
+          </ul>
+        </dd>
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="NullLogger" class="callable">
+          <span class="name"><a href="../pip_services3_components/NullLogger/NullLogger.html">NullLogger</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates a new instance of the logger. 
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="debug" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/debug.html">debug</a></span><span class="signature">(<wbr><span class="parameter" id="debug-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="debug-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="debug-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs a high-level debug information for troubleshooting. <a href="../pip_services3_components/NullLogger/debug.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="error" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="error-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Exception-class.html">Exception</a>?</span> <span class="parameter-name">error</span>, </span><span class="parameter" id="error-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="error-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs recoverable application error. <a href="../pip_services3_components/NullLogger/error.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="fatal" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="fatal-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Exception-class.html">Exception</a>?</span> <span class="parameter-name">error</span>, </span><span class="parameter" id="fatal-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="fatal-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs fatal (unrecoverable) message that caused the process to crash. <a href="../pip_services3_components/NullLogger/fatal.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="getLevel" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/getLevel.html">getLevel</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the maximum log level.
+Messages with higher log level are filtered out. <a href="../pip_services3_components/NullLogger/getLevel.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="info" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/info.html">info</a></span><span class="signature">(<wbr><span class="parameter" id="info-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="info-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="info-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs an important information message <a href="../pip_services3_components/NullLogger/info.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="log" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span><span class="parameter" id="log-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="log-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Exception-class.html">Exception</a>?</span> <span class="parameter-name">error</span>, </span><span class="parameter" id="log-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="log-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs a message at specified log level. <a href="../pip_services3_components/NullLogger/log.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="setLevel" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/setLevel.html">setLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setLevel-param-value"><span class="type-annotation"><a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Set the maximum log level. <a href="../pip_services3_components/NullLogger/setLevel.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="trace" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/trace.html">trace</a></span><span class="signature">(<wbr><span class="parameter" id="trace-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="trace-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="trace-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs a low-level debug information for troubleshooting. <a href="../pip_services3_components/NullLogger/trace.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="warn" class="callable">
+  <span class="name"><a href="../pip_services3_components/NullLogger/warn.html">warn</a></span><span class="signature">(<wbr><span class="parameter" id="warn-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="warn-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="warn-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a>?</span> <span class="parameter-name">args</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Logs a warning that may or may not have a negative impact. <a href="../pip_services3_components/NullLogger/warn.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <header id="header-search-sidebar" class="hidden-l">
@@ -132,253 +381,6 @@
 
   </div>
 
-  <div id="dartdoc-main-content" class="main-content">
-      <div>
-<h1><span class="kind-class">NullLogger</span> class 
- 
-</h1></div>
-
-    
-<section class="desc markdown">
-  <p>Dummy implementation of logger that doesn't do anything.</p>
-<p>It can be used in testing or in situations when logger is required
-but shall be disabled.</p>
-<p>See <a href="../pip_services3_components/ILogger-class.html">ILogger</a></p>
-</section>
-
-
-    <section>
-      <dl class="dl-horizontal">
-
-        <dt>Implemented types</dt>
-        <dd>
-          <ul class="comma-separated clazz-relationships">
-            <li><a href="../pip_services3_components/ILogger-class.html">ILogger</a></li>
-          </ul>
-        </dd>
-
-
-
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="constructors">
-      <h2>Constructors</h2>
-
-      <dl class="constructor-summary-list">
-        <dt id="NullLogger" class="callable">
-          <span class="name"><a href="../pip_services3_components/NullLogger/NullLogger.html">NullLogger</a></span><span class="signature">()</span>
-        </dt>
-        <dd>
-          Creates a new instance of the logger. 
-        </dd>
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor inherited" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
-        <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> 
-
-</dt>
-<dd class="inherited">
-  The hash code for this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">[...]</a>
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-        <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/Type-class.html">Type</a></span> 
-
-</dt>
-<dd class="inherited">
-  A representation of the runtime type of the object. 
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="instance-methods">
-      <h2>Methods</h2>
-      <dl class="callables">
-        <dt id="debug" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/debug.html">debug</a></span><span class="signature">(<wbr><span class="parameter" id="debug-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="debug-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="debug-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs a high-level debug information for troubleshooting. <a href="../pip_services3_components/NullLogger/debug.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="error" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="error-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Exception-class.html">Exception</a></span> <span class="parameter-name">error</span>, </span><span class="parameter" id="error-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="error-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs recoverable application error. <a href="../pip_services3_components/NullLogger/error.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="fatal" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/fatal.html">fatal</a></span><span class="signature">(<wbr><span class="parameter" id="fatal-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="fatal-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Exception-class.html">Exception</a></span> <span class="parameter-name">error</span>, </span><span class="parameter" id="fatal-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="fatal-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs fatal (unrecoverable) message that caused the process to crash. <a href="../pip_services3_components/NullLogger/fatal.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="getLevel" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/getLevel.html">getLevel</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span>
-  </span>
-  
-
-</dt>
-<dd>
-  Gets the maximum log level.
-Messages with higher log level are filtered out. <a href="../pip_services3_components/NullLogger/getLevel.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="info" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/info.html">info</a></span><span class="signature">(<wbr><span class="parameter" id="info-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="info-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="info-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs an important information message <a href="../pip_services3_components/NullLogger/info.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="log" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-level"><span class="type-annotation"><a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">level</span>, </span><span class="parameter" id="log-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="log-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Exception-class.html">Exception</a></span> <span class="parameter-name">error</span>, </span><span class="parameter" id="log-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="log-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs a message at specified log level. <a href="../pip_services3_components/NullLogger/log.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
-    <span class="returntype parameter">&#8594; dynamic</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="setLevel" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/setLevel.html">setLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setLevel-param-value"><span class="type-annotation"><a href="../pip_services3_components/LogLevel-class.html">LogLevel</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Set the maximum log level. <a href="../pip_services3_components/NullLogger/setLevel.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  A string representation of this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="trace" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/trace.html">trace</a></span><span class="signature">(<wbr><span class="parameter" id="trace-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="trace-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="trace-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs a low-level debug information for troubleshooting. <a href="../pip_services3_components/NullLogger/trace.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="warn" class="callable">
-  <span class="name"><a href="../pip_services3_components/NullLogger/warn.html">warn</a></span><span class="signature">(<wbr><span class="parameter" id="warn-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="warn-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="warn-param-args">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a></span> <span class="parameter-name">args</span>]</span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Logs a warning that may or may not have a negative impact. <a href="../pip_services3_components/NullLogger/warn.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor inherited" id="operators">
-      <h2>Operators</h2>
-      <dl class="callables">
-        <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/bool-class.html">bool</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  The equality operator. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-
-
-
-  </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <ol>
 
@@ -389,8 +391,8 @@ Messages with higher log level are filtered out. <a href="../pip_services3_compo
     <li class="section-title inherited">
       <a href="../pip_services3_components/NullLogger-class.html#instance-properties">Properties</a>
     </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../pip_services3_components/NullLogger-class.html#instance-methods">Methods</a></li>
     <li><a href="../pip_services3_components/NullLogger/debug.html">debug</a></li>
@@ -399,14 +401,14 @@ Messages with higher log level are filtered out. <a href="../pip_services3_compo
     <li><a href="../pip_services3_components/NullLogger/getLevel.html">getLevel</a></li>
     <li><a href="../pip_services3_components/NullLogger/info.html">info</a></li>
     <li><a href="../pip_services3_components/NullLogger/log.html">log</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li><a href="../pip_services3_components/NullLogger/setLevel.html">setLevel</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></li>
     <li><a href="../pip_services3_components/NullLogger/trace.html">trace</a></li>
     <li><a href="../pip_services3_components/NullLogger/warn.html">warn</a></li>
 
     <li class="section-title inherited"><a href="../pip_services3_components/NullLogger-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -420,15 +422,16 @@ Messages with higher log level are filtered out. <a href="../pip_services3_compo
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.7
+      1.1.0
   </span>
 
   
 </footer>
 
 
-<script src="../static-assets/highlight.pack.js"></script>
-<script src="../static-assets/script.js"></script>
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
 
 
 

@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="../static-assets/github.css">
-  <link rel="stylesheet" href="../static-assets/styles.css">
-  <link rel="icon" href="../static-assets/favicon.png">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
 
   
 </head>
@@ -40,6 +41,253 @@
 
 <main>
 
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">ContextInfo</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Context information component that provides detail information
+about execution context: container or/and process.</p>
+<p>Most often ContextInfo is used by logging and performance counters
+to identify source of the collected logs and metrics.</p>
+<h3 id="configuration-parameters">Configuration parameters</h3>
+<ul>
+<li><a href="../pip_services3_components/ContextInfo/name.html">name</a>: 					the context (container or process) name</li>
+<li><a href="../pip_services3_components/ContextInfo/description.html">description</a>: 		   	human-readable description of the context</li>
+<li><a href="../pip_services3_components/ContextInfo/properties.html">properties</a>: 			entire section of additional descriptive properties</li>
+<li>...</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code>let contextInfo = new ContextInfo();
+contextInfo.configure(ConfigParams.fromTuples(
+    'name', 'MyMicroservice',
+    'description', 'My first microservice'
+));
+
+context.name;			// Result: 'MyMicroservice'
+context.contextId;		// Possible result: 'mylaptop'
+context.startTime;		// Possible result: 2018-01-01:22:12:23.45Z
+context.uptime;			// Possible result: 3454345
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+
+        <dt>Implemented types</dt>
+        <dd>
+          <ul class="comma-separated clazz-relationships">
+            <li><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/IReconfigurable-class.html">IReconfigurable</a></li>
+          </ul>
+        </dd>
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="ContextInfo" class="callable">
+          <span class="name"><a href="../pip_services3_components/ContextInfo/ContextInfo.html">ContextInfo</a></span><span class="signature">(<span class="parameter" id="-param-name">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-description"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">description</span>]</span>)</span>
+        </dt>
+        <dd>
+          Creates a new instance of this context info. <a href="../pip_services3_components/ContextInfo/ContextInfo.html">[...]</a>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="contextId" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/contextId.html">contextId</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  Gets the unique context id.
+Usually it is the current host name. <a href="../pip_services3_components/ContextInfo/contextId.html">[...]</a>
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="description" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/description.html">description</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  Gets the human-readable description of the context. <a href="../pip_services3_components/ContextInfo/description.html">[...]</a>
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="name" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/name.html">name</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  Gets the context name. <a href="../pip_services3_components/ContextInfo/name.html">[...]</a>
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="properties" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/properties.html">properties</a></span>
+  <span class="signature">&#8596; dynamic</span> 
+
+</dt>
+<dd>
+  Gets context additional parameters. <a href="../pip_services3_components/ContextInfo/properties.html">[...]</a>
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="startTime" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/startTime.html">startTime</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.14.1/dart-core/DateTime-class.html">DateTime</a></span> 
+
+</dt>
+<dd>
+  Gets the context start time. <a href="../pip_services3_components/ContextInfo/startTime.html">[...]</a>
+  <div class="features">read / write</div>
+
+</dd>
+
+        <dt id="uptime" class="property">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/uptime.html">uptime</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd>
+  Calculates the context uptime as from the start time. <a href="../pip_services3_components/ContextInfo/uptime.html">[...]</a>
+  <div class="features">read-only</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="configure" class="callable">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/configure.html">configure</a></span><span class="signature">(<wbr><span class="parameter" id="configure-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Configures component by passing configuration parameters. <a href="../pip_services3_components/ContextInfo/configure.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="fromConfig" class="callable">
+  <span class="name"><a href="../pip_services3_components/ContextInfo/fromConfig.html">fromConfig</a></span><span class="signature">(<wbr><span class="parameter" id="fromConfig-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a new ContextInfo and sets its configuration parameters. <a href="../pip_services3_components/ContextInfo/fromConfig.html">[...]</a>
+  
+
+</dd>
+
+      </dl>
+    </section>
+
+
+  </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <header id="header-search-sidebar" class="hidden-l">
@@ -132,252 +380,6 @@
 
   </div>
 
-  <div id="dartdoc-main-content" class="main-content">
-      <div>
-<h1><span class="kind-class">ContextInfo</span> class 
- 
-</h1></div>
-
-    
-<section class="desc markdown">
-  <p>Context information component that provides detail information
-about execution context: container or/and process.</p>
-<p>Most often ContextInfo is used by logging and performance counters
-to identify source of the collected logs and metrics.</p>
-<h3 id="configuration-parameters">Configuration parameters</h3>
-<ul>
-<li><a href="../pip_services3_components/ContextInfo/name.html">name</a>: 					the context (container or process) name</li>
-<li><a href="../pip_services3_components/ContextInfo/description.html">description</a>: 		   	human-readable description of the context</li>
-<li><a href="../pip_services3_components/ContextInfo/properties.html">properties</a>: 			entire section of additional descriptive properties</li>
-<li>...</li>
-</ul>
-<h3 id="example">Example</h3>
-<pre class="language-dart"><code>let contextInfo = new ContextInfo();
-contextInfo.configure(ConfigParams.fromTuples(
-    'name', 'MyMicroservice',
-    'description', 'My first microservice'
-));
-
-context.name;			// Result: 'MyMicroservice'
-context.contextId;		// Possible result: 'mylaptop'
-context.startTime;		// Possible result: 2018-01-01:22:12:23.45Z
-context.uptime;			// Possible result: 3454345
-</code></pre>
-</section>
-
-
-    <section>
-      <dl class="dl-horizontal">
-
-        <dt>Implemented types</dt>
-        <dd>
-          <ul class="comma-separated clazz-relationships">
-            <li><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/IReconfigurable-class.html">IReconfigurable</a></li>
-          </ul>
-        </dd>
-
-
-
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="constructors">
-      <h2>Constructors</h2>
-
-      <dl class="constructor-summary-list">
-        <dt id="ContextInfo" class="callable">
-          <span class="name"><a href="../pip_services3_components/ContextInfo/ContextInfo.html">ContextInfo</a></span><span class="signature">(<span class="parameter" id="-param-name">[<span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-description"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">description</span>]</span>)</span>
-        </dt>
-        <dd>
-          Creates a new instance of this context info. <a href="../pip_services3_components/ContextInfo/ContextInfo.html">[...]</a>
-        </dd>
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
-        <dt id="contextId" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/contextId.html">contextId</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> 
-
-</dt>
-<dd>
-  Gets the unique context id.
-Usually it is the current host name. <a href="../pip_services3_components/ContextInfo/contextId.html">[...]</a>
-  <div class="features">read / write</div>
-
-</dd>
-
-        <dt id="description" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/description.html">description</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> 
-
-</dt>
-<dd>
-  Gets the human-readable description of the context. <a href="../pip_services3_components/ContextInfo/description.html">[...]</a>
-  <div class="features">read / write</div>
-
-</dd>
-
-        <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> 
-
-</dt>
-<dd class="inherited">
-  The hash code for this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">[...]</a>
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-        <dt id="name" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/name.html">name</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> 
-
-</dt>
-<dd>
-  Gets the context name. <a href="../pip_services3_components/ContextInfo/name.html">[...]</a>
-  <div class="features">read / write</div>
-
-</dd>
-
-        <dt id="properties" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/properties.html">properties</a></span>
-  <span class="signature">&#8596; dynamic</span> 
-
-</dt>
-<dd>
-  Gets context additional parameters. <a href="../pip_services3_components/ContextInfo/properties.html">[...]</a>
-  <div class="features">read / write</div>
-
-</dd>
-
-        <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/Type-class.html">Type</a></span> 
-
-</dt>
-<dd class="inherited">
-  A representation of the runtime type of the object. 
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-        <dt id="startTime" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/startTime.html">startTime</a></span>
-  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.13.4/dart-core/DateTime-class.html">DateTime</a></span> 
-
-</dt>
-<dd>
-  Gets the context start time. <a href="../pip_services3_components/ContextInfo/startTime.html">[...]</a>
-  <div class="features">read / write</div>
-
-</dd>
-
-        <dt id="uptime" class="property">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/uptime.html">uptime</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> 
-
-</dt>
-<dd>
-  Calculates the context uptime as from the start time. <a href="../pip_services3_components/ContextInfo/uptime.html">[...]</a>
-  <div class="features">read-only</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="instance-methods">
-      <h2>Methods</h2>
-      <dl class="callables">
-        <dt id="configure" class="callable">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/configure.html">configure</a></span><span class="signature">(<wbr><span class="parameter" id="configure-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Configures component by passing configuration parameters. <a href="../pip_services3_components/ContextInfo/configure.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
-    <span class="returntype parameter">&#8594; dynamic</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  A string representation of this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor inherited" id="operators">
-      <h2>Operators</h2>
-      <dl class="callables">
-        <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/bool-class.html">bool</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  The equality operator. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-
-    <section class="summary offset-anchor" id="static-methods">
-      <h2>Static Methods</h2>
-      <dl class="callables">
-        <dt id="fromConfig" class="callable">
-  <span class="name"><a href="../pip_services3_components/ContextInfo/fromConfig.html">fromConfig</a></span><span class="signature">(<wbr><span class="parameter" id="fromConfig-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a></span>
-  </span>
-  
-
-</dt>
-<dd>
-  Creates a new ContextInfo and sets its configuration parameters. <a href="../pip_services3_components/ContextInfo/fromConfig.html">[...]</a>
-  
-
-</dd>
-
-      </dl>
-    </section>
-
-
-  </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <ol>
 
@@ -390,20 +392,20 @@ Usually it is the current host name. <a href="../pip_services3_components/Contex
     </li>
     <li><a href="../pip_services3_components/ContextInfo/contextId.html">contextId</a></li>
     <li><a href="../pip_services3_components/ContextInfo/description.html">description</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></li>
     <li><a href="../pip_services3_components/ContextInfo/name.html">name</a></li>
     <li><a href="../pip_services3_components/ContextInfo/properties.html">properties</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
     <li><a href="../pip_services3_components/ContextInfo/startTime.html">startTime</a></li>
     <li><a href="../pip_services3_components/ContextInfo/uptime.html">uptime</a></li>
 
     <li class="section-title"><a href="../pip_services3_components/ContextInfo-class.html#instance-methods">Methods</a></li>
     <li><a href="../pip_services3_components/ContextInfo/configure.html">configure</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../pip_services3_components/ContextInfo-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -419,15 +421,16 @@ Usually it is the current host name. <a href="../pip_services3_components/Contex
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.7
+      1.1.0
   </span>
 
   
 </footer>
 
 
-<script src="../static-assets/highlight.pack.js"></script>
-<script src="../static-assets/script.js"></script>
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
 
 
 

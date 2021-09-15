@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="../static-assets/github.css">
-  <link rel="stylesheet" href="../static-assets/styles.css">
-  <link rel="icon" href="../static-assets/favicon.png">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
 
   
 </head>
@@ -40,6 +41,410 @@
 
 <main>
 
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">LogCounters</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Performance counters that periodically dumps counters measurements to logger.</p>
+<h3 id="configuration-parameters">Configuration parameters</h3>
+<ul>
+<li><strong>options:</strong>
+<ul>
+<li><code>interval</code>:          interval in milliseconds to save current counters measurements (default: 5 mins)</li>
+<li><code>reset_timeout</code>:     timeout in milliseconds to reset the counters. 0 disables the reset (default: 0)</li>
+</ul>
+</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li>*:logger:*:*:1.0           <a href="../pip_services3_components/ILogger-class.html">ILogger</a> components to dump the captured counters</li>
+<li>*:context-info:*:*:1.0     (optional) <a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a> to detect the context id and specify counters source</li>
+</ul>
+<p>See <a href="../pip_services3_components/Counter-class.html">Counter</a>
+See <a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a>
+See <a href="../pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code>var counters = LogCounters();
+counters.setReferences(References.fromTuples([
+    Descriptor("pip-services", "logger", "console", "default", "1.0"), ConsoleLogger()
+]));
+
+counters.increment("mycomponent.mymethod.calls");
+var timing = counters.beginTiming("mycomponent.mymethod.exec_time");
+try {
+    ...
+} finally {
+    timing.endTiming();
+}
+
+counters.dump();
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object-class.html">Object</a></li>
+          <li><a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a></li>
+          <li>LogCounters</li>
+        </ul></dd>
+
+        <dt>Implemented types</dt>
+        <dd>
+          <ul class="comma-separated clazz-relationships">
+            <li><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/IReferenceable-class.html">IReferenceable</a></li>
+          </ul>
+        </dd>
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="LogCounters" class="callable">
+          <span class="name"><a href="../pip_services3_components/LogCounters/LogCounters.html">LogCounters</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates a new instance of the counters. 
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="beginTiming" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/beginTiming.html">beginTiming</a></span><span class="signature">(<wbr><span class="parameter" id="beginTiming-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/Timing-class.html">Timing</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Begins measurement of execution time interval.
+It returns <a href="../pip_services3_components/Timing-class.html">Timing</a> object which has to be called at
+<a href="../pip_services3_components/Timing/endTiming.html">Timing.endTiming</a> to end the measurement and update the counter. <a href="../pip_services3_components/CachedCounters/beginTiming.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="clear" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears (resets) a counter specified by its name. <a href="../pip_services3_components/CachedCounters/clear.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="clearAll" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/clearAll.html">clearAll</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears (resets) all counters. 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="configure" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/configure.html">configure</a></span><span class="signature">(<wbr><span class="parameter" id="configure-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Configures component by passing configuration parameters. <a href="../pip_services3_components/CachedCounters/configure.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="dump" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/dump.html">dump</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Dumps (saves) the current values of counters. <a href="../pip_services3_components/CachedCounters/dump.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="endTiming" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/endTiming.html">endTiming</a></span><span class="signature">(<wbr><span class="parameter" id="endTiming-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="endTiming-param-elapsed"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">elapsed</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Ends measurement of execution elapsed time and updates specified counter. <a href="../pip_services3_components/CachedCounters/endTiming.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="get" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="get-param-type"><span class="type-annotation"><a href="../pip_services3_components/CounterType-class.html">CounterType</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/Counter-class.html">Counter</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a counter specified by its name.
+It counter does not exist or its type doesn't match the specified type
+it creates a new one. <a href="../pip_services3_components/CachedCounters/get.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getAll" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/getAll.html">getAll</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../pip_services3_components/Counter-class.html">Counter</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets all captured counters. <a href="../pip_services3_components/CachedCounters/getAll.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getInterval" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/getInterval.html">getInterval</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets the counters dump/save interval. <a href="../pip_services3_components/CachedCounters/getInterval.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="increment" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/increment.html">increment</a></span><span class="signature">(<wbr><span class="parameter" id="increment-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="increment-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Increments counter by given value. <a href="../pip_services3_components/CachedCounters/increment.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="incrementOne" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/incrementOne.html">incrementOne</a></span><span class="signature">(<wbr><span class="parameter" id="incrementOne-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Increments counter by 1. <a href="../pip_services3_components/CachedCounters/incrementOne.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="last" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/last.html">last</a></span><span class="signature">(<wbr><span class="parameter" id="last-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="last-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Records the last calculated measurement value. <a href="../pip_services3_components/CachedCounters/last.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="save" class="callable">
+  <span class="name"><a href="../pip_services3_components/LogCounters/save.html">save</a></span><span class="signature">(<wbr><span class="parameter" id="save-param-counters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../pip_services3_components/Counter-class.html">Counter</a></span>&gt;</span>?</span> <span class="parameter-name">counters</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Saves the current counters measurements. <a href="../pip_services3_components/LogCounters/save.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="setInterval" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/setInterval.html">setInterval</a></span><span class="signature">(<wbr><span class="parameter" id="setInterval-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the counters dump/save interval. <a href="../pip_services3_components/CachedCounters/setInterval.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="setReferences" class="callable">
+  <span class="name"><a href="../pip_services3_components/LogCounters/setReferences.html">setReferences</a></span><span class="signature">(<wbr><span class="parameter" id="setReferences-param-references"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.1/pip_services3_commons/IReferences-class.html">IReferences</a></span> <span class="parameter-name">references</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets references to dependent components. <a href="../pip_services3_components/LogCounters/setReferences.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="stats" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/stats.html">stats</a></span><span class="signature">(<wbr><span class="parameter" id="stats-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="stats-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Calculates min/average/max statistics based on the current and previous values. <a href="../pip_services3_components/CachedCounters/stats.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="timestamp" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/timestamp.html">timestamp</a></span><span class="signature">(<wbr><span class="parameter" id="timestamp-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="timestamp-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Records the given timestamp. <a href="../pip_services3_components/CachedCounters/timestamp.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="timestampNow" class="callable inherited">
+  <span class="name"><a href="../pip_services3_components/CachedCounters/timestampNow.html">timestampNow</a></span><span class="signature">(<wbr><span class="parameter" id="timestampNow-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Records the current time as a timestamp. <a href="../pip_services3_components/CachedCounters/timestampNow.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.14.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <header id="header-search-sidebar" class="hidden-l">
@@ -132,409 +537,6 @@
 
   </div>
 
-  <div id="dartdoc-main-content" class="main-content">
-      <div>
-<h1><span class="kind-class">LogCounters</span> class 
- 
-</h1></div>
-
-    
-<section class="desc markdown">
-  <p>Performance counters that periodically dumps counters measurements to logger.</p>
-<h3 id="configuration-parameters">Configuration parameters</h3>
-<ul>
-<li><strong>options:</strong>
-<ul>
-<li><code>interval</code>:          interval in milliseconds to save current counters measurements (default: 5 mins)</li>
-<li><code>reset_timeout</code>:     timeout in milliseconds to reset the counters. 0 disables the reset (default: 0)</li>
-</ul>
-</li>
-</ul>
-<h3 id="references">References</h3>
-<ul>
-<li>*:logger:*:*:1.0           <a href="../pip_services3_components/ILogger-class.html">ILogger</a> components to dump the captured counters</li>
-<li>*:context-info:*:*:1.0     (optional) <a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a> to detect the context id and specify counters source</li>
-</ul>
-<p>See <a href="../pip_services3_components/Counter-class.html">Counter</a>
-See <a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a>
-See <a href="../pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></p>
-<h3 id="example">Example</h3>
-<pre class="language-dart"><code>var counters = LogCounters();
-counters.setReferences(References.fromTuples([
-    Descriptor("pip-services", "logger", "console", "default", "1.0"), ConsoleLogger()
-]));
-
-counters.increment("mycomponent.mymethod.calls");
-var timing = counters.beginTiming("mycomponent.mymethod.exec_time");
-try {
-    ...
-} finally {
-    timing.endTiming();
-}
-
-counters.dump();
-</code></pre>
-</section>
-
-
-    <section>
-      <dl class="dl-horizontal">
-        <dt>Inheritance</dt>
-        <dd><ul class="gt-separated dark clazz-relationships">
-          <li><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object-class.html">Object</a></li>
-          <li><a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a></li>
-          <li>LogCounters</li>
-        </ul></dd>
-
-        <dt>Implemented types</dt>
-        <dd>
-          <ul class="comma-separated clazz-relationships">
-            <li><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/IReferenceable-class.html">IReferenceable</a></li>
-          </ul>
-        </dd>
-
-
-
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="constructors">
-      <h2>Constructors</h2>
-
-      <dl class="constructor-summary-list">
-        <dt id="LogCounters" class="callable">
-          <span class="name"><a href="../pip_services3_components/LogCounters/LogCounters.html">LogCounters</a></span><span class="signature">()</span>
-        </dt>
-        <dd>
-          Creates a new instance of the counters. 
-        </dd>
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor inherited" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
-        <dt id="hashCode" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> 
-
-</dt>
-<dd class="inherited">
-  The hash code for this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">[...]</a>
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-        <dt id="runtimeType" class="property inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/Type-class.html">Type</a></span> 
-
-</dt>
-<dd class="inherited">
-  A representation of the runtime type of the object. 
-  <div class="features">read-only, inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="instance-methods">
-      <h2>Methods</h2>
-      <dl class="callables">
-        <dt id="beginTiming" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/beginTiming.html">beginTiming</a></span><span class="signature">(<wbr><span class="parameter" id="beginTiming-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/Timing-class.html">Timing</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Begins measurement of execution time interval.
-It returns <a href="../pip_services3_components/Timing-class.html">Timing</a> object which has to be called at
-<a href="../pip_services3_components/Timing/endTiming.html">Timing.endTiming</a> to end the measurement and update the counter. <a href="../pip_services3_components/CachedCounters/beginTiming.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="clear" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Clears (resets) a counter specified by its name. <a href="../pip_services3_components/CachedCounters/clear.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="clearAll" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/clearAll.html">clearAll</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Clears (resets) all counters. 
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="configure" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/configure.html">configure</a></span><span class="signature">(<wbr><span class="parameter" id="configure-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Configures component by passing configuration parameters. <a href="../pip_services3_components/CachedCounters/configure.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="dump" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/dump.html">dump</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Dumps (saves) the current values of counters. <a href="../pip_services3_components/CachedCounters/dump.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="endTiming" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/endTiming.html">endTiming</a></span><span class="signature">(<wbr><span class="parameter" id="endTiming-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="endTiming-param-elapsed"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">elapsed</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Ends measurement of execution elapsed time and updates specified counter. <a href="../pip_services3_components/CachedCounters/endTiming.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="get" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="get-param-type"><span class="type-annotation"><a href="../pip_services3_components/CounterType-class.html">CounterType</a></span> <span class="parameter-name">type</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../pip_services3_components/Counter-class.html">Counter</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Gets a counter specified by its name.
-It counter does not exist or its type doesn't match the specified type
-it creates a new one. <a href="../pip_services3_components/CachedCounters/get.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="getAll" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/getAll.html">getAll</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../pip_services3_components/Counter-class.html">Counter</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Gets all captured counters. <a href="../pip_services3_components/CachedCounters/getAll.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="getInterval" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/getInterval.html">getInterval</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Gets the counters dump/save interval. <a href="../pip_services3_components/CachedCounters/getInterval.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="increment" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/increment.html">increment</a></span><span class="signature">(<wbr><span class="parameter" id="increment-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="increment-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Increments counter by given value. <a href="../pip_services3_components/CachedCounters/increment.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="incrementOne" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/incrementOne.html">incrementOne</a></span><span class="signature">(<wbr><span class="parameter" id="incrementOne-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Increments counter by 1. <a href="../pip_services3_components/CachedCounters/incrementOne.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="last" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/last.html">last</a></span><span class="signature">(<wbr><span class="parameter" id="last-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="last-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Records the last calculated measurement value. <a href="../pip_services3_components/CachedCounters/last.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="noSuchMethod" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
-    <span class="returntype parameter">&#8594; dynamic</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="save" class="callable">
-  <span class="name"><a href="../pip_services3_components/LogCounters/save.html">save</a></span><span class="signature">(<wbr><span class="parameter" id="save-param-counters"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../pip_services3_components/Counter-class.html">Counter</a></span>&gt;</span></span> <span class="parameter-name">counters</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Saves the current counters measurements. <a href="../pip_services3_components/LogCounters/save.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="setInterval" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/setInterval.html">setInterval</a></span><span class="signature">(<wbr><span class="parameter" id="setInterval-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Sets the counters dump/save interval. <a href="../pip_services3_components/CachedCounters/setInterval.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="setReferences" class="callable">
-  <span class="name"><a href="../pip_services3_components/LogCounters/setReferences.html">setReferences</a></span><span class="signature">(<wbr><span class="parameter" id="setReferences-param-references"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.0.12/pip_services3_commons/IReferences-class.html">IReferences</a></span> <span class="parameter-name">references</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Sets references to dependent components. <a href="../pip_services3_components/LogCounters/setReferences.html">[...]</a>
-  <div class="features">override</div>
-
-</dd>
-
-        <dt id="stats" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/stats.html">stats</a></span><span class="signature">(<wbr><span class="parameter" id="stats-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="stats-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Calculates min/average/max statistics based on the current and previous values. <a href="../pip_services3_components/CachedCounters/stats.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="timestamp" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/timestamp.html">timestamp</a></span><span class="signature">(<wbr><span class="parameter" id="timestamp-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="timestamp-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">value</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Records the given timestamp. <a href="../pip_services3_components/CachedCounters/timestamp.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="timestampNow" class="callable inherited">
-  <span class="name"><a href="../pip_services3_components/CachedCounters/timestampNow.html">timestampNow</a></span><span class="signature">(<wbr><span class="parameter" id="timestampNow-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Records the current time as a timestamp. <a href="../pip_services3_components/CachedCounters/timestampNow.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-        <dt id="toString" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/String-class.html">String</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  A string representation of this object. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor inherited" id="operators">
-      <h2>Operators</h2>
-      <dl class="callables">
-        <dt id="operator ==" class="callable inherited">
-  <span class="name"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.13.4/dart-core/bool-class.html">bool</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  The equality operator. <a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">[...]</a>
-  <div class="features">inherited</div>
-
-</dd>
-
-      </dl>
-    </section>
-
-
-
-
-  </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <ol>
 
@@ -545,8 +547,8 @@ it creates a new one. <a href="../pip_services3_components/CachedCounters/get.ht
     <li class="section-title inherited">
       <a href="../pip_services3_components/LogCounters-class.html#instance-properties">Properties</a>
     </li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/hashCode.html">hashCode</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
 
     <li class="section-title"><a href="../pip_services3_components/LogCounters-class.html#instance-methods">Methods</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/beginTiming.html">beginTiming</a></li>
@@ -561,17 +563,17 @@ it creates a new one. <a href="../pip_services3_components/CachedCounters/get.ht
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/increment.html">increment</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/incrementOne.html">incrementOne</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/last.html">last</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
     <li><a href="../pip_services3_components/LogCounters/save.html">save</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/setInterval.html">setInterval</a></li>
     <li><a href="../pip_services3_components/LogCounters/setReferences.html">setReferences</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/stats.html">stats</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/timestamp.html">timestamp</a></li>
     <li class="inherited"><a href="../pip_services3_components/CachedCounters/timestampNow.html">timestampNow</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/toString.html">toString</a></li>
 
     <li class="section-title inherited"><a href="../pip_services3_components/LogCounters-class.html#operators">Operators</a></li>
-    <li class="inherited"><a href="https://api.dart.dev/stable/2.13.4/dart-core/Object/operator_equals.html">operator ==</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.14.1/dart-core/Object/operator_equals.html">operator ==</a></li>
 
 
 
@@ -585,15 +587,16 @@ it creates a new one. <a href="../pip_services3_components/CachedCounters/get.ht
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.7
+      1.1.0
   </span>
 
   
 </footer>
 
 
-<script src="../static-assets/highlight.pack.js"></script>
-<script src="../static-assets/script.js"></script>
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
 
 
 

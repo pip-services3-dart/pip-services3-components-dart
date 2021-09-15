@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 0.42.0">
+  <meta name="generator" content="made with love by dartdoc 1.0.0">
   <meta name="description" content="pip_services3_components API docs, for the Dart programming language.">
   <title>pip_services3_components - Dart API docs</title>
 
@@ -13,9 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="static-assets/github.css">
-  <link rel="stylesheet" href="static-assets/styles.css">
-  <link rel="icon" href="static-assets/favicon.png">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
 
   
 </head>
@@ -39,26 +40,6 @@
 
 <main>
 
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <header id="header-search-sidebar" class="hidden-l">
-  <form class="search-sidebar" role="search">
-    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
-  </form>
-</header>
-
-<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-  <li><a href="https://github.com/pip-services3-dart/pip-services3-components-dart">pip_services3_components package</a></li>
-</ol>
-
-
-    <h5 class="hidden-xs"><span class="package-name">pip_services3_components</span> <span class="package-kind">package</span></h5>
-    <ol>
-      <li class="section-title">Libraries</li>
-      <li><a href="pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
-</ol>
-
-  </div>
 
   <div id="dartdoc-main-content" class="main-content">
       
@@ -155,43 +136,58 @@ import 'package:pip_services3_components/src/connect/ConnectionResolver.dart';
 import 'package:pip_services3_components/src/auth/CredentialParams.dart';
 import 'package:pip_services3_components/src/auth/CredentialResolver.dart';
 
-
 class MyComponent implements IConfigurable, IReferenceable, IOpenable {
-  ConnectionResolver _connectionResolver = ConnectionResolver();
-  CredentialResolver _credentialResolver = CredentialResolver();
-  
-  configure(ConfigParams config) {
-    this._connectionResolver.configure(config);
-    this._credentialResolver.configure(config);
-  }
-  
-  setReferences(IReferences refs) {
-    this._connectionResolver.setReferences(refs);
-    this._credentialResolver.setReferences(refs);
-  }
-  
-  ...
-  
-  open(String correlationId) async{
+  final _connectionResolver = ConnectionResolver();
+  final _credentialResolver = CredentialResolver();
+  bool _opened = false;
 
-      ConnectionParams connection = await this._connectionResolver.resolve(correlationId);
-      
-      CredentialParams credential = await this._credentialResolver.lookup(correlationId);
-      
-      String host = connection.getHost();
-      int port = connection.getPort();
-      String user = credential.getUsername();
-      String pass = credential.getPassword();
-        ...
-      }
+  @override
+  void configure(ConfigParams config) {
+    _connectionResolver.configure(config);
+    _credentialResolver.configure(config);
+  }
+
+  @override
+  void setReferences(IReferences refs) {
+    _connectionResolver.setReferences(refs);
+    _credentialResolver.setReferences(refs);
+  }
+
+  // ...
+  @override
+  Future open(String? correlationId) async {
+    ConnectionParams? connection =
+        await _connectionResolver.resolve(correlationId);
+
+    CredentialParams? credential =
+        await _credentialResolver.lookup(correlationId);
+
+    if (connection != null &amp;&amp; credential != null) {
+      String? host = connection.getHost();
+      int? port = connection.getPort();
+      String? user = credential.getUsername();
+      String? pass = credential.getPassword();
+      // ...
+      _opened = true;
     }
   }
+
+  @override
+  Future close(String? correlationId) {
+    // do closing
+    return Future.value();
+  }
+
+  @override
+  bool isOpen() {
+    return _opened;
+  }
 }
+
 </code></pre>
 <p>Example how to use caching and locking.
 Here we assume that references are passed externally.</p>
-<pre class="language-dart"><code class="language-dart">
-import 'package:pip_services3_commons/src/refer/Descriptor.dart';
+<pre class="language-dart"><code class="language-dart">import 'package:pip_services3_commons/src/refer/Descriptor.dart';
 import 'package:pip_services3_commons/src/refer/References.dart';
 import 'package:pip_services3_commons/src/refer/IReferences.dart';
 import 'package:pip_services3_commons/src/refer/IReferenceable.dart';
@@ -200,58 +196,61 @@ import 'package:pip_services3_components/src/lock/MemoryLock.dart';
 import 'package:pip_services3_components/src/cache/ICache.dart';
 import 'package:pip_services3_components/src/cache/MemoryCache.dart';
 
-
 class MyComponent implements IReferenceable {
-  ICache _cache;
-  ILock _lock;
-  
-  setReferences(IReferences refs) {
-    this._cache = refs.getOneRequired&lt;ICache&gt;(Descriptor("*", "cache", "*", "*", "1.0"));
-    this._lock = refs.getOneRequired&lt;ILock&gt;(Descriptor("*", "lock", "*", "*", "1.0"));
-  }
-  
-  myMethod(String correlationId, dynamic param1) async {
-    // First check cache for result
-    dynamic result = await this._cache.retrieve(correlationId, "mykey")
-      
-      // Lock..
-      this._lock.acquireLock(correlationId, "mykey", 1000, 1000)
-        
-      // Do processing
-      ...
-      
-      // Store result to cache async
-      this._cache.store(correlationId, "mykey", result, 3600000);
+  ICache? _cache;
+  ILock? _lock;
 
-      // Release lock async
-      this._lock.releaseLock(correlationId, "mykey");
-      
-      };
-    }
+  @override
+  void setReferences(IReferences refs) {
+    _cache =
+        refs.getOneRequired&lt;ICache&gt;(Descriptor('*', 'cache', '*', '*', '1.0'));
+    _lock =
+        refs.getOneRequired&lt;ILock&gt;(Descriptor('*', 'lock', '*', '*', '1.0'));
+  }
+
+  Future myMethod(String? correlationId, dynamic param1) async {
+    // First check cache for result
+    dynamic result = await _cache!.retrieve(correlationId, 'mykey');
+
+    // Lock..
+    await _lock!.acquireLock(correlationId, 'mykey', 1000, 1000);
+
+    // Do processing
+    // ...
+
+    // Store result to cache async
+    await _cache!.store(correlationId, 'mykey', result, 3600000);
+
+    // Release lock async
+    await _lock!.releaseLock(correlationId, 'mykey');
   }
 }
 
+void main() async {
 // Use the component
-MyComponent myComponent = new MyComponent();
+  MyComponent myComponent = MyComponent();
 
-myComponent.setReferences(References.fromTuples([
-  Descriptor("pip-services", "cache", "memory", "default", "1.0"), MemoryCache(),
-  Descriptor("pip-services", "lock", "memory", "default", "1.0"), MemoryLock(),
-]);
+  myComponent.setReferences(References.fromTuples([
+    Descriptor('pip-services', 'cache', 'memory', 'default', '1.0'),
+    MemoryCache(),
+    Descriptor('pip-services', 'lock', 'memory', 'default', '1.0'),
+    MemoryLock(),
+  ]));
 
-myComponent.myMethod(null);
+  await myComponent.myMethod(null, 'param1');
+}
 </code></pre>
 <p>If you need to create components using their locators (descriptors) implement 
 component factories similar to the example below.</p>
 <pre class="language-dart"><code class="language-dart">import 'package:pip_services3_components/src/build/Factory.dart';
 import 'package:pip_services3_commons/src/refer/Descriptor.dart';
 
-
 class MyFactory extends Factory {
-  static Descriptor myComponentDescriptor  = new Descriptor("myservice", "mycomponent", "default", "*", "1.0");
-  
-  MyFactory():super() {
-    this.registerAsType(MyFactory.myComponentDescriptor, MyComponent);    
+  static Descriptor myComponentDescriptor =
+      Descriptor('myservice', 'mycomponent', 'default', '*', '1.0');
+
+  MyFactory() : super() {
+    registerAsType(MyFactory.myComponentDescriptor, MyComponent);
   }
 }
 
@@ -259,8 +258,10 @@ class MyFactory extends Factory {
 
 MyFactory myFactory = MyFactory();
 
-MyComponent1 myComponent1 = myFactory.create(new Descriptor("myservice", "mycomponent", "default", "myComponent1", "1.0"));
-MyComponent2 myComponent2 = myFactory.create(new Descriptor("myservice", "mycomponent", "default", "myComponent2", "1.0"));
+MyComponent1 myComponent1 = myFactory.create(
+    Descriptor('myservice', 'mycomponent', 'default', 'myComponent1', '1.0'));
+MyComponent2 myComponent2 = myFactory.create(
+    Descriptor('myservice', 'mycomponent', 'default', 'myComponent2', '1.0'));
 ...
 </code></pre>
 <h2 id="develop">Develop</h2>
@@ -305,6 +306,26 @@ MyComponent2 myComponent2 = myFactory.create(new Descriptor("myservice", "mycomp
 
   </div> <!-- /.main-content -->
 
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="https://github.com/pip-services3-dart/pip-services3-components-dart">pip_services3_components package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">pip_services3_components</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="pip_services3_components/pip_services3_components-library.html">pip_services3_components</a></li>
+</ol>
+
+  </div>
+
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div>
 
@@ -313,15 +334,16 @@ MyComponent2 myComponent2 = myFactory.create(new Descriptor("myservice", "mycomp
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.0.7
+      1.1.0
   </span>
 
   
 </footer>
 
 
-<script src="static-assets/highlight.pack.js"></script>
-<script src="static-assets/script.js"></script>
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/script.js?v1"></script>
 
 
 
