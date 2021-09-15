@@ -16,7 +16,7 @@ import '../../pip_services3_components.dart';
 ///
 /// ### Example ###
 ///
-///     var cache = new MemoryCache();
+///     var cache = MemoryCache();
 ///
 ///     await cache.store('123', 'key1', 'ABC')
 ///     var value await cache.retrive('123', 'key1')

@@ -38,7 +38,7 @@ void main(){
     String KEY1 = 'key1';
     String VALUE1 = 'value1';
 
-    MemoryCache _cache;
+    var _cache = MemoryCache();
      try {
       await _cache.store('123', KEY1, VALUE1, 5000);
     } catch (err) {
@@ -156,7 +156,7 @@ void main(){
 ```dart
 void main() async {
     final String LOCK1 = 'lock_1';
-    _lock = MemoryLock();
+    var _lock = MemoryLock();
     // Try to acquire lock for the first time
     try {
       var result = await _lock.tryAcquireLock('123', LOCK1, 3000);

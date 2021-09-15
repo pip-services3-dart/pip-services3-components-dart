@@ -110,7 +110,7 @@ class ConnectionParams extends ConfigParams {
   /// Gets the port number.
   ///
   /// Return the port number.
-  int getPort() {
+  int? getPort() {
     return super.getAsInteger('port');
   }
 
