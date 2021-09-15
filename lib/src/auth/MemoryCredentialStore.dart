@@ -37,7 +37,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   ///
   /// - [config]    (optional) configuration with credential parameters.
 
-  MemoryCredentialStore([ConfigParams config]) {
+  MemoryCredentialStore([ConfigParams? config]) {
     if (config != null) configure(config);
   }
 
@@ -72,7 +72,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// Throw error
   @override
   Future store(
-      String correlationId, String key, CredentialParams credential) async {
+      String? correlationId, String key, CredentialParams? credential) async {
     if (credential != null) {
       _items[key] = credential;
     } else {
@@ -87,7 +87,7 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// Return              Future that receives found credential parameters
   /// Throw error.
   @override
-  Future<CredentialParams> lookup(String correlationId, String key) async {
+  Future<CredentialParams?> lookup(String? correlationId, String? key) async {
     var credential = _items[key];
     return credential;
   }

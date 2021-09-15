@@ -9,7 +9,7 @@ class CreateException extends InternalException {
   ///
   /// - [correlation_id]    (optional) a unique transaction id to trace execution through call chain.
   /// - [messageOrLocator]  human-readable error or locator of the component that cannot be created.
-  CreateException(String correlationId, dynamic messageOrLocator)
+  CreateException(String? correlationId, dynamic messageOrLocator)
       : super(
             correlationId,
             'CANNOT_CREATE',

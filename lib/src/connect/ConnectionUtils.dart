@@ -10,12 +10,12 @@ class ConnectionUtils {
   /// - [options2] second options to merge
   /// - [keys] when define it limits only to specific keys
   static ConfigParams concat(ConfigParams options1, ConfigParams options2,
-      [List<String> keys]) {
+      [List<String>? keys]) {
     dynamic options = ConfigParams.fromValue(options1);
 
     for (var key in options2.getKeys()) {
-      var value1 = options1.getAsString(key) ?? '';
-      var value2 = options2.getAsString(key) ?? '';
+      var value1 = options1.getAsString(key);
+      var value2 = options2.getAsString(key);
 
       if (value1 != '' && value2 != '') {
         if (keys == null || keys.isEmpty || keys.contains(key)) {
@@ -30,7 +30,7 @@ class ConnectionUtils {
     return options;
   }
 
-  static String concatValues(String value1, String value2) {
+  static String? concatValues(String? value1, String? value2) {
     if (value1 == null || value1 == '') return value2;
     if (value2 == null || value2 == '') return value1;
     return value1 + ',' + value2;
@@ -46,7 +46,7 @@ class ConnectionUtils {
   /// return a configuration parameters with URI elements
   ///
   static ConfigParams parseUri(
-      String uri, String defaultProtocol, int defaultPort) {
+      String? uri, String defaultProtocol, int defaultPort) {
     var options = ConfigParams();
 
     if (uri == null || uri == '') return options;
@@ -136,11 +136,12 @@ class ConnectionUtils {
   /// - [defaultProtocol] a default protocol
   /// - [defaultPort] a default port
   static String composeUri(
-      ConfigParams options, String defaultProtocol, int defaultPort) {
+      ConfigParams options, String? defaultProtocol, int? defaultPort) {
     var builder = '';
 
-    var protocol = options.getAsStringWithDefault('protocol', defaultProtocol);
-    if (protocol != null) {
+    var protocol =
+        options.getAsStringWithDefault('protocol', defaultProtocol ?? '');
+    if (protocol != '') {
       builder = protocol + '://' + builder;
     }
 
@@ -214,7 +215,7 @@ class ConnectionUtils {
   /// - [options] configuration parameters to be processed.
   /// - [keys] a list of keys to be included.
   /// return a processed config parameters.
-  static ConfigParams include(ConfigParams options, List<String> keys) {
+  static ConfigParams include(ConfigParams options, List<String>? keys) {
     if (keys == null || keys.isEmpty) return options;
 
     var result = ConfigParams();
@@ -233,7 +234,7 @@ class ConnectionUtils {
   /// - [options] configuration parameters to be processed.
   /// - [keys] a list of keys to be included.
   /// return a processed config parameters.
-  static ConfigParams exclude(ConfigParams options, List<String> keys) {
+  static ConfigParams exclude(ConfigParams options, List<String>? keys) {
     if (keys == null || keys.isEmpty) return options;
 
     var result = ConfigParams.fromString(options.clone().toString());

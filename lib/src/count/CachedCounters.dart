@@ -17,7 +17,7 @@ abstract class CachedCounters
   int _interval = 300000;
   int _resetTimeout = 0;
   final _cache = <String, Counter>{};
-  bool _updated;
+  bool _updated = false;
   int _lastDumpTime = DateTime.now().toUtc().millisecondsSinceEpoch;
   int _lastResetTime = DateTime.now().toUtc().millisecondsSinceEpoch;
 
@@ -129,7 +129,7 @@ abstract class CachedCounters
     _resetIfNeeded();
 
     for (var key in _cache.keys) {
-      result.add(_cache[key]);
+      if (_cache.containsKey(key)) result.add(_cache[key]!);
     }
 
     return result;
@@ -142,7 +142,7 @@ abstract class CachedCounters
   /// - [name]  a counter name to retrieve.
   /// - [type]  a counter type.
   /// Return an existing or newly created counter of the specified type.
-  Counter get(String name, CounterType type) {
+  Counter get(String? name, CounterType type) {
     if (name == null || name == '') {
       throw Exception('Name cannot be null');
     }
@@ -159,17 +159,17 @@ abstract class CachedCounters
     return counter;
   }
 
-  void _calculateStats(Counter counter, int value) {
+  void _calculateStats(Counter? counter, int value) {
     if (counter == null) {
       throw Exception('Counter cannot be null');
     }
 
     counter.last = value;
-    counter.count = counter.count != null ? counter.count + 1 : 1;
-    counter.max = counter.max != null ? max(counter.max, value) : value;
-    counter.min = counter.min != null ? min(counter.min, value) : value;
-    counter.average = (counter.average != null && counter.count > 1
-        ? (counter.average * (counter.count - 1) + value) / counter.count
+    counter.count = counter.count != null ? counter.count! + 1 : 1;
+    counter.max = counter.max != null ? max(counter.max!, value) : value;
+    counter.min = counter.min != null ? min(counter.min!, value) : value;
+    counter.average = (counter.average != null && counter.count! > 1
+        ? (counter.average! * (counter.count! - 1) + value) / counter.count!
         : (value + 0.0));
   }
 
@@ -180,7 +180,7 @@ abstract class CachedCounters
   ///
   /// See [Timing.endTiming]
   @override
-  void endTiming(String name, int elapsed) {
+  void endTiming(String? name, int elapsed) {
     var counter = get(name, CounterType.Interval);
     _calculateStats(counter, elapsed);
     _update();
@@ -245,7 +245,7 @@ abstract class CachedCounters
   @override
   void increment(String name, int value) {
     var counter = get(name, CounterType.Increment);
-    counter.count = counter.count != null ? counter.count + value : value;
+    counter.count = counter.count != null ? counter.count! + value : value;
     _update();
   }
 }

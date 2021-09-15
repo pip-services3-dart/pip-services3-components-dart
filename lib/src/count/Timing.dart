@@ -12,18 +12,18 @@ import '../../pip_services3_components.dart';
 ///         timing.endTiming();
 ///     }
 class Timing {
-  int _start;
-  ITimingCallback _callback;
-  String _counter;
+  final int _start;
+  ITimingCallback? _callback;
+  String? _counter;
 
   /// Creates a new instance of the timing callback object.
   ///
   /// - counter 		an associated counter name
   /// - callback 		a callback that shall be called when endTiming is called.
-  Timing([String counter, ITimingCallback callback]) {
+  Timing([String? counter, ITimingCallback? callback])
+      : _start = DateTime.now().toUtc().millisecondsSinceEpoch {
     _counter = counter;
     _callback = callback;
-    _start = DateTime.now().toUtc().millisecondsSinceEpoch;
   }
 
   /// Ends timing of an execution block, calculates elapsed time
@@ -31,7 +31,7 @@ class Timing {
   void endTiming() {
     if (_callback != null) {
       var elapsed = DateTime.now().toUtc().millisecondsSinceEpoch - _start;
-      _callback.endTiming(_counter, elapsed);
+      _callback!.endTiming(_counter, elapsed);
     }
   }
 }

@@ -39,7 +39,8 @@ class MemoryLock extends Lock {
   /// Return                Future  that receives a lock result
   /// Throws error.
   @override
-  Future<bool> tryAcquireLock(String correlationId, String key, int ttl) async {
+  Future<bool> tryAcquireLock(
+      String? correlationId, String key, int ttl) async {
     var expireTime = _locks[key];
     var now = DateTime.now().toUtc().millisecondsSinceEpoch;
 
@@ -59,7 +60,7 @@ class MemoryLock extends Lock {
   ///                          with null.
   /// Throw error
   @override
-  Future releaseLock(String correlationId, String key) async {
+  Future releaseLock(String? correlationId, String key) async {
     _locks.remove(key);
   }
 }

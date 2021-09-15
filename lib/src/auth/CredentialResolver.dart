@@ -45,13 +45,13 @@ import '../../pip_services3_components.dart';
 ///
 class CredentialResolver {
   final _credentials = <CredentialParams>[];
-  IReferences _references;
+  IReferences? _references;
 
   /// Creates a new instance of credentials resolver.
   ///
   /// - [config]        (optional) component configuration parameters
   /// - [references]    (optional) component references
-  CredentialResolver([ConfigParams config, IReferences references]) {
+  CredentialResolver([ConfigParams? config, IReferences? references]) {
     if (config != null) configure(config);
     if (references != null) setReferences(references);
   }
@@ -88,20 +88,20 @@ class CredentialResolver {
     _credentials.add(credential);
   }
 
-  Future<CredentialParams> _lookupInStores(
-      String correlationId, CredentialParams credential) async {
+  Future<CredentialParams?> _lookupInStores(
+      String? correlationId, CredentialParams credential) async {
     if (!credential.useCredentialStore()) return null;
 
     var key = credential.getStoreKey();
     if (_references == null) return null;
 
     var storeDescriptor = Descriptor('*', 'credential-store', '*', '*', '*');
-    var components = _references.getOptional<dynamic>(storeDescriptor);
+    var components = _references!.getOptional<dynamic>(storeDescriptor);
     if (components.isEmpty) {
       throw ReferenceException(correlationId, storeDescriptor);
     }
 
-    CredentialParams firstResult;
+    CredentialParams? firstResult;
     for (var component in components) {
       ICredentialStore store = component;
       var result = await store.lookup(correlationId, key);
@@ -119,7 +119,7 @@ class CredentialResolver {
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// Returrn 			Future that receives resolved credential.
   /// Throw error
-  Future<CredentialParams> lookup(String correlationId) async {
+  Future<CredentialParams?> lookup(String? correlationId) async {
     if (_credentials.isEmpty) {
       return null;
     }
@@ -134,7 +134,7 @@ class CredentialResolver {
       }
     }
 
-    CredentialParams firstResult;
+    CredentialParams? firstResult;
     for (var credential in lookupCredentials) {
       var result = await _lookupInStores(correlationId, credential);
       if (result != null) {

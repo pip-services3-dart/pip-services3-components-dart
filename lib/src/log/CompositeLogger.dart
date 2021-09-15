@@ -40,7 +40,7 @@ class CompositeLogger extends Logger implements IReferenceable {
   ///
   /// - references 	references to locate the component dependencies.
 
-  CompositeLogger([IReferences references]) : super() {
+  CompositeLogger([IReferences? references]) : super() {
     if (references != null) setReferences(references);
   }
 
@@ -70,7 +70,7 @@ class CompositeLogger extends Logger implements IReferenceable {
   /// - message           a human-readable message to log.
   @override
   void write(
-      LogLevel level, String correlationId, Exception error, String message) {
+      LogLevel level, String? correlationId, Exception? error, String message) {
     for (var index = 0; index < _loggers.length; index++) {
       _loggers[index].log(level, correlationId, error, message);
     }

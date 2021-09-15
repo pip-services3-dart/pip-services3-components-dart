@@ -39,7 +39,7 @@ abstract class CachedLogger extends Logger {
   /// - [message]           a human-readable message to log.
   @override
   void write(
-      LogLevel level, String correlationId, Exception error, String message) {
+      LogLevel level, String? correlationId, Exception? error, String message) {
     var errorDesc =
         error != null ? ErrorDescriptionFactory.create(error) : null;
     var logMessage = LogMessage();

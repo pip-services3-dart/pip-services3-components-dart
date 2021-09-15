@@ -24,7 +24,7 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 ///     shutdown.shutdown();         // Result: Bang!!! the process crashes
 
 class Shutdown implements IConfigurable, IOpenable {
-  Timer _interval;
+  Timer? _interval;
   String _mode = 'exception';
   int _minTimeout = 300000;
   int _maxTimeout = 900000;
@@ -55,8 +55,8 @@ class Shutdown implements IConfigurable, IOpenable {
   /// - correlationId 	(optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives error or null no errors occured.
   @override
-  Future open(String correlationId) async {
-    if (_interval != null) _interval.cancel();
+  Future open(String? correlationId) async {
+    if (_interval != null) _interval!.cancel();
 
     var timeout = RandomInteger.nextInteger(_minTimeout, _maxTimeout);
     _interval = Timer.periodic(Duration(milliseconds: timeout), (Timer tm) {
@@ -69,9 +69,9 @@ class Shutdown implements IConfigurable, IOpenable {
   /// - correlationId 	(optional) transaction id to trace execution through call chain.
   /// - callback 			callback function that receives error or null no errors occured.
   @override
-  Future close(String correlationId) async {
+  Future close(String? correlationId) async {
     if (_interval != null) {
-      _interval.cancel();
+      _interval!.cancel();
       _interval = null;
     }
   }

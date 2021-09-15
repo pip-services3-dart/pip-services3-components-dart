@@ -32,7 +32,7 @@ abstract class Lock implements ILock, IReconfigurable {
   /// Return                Future  that receives a lock result
   /// Throws error.
   @override
-  Future<bool> tryAcquireLock(String correlationId, String key, int ttl);
+  Future<bool> tryAcquireLock(String? correlationId, String key, int ttl);
 
   /// Releases prevously acquired lock by its key.
   ///
@@ -41,7 +41,7 @@ abstract class Lock implements ILock, IReconfigurable {
   /// Return              Future  that receives null for success.
   /// Throws error
   @override
-  Future releaseLock(String correlationId, String key);
+  Future releaseLock(String? correlationId, String key);
 
   /// Makes multiple attempts to acquire a lock by its key within give time interval.
   ///
@@ -53,7 +53,7 @@ abstract class Lock implements ILock, IReconfigurable {
   /// Throw error
   @override
   Future acquireLock(
-      String correlationId, String key, int ttl, int timeout) async {
+      String? correlationId, String key, int ttl, int timeout) async {
     var retryTime = DateTime.now()
         .toUtc()
         .add(Duration(milliseconds: timeout))

@@ -79,7 +79,7 @@ class LogCounters extends CachedCounters implements IReferenceable {
   ///
   /// - [counters]      current counters measurements to be saves.
   @override
-  void save(List<Counter> counters) {
+  void save(List<Counter>? counters) {
     if (_logger == null || counters == null) return;
 
     if (counters.isEmpty) return;

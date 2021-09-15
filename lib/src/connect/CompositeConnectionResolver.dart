@@ -23,25 +23,25 @@ import 'package:pip_services3_components/pip_services3_components.dart';
 ///
 class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   /// The connection options
-  ConfigParams _options;
+  ConfigParams? _options;
 
   /// The connections resolver.
-  ConnectionResolver _connectionResolver = ConnectionResolver();
+  final ConnectionResolver _connectionResolver = ConnectionResolver();
 
   /// The credentials resolver.
-  CredentialResolver _credentialResolver = CredentialResolver();
+  final CredentialResolver _credentialResolver = CredentialResolver();
 
   /// The cluster support (multiple connections)
-  bool _clusterSupported = true;
+  final bool _clusterSupported = true;
 
   /// The default protocol
-  String _defaultProtocol = null;
+  final String? _defaultProtocol = null;
 
   /// The default port number
-  int _defaultPort = 0;
+  final int _defaultPort = 0;
 
   /// The list of supported protocols
-  List<String> _supportedProtocols = null;
+  final List<String>? _supportedProtocols = null;
 
   /// Configures component by passing configuration parameters.
   ///
@@ -66,13 +66,13 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// Return resolved options.
-  Future<ConfigParams> resolve(String correlationId) async {
-    List<ConnectionParams> connections;
-    CredentialParams credential;
+  Future<ConfigParams> resolve(String? correlationId) async {
+    var connections = <ConnectionParams>[];
+    var credential = CredentialParams();
 
     await Future(() async {
       connections = await _connectionResolver.resolveAll(correlationId);
-      connections = connections ?? [];
+      connections = connections.isNotEmpty ? connections : [];
 
       // Validate if cluster (multiple connections) is supported
       if (connections.isEmpty && !_clusterSupported) {
@@ -88,13 +88,13 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
     });
 
     await Future(() async {
-      credential = await _credentialResolver.lookup(correlationId);
-      credential = credential ?? CredentialParams();
+      var result = await _credentialResolver.lookup(correlationId);
+      credential = result ?? credential;
       // Validate credential
       validateCredential(correlationId, credential);
     });
 
-    return composeOptions(connections, credential, _options);
+    return composeOptions(connections, credential, _options!);
   }
 
   /// Composes Composite connection options from connection and credential parameters.
@@ -104,8 +104,11 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   /// - [credential]        credential parameters
   /// - [parameters]        optional parameters
   /// Return                resolved options.
-  ConfigParams compose(String correlationId, List<ConnectionParams> connections,
-      CredentialParams credential, ConfigParams parameters) {
+  ConfigParams compose(
+      String? correlationId,
+      List<ConnectionParams> connections,
+      CredentialParams credential,
+      ConfigParams parameters) {
     // Validate connection parameters
     for (dynamic connection in connections) {
       validateConnection(correlationId, connection);
@@ -123,7 +126,7 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [connection]        connection parameters to be validated
-  void validateConnection(String correlationId, ConnectionParams connection) {
+  void validateConnection(String? correlationId, ConnectionParams? connection) {
     if (connection == null) {
       throw ConfigException(correlationId, 'NO_CONNECTION',
           'Connection parameters are not set is not set');
@@ -135,13 +138,13 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
       return;
     }
 
-    dynamic protocol = connection.getProtocolWithDefault(_defaultProtocol);
+    dynamic protocol = connection.getProtocol(_defaultProtocol);
     if (protocol == null) {
       throw ConfigException(
           correlationId, 'NO_PROTOCOL", "Connection protocol is not set');
     }
     if (_supportedProtocols != null &&
-        !_supportedProtocols.contains(protocol)) {
+        !_supportedProtocols!.contains(protocol)) {
       throw ConfigException(correlationId, 'UNSUPPORTED_PROTOCOL',
           'The protocol ' + protocol + ' is not supported');
     }
@@ -164,7 +167,7 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [credential]        credential parameters to be validated
-  void validateCredential(String correlationId, CredentialParams credential) {
+  void validateCredential(String? correlationId, CredentialParams? credential) {
     // By default the rules are open
   }
 

@@ -40,7 +40,7 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// Creates a new instance of the counters.
   ///
   /// - [references] 	references to locate the component dependencies.
-  CompositeCounters([IReferences references]) {
+  CompositeCounters([IReferences? references]) {
     if (references != null) {
       setReferences(references);
     }
@@ -81,7 +81,7 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   ///
   /// See [Timing.endTiming]
   @override
-  void endTiming(String name, int elapsed) {
+  void endTiming(String? name, int elapsed) {
     for (var i = 0; i < _counters.length; i++) {
       var counter = _counters[i];
       var callback = counter as ITimingCallback;
@@ -148,7 +148,7 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// - [name] 		a counter name of Increment type.
   /// - [value]		a value to add to the counter.
   @override
-  void increment(String name, int value) {
+  void increment(String? name, int value) {
     if (name == null || name == '') {
       throw Exception('Name cannot be null');
     }

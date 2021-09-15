@@ -16,7 +16,8 @@ class NullLock implements ILock {
   /// - [ttl]               a lock timeout (time to live) in milliseconds.
   /// Return          Future  that receives a lock result or error.
   @override
-  Future<bool> tryAcquireLock(String correlationId, String key, int ttl) async {
+  Future<bool> tryAcquireLock(
+      String? correlationId, String key, int ttl) async {
     return true;
   }
 
@@ -29,7 +30,7 @@ class NullLock implements ILock {
   /// Return          Future  that receives error or null for success.
   @override
   Future acquireLock(
-      String correlationId, String key, int ttl, int timeout) async {
+      String? correlationId, String key, int ttl, int timeout) async {
     // Do nothing...
   }
 
@@ -39,7 +40,7 @@ class NullLock implements ILock {
   /// - [key]               a unique lock key to release.
   /// Return          Future  that receives error or null for success.
   @override
-  Future releaseLock(String correlationId, String key) async {
+  Future releaseLock(String? correlationId, String key) async {
     // Do nothing...
   }
 }

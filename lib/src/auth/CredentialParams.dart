@@ -58,14 +58,14 @@ class CredentialParams extends ConfigParams {
   /// Return     the store key to retrieve credentials.
   ///
   /// See [useCredentialStore]
-  String getStoreKey() {
+  String? getStoreKey() {
     return super.getAsNullableString('store_key');
   }
 
   /// Sets the key to retrieve these parameters from [CredentialStore].
   ///
   /// - [value]     a new key to retrieve credentials.
-  void setStoreKey(String value) {
+  void setStoreKey(String? value) {
     super.put('store_key', value);
   }
 
@@ -73,7 +73,7 @@ class CredentialParams extends ConfigParams {
   /// The value can be stored in parameters 'username' or 'user'.
   ///
   /// Return     the user name.
-  String getUsername() {
+  String? getUsername() {
     return super.getAsNullableString('username') ??
         super.getAsNullableString('user');
   }
@@ -81,7 +81,7 @@ class CredentialParams extends ConfigParams {
   /// Sets the user name.
   ///
   /// - [value]     a new user name.
-  void setUsername(String value) {
+  void setUsername(String? value) {
     super.put('username', value);
   }
 
@@ -89,7 +89,7 @@ class CredentialParams extends ConfigParams {
   /// The value can be stored in parameters 'password' or 'pass'.
   ///
   /// Return     the user password.
-  String getPassword() {
+  String? getPassword() {
     return super.getAsNullableString('password') ??
         super.getAsNullableString('pass');
   }
@@ -97,7 +97,7 @@ class CredentialParams extends ConfigParams {
   /// Sets the user password.
   ///
   /// - [value]     a new user password.
-  void setPassword(String value) {
+  void setPassword(String? value) {
     super.put('password', value);
   }
 
@@ -105,7 +105,7 @@ class CredentialParams extends ConfigParams {
   /// The value can be stored in parameters 'access_id' pr 'client_id'
   ///
   /// Return     the application access id.
-  String getAccessId() {
+  String? getAccessId() {
     return super.getAsNullableString('access_id') ??
         super.getAsNullableString('client_id');
   }
@@ -121,7 +121,7 @@ class CredentialParams extends ConfigParams {
   /// The value can be stored in parameters 'access_key', 'client_key' or 'secret_key'.
   ///
   /// Return     the application secret key.
-  String getAccessKey() {
+  String? getAccessKey() {
     return super.getAsNullableString('access_key') ??
         super.getAsNullableString('client_key') ??
         super.getAsNullableString('secret_key');
@@ -130,7 +130,7 @@ class CredentialParams extends ConfigParams {
   /// Sets the application secret key.
   ///
   /// - [value]     a new application secret key.
-  void setAccessKey(String value) {
+  void setAccessKey(String? value) {
     super.put('access_key', value);
   }
 
@@ -186,7 +186,7 @@ class CredentialParams extends ConfigParams {
   /// Return			the generated CredentialParams object.
   ///
   /// See [manyFromConfig]
-  static CredentialParams fromConfig(ConfigParams config) {
+  static CredentialParams? fromConfig(ConfigParams config) {
     var credentials = CredentialParams.manyFromConfig(config);
     return credentials.isNotEmpty ? credentials[0] : null;
   }

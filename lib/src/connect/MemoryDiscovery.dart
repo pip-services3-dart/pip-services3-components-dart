@@ -4,8 +4,8 @@ import '../../pip_services3_components.dart';
 
 /// Used to store key-identifiable information about connections.
 class DiscoveryItem {
-  String key;
-  ConnectionParams connection;
+  String? key;
+  ConnectionParams? connection;
 }
 
 /// Discovery service that keeps connections in memory.
@@ -40,7 +40,7 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// Creates a new instance of discovery service.
   ///
   /// - [config]    (optional) configuration with connection parameters.
-  MemoryDiscovery([ConfigParams config]) {
+  MemoryDiscovery([ConfigParams? config]) {
     if (config != null) configure(config);
   }
 
@@ -64,7 +64,8 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
       var value = config.getAsNullableString(key);
       var item = DiscoveryItem();
       item.key = key;
-      item.connection = ConnectionParams.fromString(value);
+      item.connection =
+          value != null ? ConnectionParams.fromString(value) : null;
       _items.add(item);
     }
   }
@@ -76,7 +77,7 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// Return 			Future that receives a registered connection or error.
   @override
   Future<ConnectionParams> register(
-      String correlationId, String key, ConnectionParams connection) async {
+      String? correlationId, String key, ConnectionParams connection) async {
     var item = DiscoveryItem();
     item.key = key;
     item.connection = connection;
@@ -91,8 +92,9 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// - key               a key to uniquely identify the connection.
   /// Return          Future that receives found connection or error.
   @override
-  Future<ConnectionParams> resolveOne(String correlationId, String key) async {
-    ConnectionParams connection;
+  Future<ConnectionParams?> resolveOne(
+      String? correlationId, String key) async {
+    ConnectionParams? connection;
     for (var index = 0; index < _items.length; index++) {
       var item = _items[index];
       if (item.key == key && item.connection != null) {
@@ -110,12 +112,12 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// Return          Future that receives found connections or error.
   @override
   Future<List<ConnectionParams>> resolveAll(
-      String correlationId, String key) async {
+      String? correlationId, String key) async {
     var connections = <ConnectionParams>[];
     for (var index = 0; index < _items.length; index++) {
       var item = _items[index];
       if (item.key == key && item.connection != null) {
-        connections.add(item.connection);
+        connections.add(item.connection!);
       }
     }
     return connections;

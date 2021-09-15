@@ -56,14 +56,14 @@ class ConnectionParams extends ConfigParams {
   /// Return     the discovery key to retrieve connection.
   ///
   /// See [useDiscovery]
-  String getDiscoveryKey() {
-    return super.getAsString('discovery_key');
+  String? getDiscoveryKey() {
+    return super.getAsNullableString('discovery_key');
   }
 
   /// Sets the key to retrieve these parameters from [DiscoveryService].
   ///
   /// - [value]     a new key to retrieve connection.
-  void setDiscoveryKey(String value) {
+  void setDiscoveryKey(String? value) {
     return super.put('discovery_key', value);
   }
 
@@ -71,8 +71,9 @@ class ConnectionParams extends ConfigParams {
   ///
   /// - [defaultValue]  (optional) the default protocol
   /// Return             the connection protocol or the default value if it's not set.
-  String getProtocol([String defaultValue]) {
-    return super.getAsStringWithDefault('protocol', defaultValue);
+  String? getProtocol([String? defaultValue]) {
+    var result = super.getAsStringWithDefault('protocol', defaultValue ?? '');
+    return result != '' ? result : null;
   }
 
   /// Gets the connection protocol with default value.
@@ -86,14 +87,14 @@ class ConnectionParams extends ConfigParams {
   /// Sets the connection protocol.
   ///
   /// - [value]     a new connection protocol.
-  void setProtocol(String value) {
+  void setProtocol(String? value) {
     return super.put('protocol', value);
   }
 
   /// Gets the host name or IP address.
   ///
   /// Return     the host name or IP address.
-  String getHost() {
+  String? getHost() {
     var host = super.getAsNullableString('host');
     host = host ?? super.getAsNullableString('ip');
     return host;
@@ -102,7 +103,7 @@ class ConnectionParams extends ConfigParams {
   /// Sets the host name or IP address.
   ///
   /// - [value]     a new host name or IP address.
-  void setHost(String value) {
+  void setHost(String? value) {
     return super.put('host', value);
   }
 
@@ -134,8 +135,8 @@ class ConnectionParams extends ConfigParams {
   /// Usually it includes all connection parameters in it.
   ///
   /// Return the resource URI or connection string.
-  String getUri() {
-    return super.getAsString('uri');
+  String? getUri() {
+    return super.getAsNullableString('uri');
   }
 
   /// Sets the resource URI or connection string.
@@ -199,7 +200,7 @@ class ConnectionParams extends ConfigParams {
   /// Return			the generated ConnectionParams object.
   ///
   /// See [manyFromConfig]
-  static ConnectionParams fromConfig(ConfigParams config) {
+  static ConnectionParams? fromConfig(ConfigParams config) {
     var connections = ConnectionParams.manyFromConfig(config);
     return connections.isNotEmpty ? connections[0] : null;
   }

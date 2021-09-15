@@ -28,7 +28,7 @@ import 'package:pip_services3_commons/pip_services3_commons.dart';
 ///     context.uptime;			// Possible result: 3454345
 class ContextInfo implements IReconfigurable {
   String _name = 'unknown';
-  String _description;
+  String? _description;
   String _contextId = Platform.localHostname; // IdGenerator.nextLong();
   DateTime _startTime = DateTime.now().toUtc();
   StringValueMap _properties = StringValueMap();
@@ -37,7 +37,7 @@ class ContextInfo implements IReconfigurable {
   ///
   /// - name  		(optional) a context name.
   /// - description 	(optional) a human-readable description of the context.
-  ContextInfo([String name, String description]) {
+  ContextInfo([String? name, String? description]) {
     _name = name ?? 'unknown';
     //_description = description ?? null;
   }
@@ -48,7 +48,7 @@ class ContextInfo implements IReconfigurable {
   @override
   void configure(ConfigParams config) {
     name = config.getAsStringWithDefault('name', name);
-    description = config.getAsStringWithDefault('description', description);
+    description = config.getAsNullableString('description') ?? description;
     properties = config.getSection('properties');
   }
 
@@ -62,21 +62,21 @@ class ContextInfo implements IReconfigurable {
   /// Sets the context name.
   ///
   /// - value		a new name for the context.
-  set name(String value) {
+  set name(String? value) {
     _name = value ?? 'unknown';
   }
 
   /// Gets the human-readable description of the context.
   ///
   /// Return the human-readable description of the context.
-  String get description {
+  String? get description {
     return _description;
   }
 
   /// Sets the human-readable description of the context.
   ///
   /// - value a new human readable description of the context.
-  set description(String value) {
+  set description(String? value) {
     _description = value;
   }
 
@@ -106,7 +106,7 @@ class ContextInfo implements IReconfigurable {
   ///
   /// - value a new context start time.
   set startTime(DateTime value) {
-    _startTime = value ?? DateTime.now().toUtc();
+    _startTime = value;
   }
 
   /// Calculates the context uptime as from the start time.

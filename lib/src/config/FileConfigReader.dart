@@ -14,12 +14,12 @@ import '../../pip_services3_components.dart';
 /// See [IConfigReader]
 /// See [ConfigReader]
 abstract class FileConfigReader extends ConfigReader {
-  String _path;
+  String? _path;
 
   /// Creates a new instance of the config reader.
   ///
   /// - [path]  (optional) a path to configuration file.
-  FileConfigReader([String path]) : super() {
+  FileConfigReader([String? path]) : super() {
     _path = path;
   }
 
@@ -29,13 +29,13 @@ abstract class FileConfigReader extends ConfigReader {
   @override
   void configure(ConfigParams config) {
     super.configure(config);
-    _path = config.getAsStringWithDefault('path', _path);
+    _path = config.getAsStringWithDefault('path', _path ?? '');
   }
 
   /// Get the path to configuration file..
   ///
   /// Return the path to configuration file.
-  String getPath() {
+  String? getPath() {
     return _path;
   }
 

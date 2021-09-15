@@ -11,31 +11,30 @@ class Counter {
   CounterType type;
 
   /// The last recorded value
-  int last;
+  int? last;
 
   /// The total count
-  int count;
+  int? count;
 
   /// The minimum value
-  int min;
+  int? min;
 
   /// The maximum value
-  int max;
+  int? max;
 
   /// The average value
-  double average;
+  double? average;
 
   /// The recorded timestamp
-  DateTime time;
+  DateTime? time;
 
   /// Creates a instance of the data obejct
   ///
   /// - [name]      a counter name.
   /// - [type]      a counter type.
-  Counter(String name, CounterType type) {
-    this.name = name;
-    this.type = type;
-  }
+  Counter(String name, CounterType type)
+      : name = name,
+        type = type;
 
   factory Counter.fromJson(Map<String, dynamic> json) {
     var c = Counter(json['name'], json['type']);

@@ -5,22 +5,22 @@ import 'package:pip_services3_commons/src/errors/ErrorDescription.dart';
 // Todo: Make it JSON Serializable
 class LogMessage {
   // The time then message was generated
-  DateTime time;
+  DateTime? time;
   // The source (context name)
-  String source;
+  String? source;
   // This log level
-  String level;
+  String? level;
   // The transaction id to trace execution through call chain.
-  String correlation_id;
+  String? correlation_id;
 
   /// The description of the captured error
   ///
   /// [ErrorDescription](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/ErrorDescription-class.html)
   /// [ApplicationException](https://pub.dev/documentation/pip_services3_commons/latest/pip_services3_commons/ApplicationException-class.html)
 
-  ErrorDescription error;
+  ErrorDescription? error;
   // The human-readable message
-  String message;
+  String message = '';
 
   LogMessage();
 
@@ -37,7 +37,9 @@ class LogMessage {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'time': time.toIso8601String(),
+      'time': time != null
+          ? time!.toIso8601String()
+          : DateTime.now().toIso8601String(),
       'source': source,
       'level': level,
       'correlation_id': correlation_id,

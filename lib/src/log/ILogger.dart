@@ -23,8 +23,8 @@ abstract class ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   void log(
-      LogLevel level, String correlationId, Exception error, String message,
-      [List args]);
+      LogLevel level, String? correlationId, Exception? error, String message,
+      [List? args]);
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///
@@ -32,7 +32,7 @@ abstract class ILogger {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void fatal(String correlationId, Exception error, String message,
+  void fatal(String? correlationId, Exception? error, String message,
       [List args]);
 
   // Todo: these overloads are not supported in TS
@@ -45,8 +45,8 @@ abstract class ILogger {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void error(String correlationId, Exception error, String message,
-      [List args]);
+  void error(String? correlationId, Exception? error, String message,
+      [List? args]);
 
   // Todo: these overloads are not supported in TS
   //error(String correlationId, error: Exception) ;
@@ -57,26 +57,26 @@ abstract class ILogger {
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void warn(String correlationId, String message, [List args]);
+  void warn(String? correlationId, String message, [List? args]);
 
   /// Logs an important information message
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void info(String correlationId, String message, [List args]);
+  void info(String? correlationId, String message, [List? args]);
 
   /// Logs a high-level debug information for troubleshooting.
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void debug(String correlationId, String message, [List args]);
+  void debug(String? correlationId, String message, [List args]);
 
   /// Logs a low-level debug information for troubleshooting.
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
-  void trace(String correlationId, String message, [List args]);
+  void trace(String? correlationId, String message, [List? args]);
 }

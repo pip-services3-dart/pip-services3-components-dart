@@ -1,7 +1,7 @@
 /// Data object to store cached values with their keys used by [MemoryCache]
 
 class CacheEntry {
-  String _key;
+  final String _key;
   var _value;
   int _expiration;
 
@@ -10,14 +10,13 @@ class CacheEntry {
   /// - [key]       a unique key to locate the value.
   /// - [value]     a value to be stored.
   /// - [timeout]   expiration timeout in milliseconds.
-  CacheEntry(String key, dynamic value, int timeout) {
-    _key = key;
-    _value = value;
-    _expiration = DateTime.now()
-        .toUtc()
-        .add(Duration(milliseconds: timeout))
-        .millisecondsSinceEpoch;
-  }
+  CacheEntry(String key, dynamic value, int timeout)
+      : _key = key,
+        _value = value,
+        _expiration = DateTime.now()
+            .toUtc()
+            .add(Duration(milliseconds: timeout))
+            .millisecondsSinceEpoch;
 
   /// Gets the key to locate the cached value.
   ///

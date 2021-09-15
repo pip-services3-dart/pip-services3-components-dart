@@ -15,5 +15,5 @@ abstract class IConfigReader {
   /// Return            Future that receives configuration
   /// Throws error.
   Future<ConfigParams> readConfig(
-      String correlationId, ConfigParams parameters);
+      String? correlationId, ConfigParams parameters);
 }

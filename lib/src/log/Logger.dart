@@ -18,7 +18,7 @@ import '../../pip_services3_components.dart';
 /// See [ILogger]
 abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   LogLevel _level = LogLevel.Info;
-  String source;
+  String? source;
 
   /// Creates a new instance of the logger.
   Logger();
@@ -29,7 +29,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   @override
   void configure(ConfigParams config) {
     _level = LogLevelConverter.toLogLevel(config.getAsObject('level'), _level);
-    source = config.getAsStringWithDefault('source', source);
+    source = config.getAsNullableString('source') ?? source;
   }
 
   /// Sets references to dependent components.
@@ -64,7 +64,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// Gets the source (context) name.
   ///
   /// Return the source (context) name.
-  String getSource() {
+  String? getSource() {
     return source;
   }
 
@@ -82,7 +82,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [error]             an error object associated with this message.
   /// - [message]           a human-readable message to log.
   void write(
-      LogLevel level, String correlationId, Exception error, String message);
+      LogLevel level, String? correlationId, Exception? error, String message);
 
   /// Formats the log message and writes it to the logger destination.
   ///
@@ -92,8 +92,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
 
-  void _formatAndWrite(LogLevel level, String correlationId, Exception error,
-      String message, List args) {
+  void _formatAndWrite(LogLevel level, String? correlationId, Exception? error,
+      String? message, List? args) {
     message = message ?? '';
     if (args != null && args.isNotEmpty) {
       // message = message.replace(/{(\d+)}/g, function (match, number) {
@@ -114,8 +114,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [args]              arguments to parameterize the message.
   @override
   void log(
-      LogLevel level, String correlationId, Exception error, String message,
-      [List args]) {
+      LogLevel level, String? correlationId, Exception? error, String message,
+      [List? args]) {
     _formatAndWrite(level, correlationId, error, message, args);
   }
 
@@ -126,8 +126,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void fatal(String correlationId, Exception error, String message,
-      [List args]) {
+  void fatal(String? correlationId, Exception? error, String message,
+      [List? args]) {
     _formatAndWrite(LogLevel.Fatal, correlationId, error, message, args);
   }
 
@@ -138,8 +138,8 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void error(String correlationId, Exception error, String message,
-      [List args]) {
+  void error(String? correlationId, Exception? error, String message,
+      [List? args]) {
     _formatAndWrite(LogLevel.Error, correlationId, error, message, args);
   }
 
@@ -149,7 +149,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void warn(String correlationId, String message, [List args]) {
+  void warn(String? correlationId, String message, [List? args]) {
     _formatAndWrite(LogLevel.Warn, correlationId, null, message, args);
   }
 
@@ -159,7 +159,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void info(String correlationId, String message, [List args]) {
+  void info(String? correlationId, String message, [List? args]) {
     _formatAndWrite(LogLevel.Info, correlationId, null, message, args);
   }
 
@@ -169,7 +169,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void debug(String correlationId, String message, [List args]) {
+  void debug(String? correlationId, String message, [List? args]) {
     _formatAndWrite(LogLevel.Debug, correlationId, null, message, args);
   }
 
@@ -179,7 +179,7 @@ abstract class Logger implements ILogger, IReconfigurable, IReferenceable {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void trace(String correlationId, String message, [List args]) {
+  void trace(String? correlationId, String message, [List? args]) {
     _formatAndWrite(LogLevel.Trace, correlationId, null, message, args);
   }
 

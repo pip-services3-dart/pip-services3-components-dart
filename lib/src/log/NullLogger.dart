@@ -35,8 +35,8 @@ class NullLogger implements ILogger {
   /// - [args]              arguments to parameterize the message.
   @override
   void log(
-      LogLevel level, String correlationId, Exception error, String message,
-      [List args]) {}
+      LogLevel level, String? correlationId, Exception? error, String message,
+      [List? args]) {}
 
   /// Logs fatal (unrecoverable) message that caused the process to crash.
   ///
@@ -45,8 +45,8 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void fatal(String correlationId, Exception error, String message,
-      [List args]) {}
+  void fatal(String? correlationId, Exception? error, String message,
+      [List? args]) {}
 
   /// Logs recoverable application error.
   ///
@@ -55,8 +55,8 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void error(String correlationId, Exception error, String message,
-      [List args]) {}
+  void error(String? correlationId, Exception? error, String message,
+      [List? args]) {}
 
   /// Logs a warning that may or may not have a negative impact.
   ///
@@ -64,7 +64,7 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void warn(String correlationId, String message, [List args]) {}
+  void warn(String? correlationId, String message, [List? args]) {}
 
   /// Logs an important information message
   ///
@@ -72,7 +72,7 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void info(String correlationId, String message, [List args]) {}
+  void info(String? correlationId, String message, [List? args]) {}
 
   /// Logs a high-level debug information for troubleshooting.
   ///
@@ -80,7 +80,7 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void debug(String correlationId, String message, [List args]) {}
+  void debug(String? correlationId, String message, [List? args]) {}
 
   /// Logs a low-level debug information for troubleshooting.
   ///
@@ -88,5 +88,5 @@ class NullLogger implements ILogger {
   /// - [message]           a human-readable message to log.
   /// - [args]              arguments to parameterize the message.
   @override
-  void trace(String correlationId, String message, [List args]) {}
+  void trace(String? correlationId, String message, [List? args]) {}
 }

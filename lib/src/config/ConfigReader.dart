@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:mustache_template/mustache.dart';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
-import 'package:mustache4dart2/mustache4dart2.dart';
+
+import '../../pip_services3_components.dart';
 
 /// Abstract config reader that supports configuration parameterization.
 ///
@@ -10,7 +12,7 @@ import 'package:mustache4dart2/mustache4dart2.dart';
 ///     - ...
 ///
 ///  See [IConfigReader]
-abstract class ConfigReader implements IConfigurable {
+abstract class ConfigReader implements IConfigurable, IConfigReader {
   ConfigParams _parameters = ConfigParams();
 
   /// Creates a new instance of the config reader.
@@ -31,8 +33,9 @@ abstract class ConfigReader implements IConfigurable {
   /// - [parameters]        values to parameters the configuration or null to skip parameterization.
   /// Return                Future that receives configuration
   /// Throws error.
+  @override
   Future<ConfigParams> readConfig(
-      String correlationId, ConfigParams parameters);
+      String? correlationId, ConfigParams parameters);
 
   /// Parameterized configuration template given as string with dynamic parameters.
   ///
@@ -43,6 +46,7 @@ abstract class ConfigReader implements IConfigurable {
   /// Return a parameterized configuration string.
   String parameterize(String config, ConfigParams parameters) {
     parameters = _parameters.override(parameters);
-    return render(config, parameters);
+    var template = Template(config);
+    return template.renderString(parameters);
   }
 }

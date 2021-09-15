@@ -10,5 +10,5 @@ abstract class ITimingCallback {
   ///
   /// See [Timing.endTiming]
 
-  void endTiming(String name, int elapsed);
+  void endTiming(String? name, int elapsed);
 }

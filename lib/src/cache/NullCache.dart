@@ -17,7 +17,7 @@ class NullCache implements ICache {
   /// Return          Future that receives cached value
   /// Throws error.
   @override
-  Future<dynamic> retrieve(String correlationId, String key) async {}
+  Future<dynamic> retrieve(String? correlationId, String key) async {}
 
   /// Stores value in the cache with expiration time.
   ///
@@ -29,7 +29,7 @@ class NullCache implements ICache {
   /// Throws error
   @override
   Future<dynamic> store(
-      String correlationId, String key, value, int timeout) async {
+      String? correlationId, String key, value, int timeout) async {
     return value;
   }
 
@@ -40,7 +40,7 @@ class NullCache implements ICache {
   /// Return              Future that receives an null for success
   /// Throws error
   @override
-  Future<dynamic> remove(String correlationId, String key) async {
+  Future<dynamic> remove(String? correlationId, String key) async {
     return null;
   }
 }

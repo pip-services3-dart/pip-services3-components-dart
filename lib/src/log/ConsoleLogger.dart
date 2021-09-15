@@ -36,7 +36,7 @@ class ConsoleLogger extends Logger {
   /// - [message]           a human-readable message to log.
   @override
   void write(
-      LogLevel level, String correlationId, Exception error, String message) {
+      LogLevel level, String? correlationId, Exception? error, String message) {
     if (getLevel().index < level.index) return;
 
     var result = '[';

@@ -13,7 +13,7 @@ abstract class ICredentialStore {
   /// - [credential]        a credential to be stored.
   /// Return 			        Future that receives an null for success.
   /// Throw error
-  Future store(String correlationId, String key, CredentialParams credential);
+  Future store(String? correlationId, String key, CredentialParams credential);
 
   /// Lookups credential parameters by its key.
   ///
@@ -21,5 +21,5 @@ abstract class ICredentialStore {
   /// - [key]               a key to uniquely identify the credential.
   /// Return              Future that receives found credential
   /// Throw  error.
-  Future<CredentialParams> lookup(String correlationId, String key);
+  Future<CredentialParams?> lookup(String? correlationId, String? key);
 }

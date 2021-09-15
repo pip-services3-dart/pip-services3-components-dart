@@ -13,7 +13,7 @@ abstract class ILock {
   /// - [ttl]               a lock timeout (time to live) in milliseconds.
   /// Return          Future  that receives a lock result
   /// Throws  error.
-  Future<bool> tryAcquireLock(String correlationId, String key, int ttl);
+  Future<bool> tryAcquireLock(String? correlationId, String key, int ttl);
 
   /// Makes multiple attempts to acquire a lock by its key within give time interval.
   ///
@@ -23,12 +23,12 @@ abstract class ILock {
   /// - [timeout]           a lock acquisition timeout.
   /// Return                Future  that receives  null for success.
   /// Throws error
-  Future acquireLock(String correlationId, String key, int ttl, int timeout);
+  Future acquireLock(String? correlationId, String key, int ttl, int timeout);
 
   /// Releases prevously acquired lock by its key.
   ///
   /// - [correlationId]     (optional) transaction id to trace execution through call chain.
   /// - [key]               a unique lock key to release.
   /// Return          Future  that receives error or null for success.
-  Future releaseLock(String correlationId, String key);
+  Future releaseLock(String? correlationId, String key);
 }

@@ -23,7 +23,7 @@ import '../../pip_services3_components.dart';
 ///             // Result: 'ABC'
 ///
 class MemoryCache implements ICache, IReconfigurable {
-  final Map _cache = {};
+  final _cache = {};
   int _count = 0;
 
   int _timeout = 60000;
@@ -47,7 +47,7 @@ class MemoryCache implements ICache, IReconfigurable {
   /// - [correlationId] 	(optional) transaction id to trace execution through call chain.
   /// - [callback] 			Future that receives error or null no errors occured.
   void _cleanup() {
-    CacheEntry oldest;
+    CacheEntry? oldest;
     //var now = DateTime.now().toUtc().millisecondsSinceEpoch;
     _count = 0;
 
@@ -82,14 +82,14 @@ class MemoryCache implements ICache, IReconfigurable {
   /// Return                Future that receives cached value
   /// Throws error.
   @override
-  Future<dynamic> retrieve(String correlationId, String key) async {
+  Future<dynamic> retrieve(String? correlationId, String? key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;
     }
 
     // Get entry from the cache
-    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
+    CacheEntry? entry = _cache[key]; //.cast<CacheEntry>();
 
     // Cache has nothing
     if (entry == null) {
@@ -116,14 +116,14 @@ class MemoryCache implements ICache, IReconfigurable {
   /// Throws error
   @override
   Future<dynamic> store(
-      String correlationId, String key, value, int timeout) async {
+      String? correlationId, String? key, value, int? timeout) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;
     }
 
     // Get the entry
-    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
+    CacheEntry? entry = _cache[key]; //.cast<CacheEntry>();
     // Shortcut to remove entry from the cache
     if (value == null) {
       if (entry != null) {
@@ -159,14 +159,14 @@ class MemoryCache implements ICache, IReconfigurable {
   /// Return                Future that receives an null for success
   /// Throws error
   @override
-  Future<dynamic> remove(String correlationId, String key) async {
+  Future<dynamic> remove(String? correlationId, String? key) async {
     if (key == null) {
       var err = Exception('Key cannot be null');
       throw err;
     }
 
     // Get the entry
-    CacheEntry entry = _cache[key]; //.cast<CacheEntry>();
+    CacheEntry? entry = _cache[key]; //.cast<CacheEntry>();
 
     // Remove entry from the cache
     if (entry != null) {

@@ -21,7 +21,7 @@ class CompositeFactory implements IFactory {
   /// Creates a new instance of the factory.
   ///
   /// - factories 	a list of factories to embed into this factory.
-  CompositeFactory(List<IFactory> factories) {
+  CompositeFactory(List<IFactory>? factories) {
     if (factories != null) {
       _factories.addAll(factories);
     }
@@ -30,7 +30,7 @@ class CompositeFactory implements IFactory {
   /// Adds a factory into the list of embedded factories.
   ///
   /// - [factory] 	a factory to be added.
-  void add(IFactory factory) {
+  void add(IFactory? factory) {
     if (factory == null) {
       throw Exception('Factory cannot be null');
     }

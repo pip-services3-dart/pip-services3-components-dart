@@ -15,7 +15,7 @@ abstract class IDiscovery {
   /// Return 			          Future that receives a registered connection
   /// Throw error.
   Future<ConnectionParams> register(
-      String correlationId, String key, ConnectionParams connection);
+      String? correlationId, String key, ConnectionParams connection);
 
   /// Resolves a single connection parameters by its key.
   ///
@@ -23,7 +23,7 @@ abstract class IDiscovery {
   /// - [key]               a key to uniquely identify the connection.
   /// Return          Future that receives found connection
   /// Throw error.
-  Future<ConnectionParams> resolveOne(String correlationId, String key);
+  Future<ConnectionParams?> resolveOne(String? correlationId, String key);
 
   /// Resolves all connection parameters by their key.
   ///
@@ -31,5 +31,5 @@ abstract class IDiscovery {
   /// - [key]               a key to uniquely identify the connections.
   /// Return          Future that receives found connections
   /// Throw error.
-  Future<List<ConnectionParams>> resolveAll(String correlationId, String key);
+  Future<List<ConnectionParams>> resolveAll(String? correlationId, String key);
 }
