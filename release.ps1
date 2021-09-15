@@ -4,7 +4,7 @@ Set-StrictMode -Version latest
 $ErrorActionPreference = "Stop"
 
 $component = Get-Content -Path "component.json" | ConvertFrom-Json
-$version = (Get-Content -Path pubspec.yaml | ConvertFrom-yaml ).Item(1).Values
+$version = (Get-Content -Path pubspec.yaml | ConvertFrom-yaml ).version
 
 if ($component.version -ne $version) {
     throw "Versions in component.json and pubspec.yaml do not match"
