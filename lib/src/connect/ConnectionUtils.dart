@@ -36,6 +36,26 @@ class ConnectionUtils {
     return value1 + ',' + value2;
   }
 
+  /// Renames property if the target name is not used.
+  ///
+  /// - [options] configuration options
+  /// - [fromName] original property name.
+  /// - [toName] property name to rename to.
+  /// return updated configuration options
+  static ConfigParams rename(
+      ConfigParams options, String fromName, String toName) {
+    var fromValue = options.getAsObject(fromName);
+    if (fromValue == null) return options;
+
+    var toValue = options.getAsObject(toName);
+    if (toValue != null) return options;
+
+    options = ConfigParams.fromValue(options);
+    options.setAsObject(toName, fromValue);
+    options.remove(fromName);
+    return options;
+  }
+
   /// Parses URI into config parameters.
   /// The URI shall be in the following form:
   ///   protocol://username@password@host1:port1,host2:port2,...?param1=abc&param2=xyz&...
@@ -95,6 +115,13 @@ class ConnectionUtils {
       } else {
         options.setAsObject('username', userAndPass);
       }
+    }
+
+    pos = uri.indexOf('/');
+    if (pos > 0) {
+      var path = uri.substring(pos + 1);
+      uri = uri.substring(0, pos);
+      options.setAsObject('path', path);
     }
 
     // Process host and ports
@@ -178,6 +205,12 @@ class ConnectionUtils {
 
     builder += servers;
 
+    var path = options.getAsNullableString('path');
+
+    if (path != null) {
+      builder += '/' + path;
+    }
+
     var params = '';
     var reservedKeys = [
       'protocol',
@@ -185,7 +218,8 @@ class ConnectionUtils {
       'port',
       'username',
       'password',
-      'servers'
+      'servers',
+      'path'
     ];
     for (var key in options.getKeys()) {
       if (reservedKeys.contains(key)) {

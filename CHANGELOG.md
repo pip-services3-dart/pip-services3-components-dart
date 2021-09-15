@@ -29,3 +29,8 @@
 
 - **connect** added **CompositeConnectionResolver** and **ConnectionUtils**
 - **ConnectionParams** added getProtocolWithDefault and getPortWithDefault methods
+
+## 1.1.0
+
+- Added **trace** module
+- Added null-safety supports

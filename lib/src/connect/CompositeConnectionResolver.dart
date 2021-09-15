@@ -211,7 +211,7 @@ class CompositeConnectionResolver implements IReferenceable, IConfigurable {
   /// - [options] connection options
   /// - [credential] credential parameters to be merged
   /// Return merged connection options.
-  ConfigReader mergeCredential(
+  ConfigParams mergeCredential(
       ConfigParams options, CredentialParams credential) {
     dynamic mergedOptions = options.override(credential);
     return mergedOptions;
