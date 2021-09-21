@@ -47,7 +47,7 @@ class JsonConfigReader extends FileConfigReader {
 
     try {
       // Todo: make this async?
-      var data = File(super.getPath()!).readAsStringSync();
+      String? data = File(super.getPath()!).readAsStringSync();
       data = parameterize(data, parameters);
       return JsonConverter.toNullableMap(data);
     } catch (e) {

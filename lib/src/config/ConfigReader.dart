@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:mustache_template/mustache.dart';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
+import 'package:pip_services3_expressions/pip_services3_expressions.dart';
 
 import '../../pip_services3_components.dart';
 
@@ -44,9 +44,9 @@ abstract class ConfigReader implements IConfigurable, IConfigReader {
   /// - [config]        a string with configuration template to be parameterized
   /// - [parameters]    dynamic parameters to inject into the template
   /// Return a parameterized configuration string.
-  String parameterize(String config, ConfigParams parameters) {
+  String? parameterize(String config, ConfigParams parameters) {
     parameters = _parameters.override(parameters);
-    var template = Template(config);
-    return template.renderString(parameters);
+    var template = MustacheTemplate(config);
+    return template.evaluateWithVariables(parameters);
   }
 }

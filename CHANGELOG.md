@@ -34,3 +34,9 @@
 
 - Added **trace** module
 - Added null-safety supports
+
+## 1.1.1
+
+- Replace **mustache_template** dependency with **pip_services3_expressions**
+
+

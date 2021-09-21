@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:mustache_template/mustache.dart';
 import 'package:pip_services3_commons/pip_services3_commons.dart';
+import 'package:pip_services3_expressions/pip_services3_expressions.dart';
 import '../../pip_services3_components.dart';
 
 /// Config reader that stores configuration in memory.
@@ -59,8 +59,8 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
       String? correlationId, ConfigParams? parameters) async {
     if (parameters != null) {
       var config = ConfigParams(_config).toString();
-      var template = Template(config);
-      config = template.renderString(parameters);
+      var template = MustacheTemplate(config);
+      config = template.evaluateWithVariables(parameters) ?? '';
       return ConfigParams.fromString(config);
     } else {
       var config = ConfigParams(_config);

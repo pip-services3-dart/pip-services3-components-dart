@@ -1,5 +1,5 @@
 name: pip_services3_components
-version: 1.1.0
+version: 1.1.1
 description: Components patterns for Pip.Services in Dart. This framework is part of the [Pip.Services](https://github.com/pip-services/pip-services) project.
 homepage: https://github.com/pip-services3-dart/pip-services3-components-dart
 
@@ -8,9 +8,9 @@ environment:
 
 dependencies:
   pip_services3_commons: ^1.1.0
+  pip_services3_expressions: ^1.0.0
   yaml: ^3.1.0
   sprintf: ^6.0.0
-  mustache_template: ^2.0.0
 
 dev_dependencies:
   test: ^1.17.12

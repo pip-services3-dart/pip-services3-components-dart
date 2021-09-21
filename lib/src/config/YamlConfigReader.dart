@@ -50,9 +50,9 @@ class YamlConfigReader extends FileConfigReader {
 
     try {
       // Todo: make this async?
-      var content = File(super.getPath()!).readAsStringSync();
+      String? content = File(super.getPath()!).readAsStringSync();
       content = parameterize(content, parameters);
-      var data = loadYaml(content);
+      var data = content != null ? loadYaml(content) : null;
       return data;
     } catch (e) {
       throw FileException(
