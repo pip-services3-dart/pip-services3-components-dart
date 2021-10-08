@@ -40,7 +40,7 @@ class CompositeTracer implements ITracer, IReferenceable {
   /// Creates a new instance of the tracer.
   ///
   /// - [references] references to locate the component dependencies.
-  CompositeTracer(IReferences? references) {
+  CompositeTracer([IReferences? references]) {
     if (references != null) setReferences(references);
   }
 
