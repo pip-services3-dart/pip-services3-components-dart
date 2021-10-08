@@ -1,8 +1,8 @@
 /// Interface for a callback to end measurement of execution elapsed time.
 ///
-/// See [Timing]
+/// See [CounterTiming]
 
-abstract class ITimingCallback {
+abstract class ICounterTimingCallback {
   /// Ends measurement of execution elapsed time and updates specified counter.
   ///
   /// - [name]      a counter name

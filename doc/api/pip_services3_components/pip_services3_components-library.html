@@ -185,6 +185,15 @@ about execution context: container or/and process. <a href="../pip_services3_com
 This object is used by <a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a> to store counters. 
 </dd>
 
+        <dt id="CounterTiming">
+  <span class="name "><a href="../pip_services3_components/CounterTiming-class.html">CounterTiming</a></span> 
+
+</dt>
+<dd>
+  Callback object returned by {@link ICounters.beginTiming} to end timing
+of execution block and update the associated counter. <a href="../pip_services3_components/CounterTiming-class.html">[...]</a>
+</dd>
+
         <dt id="CredentialParams">
   <span class="name "><a href="../pip_services3_components/CredentialParams-class.html">CredentialParams</a></span> 
 
@@ -326,6 +335,14 @@ and make it available for other components. <a href="../pip_services3_components
   Interface for performance counters that measure execution metrics. <a href="../pip_services3_components/ICounters-class.html">[...]</a>
 </dd>
 
+        <dt id="ICounterTimingCallback">
+  <span class="name "><a href="../pip_services3_components/ICounterTimingCallback-class.html">ICounterTimingCallback</a></span> 
+
+</dt>
+<dd>
+  Interface for a callback to end measurement of execution elapsed time. <a href="../pip_services3_components/ICounterTimingCallback-class.html">[...]</a>
+</dd>
+
         <dt id="ICredentialStore">
   <span class="name "><a href="../pip_services3_components/ICredentialStore-class.html">ICredentialStore</a></span> 
 
@@ -367,14 +384,6 @@ to connect to external services. <a href="../pip_services3_components/IDiscovery
 <dd>
   Todo: solve issue with overloaded methods. Look at Python implementation
 Interface for logger components that capture execution log messages. 
-</dd>
-
-        <dt id="ITimingCallback">
-  <span class="name "><a href="../pip_services3_components/ITimingCallback-class.html">ITimingCallback</a></span> 
-
-</dt>
-<dd>
-  Interface for a callback to end measurement of execution elapsed time. <a href="../pip_services3_components/ITimingCallback-class.html">[...]</a>
 </dd>
 
         <dt id="JsonConfigReader">
@@ -516,15 +525,6 @@ This object is used by <a href="../pip_services3_components/CachedLogger-class.h
 using various methods. <a href="../pip_services3_components/Shutdown-class.html">[...]</a>
 </dd>
 
-        <dt id="Timing">
-  <span class="name "><a href="../pip_services3_components/Timing-class.html">Timing</a></span> 
-
-</dt>
-<dd>
-  Callback object returned by {@link ICounters.beginTiming} to end timing
-of execution block and update the associated counter. <a href="../pip_services3_components/Timing-class.html">[...]</a>
-</dd>
-
         <dt id="YamlConfigReader">
   <span class="name "><a href="../pip_services3_components/YamlConfigReader-class.html">YamlConfigReader</a></span> 
 
@@ -622,6 +622,7 @@ of execution block and update the associated counter. <a href="../pip_services3_
   <li><a href="../pip_services3_components/ConsoleLogger-class.html">ConsoleLogger</a></li>
   <li><a href="../pip_services3_components/ContextInfo-class.html">ContextInfo</a></li>
   <li><a href="../pip_services3_components/Counter-class.html">Counter</a></li>
+  <li><a href="../pip_services3_components/CounterTiming-class.html">CounterTiming</a></li>
   <li><a href="../pip_services3_components/CredentialParams-class.html">CredentialParams</a></li>
   <li><a href="../pip_services3_components/CredentialResolver-class.html">CredentialResolver</a></li>
   <li><a href="../pip_services3_components/DefaultCacheFactory-class.html">DefaultCacheFactory</a></li>
@@ -639,12 +640,12 @@ of execution block and update the associated counter. <a href="../pip_services3_
   <li><a href="../pip_services3_components/ICache-class.html">ICache</a></li>
   <li><a href="../pip_services3_components/IConfigReader-class.html">IConfigReader</a></li>
   <li><a href="../pip_services3_components/ICounters-class.html">ICounters</a></li>
+  <li><a href="../pip_services3_components/ICounterTimingCallback-class.html">ICounterTimingCallback</a></li>
   <li><a href="../pip_services3_components/ICredentialStore-class.html">ICredentialStore</a></li>
   <li><a href="../pip_services3_components/IDiscovery-class.html">IDiscovery</a></li>
   <li><a href="../pip_services3_components/IFactory-class.html">IFactory</a></li>
   <li><a href="../pip_services3_components/ILock-class.html">ILock</a></li>
   <li><a href="../pip_services3_components/ILogger-class.html">ILogger</a></li>
-  <li><a href="../pip_services3_components/ITimingCallback-class.html">ITimingCallback</a></li>
   <li><a href="../pip_services3_components/JsonConfigReader-class.html">JsonConfigReader</a></li>
   <li><a href="../pip_services3_components/Lock-class.html">Lock</a></li>
   <li><a href="../pip_services3_components/LogCounters-class.html">LogCounters</a></li>
@@ -662,7 +663,6 @@ of execution block and update the associated counter. <a href="../pip_services3_
   <li><a href="../pip_services3_components/NullLogger-class.html">NullLogger</a></li>
   <li><a href="../pip_services3_components/Registration-class.html">Registration</a></li>
   <li><a href="../pip_services3_components/Shutdown-class.html">Shutdown</a></li>
-  <li><a href="../pip_services3_components/Timing-class.html">Timing</a></li>
   <li><a href="../pip_services3_components/YamlConfigReader-class.html">YamlConfigReader</a></li>
 
 
@@ -686,7 +686,7 @@ of execution block and update the associated counter. <a href="../pip_services3_
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.1.1
+      1.1.2
   </span>
 
   

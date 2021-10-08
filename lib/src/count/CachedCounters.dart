@@ -13,7 +13,7 @@ import '../../pip_services3_components.dart';
 ///     - [reset_timeout]:   timeout in milliseconds to reset the counters. 0 disables the reset
 ///     (default: 0)
 abstract class CachedCounters
-    implements ICounters, IReconfigurable, ITimingCallback {
+    implements ICounters, IReconfigurable, ICounterTimingCallback {
   int _interval = 300000;
   int _resetTimeout = 0;
   final _cache = <String, Counter>{};
@@ -69,14 +69,14 @@ abstract class CachedCounters
   }
 
   /// Begins measurement of execution time interval.
-  /// It returns [Timing] object which has to be called at
-  /// [Timing.endTiming] to end the measurement and update the counter.
+  /// It returns [CounterTiming] object which has to be called at
+  /// [CounterTiming.endTiming] to end the measurement and update the counter.
   ///
   /// - [name] 	a counter name of Interval type.
-  /// Return a [Timing] callback object to end timing.
+  /// Return a [CounterTiming] callback object to end timing.
   @override
-  Timing beginTiming(String name) {
-    return Timing(name, this);
+  CounterTiming beginTiming(String name) {
+    return CounterTiming(name, this);
   }
 
   /// Dumps (saves) the current values of counters.
@@ -178,7 +178,7 @@ abstract class CachedCounters
   /// - [name]      a counter name
   /// - [elapsed]   execution elapsed time in milliseconds to update the counter.
   ///
-  /// See [Timing.endTiming]
+  /// See [CounterTiming.endTiming]
   @override
   void endTiming(String? name, int elapsed) {
     var counter = get(name, CounterType.Interval);

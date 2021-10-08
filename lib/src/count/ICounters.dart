@@ -11,12 +11,12 @@ import '../../pip_services3_components.dart';
 
 abstract class ICounters {
   /// Begins measurement of execution time interval.
-  /// It returns [Timing] object which has to be called at
-  /// [Timing.endTiming] to end the measurement and update the counter.
+  /// It returns [CounterTiming] object which has to be called at
+  /// [CounterTiming.endTiming] to end the measurement and update the counter.
   ///
   /// - [name] 	a counter name of Interval type.
-  /// Return a [Timing] callback object to end timing.
-  Timing beginTiming(String name);
+  /// Return a [CounterTiming] callback object to end timing.
+  CounterTiming beginTiming(String name);
 
   /// Calculates min/average/max statistics based on the current and previous values.
   ///

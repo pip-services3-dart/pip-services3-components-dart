@@ -7,8 +7,8 @@
 /// like: times called, response time, objects saved/processed. Using these numbers, we can
 /// show how the code works in the system – how stable, fast, expandable it is.
 
-export './Timing.dart';
-export './ITimingCallback.dart';
+export 'CounterTiming.dart';
+export 'ICounterTimingCallback.dart';
 export './ICounters.dart';
 export './CachedCounters.dart';
 export './NullCounters.dart';

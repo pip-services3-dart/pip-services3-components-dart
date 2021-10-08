@@ -11,16 +11,16 @@ import '../../pip_services3_components.dart';
 ///     } finally {
 ///         timing.endTiming();
 ///     }
-class Timing {
+class CounterTiming {
   final int _start;
-  ITimingCallback? _callback;
+  ICounterTimingCallback? _callback;
   String? _counter;
 
   /// Creates a new instance of the timing callback object.
   ///
   /// - counter 		an associated counter name
   /// - callback 		a callback that shall be called when endTiming is called.
-  Timing([String? counter, ITimingCallback? callback])
+  CounterTiming([String? counter, ICounterTimingCallback? callback])
       : _start = DateTime.now().toUtc().millisecondsSinceEpoch {
     _counter = counter;
     _callback = callback;

@@ -12,14 +12,14 @@ class NullCounters implements ICounters {
   NullCounters();
 
   /// Begins measurement of execution time interval.
-  /// It returns [Timing] object which has to be called at
-  /// [Timing.endTiming] to end the measurement and update the counter.
+  /// It returns [CounterTiming] object which has to be called at
+  /// [CounterTiming.endTiming] to end the measurement and update the counter.
   ///
   /// - [name] 	a counter name of Interval type.
-  /// Return a [Timing] callback object to end timing.
+  /// Return a [CounterTiming] callback object to end timing.
   @override
-  Timing beginTiming(String name) {
-    return Timing();
+  CounterTiming beginTiming(String name) {
+    return CounterTiming();
   }
 
   /// Calculates min/average/max statistics based on the current and previous values.

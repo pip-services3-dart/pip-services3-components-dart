@@ -40,3 +40,10 @@
 - Replace **mustache_template** dependency with **pip_services3_expressions**
 
 
+## 1.1.2
+
+- Renamed Timing to CounterTiming
+- Renamed ITimingCallback to ICounterTimingCallback
+- Made optional param for CompositeTracer
+
+

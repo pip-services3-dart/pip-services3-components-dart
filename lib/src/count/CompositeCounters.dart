@@ -34,7 +34,8 @@ import '../../pip_services3_components.dart';
 ///     }
 ///
 
-class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
+class CompositeCounters
+    implements ICounters, ICounterTimingCallback, IReferenceable {
   final _counters = <ICounters>[];
 
   /// Creates a new instance of the counters.
@@ -64,14 +65,14 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   }
 
   /// Begins measurement of execution time interval.
-  /// It returns [Timing] object which has to be called at
-  /// [Timing.endTiming] to end the measurement and update the counter.
+  /// It returns [CounterTiming] object which has to be called at
+  /// [CounterTiming.endTiming] to end the measurement and update the counter.
   ///
   /// - [name] 	a counter name of Interval type.
-  /// Return a [Timing] callback object to end timing.
+  /// Return a [CounterTiming] callback object to end timing.
   @override
-  Timing beginTiming(String name) {
-    return Timing(name, this);
+  CounterTiming beginTiming(String name) {
+    return CounterTiming(name, this);
   }
 
   /// Ends measurement of execution elapsed time and updates specified counter.
@@ -79,12 +80,12 @@ class CompositeCounters implements ICounters, ITimingCallback, IReferenceable {
   /// - [name]      a counter name
   /// - [elapsed]   execution elapsed time in milliseconds to update the counter.
   ///
-  /// See [Timing.endTiming]
+  /// See [CounterTiming.endTiming]
   @override
   void endTiming(String? name, int elapsed) {
     for (var i = 0; i < _counters.length; i++) {
       var counter = _counters[i];
-      var callback = counter as ITimingCallback;
+      var callback = counter as ICounterTimingCallback;
       if (callback != null) {
         callback.endTiming(name, elapsed);
       }
