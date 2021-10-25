@@ -4,7 +4,7 @@ import 'package:pip_services3_components/src/trace/trace.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('LogTracer', () {
+  group('MemoryStateStore', () {
     var _tracer = LogTracer();
     _tracer.setReferences(References.fromTuples([
       Descriptor('pip-services', 'logger', 'null', 'default', '1.0'),

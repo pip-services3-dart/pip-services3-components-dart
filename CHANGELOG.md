@@ -46,4 +46,12 @@
 - Renamed ITimingCallback to ICounterTimingCallback
 - Made optional param for CompositeTracer
 
+## 1.2.0
 
+- Added addChangeListener and removeChangeListener to IConfigReader
+
+- Added state management components
+- **state** Added IStateStore interface and StateValue class
+- **state** Added NullStateStore class
+- **state** Added MemoryStateStore class
+- **state** Added DefaultStateStoreFactory class
