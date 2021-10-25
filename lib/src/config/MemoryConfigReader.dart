@@ -67,4 +67,20 @@ class MemoryConfigReader implements IConfigReader, IReconfigurable {
       return config;
     }
   }
+
+  /// Adds a listener that will be notified when configuration is changed
+  ///
+  /// - [listener] a listener to be added.
+  @override
+  void addChangeListener(INotifiable listener) {
+    // Do nothing...
+  }
+
+  /// Remove a previously added change listener.
+  ///
+  /// - [listener]  a listener to be removed.
+  @override
+  void removeChangeListener(INotifiable listener) {
+    // Do nothing...
+  }
 }

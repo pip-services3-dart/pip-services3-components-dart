@@ -16,4 +16,14 @@ abstract class IConfigReader {
   /// Throws error.
   Future<ConfigParams> readConfig(
       String? correlationId, ConfigParams parameters);
+
+  /// Adds a listener that will be notified when configuration is changed
+  ///
+  /// - [listener] a listener to be added.
+  void addChangeListener(INotifiable listener);
+
+  /// Remove a previously added change listener.
+  ///
+  /// - [listener]  a listener to be removed.
+  void removeChangeListener(INotifiable listener);
 }
