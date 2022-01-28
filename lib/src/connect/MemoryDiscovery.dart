@@ -23,16 +23,16 @@ class DiscoveryItem {
 /// ### Example ###
 ///
 ///     var config = ConfigParams.fromTuples(
-///         'key1.host', '10.1.1.100',
-///         'key1.port', '8080',
-///         'key2.host', '10.1.1.100',
-///         'key2.port', '8082'
+///         'connections.key1.host', '10.1.1.100',
+///         'connections.key1.port', '8080',
+///         'connections.key2.host', '10.1.1.100',
+///         'connections.key2.port', '8082'
 ///     );
 ///
 ///     var discovery = new MemoryDiscovery();
-///     discovery.readConnections(config);
+///     discovery.configure(config);
 ///
-///     var connection await discovery.resolve('123', 'key1');
+///     var connection await discovery.resolveOne('123', 'key1');
 ///         // Result: host=10.1.1.100;port=8080
 class MemoryDiscovery implements IDiscovery, IReconfigurable {
   List<DiscoveryItem> _items = <DiscoveryItem>[];
@@ -58,15 +58,19 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// - [config]   configuration parameters to be read
   void readConnections(ConfigParams config) {
     _items = [];
-    var keys = config.getKeys();
-    for (var index = 0; index < keys.length; index++) {
-      var key = keys[index];
-      var value = config.getAsNullableString(key);
-      var item = DiscoveryItem();
-      item.key = key;
-      item.connection =
-          value != null ? ConnectionParams.fromString(value) : null;
-      _items.add(item);
+    var connections = config.getSection('connections');
+
+    if (connections.isNotEmpty) {
+      var connectionSections = connections.getSectionNames();
+      for (var index = 0; index < connectionSections.length; index++) {
+        var key = connectionSections[index];
+        var value = connections.getSection(key);
+
+        var item = DiscoveryItem();
+        item.key = key;
+        item.connection = ConnectionParams(value);
+        _items.add(item);
+      }
     }
   }
 

@@ -55,3 +55,7 @@
 - **state** Added NullStateStore class
 - **state** Added MemoryStateStore class
 - **state** Added DefaultStateStoreFactory class
+
+## 1.2.1
+
+- Fixed MemoryDiscovery class
