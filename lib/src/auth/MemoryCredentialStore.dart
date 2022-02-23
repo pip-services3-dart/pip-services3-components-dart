@@ -55,11 +55,11 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   /// - [config]   configuration parameters to be read
   void readCredentials(ConfigParams config) {
     _items = <String, dynamic>{};
-    var keys = config.getKeys();
-    for (var index = 0; index < keys.length; index++) {
-      var key = keys[index];
-      var value = config.getAsString(key);
-      _items[key] = CredentialParams.fromString(value);
+    var sections = config.getSectionNames();
+    for (var index = 0; index < sections.length; index++) {
+      var section = sections[index];
+      var value = config.getSection(section);
+      _items[section] = CredentialParams.fromString(value.toString());
     }
   }
 
@@ -89,6 +89,9 @@ class MemoryCredentialStore implements ICredentialStore, IReconfigurable {
   @override
   Future<CredentialParams?> lookup(String? correlationId, String? key) async {
     var credential = _items[key];
+    if (credential is String) {
+      return CredentialParams.fromString(credential);
+    }
     return credential;
   }
 }

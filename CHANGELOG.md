@@ -59,3 +59,7 @@
 ## 1.2.1
 
 - Fixed MemoryDiscovery class
+
+## 1.2.2
+
+- Fixed MemoryCredentialStore class
