@@ -11,7 +11,7 @@ if ($component.version -ne $version) {
 }
 
 Write-Output "Formating code before publish"
-dartfmt -w lib test
+dart format -w lib test
 
 # Publish to global repository
 Write-Output "Pushing package to [pub.dev] registry"
