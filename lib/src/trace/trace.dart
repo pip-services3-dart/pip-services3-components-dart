@@ -1,5 +1,8 @@
 export 'CachedTracer.dart';
 export 'CompositeTracer.dart';
+export 'CompositeTracer.dart';
+export 'DefaultTracerFactory.dart';
+export 'ITracer.dart';
 export 'ITracer.dart';
 export 'LogTracer.dart';
 export 'NullTracer.dart';
