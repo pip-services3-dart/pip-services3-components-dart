@@ -63,3 +63,7 @@
 ## 1.2.2
 
 - Fixed MemoryCredentialStore class
+
+## 1.2.3
+
+- Fixed tracers import

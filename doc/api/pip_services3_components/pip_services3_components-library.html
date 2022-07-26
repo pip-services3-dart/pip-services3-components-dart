@@ -73,6 +73,15 @@ Child classes implement saving of the counters into various destinations. <a hre
 Child classes implement saving cached messages to their specified destinations. <a href="../pip_services3_components/CachedLogger-class.html">[...]</a>
 </dd>
 
+        <dt id="CachedTracer">
+  <span class="name "><a href="../pip_services3_components/CachedTracer-class.html">CachedTracer</a></span> 
+
+</dt>
+<dd>
+  Abstract tracer that caches recorded traces in memory and periodically dumps them.
+Child classes implement saving cached traces to their specified destinations. <a href="../pip_services3_components/CachedTracer-class.html">[...]</a>
+</dd>
+
         <dt id="CacheEntry">
   <span class="name "><a href="../pip_services3_components/CacheEntry-class.html">CacheEntry</a></span> 
 
@@ -123,6 +132,14 @@ factories to locate the one able to create the requested component. <a href="../
 </dt>
 <dd>
   Aggregates all loggers from component references under a single component. <a href="../pip_services3_components/CompositeLogger-class.html">[...]</a>
+</dd>
+
+        <dt id="CompositeTracer">
+  <span class="name "><a href="../pip_services3_components/CompositeTracer-class.html">CompositeTracer</a></span> 
+
+</dt>
+<dd>
+  Aggregates all tracers from component references under a single component. <a href="../pip_services3_components/CompositeTracer-class.html">[...]</a>
 </dd>
 
         <dt id="ConfigReader">
@@ -276,6 +293,14 @@ in a separate store, protected from unauthorized access. <a href="../pip_service
   Creates <a href="../pip_services3_components/ILogger-class.html">ILogger</a> components by their descriptors. <a href="../pip_services3_components/DefaultLoggerFactory-class.html">[...]</a>
 </dd>
 
+        <dt id="DefaultStateStoreFactory">
+  <span class="name "><a href="../pip_services3_components/DefaultStateStoreFactory-class.html">DefaultStateStoreFactory</a></span> 
+
+</dt>
+<dd>
+  Creates <a href="../pip_services3_components/IStateStore-class.html">IStateStore</a> components by their descriptors. <a href="../pip_services3_components/DefaultStateStoreFactory-class.html">[...]</a>
+</dd>
+
         <dt id="DefaultTestFactory">
   <span class="name "><a href="../pip_services3_components/DefaultTestFactory-class.html">DefaultTestFactory</a></span> 
 
@@ -386,6 +411,22 @@ to connect to external services. <a href="../pip_services3_components/IDiscovery
 Interface for logger components that capture execution log messages. 
 </dd>
 
+        <dt id="IStateStore">
+  <span class="name "><a href="../pip_services3_components/IStateStore-class.html">IStateStore</a></span> 
+
+</dt>
+<dd>
+  Interface for state storages that are used to store and retrieve transaction states. 
+</dd>
+
+        <dt id="ITracer">
+  <span class="name "><a href="../pip_services3_components/ITracer-class.html">ITracer</a></span> 
+
+</dt>
+<dd>
+  Interface for tracer components that capture operation traces. 
+</dd>
+
         <dt id="JsonConfigReader">
   <span class="name "><a href="../pip_services3_components/JsonConfigReader-class.html">JsonConfigReader</a></span> 
 
@@ -436,6 +477,14 @@ Child classes take the captured messages and write them to their specific destin
 This object is used by <a href="../pip_services3_components/CachedLogger-class.html">CachedLogger</a>. 
 </dd>
 
+        <dt id="LogTracer">
+  <span class="name "><a href="../pip_services3_components/LogTracer-class.html">LogTracer</a></span> 
+
+</dt>
+<dd>
+   
+</dd>
+
         <dt id="MemoryCache">
   <span class="name "><a href="../pip_services3_components/MemoryCache-class.html">MemoryCache</a></span> 
 
@@ -476,6 +525,14 @@ This object is used by <a href="../pip_services3_components/CachedLogger-class.h
   Lock that is used to synchronize execution within one process using shared memory. <a href="../pip_services3_components/MemoryLock-class.html">[...]</a>
 </dd>
 
+        <dt id="MemoryStateStore">
+  <span class="name "><a href="../pip_services3_components/MemoryStateStore-class.html">MemoryStateStore</a></span> 
+
+</dt>
+<dd>
+  State store that keeps states in the process memory. <a href="../pip_services3_components/MemoryStateStore-class.html">[...]</a>
+</dd>
+
         <dt id="NullCache">
   <span class="name "><a href="../pip_services3_components/NullCache-class.html">NullCache</a></span> 
 
@@ -508,6 +565,30 @@ This object is used by <a href="../pip_services3_components/CachedLogger-class.h
   Dummy implementation of logger that doesn't do anything. <a href="../pip_services3_components/NullLogger-class.html">[...]</a>
 </dd>
 
+        <dt id="NullStateStore">
+  <span class="name "><a href="../pip_services3_components/NullStateStore-class.html">NullStateStore</a></span> 
+
+</dt>
+<dd>
+  Dummy state store implementation that doesn't do anything. <a href="../pip_services3_components/NullStateStore-class.html">[...]</a>
+</dd>
+
+        <dt id="NullTracer">
+  <span class="name "><a href="../pip_services3_components/NullTracer-class.html">NullTracer</a></span> 
+
+</dt>
+<dd>
+   
+</dd>
+
+        <dt id="OperationTrace">
+  <span class="name "><a href="../pip_services3_components/OperationTrace-class.html">OperationTrace</a></span> 
+
+</dt>
+<dd>
+   
+</dd>
+
         <dt id="Registration">
   <span class="name "><a href="../pip_services3_components/Registration-class.html">Registration</a></span> 
 
@@ -523,6 +604,31 @@ This object is used by <a href="../pip_services3_components/CachedLogger-class.h
 <dd>
   Random shutdown component that crashes the process
 using various methods. <a href="../pip_services3_components/Shutdown-class.html">[...]</a>
+</dd>
+
+        <dt id="StateEntry">
+  <span class="name "><a href="../pip_services3_components/StateEntry-class.html">StateEntry</a></span> 
+
+</dt>
+<dd>
+  Data object to store state values with their keys used by <a href="../pip_services3_components/MemoryStateStore-class.html">MemoryStateStore</a> 
+</dd>
+
+        <dt id="StateValue">
+  <span class="name "><a href="../pip_services3_components/StateValue-class.html">StateValue</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A data object that holds a retrieved state value with its key. 
+</dd>
+
+        <dt id="TraceTiming">
+  <span class="name "><a href="../pip_services3_components/TraceTiming-class.html">TraceTiming</a></span> 
+
+</dt>
+<dd>
+  Timing object returned by <a href="../pip_services3_components/ITracer/beginTrace.html">ITracer.beginTrace</a> to end timing
+of execution block and record the associated trace. <a href="../pip_services3_components/TraceTiming-class.html">[...]</a>
 </dd>
 
         <dt id="YamlConfigReader">
@@ -609,12 +715,14 @@ using various methods. <a href="../pip_services3_components/Shutdown-class.html"
   <li class="section-title"><a href="../pip_services3_components/pip_services3_components-library.html#classes">Classes</a></li>
   <li><a href="../pip_services3_components/CachedCounters-class.html">CachedCounters</a></li>
   <li><a href="../pip_services3_components/CachedLogger-class.html">CachedLogger</a></li>
+  <li><a href="../pip_services3_components/CachedTracer-class.html">CachedTracer</a></li>
   <li><a href="../pip_services3_components/CacheEntry-class.html">CacheEntry</a></li>
   <li><a href="../pip_services3_components/Component-class.html">Component</a></li>
   <li><a href="../pip_services3_components/CompositeConnectionResolver-class.html">CompositeConnectionResolver</a></li>
   <li><a href="../pip_services3_components/CompositeCounters-class.html">CompositeCounters</a></li>
   <li><a href="../pip_services3_components/CompositeFactory-class.html">CompositeFactory</a></li>
   <li><a href="../pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></li>
+  <li><a href="../pip_services3_components/CompositeTracer-class.html">CompositeTracer</a></li>
   <li><a href="../pip_services3_components/ConfigReader-class.html">ConfigReader</a></li>
   <li><a href="../pip_services3_components/ConnectionParams-class.html">ConnectionParams</a></li>
   <li><a href="../pip_services3_components/ConnectionResolver-class.html">ConnectionResolver</a></li>
@@ -633,6 +741,7 @@ using various methods. <a href="../pip_services3_components/Shutdown-class.html"
   <li><a href="../pip_services3_components/DefaultInfoFactory-class.html">DefaultInfoFactory</a></li>
   <li><a href="../pip_services3_components/DefaultLockFactory-class.html">DefaultLockFactory</a></li>
   <li><a href="../pip_services3_components/DefaultLoggerFactory-class.html">DefaultLoggerFactory</a></li>
+  <li><a href="../pip_services3_components/DefaultStateStoreFactory-class.html">DefaultStateStoreFactory</a></li>
   <li><a href="../pip_services3_components/DefaultTestFactory-class.html">DefaultTestFactory</a></li>
   <li><a href="../pip_services3_components/DiscoveryItem-class.html">DiscoveryItem</a></li>
   <li><a href="../pip_services3_components/Factory-class.html">Factory</a></li>
@@ -646,23 +755,33 @@ using various methods. <a href="../pip_services3_components/Shutdown-class.html"
   <li><a href="../pip_services3_components/IFactory-class.html">IFactory</a></li>
   <li><a href="../pip_services3_components/ILock-class.html">ILock</a></li>
   <li><a href="../pip_services3_components/ILogger-class.html">ILogger</a></li>
+  <li><a href="../pip_services3_components/IStateStore-class.html">IStateStore</a></li>
+  <li><a href="../pip_services3_components/ITracer-class.html">ITracer</a></li>
   <li><a href="../pip_services3_components/JsonConfigReader-class.html">JsonConfigReader</a></li>
   <li><a href="../pip_services3_components/Lock-class.html">Lock</a></li>
   <li><a href="../pip_services3_components/LogCounters-class.html">LogCounters</a></li>
   <li><a href="../pip_services3_components/Logger-class.html">Logger</a></li>
   <li><a href="../pip_services3_components/LogLevelConverter-class.html">LogLevelConverter</a></li>
   <li><a href="../pip_services3_components/LogMessage-class.html">LogMessage</a></li>
+  <li><a href="../pip_services3_components/LogTracer-class.html">LogTracer</a></li>
   <li><a href="../pip_services3_components/MemoryCache-class.html">MemoryCache</a></li>
   <li><a href="../pip_services3_components/MemoryConfigReader-class.html">MemoryConfigReader</a></li>
   <li><a href="../pip_services3_components/MemoryCredentialStore-class.html">MemoryCredentialStore</a></li>
   <li><a href="../pip_services3_components/MemoryDiscovery-class.html">MemoryDiscovery</a></li>
   <li><a href="../pip_services3_components/MemoryLock-class.html">MemoryLock</a></li>
+  <li><a href="../pip_services3_components/MemoryStateStore-class.html">MemoryStateStore</a></li>
   <li><a href="../pip_services3_components/NullCache-class.html">NullCache</a></li>
   <li><a href="../pip_services3_components/NullCounters-class.html">NullCounters</a></li>
   <li><a href="../pip_services3_components/NullLock-class.html">NullLock</a></li>
   <li><a href="../pip_services3_components/NullLogger-class.html">NullLogger</a></li>
+  <li><a href="../pip_services3_components/NullStateStore-class.html">NullStateStore</a></li>
+  <li><a href="../pip_services3_components/NullTracer-class.html">NullTracer</a></li>
+  <li><a href="../pip_services3_components/OperationTrace-class.html">OperationTrace</a></li>
   <li><a href="../pip_services3_components/Registration-class.html">Registration</a></li>
   <li><a href="../pip_services3_components/Shutdown-class.html">Shutdown</a></li>
+  <li><a href="../pip_services3_components/StateEntry-class.html">StateEntry</a></li>
+  <li><a href="../pip_services3_components/StateValue-class.html">StateValue</a></li>
+  <li><a href="../pip_services3_components/TraceTiming-class.html">TraceTiming</a></li>
   <li><a href="../pip_services3_components/YamlConfigReader-class.html">YamlConfigReader</a></li>
 
 
@@ -686,7 +805,7 @@ using various methods. <a href="../pip_services3_components/Shutdown-class.html"
 <footer>
   <span class="no-break">
     pip_services3_components
-      1.2.2
+      1.2.3
   </span>
 
   
