@@ -1,6 +1,14 @@
 {
-    "name": "pip_services3_components",
-    "registry": "github.com/pip-services3-dart",
+    "name": "pip-services3-components",
+    "type": "module",
+    "language": "dart",
     "version": "1.2.4",
-    "build": "0"
+    "build": 0,
+    "registry": "pipdevs",
+    "artifacts": [
+        {
+            "name":  "<name>",
+            "type": "dart"
+        }
+    ]
 }
