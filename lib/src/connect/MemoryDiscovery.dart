@@ -23,10 +23,10 @@ class DiscoveryItem {
 /// ### Example ###
 ///
 ///     var config = ConfigParams.fromTuples(
-///         'connections.key1.host', '10.1.1.100',
-///         'connections.key1.port', '8080',
-///         'connections.key2.host', '10.1.1.100',
-///         'connections.key2.port', '8082'
+///         'key1.host', '10.1.1.100',
+///         'key1.port', '8080',
+///         'key2.host', '10.1.1.100',
+///         'key2.port', '8082'
 ///     );
 ///
 ///     var discovery = new MemoryDiscovery();
@@ -58,13 +58,12 @@ class MemoryDiscovery implements IDiscovery, IReconfigurable {
   /// - [config]   configuration parameters to be read
   void readConnections(ConfigParams config) {
     _items = [];
-    var connections = config.getSection('connections');
 
-    if (connections.isNotEmpty) {
-      var connectionSections = connections.getSectionNames();
+    if (config.isNotEmpty) {
+      var connectionSections = config.getSectionNames();
       for (var index = 0; index < connectionSections.length; index++) {
         var key = connectionSections[index];
-        var value = connections.getSection(key);
+        var value = config.getSection(key);
 
         var item = DiscoveryItem();
         item.key = key;

@@ -6,13 +6,13 @@ void main() {
   group('MemoryDiscovery', () {
     test('Resolve connections', () async {
       var config = ConfigParams.fromTuples([
-        'connections.key1.host',
+        'key1.host',
         '10.1.1.100',
-        'connections.key1.port',
+        'key1.port',
         '8080',
-        'connections.key2.host',
+        'key2.host',
         '10.1.1.101',
-        'connections.key2.port',
+        'key2.port',
         '8082'
       ]);
 
